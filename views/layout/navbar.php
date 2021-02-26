@@ -1,5 +1,5 @@
 <?php $uri = basename($_SERVER["REQUEST_URI"]); ?>
-<div class="container pt-3 pb-3">
+<!-- <div class="container pt-3 pb-3">
     <div class="row">
         <div class="col-3">
             <img src="<?php echo AccesoDatos::ruta(); ?>assets/img/logo.png" class="img-fluid" alt="" loading="lazy">
@@ -8,10 +8,13 @@
             Cruzeac, Inteligencia y Excelencia | Cruzeac Consultores S. A. de C. V.
         </div>
     </div>
-</div>
+</div> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="<?php echo AccesoDatos::ruta(); ?>">Home</a>
+        <a class="navbar-brand d-flex align-items-center" href="<?php echo AccesoDatos::ruta(); ?>">
+            <img src="<?php echo AccesoDatos::ruta(); ?>assets/img/ico.png" width="35" height="35" class="d-inline-block align-top" alt="">
+            &nbsp;Cruzeac
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -64,6 +67,11 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>?accion=Home">Test</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav my-2 my-lg-0">
+                <li class="nav-item ">
+                    <a class="nav-link text-white bg-dark">Cruzeac, Inteligencia y Excelencia | Cruzeac Consultores S. A. de C. V.</a>
                 </li>
             </ul>
             <?php endif; ?>
