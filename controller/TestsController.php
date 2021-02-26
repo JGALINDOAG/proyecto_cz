@@ -1,0 +1,22 @@
+<?php 
+require_once("models/pruebas.php");
+$obj = new Pruebas ();
+$list = $obj->list_pruebas();
+if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
+    if (isset($_POST["TERMAN"])) {
+        header("Location: index.php?accion=TermanEj");
+    }elseif (isset($_POST["PERSONALIDAD1"])) {
+        header("Location: index.php?accion=PersonalidadUnoEj");
+    }elseif (isset($_POST["PERSONALIDAD2"])) {
+        header("Location: index.php?accion=PersonalidadDosEj");
+    }elseif (isset($_POST["RAVEN"])) {
+        header("Location: index.php?accion=RavenEj");
+    }elseif (isset($_POST["INTERESES"])) {
+        header("Location: index.php?accion=InteresesEj");
+    }elseif (isset($_POST["APTITUDES"])) {
+        header("Location: index.php?accion=AptitudesEj");
+    }
+} else {
+    require_once("views/test/test.php");
+}
+?>
