@@ -138,7 +138,8 @@ class Usuario extends AccesoDatos
     public function salir()
     {
       // session_start();
-      unset($_SESSION["cve_p"]);
+      #unset($_SESSION["cve_p"]);
+      unset($_SESSION["idAdmin"]);
       // Destruir todas las variables de sesión.
       $_SESSION = array();
       // Si se desea destruir la sesión completamente, borre también la cookie de sesión.
@@ -152,7 +153,8 @@ class Usuario extends AccesoDatos
       }
       // Finalmente, destruir la sesión.
       session_destroy();
-      header("Location:" . AccesoDatos::ruta() . "?accion=indexUsuario&m=" . AccesoDatos::encriptar(3) . "");
+      #header("Location:" . AccesoDatos::ruta() . "?accion=indexUsuario&m=" . AccesoDatos::encriptar(3) . "");
+      header("Location:".AccesoDatos::ruta());
       exit();
     }
 }

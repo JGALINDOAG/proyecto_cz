@@ -1,25 +1,13 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Cruzeac</title>
-        <link rel="shortcut icon" href="#">
-        <link rel="stylesheet" href="./assets/style.css">
-        <script src="./assets/funciones.js"></script>
-    </head>
-    <body class="Body" onLoad="<?php echo $time; ?>">
-        <header>
-            <img class="mastLogo_sep" src="./assets/logo.png">
-            <h3>Cruzeac, Inteligencia y Excelencia | Cruzeac Consultores S. A. de C. V.</h3>
-            <img class="mastLogo_pls" src="">
-        </header>
-        <nav class="nav">
-            <a href="<?php echo 'index.php?accion=Close'; ?>">Cerrar sesión</a>
-            <a href="<?php echo 'index.php?accion=Tests'; ?>">Volver</a>
-        </nav>
-        <div class="wrap">
-            <form action="" id="form1" method="post">
+<!DOCTYPE html>
+<html lang="es">
+<?php require_once 'views/layout/head.php'; ?>
+<script type="text/javascript" language="javascript" src="<?php echo AccesoDatos::ruta(); ?>assets/js/funciones.js"></script>
+<body onLoad="<?php echo $time; ?>">
+<?php require_once 'views/layout/navtest.php'; ?>
+    <section class="container pt-5">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+        <!-- -->
+        <form action="" id="form1" method="post">
                 <input type="hidden" name="save" value="<?php echo $serie; ?>">
                 <?php
                 for ($i = 0; $i < sizeof($preguntas); $i++) {
@@ -46,7 +34,11 @@
                 }
                 ?>
                 <br><br>
-                <center><input type="submit" class="boton" value="CONTINUAR"></center>
-            </form>
+                <center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
+        </form>
+        <!-- -->
         </div>
-<?php require_once("views/test/footer.php"); ?>
+    </section>
+<?php require_once 'views/layout/footer.php'; ?>
+</body>
+</html>

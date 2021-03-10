@@ -1,5 +1,5 @@
 <?php
-require_once("models/Pruebas.php");
+require_once("models/pruebas.php");
 $id_prueba=2;
 $limit=22;
 $sum="-10";

@@ -1,7 +1,11 @@
 <?php 
 require_once("models/pruebas.php");
+$objactivo = new Pruebas();
+$activo = $objactivo->activo_detalle_personas();
+//print_r($activo);
 $obj = new Pruebas ();
 $list = $obj->list_pruebas();
+//print_r($list);
 if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
     if (isset($_POST["TERMAN"])) {
         header("Location: index.php?accion=TermanEj");
@@ -16,7 +20,6 @@ if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
     }elseif (isset($_POST["APTITUDES"])) {
         header("Location: index.php?accion=AptitudesEj");
     }
-} else {
-    require_once("views/test/test.php");
 }
+require_once("views/test/test.php");
 ?>

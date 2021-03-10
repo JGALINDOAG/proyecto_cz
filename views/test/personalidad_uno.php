@@ -1,9 +1,11 @@
-<?php require_once("views/test/header.php"); ?>
-        <nav class="nav">
-            <a href="<?php echo 'index.php?accion=Close'; ?>">Cerrar sesión</a>
-            <a href="<?php echo 'index.php?accion=Tests'; ?>">Volver</a>
-        </nav>
-        <div class="wrap">
+<!DOCTYPE html>
+<html lang="es">
+<?php require_once 'views/layout/head.php'; ?>
+<body>
+<?php require_once 'views/layout/navtest.php'; ?>
+    <section class="container pt-5">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+        <!-- -->
             <form action="" method="post">
                 <input type="hidden" name="save" value="ok">
                 <?php
@@ -22,7 +24,11 @@
                     }
                 }
                 ?>
-                <br><br><center><input type="submit" class="boton" value="CONTINUAR"></center>
+                <br><br><center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
             </form>
+        <!-- -->
         </div>
-<?php require_once("views/test/footer.php"); ?>
+    </section>
+<?php require_once 'views/layout/footer.php'; ?>
+</body>
+</html>

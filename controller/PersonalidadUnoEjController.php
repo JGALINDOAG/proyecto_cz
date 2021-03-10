@@ -1,5 +1,5 @@
 <?php
-require_once("models/Pruebas.php");
+require_once("models/pruebas.php");
 $u = new Pruebas();
 //Valida si el usuario ya termino la prueba en el día actual
 $avance = $u->fin_prueba($id_prueba=2);
