@@ -3,18 +3,16 @@ class NavbarUsuarioController
 {
   
   public static function index(){
-    if(isset($_SESSION["idadmin"])):
+    if(isset($_SESSION["idAdmin"])):
       require_once 'models/privilegio.php';
-      require_once "models/persona.php";
-      $objPersona = new Persona();
-      $rowPersona = $objPersona->get_cve_persona($_SESSION["idAdmin"]);
-      $_SESSION["nombre"] = ucwords(strtolower($rowPersona[0]["nombre"]." ".$rowPersona[0]["ap_paterno"]." ".$rowPersona[0]["ap_materno"]));
-      $_SESSION["tipoPersona"] = $rowPersona[0]["cve_tipo_persona"];
+      require_once "models/administradores.php";
+      $objAdministradores = new Administradores();
+      $rowAdmin = $objAdministradores->get_id_admin($_SESSION["idAdmin"]);
+      $_SESSION["nombre"] = ucwords(strtolower($rowAdmin[0]["nombre"]." ".$rowAdmin[0]["apellidos"]));
+      $_SESSION["idRol"] = $rowAdmin[0]["id_rol"];
       
       $objPrivilegio = new Privilegio();
-      $menu = $objPrivilegio->get_menu($_SESSION["tipoPersona"]);
-      $objPrivilegio = new Privilegio();
-      $submenu= $objPrivilegio->get_subMenu($_SESSION["tipoPersona"]);
+      $menu = $objPrivilegio->get_menu($_SESSION["idRol"]);
     endif;
     require_once 'views/layout/navbar.php';
   }
