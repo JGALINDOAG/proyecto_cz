@@ -1,8 +1,8 @@
 <?php
 require_once("models/pruebas.php");
-$id_prueba=2;
-$limit=22;
-$sum="-10";
+$id_prueba=12;
+$limit=30;
+//$sum="-10";
 $t = new Pruebas();
 //Lista de las preguntas que aún no ha respondido la persona para la prueba en el día actual
 $preguntas = $t->ultima_prg($id_prueba,$limit);
@@ -19,11 +19,13 @@ if (isset($_POST["save"])) {
             }
         }
     }
-    header("Location: index.php?accion=PersonalidadUno");
+    header("Location: index.php?accion=mmpi");
 }
+
 
 //Si el usuario ha respondido todas las peguntas se procesa su resultado
 if (empty($preguntas)) {
+    /*
     //Calculo por indicador mediante las respuestas almacenadas
     $resultados = $t->suma_prueba($id_prueba,$sum);
     for ($i = 0; $i < sizeof($resultados); $i++) {
@@ -38,7 +40,8 @@ if (empty($preguntas)) {
     //Una vez resguardado el resultado final de esta prueba se eliminan las respuestas del usuario en la tabla "respuestas"
     $t->delete_respuestas($id_prueba);
     header("Location: index.php?accion=PersonalidadUnoEj");
+    */
 } else {
-    require_once("views/test/personalidad_uno.php");
+    require_once("views/test/mmpi.php");
 }
 ?>

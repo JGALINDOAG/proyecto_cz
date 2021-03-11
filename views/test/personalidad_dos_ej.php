@@ -1,31 +1,49 @@
-<?php require_once("views/test/header.php"); ?>
-        <nav class="nav">
-            <a href="<?php echo 'index.php?accion=Close'; ?>">Cerrar sesión</a>
-            <a href="<?php echo 'index.php?accion=Tests'; ?>">Volver</a>
-        </nav>
-        <div class="wrap">
+<!DOCTYPE html>
+<html lang="es">
+<?php require_once 'views/layout/head.php'; ?>
+<body>
+<?php require_once 'views/layout/navtest.php'; ?>
+    <section class="container pt-5">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+        <!-- -->
             <?php
             switch ($progreso) {
                 case 'Progreso':
                     ?>
-                    <form action="<?php echo 'index.php?accion=PersonalidadDos'; ?>" method="post">
-                        <h4>PERSONALIDAD 2</h4>
-                        <h4>INSTRUCCIONES:</h4>
-                        <p>LEE CON CUIDADO CADA UNA DE LAS PREGUNTAS Y RESPONDE (SI &Oacute; NO)</p>
-                        <p>EJEMPLO: DURANTE REUNIONES O FIESTAS &iquest;ME ES FÁCIL PRESENTAR UNAS PERSONAS CON OTRAS?</p>
-                        <p><input type="radio" name="I" disabled checked="checked">SI</p>
-                        <p><input type="radio" name="I" disabled>NO</p>
-                        <center><input type="submit" class="boton" value="CONTINUAR"></center>
-                    </form>
+                    <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
+                        <div class="media d-flex align-items-center">
+                            <div class="media-body">
+                            <form action="<?php echo 'index.php?accion=PersonalidadDos'; ?>" method="post">
+                                <h4>PERSONALIDAD 2</h4>
+                                <h4>INSTRUCCIONES:</h4>
+                                <p>LEE CON CUIDADO CADA UNA DE LAS PREGUNTAS Y RESPONDE (SI &Oacute; NO)</p>
+                                <p>EJEMPLO: DURANTE REUNIONES O FIESTAS &iquest;ME ES FÁCIL PRESENTAR UNAS PERSONAS CON OTRAS?</p>
+                                <p><input type="radio" name="I" disabled checked="checked">SI</p>
+                                <p><input type="radio" name="I" disabled>NO</p>
+                                <center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
                     <?php
                     break;
                 case 'Finalizo':
                     ?>
-                    <h3>HA CONCLUIDO SATISFACTORIAMENTE LA PRUEBA PERSONALIDAD 2.</h3>
-                    <h3>PULSE <a href="<?php echo 'index.php?accion=Tests'; ?>">AQUÍ</a> PARA REGRESAR AL MENÚ DE PRUEBAS.</h3>
+                    <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
+                        <div class="media d-flex align-items-center">
+                            <div class="media-body">
+                            <h3>HA CONCLUIDO SATISFACTORIAMENTE LA PRUEBA PERSONALIDAD 2.</h3>
+                            <h3>PULSE <a href="<?php echo 'index.php?accion=Tests'; ?>">AQUÍ</a> PARA REGRESAR AL MENÚ DE PRUEBAS.</h3>
+                            </div>
+                        </div>
+                    </div>
                     <?php
                     break;
             }
             ?>
+        <!-- -->
         </div>
-<?php require_once("views/test/footer.php"); ?>
+    </section>
+<?php require_once 'views/layout/footer.php'; ?>
+</body>
+</html>
