@@ -23,7 +23,28 @@ class Pruebas extends AccesoDatos
                 $this->dbh = null;
             }
         } catch (Exception $e) {
-            die("¡Error!: get_persona() " . $e->getMessage());
+            die("¡Error!: list_pruebas() " . $e->getMessage());
+        }
+    }
+
+    public function list_byInstitucion()
+    {
+        try {
+            $this->dbh = parent::conexion();
+            $pruebas = $this->dbh->prepare("SELECT pruebas FROM institucion WHERE id_institucion = ?");
+            $pruebas->bindParam(1, $_SESSION["idInstitucion"], PDO::PARAM_INT);
+            $pruebas->execute();
+            $rowPruebas = $pruebas->fetch(PDO::FETCH_NUM);
+            $stmt = $this->dbh->prepare("SELECT * FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
+            if ($stmt->execute()) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->result[] = $row;
+                }
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: list_byInstitucion() " . $e->getMessage());
         }
     }
 
