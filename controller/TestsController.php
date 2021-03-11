@@ -19,6 +19,8 @@ if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
         header("Location: index.php?accion=InteresesEj");
     }elseif (isset($_POST["APTITUDES"])) {
         header("Location: index.php?accion=AptitudesEj");
+    }elseif (isset($_POST["MMPI"])) {
+        header("Location: index.php?accion=mmpiEj");
     }
 }
 require_once("views/test/test.php");
