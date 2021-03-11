@@ -39,7 +39,28 @@ class Pruebas extends AccesoDatos
                 $this->dbh = null;
             }
         } catch (Exception $e) {
-            die("¡Error!: list_pruebas " . $e->getMessage());
+            die("¡Error!: list_pruebas() " . $e->getMessage());
+        }
+    }
+
+    public function list_byInstitucion()
+    {
+        try {
+            $this->dbh = parent::conexion();
+            $pruebas = $this->dbh->prepare("SELECT pruebas FROM institucion WHERE id_institucion = ?");
+            $pruebas->bindParam(1, $_SESSION["idInstitucion"], PDO::PARAM_INT);
+            $pruebas->execute();
+            $rowPruebas = $pruebas->fetch(PDO::FETCH_NUM);
+            $stmt = $this->dbh->prepare("SELECT * FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
+            if ($stmt->execute()) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->result[] = $row;
+                }
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: list_byInstitucion() " . $e->getMessage());
         }
     }
 
@@ -191,40 +212,6 @@ class Pruebas extends AccesoDatos
             die("¡Error!: ultima_prg " . $e->getMessage());
         }
     }
-    # Lista de las preguntas que aún no ha respondido la persona para la prueba en el día actual
-    /*public function ultima_prg($id_prueba,$limit)
-    {
-        try {
-            $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
-            $sql = "SELECT preguntas.id_pregunta, preguntas.pregunta, pregunta_indicador.id_indicador 
-            FROM pruebas 
-            INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
-            INNER JOIN pregunta_indicador ON preguntas.id_pregunta = pregunta_indicador.id_pregunta 
-            WHERE pruebas.id_prueba = ? 
-            AND preguntas.id_pregunta 
-            NOT IN (
-                SELECT id_pregunta 
-                FROM respuestas 
-                WHERE id_detalle = ?
-            )
-            ORDER BY id_pregunta ASC 
-            LIMIT ? ";
-            $stmt = $this->dbh->prepare($sql);
-            $stmt->bindParam(1, $id_prueba, PDO::PARAM_INT);
-            $stmt->bindParam(2, $_SESSION["idAdmin"], PDO::PARAM_INT);
-            $stmt->bindParam(3, $limit, PDO::PARAM_INT);
-            if ($stmt->execute()) {
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  $this->result[] = $row;
-                }
-                return $this->result;
-                $this->dbh = null;
-            }
-        } catch (Exception $e) {
-            die("¡Error!: ultima_prg " . $e->getMessage());
-        }
-    }*/
 
     //Calculo por indicador mediante las respuestas almacenadas
     public function suma_prueba($id_prueba,$sum)
