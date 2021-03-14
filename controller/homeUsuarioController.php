@@ -9,8 +9,17 @@ class HomeUsuarioController
     require_once "views/usuario/home.php";
   }
 
-  public static function update(){ 
-    header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario&pag=profile&m=".AccesoDatos::encriptar($msn));
+  public static function save(){ 
+    require_once "models/detallePersonasPruebas.php";
+    $objDetallePersonasPruebas = new DetallePersonasPruebas();
+    foreach($_POST as $POST => $val){
+      if($POST != 'user_length' && $POST != 'validUsuario'){
+        $json = json_decode($val, true);
+        // echo $json['id'];
+        $rowDetallePersonasPruebas = $objDetallePersonasPruebas->update_detallePersonasPruebas($json['id']);
+      }
+    }
+    header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario&m=".AccesoDatos::encriptar(1));
   }
 
   public static function updateUser(){ 
@@ -34,8 +43,8 @@ class HomeUsuarioController
 
 //obtiene los datos del usuario desde la vista y redirecciona a UsuarioController.php
 if (isset($_POST['validUsuario'])) {
-  if ($_POST["validUsuario"] == "update") { 
-    HomeUsuarioController::update();
+  if ($_POST["validUsuario"] == "save") { 
+    HomeUsuarioController::save();
   }
 }
 //se verifica que action esté definida
