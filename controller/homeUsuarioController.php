@@ -3,6 +3,9 @@ class HomeUsuarioController
 {
   
   public static function index(){
+    require_once "models/detallePersonasPruebas.php";
+    $objDetallePersonasPruebas = new DetallePersonasPruebas();
+    $rowDetallePersonasPruebas = $objDetallePersonasPruebas->get_detallePersonasPruebas();
     require_once "views/usuario/home.php";
   }
 

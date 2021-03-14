@@ -1,41 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php require_once 'views/layout/head.php'; ?>
-<script>
-$(document).ready(function(){
-  $("#folio").change(function(){
-    var folio=$("#folio").val();
-    $.ajax({
-        url: "index.php?accion=VerificaFolio",
-        type: "POST",
-        data: {
-            folio: folio
-        },
-        cache: false,
-        success:function(data){
-            $('#info').empty();
-            //console.log(data);
-            $("#info").append(data);
-        }
-    });
-  });
-  
-  $("#exampleCheck1").click(function(){
-      if($('#exampleCheck1').is(':checked')){
-          $("#divsub").css("display", "block");
-          $("#area").attr("required", "true");
-          $("#turno").attr("required", "true");
-          }else{
-              $("#divsub").css("display", "none");
-              $("#area").removeAttr("required");
-              $("#area").val("");
-              $("#turno").removeAttr("required");
-              $("#turno").val("");
-              }
-              });
-});
-</script>
 <body>
+    <!-- Invoca al Navbar -->
+    <?php NavbarUsuarioController::index(); ?>
+
     <section class="container pt-5">
         <div class="shadow p-3 mb-5 bg-white rounded">
         <!-- -->
@@ -125,6 +94,40 @@ $(document).ready(function(){
         <!-- -->
         </div>
     </section>
-<?php require_once 'views/layout/footer.php'; ?>
+    <?php require_once 'views/layout/footer.php'; ?>
+    <script>
+    $(document).ready(function(){
+        $("#folio").change(function(){
+            var folio=$("#folio").val();
+            $.ajax({
+                url: "index.php?accion=VerificaFolio",
+                type: "POST",
+                data: {
+                    folio: folio
+                },
+                cache: false,
+                success:function(data){
+                    $('#info').empty();
+                    //console.log(data);
+                    $("#info").append(data);
+                }
+            });
+        });
+    
+        $("#exampleCheck1").click(function(){
+            if($('#exampleCheck1').is(':checked')){
+                $("#divsub").css("display", "block");
+                $("#area").attr("required", "true");
+                $("#turno").attr("required", "true");
+            }else{
+                $("#divsub").css("display", "none");
+                $("#area").removeAttr("required");
+                $("#area").val("");
+                $("#turno").removeAttr("required");
+                $("#turno").val("");
+            }
+        });
+    });
+    </script>
 </body>
 </html>

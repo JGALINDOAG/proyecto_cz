@@ -3141,6 +3141,8 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
 }
 
+/* Propios outline */
+
 .btn-outline-green {
   color: #007770;
   border-color: #007770;

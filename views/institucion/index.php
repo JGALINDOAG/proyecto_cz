@@ -194,7 +194,7 @@
                 </div>
                 <input type="hidden" name="errno[]">
                 <input type="hidden" name="validUsuario" value="save">
-                <input type="submit" value="Agregar Institución" class="btn btn-green btn-lg btn-block">
+                <input type="submit" value="Agregar Institución" class="btn btn-outline-green btn-lg btn-block">
             </div>
         </form>
     </section>
