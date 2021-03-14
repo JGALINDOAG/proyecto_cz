@@ -5,7 +5,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?php echo AccesoDatos::ruta(); ?>libs/bootstrap-4/css/bootstrap.css">
     <!-- DataTable -->
-    <link rel="stylesheet" href="<?php echo AccesoDatos::ruta(); ?>assets/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="<?php echo AccesoDatos::ruta(); ?>libs/DataTables/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.2/css/select.dataTables.min.css">
     <!-- bootstrap-select -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.9/css/bootstrap-select.min.css" />
     <!-- CSS -->
