@@ -21,14 +21,29 @@
                 </li>
                 <?php endif; ?>
                 <?php endforeach; ?>
-                <li class="nav-item dropdown" <?php if ($uri == $title['enlace']) echo 'active'; ?>>
+                <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Institución
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <?php 
+                    <?php
                     foreach ($menu as $key=>$title):  
                     if($title['sub_menu'] == 1):
+                    ?>
+                    <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
+                    <!-- <div class="dropdown-divider"></div> -->
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Pago
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php 
+                    foreach ($menu as $key=>$title):  
+                    if($title['sub_menu'] == 2):
                     ?>
                     <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
                     <!-- <div class="dropdown-divider"></div> -->

@@ -24,13 +24,24 @@ $(document).ready( function () {
             }
         },
         dom: 'Plfrtip',
+        searchPanes: {
+            layout: 'columns-1'
+        },
         columnDefs: [
+            { "orderable": false, "targets": [1] },
             {
                 searchPanes: {
                     show: true
                 },
-                targets: [3]
+                targets: [3],
             }
         ]
     });
+
+   $("#MarcarTodos").change(function () {
+      $("input:checkbox").prop('checked', $(this).prop("checked"));
+      if($(this).prop("checked")) $("#active").html('&nbsp;Desactivar');
+      else $("#active").html('&nbsp;Activar');
+   });
+
 } );

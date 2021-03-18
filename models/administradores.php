@@ -190,4 +190,5 @@ class Administradores extends AccesoDatos
       die("¡Error!: valid_administradores() " . $e->getMessage());
     }
   }
+
 }
