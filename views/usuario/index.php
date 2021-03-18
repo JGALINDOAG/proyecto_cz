@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div id="showLogin">
-                <div class="form-group row d-flex justify-content-center">
+                <div class="row d-flex justify-content-center">
                     <div class="col-sm-12 col-md-9 col-lg-6">
                         <?php
                         // echo AccesoDatos::encriptar("12345678");
@@ -126,6 +126,7 @@
             $("#logo").animate({ opacity: 0.25 }, 1000);
             document.form.login.focus();
         });
+        $('.toast').toast('show')
     });
     </script>
     

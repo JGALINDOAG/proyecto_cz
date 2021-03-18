@@ -32,7 +32,6 @@
         </div>
         <!-- wrap -->
         <div class="shadow p-3 mb-5 bg-white rounded pt-4">
-
             <div class="alert alert-light" role="alert">
                 <div class="form-row">
                     <div class="col-11">ACTIVACIÓN DE PRUEBAS</div>
@@ -40,36 +39,38 @@
                 <hr>
             </div>
             <form method="post">
-                <table class="table table-hover" id="user" style="width:100%">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Activar</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Institución</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 1; foreach ($rowDetallePersonasPruebas as $item): ?>
-                    <tr>
-                        <th scope="row"><?php echo $i; ?></th>
-                        <td><input type="checkbox" name="<?php echo 'active'.$i; ?>" value='{"id":<?php echo $item[0]; ?>,"val": <?php echo 1; ?>}'></td>
-                        <td><?php echo $item[1]; ?></td>
-                        <td><?php echo $item[2]; ?></td>
-                    </tr>
-                    <?php $i++; endforeach;?>
-                </tbody>
-                <?php if(!empty($rowDetallePersonasPruebas)): ?>
-                    <tfoot>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="user" style="width:100%">
+                    <thead>
                         <tr>
-                            <td colspan="4">
-                                <input type="hidden" name="validUsuario" value="save">
-                                <input type="submit" value="Activar pruebas" class="btn btn-outline-green btn-lg btn-block">
-                            </td>
+                            <th scope="col">#</th>
+                            <th scope="col" width="100px"><input type="checkbox" id="MarcarTodos" /><span id="active">&nbsp;Activar</span></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Institución</th>
                         </tr>
-                    </tfoot>
-                <?php endif;?>
-                </table>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; foreach ($rowDetallePersonasPruebas as $item): ?>
+                        <tr>
+                            <th scope="row"><?php echo $i; ?></th>
+                            <td class="text-right"><input type="checkbox" name="<?php echo 'active'.$i; ?>" value='{"id":<?php echo $item[0]; ?>,"val": <?php echo 1; ?>}'></td>
+                            <td><?php echo $item[1]; ?></td>
+                            <td><?php echo $item[2]; ?></td>
+                        </tr>
+                        <?php $i++; endforeach;?>
+                    </tbody>
+                    <?php if(!empty($rowDetallePersonasPruebas)): ?>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <input type="hidden" name="validUsuario" value="save">
+                                    <input type="submit" value="Activar pruebas" class="btn btn-outline-green btn-lg btn-block">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    <?php endif;?>
+                    </table>
+                </div>
             </form>
         </div>
     </section>
