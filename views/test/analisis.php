@@ -12,8 +12,8 @@
                 <tbody>
                 <thead class="table-dark">
                 <tr>
-                    <th width="80%">PREGUNTAS</th>
-                    <th width="20%">OPCIONES</th>
+                    <th width="68%">PREGUNTAS</th>
+                    <th colspan="2" width="32%">OPCIONES</th>
                 </tr>
                 </thead>
                 <?php 
@@ -21,17 +21,16 @@
                     ?>
                     <tr>
                         <td><strong><?php echo $preguntas[$i]["pregunta"]; ?></strong></td>
-                        <td>
-                        <select name="<?php echo $preguntas[$i]["id_pregunta"]; ?>" required>
-                        <option value="">Seleccione una opción</option>
-                        <?php 
+                        <?php
                         $op = new Pruebas();
+                        //Muestra las opciones que contiene una pregunta
                         $opcion = $op->opciones_pregunta($preguntas[$i]["id_pregunta"]);
-                        for ($o = 0; $o < sizeof($opcion); $o++) { 
-                            ?><option value="<?php echo $opcion[$o]["id_opcion"]; ?>"><?php echo $opcion[$o]['valor']; ?> - <?php echo $opcion[$o]['opcion']; ?></option>
-                            <?php } ?>
-                        </select>
-                        </td>
+                        for ($o = 0; $o < sizeof($opcion); $o++) {
+                        ?>
+                        <td><input type="radio" name="<?php echo $opcion[$o]["id_pregunta"]; ?>" value="<?php echo $opcion[$o]["id_opcion"]; ?>" required />&nbsp;<label><?php echo $opcion[$o]['opcion']; ?></label></td>
+                        <?php
+                    }
+                    ?>
                     </tr>
                     <?php
                 }

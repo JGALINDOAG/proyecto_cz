@@ -16,81 +16,113 @@
                     </div>
                 </div>
             </div>
-
-            <form name="form" action="" method="post">
-                <input type="hidden" name="personal" value="ok">
-                <div class="form-group">
-                    <label>Folio</label>
-                    <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingrese el folio compartido por la institución" required>
-                    <div id="info"></div>
+            <div class="container">
+            <div id="accordion">
+                <div class="card">
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapseOne">Ya cuento con registro</a>
                 </div>
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input class="form-control" type="text" name="nom" placeholder="Ingrese su nombre" required>
-                </div>
-                <div class="form-group">
-                    <label>Primer apellido</label>
-                    <input class="form-control" type="text" name="ap1" placeholder="Ingrese su primer apellido" required>
-                </div>
-                <div class="form-group">
-                    <label>Segundo apellido</label>
-                    <input class="form-control" type="text" name="ap2" placeholder="Ingrese su segundo apellido">
-                </div>
-                <div class="form-group">
-                    <label>Correo electrónico</label>
-                    <input class="form-control" type="email" name="email" placeholder="Ingrese su email" required>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sexo" value="H" required>
-                    <label class="form-check-label">Hombre</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="sexo" value="M" required>
-                    <label class="form-check-label">Mujer</label>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label>Fecha de nacimiento</label>
-                    <input class="form-control" type="date" name="fecha_nacimiento" required>
-                </div>                
-                <div class="form-group">
-                <label>Grados de estudios</label>
-                <select class="form-control" name="grado_estudios" required>
-                    <option value="">seleccione una opción</option>
-                    <option value="ninguno">Ninguno</option>
-                    <option value="preescolar">Preescolar</option>
-                    <option value="primaria">Primaria</option>
-                    <option value="secundaria">Secundaria</option>
-                    <option value="bachillerato">Bachillerato</option>
-                    <option value="licenciatura">Licenciatura</option>
-                    <option value="posgrados">Posgrados</option>
-                </select>
-                </div>
-                <div class="alert alert-secondary" role="alert">Si usted pertenece a la institución, favor de marcar la casilla y llenar la información solicitada.</div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Si, pertenezco a la institución.</label>
-                </div>
-
-                <br>
-                <div id="divsub" style="display:none;">
-                    <div class="form-group">
-                        <label>Área</label>
-                        <input class="form-control" type="text" name="area" id="area" placeholder="Ingrese el área al cual pertenece">
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                    <form name="form" action="" method="post">
+                            <input type="hidden" name="existe" value="ok">
+                            <div class="form-group">
+                                <label>Folio</label>
+                                <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingrese el folio compartido por la institución" required>
+                                <div id="info"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Correo electrónico</label>
+                                <input class="form-control" type="email" name="email" placeholder="Ingrese su email" required>
+                            </div>
+                            <input type="submit" class="btn btn-outline-green btn-lg btn-block" value="Continuar">
+                        </form>
                     </div>
-                    <label>Turno</label>
-                    <select class="form-control" name="turno" id="turno">
-                    <option value="">seleccione una opción</option>
-                        <option value="matutino">Matutino</option>
-                        <option value="vespertino">Vespertino</option>
-                        <option value="nocturno">Nocturno</option>
-                    </select>
                 </div>
-                <br>
-                <br>
-
-                <input type="submit" class="btn btn-outline-green btn-lg btn-block" value="Continuar">
-            </form>
+                </div>
+                <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">Nuevo registro</a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                    <form name="form" action="" method="post">
+                            <input type="hidden" name="noexiste" value="ok">
+                            <div class="form-group">
+                                <label>Folio</label>
+                                <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingrese el folio compartido por la institución" required>
+                                <div id="info"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input class="form-control" type="text" name="nom" placeholder="Ingrese su nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Primer apellido</label>
+                                <input class="form-control" type="text" name="ap1" placeholder="Ingrese su primer apellido" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Segundo apellido</label>
+                                <input class="form-control" type="text" name="ap2" placeholder="Ingrese su segundo apellido">
+                            </div>
+                            <div class="form-group">
+                                <label>Correo electrónico</label>
+                                <input class="form-control" type="email" name="email" placeholder="Ingrese su email" required>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sexo" value="H" required>
+                                <label class="form-check-label">Hombre</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sexo" value="M" required>
+                                <label class="form-check-label">Mujer</label>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Fecha de nacimiento</label>
+                                <input class="form-control" type="date" name="fecha_nacimiento" required>
+                            </div>                
+                            <div class="form-group">
+                            <label>Grados de estudios</label>
+                            <select class="form-control" name="grado_estudios" required>
+                                <option value="">seleccione una opción</option>
+                                <option value="ninguno">Ninguno</option>
+                                <option value="preescolar">Preescolar</option>
+                                <option value="primaria">Primaria</option>
+                                <option value="secundaria">Secundaria</option>
+                                <option value="bachillerato">Bachillerato</option>
+                                <option value="licenciatura">Licenciatura</option>
+                                <option value="posgrados">Posgrados</option>
+                            </select>
+                            </div>
+                            <div class="alert alert-secondary" role="alert">Si usted pertenece a la institución, favor de marcar la casilla y llenar la información solicitada.</div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Si, pertenezco a la institución.</label>
+                            </div>
+                            <br>
+                            <div id="divsub" style="display:none;">
+                                <div class="form-group">
+                                    <label>Área</label>
+                                    <input class="form-control" type="text" name="area" id="area" placeholder="Ingrese el área al cual pertenece">
+                                </div>
+                                <label>Turno</label>
+                                <select class="form-control" name="turno" id="turno">
+                                <option value="">seleccione una opción</option>
+                                    <option value="matutino">Matutino</option>
+                                    <option value="vespertino">Vespertino</option>
+                                    <option value="nocturno">Nocturno</option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                            <input type="submit" class="btn btn-outline-green btn-lg btn-block" value="Continuar">
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
         <!-- -->
         </div>
     </section>

@@ -1,6 +1,6 @@
 <?php
 //Valida la existencia un post desde la vista para ejecutar el proceso, de lo contrario muestra la vista. 
-if (isset($_POST["personal"]) and $_POST["personal"] == "ok") {
+if (isset($_POST["noexiste"]) and $_POST["noexiste"] == "ok") {
     require_once("models/personas.php");
     $nombre = strtoupper($_POST["nom"]);
     $primer_apellido = strtoupper($_POST["ap1"]);
@@ -25,8 +25,6 @@ if (isset($_POST["personal"]) and $_POST["personal"] == "ok") {
         $nodoblepersona = new Personas();
         //Valida si la persona existe en la base de datos mediante el correo para evitar insertarla de nuevo.
         $existepersona = $nodoblepersona->get_personas_email($email);
-        //print_r($existepersona);
-        /**/
         if ($existepersona[0] == 0) {
 
             $addident = new Personas();
@@ -67,7 +65,39 @@ if (isset($_POST["personal"]) and $_POST["personal"] == "ok") {
             //print_r($sesion);
             $_SESSION["idAdmin"] = $sesion[1]['id_detalle'];
             header("Location: index.php?accion=Tests");
-
+        }
+    }
+}elseif (isset($_POST["existe"]) and $_POST["existe"] == "ok") {
+    require_once("models/personas.php");
+    $email = $_POST["email"];
+    $id_folio = strtolower($_POST["folio"]);
+    $get=new Personas();
+    $result=$get->verifica_idfolio($id_folio);
+    if($result[0]['valor'] == 0){
+        header("Location: index.php?accion=Home");
+    }else{
+        $nodoblepersona = new Personas();
+        //Valida si la persona existe en la base de datos mediante el correo para evitar insertarla de nuevo.
+        $existepersona = $nodoblepersona->get_personas_email($email);
+        //print_r($existepersona);
+        /**/
+        if ($existepersona[0] == 1) {
+            $idadd=$existepersona[1]['Id_persona'];
+            $nodobledetalle = new Personas();
+            $existedetalle = $nodobledetalle->get_detalle($idadd, $id_folio);
+            //print_r($existedetalle);
+            if ($existedetalle[0] == 0) {
+                $objDetalle = new Personas();
+                $objDetalle->add_detalle($idadd, $id_folio);
+            }
+            //
+            $infodetalle = new Personas();
+            $sesion = $infodetalle->get_detalle($idadd, $id_folio);
+            //print_r($sesion);
+            $_SESSION["idAdmin"] = $sesion[1]['id_detalle'];
+            header("Location: index.php?accion=Tests");
+        }else{
+            header("Location: index.php?accion=Home");
         }
         /**/
     }

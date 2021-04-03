@@ -43,6 +43,31 @@ class Pruebas extends AccesoDatos
         }
     }
 
+    public function list_pruebas_persona()
+    {
+        try {
+            $this->dbh = parent::conexion();
+            $pruebas = $this->dbh->prepare("SELECT pruebas 
+            FROM institucion INNER JOIN administradores USING (id_institucion) 
+            INNER JOIN institucion_administrador USING (id_admin) 
+            INNER JOIN detalle_personas_pruebas USING (id_folio) 
+            WHERE id_detalle = ?");
+            $pruebas->bindParam(1, $_SESSION["idAdmin"], PDO::PARAM_INT);
+            $pruebas->execute();
+            $rowPruebas = $pruebas->fetch(PDO::FETCH_NUM);
+            $stmt = $this->dbh->prepare("SELECT * FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
+            if ($stmt->execute()) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->result[] = $row;
+                }
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: list_byInstitucion() " . $e->getMessage());
+        }
+    }
+
     public function list_byInstitucion()
     {
         try {
@@ -307,7 +332,7 @@ class Pruebas extends AccesoDatos
             FROM resultados 
             WHERE id_detalle = ? 
             AND id_indicador = ?
-            AND id_prueba = ? ");
+            AND id_prueba = ?");
             $stmt->bindParam(1, $_SESSION["idAdmin"], PDO::PARAM_INT);
             $stmt->bindParam(2, $id_indicador, PDO::PARAM_STR);
             $stmt->bindParam(3, $id_prueba, PDO::PARAM_STR);
@@ -323,17 +348,18 @@ class Pruebas extends AccesoDatos
     }
 
     //Se almacena el resultado obtenido por indicador a la tabla "resultados"
-    public function add_resultados($id_indicador, $resultado, $id_prueba) {
+    public function add_resultados($id_indicador, $resultado, $id_prueba, $escala) {
         try {
             $this->dbh = AccesoDatos::conexion();
             //$fecha = 'NOW()';
             $fecha = parent::Fecha_actual();
-            $stmt = $this->dbh->prepare("INSERT INTO resultados (id_indicador, resultado, fecha_aplicacion, id_prueba, id_detalle) VALUES (?, ?, ?, ?, ?);");
+            $stmt = $this->dbh->prepare("INSERT INTO resultados (id_indicador, resultado, fecha_aplicacion, id_prueba, id_detalle, escala) VALUES (?, ?, ?, ?, ?, ?);");
             $stmt->bindvalue(1, $id_indicador, PDO::PARAM_INT);
             $stmt->bindvalue(2, $resultado, PDO::PARAM_STR);
             $stmt->bindvalue(3, $fecha, PDO::PARAM_STR);
             $stmt->bindvalue(4, $id_prueba, PDO::PARAM_INT);
             $stmt->bindvalue(5, $_SESSION["idAdmin"], PDO::PARAM_INT);
+            $stmt->bindvalue(6, $escala, PDO::PARAM_INT);
             $stmt->execute();
             $this->dbh = null;
         } catch (Exception $e) {
@@ -367,7 +393,7 @@ class Pruebas extends AccesoDatos
             $this->dbh = AccesoDatos::conexion();
             $fecha = parent::Fecha_actual();
             $stmt = $this->dbh->prepare("SELECT COUNT(*) FROM respuestas WHERE id_detalle = ? AND id_pregunta = ? AND fecha_respuesta = ?");
-            $stmt->bindvalue(1, $_SESSION["idAdmin"], PDO::PARAM_INT);
+            $stmt->bindParam(1, $_SESSION["idAdmin"], PDO::PARAM_INT);
             $stmt->bindParam(2, $id_pregunta, PDO::PARAM_INT);
             $stmt->bindParam(3, $fecha, PDO::PARAM_STR);
             if ($stmt->execute()) {
@@ -402,6 +428,121 @@ class Pruebas extends AccesoDatos
             $this->dbh = null;
         } catch (Exception $e) {
             die("¡Error!: delete_respuestas " . $e->getMessage());
+        }
+    }
+    // # # # # # # MMPI # # # # # #
+    public function mmpi_ind($valorOp,$id_indicador,$valorInd) {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("SELECT COUNT(preguntas.id_pregunta) AS total
+            FROM pruebas 
+            INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
+            INNER JOIN respuestas ON preguntas.id_pregunta = respuestas.id_pregunta
+            INNER JOIN opciones ON respuestas.id_opcion = opciones.id_opcion 
+            WHERE pruebas.id_prueba = 12 
+            AND respuestas.id_detalle = ? 
+            AND opciones.valor = ? 
+            AND preguntas.id_pregunta 
+            IN (SELECT id_pregunta FROM pregunta_indicador WHERE id_indicador = ? AND valor = ?)");
+            $stmt->bindvalue(1, $_SESSION["idAdmin"], PDO::PARAM_INT);
+            $stmt->bindvalue(2, $valorOp, PDO::PARAM_INT);
+            $stmt->bindvalue(3, $id_indicador, PDO::PARAM_INT);
+            $stmt->bindvalue(4, $valorInd, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: mmpi_ind".$e->getMessage());
+        }
+    }
+
+    public function mmpi_ind_suma($cero,$id_indicador,$uno) {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("SELECT (SELECT COUNT(preguntas.id_pregunta)
+            FROM pruebas 
+            INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
+            INNER JOIN respuestas ON preguntas.id_pregunta = respuestas.id_pregunta
+            INNER JOIN opciones ON respuestas.id_opcion = opciones.id_opcion 
+            WHERE pruebas.id_prueba = 12 
+            AND respuestas.id_detalle = ".$_SESSION["idAdmin"]." 
+            AND opciones.valor = $cero 
+            AND preguntas.id_pregunta 
+            IN (SELECT id_pregunta FROM pregunta_indicador WHERE id_indicador = $id_indicador AND valor = $cero))
+            +
+            (SELECT COUNT(preguntas.id_pregunta)
+            FROM pruebas 
+            INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
+            INNER JOIN respuestas ON preguntas.id_pregunta = respuestas.id_pregunta
+            INNER JOIN opciones ON respuestas.id_opcion = opciones.id_opcion 
+            WHERE pruebas.id_prueba = 12 
+            AND respuestas.id_detalle = ".$_SESSION["idAdmin"]." 
+            AND opciones.valor = $uno 
+            AND preguntas.id_pregunta 
+            IN (SELECT id_pregunta FROM pregunta_indicador WHERE id_indicador = $id_indicador AND valor = $uno)) AS total");
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: mmpi_ind_suma".$e->getMessage());
+        }
+    }
+
+    public function mmpi_ind_esc($indicador,$total) {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("SELECT escala
+            FROM escalas 
+            WHERE sexo = (SELECT sexo FROM personas INNER JOIN detalle_personas_pruebas ON personas.Id_persona = detalle_personas_pruebas.Id_persona WHERE id_detalle = ".$_SESSION["idAdmin"].") AND `$indicador` BETWEEN 0 AND $total
+            ORDER BY `$indicador` DESC
+            LIMIT 1");
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: mmpi_ind_esc".$e->getMessage());
+        }
+    }
+
+    public function frac_k($f,$total) {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("select $f from frac_k where num_k=$total");
+            //$stmt->bindvalue(1, $f, PDO::PARAM_STR);
+            //$stmt->bindvalue(2, $total, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: frac_k".$e->getMessage());
+        }
+    }
+
+    public function sexo() {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("SELECT sexo FROM personas INNER JOIN detalle_personas_pruebas ON personas.Id_persona = detalle_personas_pruebas.Id_persona WHERE id_detalle = ?");
+            $stmt->bindParam(1, $_SESSION["idAdmin"], PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: sexo".$e->getMessage());
         }
     }
 }

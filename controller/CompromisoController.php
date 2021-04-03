@@ -1,8 +1,8 @@
 <?php
 require_once("models/pruebas.php");
-$id_prueba=6;
-$limit=20;
-$sum="*100/24";
+$id_prueba=8;
+$limit=15;
+$sum="";
 $t = new Pruebas();
 //Lista de las preguntas que aún no ha respondido la persona para la prueba en el día actual
 $preguntas = $t->ultima_prg($id_prueba,$limit);
@@ -19,7 +19,7 @@ if (isset($_POST["save"])) {
             }
         }
     }
-    header("Location: index.php?accion=Aptitudes");
+    header("Location: index.php?accion=Compromiso");
 }
 
 //Si el usuario ha respondido todas las peguntas se procesa su resultado
@@ -37,8 +37,8 @@ if (empty($preguntas)) {
     }
     //Una vez resguardado el resultado final de esta prueba se eliminan las respuestas del usuario en la tabla "respuestas"
     $t->delete_respuestas($id_prueba);
-    header("Location: index.php?accion=AptitudesEj");
+    header("Location: index.php?accion=CompromisoEj");
 } else {
-    require_once("views/test/aptitudes.php");
+    require_once("views/test/compromiso.php");
 }
 ?>

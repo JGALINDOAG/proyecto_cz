@@ -15,12 +15,10 @@
                             <div class="media-body">
                             <form action="<?php echo 'index.php?accion=mmpi'; ?>" method="post">
                                 <h4>MMPI</h4>
-                                <h4>INSTRUCCIONES:</h4>
-                                <p>Esta prueba contiene una serie de frases en las que usted debe ser absolutamente honesto con sus respuestas, el test está capacitado para detectar falsedad o la manipulación del mismo , si es el caso, se invalidarán sus datos y tendrá que repetir la prueba.</p>
-                                <p>Lea cuidadosamente cada una de las frases, debe responder marcando el circulo F en caso de ser Falso y V en caso de ser Verdadero como se muestra a continuación.</p>
-                                <p>EJEMPLO: &iquest;Me gustan las revistas de mecánica?</p>
-                                <p><input type="radio" name="I" disabled checked="checked"> Falso</p>
-                                <p><input type="radio" name="I" disabled> Verdadero</p>
+                                <h5>Descripcion Examen</h5>
+                                <p>Este test está diseñado en 10 subescalas clínicas que se basan en 10 categorías principales de la conducta humana anormal,   se centra en evaluar rasgos de la personalidad  para discernir si tienen problemas de salud emocional u otros problemas clínicos.</p>
+                                <h5>Instrucciones:</h5>
+                                <p>Lee con atención cada una de las preguntas, y selecciona si es falso o verdadero la opción que consideres sea la correcta.</p>
                                 <center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
                             </form>
                             </div>

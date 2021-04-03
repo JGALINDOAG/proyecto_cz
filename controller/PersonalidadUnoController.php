@@ -32,7 +32,7 @@ if (empty($preguntas)) {
         if($total[0]['COUNT(*)']==0){
             //Se almacena el resultado obtenido por indicador a la tabla "resultados"
             $obj = new Pruebas();
-            $obj->add_resultados($resultados[$i]["id_indicador"], $resultados[$i]["Result"], $id_prueba);
+            $obj->add_resultados($resultados[$i]["id_indicador"], $resultados[$i]["Result"], $id_prueba, $escala=NULL);
         }
     }
     //Una vez resguardado el resultado final de esta prueba se eliminan las respuestas del usuario en la tabla "respuestas"

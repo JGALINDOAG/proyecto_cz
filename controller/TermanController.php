@@ -62,7 +62,7 @@ if (isset($_POST["serie"])) {
             if($total[0]['COUNT(*)']==0){
                 //Se almacena el resultado obtenido por indicador a la tabla "resultados"
                 $obj = new Pruebas();
-                $obj->add_resultados($serie, $result, $id_prueba);
+                $obj->add_resultados($serie, $result, $id_prueba, $escala=NULL);
             }
         }
         if ($serie == 2 || $serie == 5 || $serie == 10) {
@@ -75,7 +75,7 @@ if (isset($_POST["serie"])) {
             if($total[0]['COUNT(*)']==0){
                 //Se almacena el resultado obtenido por indicador a la tabla "resultados"
                 $obj = new Pruebas();
-                $obj->add_resultados($serie, $result, $id_prueba);
+                $obj->add_resultados($serie, $result, $id_prueba, $escala=NULL);
             }
         }
         if ($serie == 4) {
@@ -92,7 +92,7 @@ if (isset($_POST["serie"])) {
             if($total[0]['COUNT(*)']==0){
                 //Se almacena el resultado obtenido por indicador a la tabla "resultados"
                 $obj = new Pruebas();
-                $obj->add_resultados($serie, $result, $id_prueba);
+                $obj->add_resultados($serie, $result, $id_prueba, $escala=NULL);
             }
         }
     }
