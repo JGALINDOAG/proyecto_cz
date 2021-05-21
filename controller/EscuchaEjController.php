@@ -1,8 +1,9 @@
 <?php
+$idDetalle=$_SESSION["idDetalle"];
 require_once("models/pruebas.php");
 $u = new Pruebas();
 //Valida si el usuario ya termino la prueba en el día actual
-$avance = $u->fin_prueba($id_prueba=11);
+$avance = $u->fin_prueba($idDetalle,$id_prueba=11);
 if ($avance[0]["Total"] == 1) {
     $progreso = 'Finalizo';
 } else {

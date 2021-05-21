@@ -1,10 +1,11 @@
 <?php 
+$idDetalle=$_SESSION["idDetalle"];
 require_once("models/pruebas.php");
 $objactivo = new Pruebas();
-$activo = $objactivo->activo_detalle_personas();
+$activo = $objactivo->activo_detalle_personas($idDetalle);
 //print_r($activo);
 $obj = new Pruebas ();
-$list = $obj->list_pruebas_persona();
+$list = $obj->list_pruebas_persona($idDetalle);
 //print_r($list);
 if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
     if (isset($_POST["TERMAN"])) {
@@ -31,6 +32,10 @@ if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
         header("Location: index.php?accion=CulturaEj");
     }elseif (isset($_POST["CLIMAPARAELCAMBIO"])) {
         header("Location: index.php?accion=ClimaEj");
+    }elseif (isset($_POST["TESTPROYECTIVOKARENMACHOVER"])) {
+        header("Location: index.php?accion=Machover");
+    }elseif (isset($_POST["GRADODERETROALIMENTACIÓN"])) {
+        header("Location: index.php?accion=RetroalimentacionEj");
     }
 }
 require_once("views/test/test.php");

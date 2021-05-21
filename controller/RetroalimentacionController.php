@@ -1,8 +1,8 @@
 <?php
 $idDetalle=$_SESSION["idDetalle"];
 require_once("models/pruebas.php");
-$id_prueba=8;
-$limit=15;
+$id_prueba=14;
+$limit=10;
 $sum="";
 $t = new Pruebas();
 //Lista de las preguntas que aún no ha respondido la persona para la prueba en el día actual
@@ -20,13 +20,13 @@ if (isset($_POST["save"])) {
             }
         }
     }
-    header("Location: index.php?accion=Compromiso");
+    header("Location: index.php?accion=Retroalimentacion");
 }
 
 //Si el usuario ha respondido todas las peguntas se procesa su resultado
 if (empty($preguntas)) {
     //Calculo por indicador mediante las respuestas almacenadas
-    $resultados = $t->suma_prueba($idDetalle,$id_prueba,$sum);
+    $resultados = $t->suma_prueba_op($idDetalle,$id_prueba,$sum);
     for ($i = 0; $i < sizeof($resultados); $i++) {
         $no = new Pruebas();
         $total=$no->valida_duplicado_resultados($idDetalle,$resultados[$i]["id_indicador"], $id_prueba);
@@ -37,9 +37,9 @@ if (empty($preguntas)) {
         }
     }
     //Una vez resguardado el resultado final de esta prueba se eliminan las respuestas del usuario en la tabla "respuestas"
-    $t->delete_respuestas($idDetalle,$id_prueba);
-    header("Location: index.php?accion=CompromisoEj");
+    $t->delete_respuestas_op($idDetalle,$id_prueba);
+    header("Location: index.php?accion=RetroalimentacionEj");
 } else {
-    require_once("views/test/compromiso.php");
+    require_once("views/test/retroalimentacion.php");
 }
 ?>

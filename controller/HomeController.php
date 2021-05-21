@@ -48,7 +48,7 @@ if (isset($_POST["noexiste"]) and $_POST["noexiste"] == "ok") {
             $infodetalle = new Personas();
             $sesion = $infodetalle->get_detalle($idadd, $id_folio);
             //print_r($sesion);
-            $_SESSION["idAdmin"] = $sesion[1]['id_detalle'];
+            $_SESSION["idDetalle"] = $sesion[1]['id_detalle'];
             header("Location: index.php?accion=Tests");
         } else {
             $idadd=$existepersona[1]['Id_persona'];
@@ -63,7 +63,7 @@ if (isset($_POST["noexiste"]) and $_POST["noexiste"] == "ok") {
             $infodetalle = new Personas();
             $sesion = $infodetalle->get_detalle($idadd, $id_folio);
             //print_r($sesion);
-            $_SESSION["idAdmin"] = $sesion[1]['id_detalle'];
+            $_SESSION["idDetalle"] = $sesion[1]['id_detalle'];
             header("Location: index.php?accion=Tests");
         }
     }
@@ -94,7 +94,7 @@ if (isset($_POST["noexiste"]) and $_POST["noexiste"] == "ok") {
             $infodetalle = new Personas();
             $sesion = $infodetalle->get_detalle($idadd, $id_folio);
             //print_r($sesion);
-            $_SESSION["idAdmin"] = $sesion[1]['id_detalle'];
+            $_SESSION["idDetalle"] = $sesion[1]['id_detalle'];
             header("Location: index.php?accion=Tests");
         }else{
             header("Location: index.php?accion=Home");
