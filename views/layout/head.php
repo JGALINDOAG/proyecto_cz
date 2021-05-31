@@ -21,7 +21,20 @@
         margin-right: auto;
         width: 35%;
     }
+    
+    /* Media query for mobile viewport */
+    /* @media screen and (max-width: 400px) {
+        #paypal-button-container {
+            width: 100%;
+        }
+    } */
+        
+    /* Media query for desktop viewport */
+    /* @media screen and (min-width: 400px) {
+         #paypal-button-container {
+            width: 250px;
+         }
+     } */
     </style>
-
-    <title>Cruzeac | Cruzeac Consultores S. A. de C. V.</title>
+    <title>Chrome | S. A. de C. V.</title>
 </head>
