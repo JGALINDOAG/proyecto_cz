@@ -1,13 +1,67 @@
 $(document).ready( function () {
-    $("#hidenCarga").prop( "disabled", true );
+    $('#pay').hide();
+    $('#file').hide();
+    $('#cmbFormaPago').prop('disabled', true);
+    $('#cantidad').prop('disabled', true);
+    $("#cmbFolio").change(function () {
+        var folio = $(this).val()
+        var cmbFolio = $.ajax({
+            method: "POST",
+            url: "?accion=institucionAdministrador&pag=getFolio",
+            data: { folio: folio }
+        })
+
+        cmbFolio.done(function( res ) {
+            $('#cantidad').empty()
+            $('#cmbFormaPago').prop('disabled', false);
+            var data = JSON.parse(res)
+            $('#cantidad').val(data[0].costo)
+        });
+
+        cmbFolio.fail(function() {
+            alert("error")
+        })
+    });
+
     $("#cmbFormaPago").change(function () {
-        if($(this).val() > 1) {
-            $("#hidenCarga").prop("disabled", false);
-            $("#hidenCarga").prop('required', true);
-        }
-        else {
-            $("#hidenCarga").prop("disabled", true);
+        if($(this).val() == 1) {
             $("#hidenCarga").prop('required', false);
+            $('#pay').show();
+            $('#file').hide();
+            $("#pagar").hide();
+            $('#paypal-button-container').html('');
+            // Render the PayPal button into #paypal-button-container
+            paypal.Buttons({
+                
+                // Set up the transaction
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: $('#cantidad').val()
+                            }
+                        }]
+                    });
+                },
+
+                // Finalize the transaction
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        if(details.status == "COMPLETED") window.location.href = '?accion=pago&pag=index&m=1'
+                    });
+                }
+            }).render('#paypal-button-container');
+
+        } else if($(this).val() == 2) {
+            $("#hidenCarga").prop('required', false);
+            $('#pay').hide();
+            $('#file').hide();
+            $("#pagar").show();
+        } else {
+            $('#pay').hide();
+            $('#file').show();
+            $("#hidenCarga").prop('required', true);
+            $("#pagar").show();
         }
     });
 

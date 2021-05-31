@@ -3,14 +3,15 @@ class PagoController
 {
   
   public static function index(){
-    // require_once "models/detallePersonasPruebas.php";
-    // $objDetallePersonasPruebas = new DetallePersonasPruebas();
-    // $rowDetallePersonasPruebas = $objDetallePersonasPruebas->get_detallePersonasPruebas();
+    require_once "models/institucion.php";
+    $objInstitucion = new Institucion();
+    $rowInstitucion = $objInstitucion->get_folio($_SESSION["idInstitucion"]);
     require_once "views/pago/index.php";
   }
 
   public static function save(){ 
     // header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario&m=".AccesoDatos::encriptar(1));
+    // require_once "views/pago/success.php";
   }
 
   public static function updateUser(){ }

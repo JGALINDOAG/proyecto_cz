@@ -3,7 +3,6 @@
 
 <!-- Invoca al Head -->
 <?php require_once 'views/layout/head.php'; ?>
-
 <body>
     <!-- Invoca al Navbar -->
     <?php NavbarUsuarioController::index(); ?>
@@ -14,12 +13,12 @@
             <div class="col-sm-12">
                 <?php
                     @$m=str_replace(' ','+',$_GET['m']);
-                    @$m=AccesoDatos::desencriptar($m);
+                    // @$m=AccesoDatos::desencriptar($m);
                     if(isset($m)){
                         switch ($m){
                             case '1':
                                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong><hr>Las pruebas se activaron exitosamente
+                                    <strong>¡AVISO!</strong><hr>El pago se realizo exitosamente
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -39,19 +38,26 @@
                 <hr>
             </div>
             <form name="" action="#" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label>Folio</label>
-                    <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingrese el folio compartido por la institución" required>
-                    <div id="info"></div>
+                <div class="form-row">
+                    <div class="form-group col-sm-12">
+                        <label>Folio</label>
+                        <select class="form-control" id="cmbFolio" required>
+                            <option value="" disabled selected>Selecciona el folio a pagar</option>
+                            <?php foreach($rowInstitucion as $item): ?>
+                            <option value=<?php echo $item['id_folio']; ?>><?php echo $item['id_folio']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-sm-12 col-md-6">
                         <label>Forma de pago</label>
                         <select class="form-control" id="cmbFormaPago" required>
                             <option value="" disabled selected>Selecciona una opción</option>
-                            <option value="1">Efectivo</option>
-                            <option value="2">Transferencia</option>
-                            <option value="3">Pago por banco</option>
+                            <option value="1">Pagar con PayPal</option>
+                            <option value="2">Efectivo</option>
+                            <option value="3">Transferencia</option>
+                            <option value="4">Pago por banco</option>
                         </select>
                     </div>
                     <div class="form-group col-sm-12 col-md-6">
@@ -60,7 +66,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
                             </div>
-                            <input type="text" class="form-control" id="cantidad" onkeypress="return soloNumeros(this);" min="1" pattern="^[0-9]+" required>
+                            <input type="text" class="form-control" id="cantidad" required>
                             <div class="input-group-append">
                                 <span class="input-group-text">.00</span>
                             </div>
@@ -68,7 +74,11 @@
                     </div>
                 </div>
                 <div class="form-row">
-                <div class="form-group col-sm-12">
+                    <div id="pay" class="form-group col-sm-6">
+                        <!-- Set up a container element for the button -->
+                        <div id="paypal-button-container"></div>
+                    </div>
+                    <div id="file" class="form-group col-sm-12">
                         <label>Carga de comprobante</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -82,15 +92,15 @@
                         <small id="emailHelp" class="form-text text-muted">Solo se permite imagenes jpg/jpge.</small>
                         <small id="emailHelp" class="form-text text-muted">El tamaño del archivo no mayor a 10MB.</small>
                     </div>
-                    
                 </div>
                 <input type="hidden" name="validUsuario" value="save">
-                <input type="submit" value="Enviar" class="btn btn-outline-green btn-lg btn-block">
+                <input type="submit" value="Enviar comprobante" id="pagar" class="btn btn-outline-green btn-lg btn-block">
             </form>
         </div>
     </section>
     <!-- Invoca al Footer -->
     <?php require_once 'views/layout/footer.php'; ?>
     <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/JqueryPago.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AcMUqZGxC9nXvrr994-RqCSDmpIXDC1njOYsj1R0K3lRy3TlUuzhgvkVkPQrAr03RccvK0pbzfHPSAW_&currency=MXN"> // Replace YOUR_CLIENT_ID with your sandbox client ID</script>
 </body>
 </html>

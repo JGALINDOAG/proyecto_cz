@@ -109,4 +109,27 @@ class Institucion extends AccesoDatos
           die("¡Error!: get_recoveryEmail()" . $e->getMessage());
       }
     }
+    
+    #Obtiene los folios no pagados por la institución.
+    public function get_folio($idInstitucion) 
+    {
+      try {
+          $this->dbh = AccesoDatos::conexion();
+          $query = "SELECT id_folio FROM institucion i
+          INNER JOIN administradores a USING (id_institucion)
+          INNER JOIN institucion_administrador ia USING (id_admin)
+          WHERE id_institucion = ?";
+          $stmt = $this->dbh->prepare($query);
+          $stmt->bindParam(1, $idInstitucion, PDO::PARAM_STR);
+          if ($stmt->execute()) {
+              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                  $this->result[] = $row;
+              }
+              return $this->result;
+              $this->dbh = null;
+          }
+      } catch (Exception $e) {
+          die("¡Error!: get_costoPrueba()" . $e->getMessage());
+      }
+    }
 }
