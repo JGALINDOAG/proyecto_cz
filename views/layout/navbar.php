@@ -1,7 +1,7 @@
 <?php $uri = basename($_SERVER["REQUEST_URI"]); ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="http://localhost:8888/respsite/index.html">
+        <a class="navbar-brand d-flex align-items-center" href="http://localhost:8888/proyecto_cz/home/index.html">
             <img src="<?php echo AccesoDatos::ruta(); ?>assets/img/ico.png" width="35" height="35" class="d-inline-block align-top" alt="">
             &nbsp;CHROME
         </a>
