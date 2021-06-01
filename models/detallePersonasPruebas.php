@@ -14,14 +14,17 @@ class DetallePersonasPruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $sql = "SELECT p.Id_persona,CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) AS nombre, i.abreviatura FROM detalle_personas_pruebas dpp
+            if($_SESSION["idInstitucion"] == 1) $band = "";
+            else $band = "AND i.id_institucion = :idIntitucion";
+            $sql = "SELECT p.Id_persona,CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) AS nombre, i.nombre, i.abreviatura FROM detalle_personas_pruebas dpp
             INNER JOIN personas p USING(Id_persona)
             INNER JOIN institucion_administrador ia USING(id_folio)
             INNER JOIN administradores a USING(id_admin)
             INNER JOIN institucion i USING(id_institucion)
-            WHERE dpp.activo = 0";
+            WHERE dpp.activo = 0
+            $band";
             $stmt = $this->dbh->prepare($sql);
-            # $stmt->bindParam(1, $email, PDO::PARAM_INT);
+            $stmt->bindParam("idIntitucion", $_SESSION["idInstitucion"], PDO::PARAM_INT);
             if ($stmt->execute()) {
                 while($row = $stmt->fetch(PDO::FETCH_NUM)){
                     $this->result[] = $row;

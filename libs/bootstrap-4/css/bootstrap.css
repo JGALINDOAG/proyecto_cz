@@ -6902,6 +6902,16 @@ button.bg-dark:focus {
   background-color: #fff !important;
 }
 
+.bg-login {
+  background-color: #fff !important;
+  width: 35ch;
+}
+
+.bg-login-footer {
+  background-color: #f6f6f6 !important;
+  width: 35ch;
+}
+
 .bg-transparent {
   background-color: transparent !important;
 }
@@ -6988,6 +6998,14 @@ button.bg-dark:focus {
 
 .rounded {
   border-radius: 0.25rem !important;
+}
+
+.rounded-login {
+  border-radius: 0.50rem 0.50rem 0 0 !important;
+}
+
+.rounded-login-footer {
+  border-radius: 0 0 0.50rem 0.50rem !important;
 }
 
 .rounded-top {

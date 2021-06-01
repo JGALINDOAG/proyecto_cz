@@ -31,6 +31,8 @@ else
 		// ?accion=indexUsuario
 		if($_GET["accion"] == 'Home'):
 			require_once("controller/HomeController.php");
+		elseif ($_GET["accion"] == 'recovery'):
+			require_once("controller/recoveryController.php");
 		elseif ($_GET["accion"] == 'indexUsuario'):
 			require_once("controller/indexUsuarioController.php");
 		elseif ($_GET["accion"] == 'VerificaFolio'):
