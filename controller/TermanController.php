@@ -1,4 +1,5 @@
-<?php
+<?php 
+$idDetalle=$_SESSION["idDetalle"];
 require_once("models/pruebas.php");
 $id_prueba=1;
 //El post viene de la vista terman_ej.php para mostrar la serie en curso
@@ -58,11 +59,11 @@ if (isset($_POST["serie"])) {
             $result = $resultado[0]["total"];
             //Se almacena el resultado obtenido por indicador a la tabla "resultados"
             $no = new Pruebas();
-            $total=$no->valida_duplicado_resultados($serie, $id_prueba);
+            $total=$no->valida_duplicado_resultados($idDetalle,$serie, $id_prueba);
             if($total[0]['COUNT(*)']==0){
                 //Se almacena el resultado obtenido por indicador a la tabla "resultados"
                 $obj = new Pruebas();
-                $obj->add_resultados($serie, $result, $id_prueba);
+                $obj->add_resultados($idDetalle,$serie, $result, $id_prueba, $escala=NULL);
             }
         }
         if ($serie == 2 || $serie == 5 || $serie == 10) {
@@ -71,11 +72,11 @@ if (isset($_POST["serie"])) {
             $resultado = $string->sumaX2($contesto);
             $result = $resultado[0]["total"];
             $no = new Pruebas();
-            $total=$no->valida_duplicado_resultados($serie, $id_prueba);
+            $total=$no->valida_duplicado_resultados($idDetalle,$serie, $id_prueba);
             if($total[0]['COUNT(*)']==0){
                 //Se almacena el resultado obtenido por indicador a la tabla "resultados"
                 $obj = new Pruebas();
-                $obj->add_resultados($serie, $result, $id_prueba);
+                $obj->add_resultados($idDetalle,$serie, $result, $id_prueba, $escala=NULL);
             }
         }
         if ($serie == 4) {
@@ -88,11 +89,11 @@ if (isset($_POST["serie"])) {
                 }
             $result=$res/2;
             $no = new Pruebas();
-            $total=$no->valida_duplicado_resultados($serie, $id_prueba);
+            $total=$no->valida_duplicado_resultados($idDetalle,$serie, $id_prueba);
             if($total[0]['COUNT(*)']==0){
                 //Se almacena el resultado obtenido por indicador a la tabla "resultados"
                 $obj = new Pruebas();
-                $obj->add_resultados($serie, $result, $id_prueba);
+                $obj->add_resultados($idDetalle,$serie, $result, $id_prueba, $escala=NULL);
             }
         }
     }

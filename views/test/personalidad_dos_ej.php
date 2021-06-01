@@ -15,11 +15,10 @@
                             <div class="media-body">
                             <form action="<?php echo 'index.php?accion=PersonalidadDos'; ?>" method="post">
                                 <h4>PERSONALIDAD 2</h4>
-                                <h4>INSTRUCCIONES:</h4>
-                                <p>LEE CON CUIDADO CADA UNA DE LAS PREGUNTAS Y RESPONDE (SI &Oacute; NO)</p>
-                                <p>EJEMPLO: DURANTE REUNIONES O FIESTAS &iquest;ME ES FÁCIL PRESENTAR UNAS PERSONAS CON OTRAS?</p>
-                                <p><input type="radio" name="I" disabled checked="checked">SI</p>
-                                <p><input type="radio" name="I" disabled>NO</p>
+                                <h5>Descripcion Examen</h5>
+                                <p>El propósito de este test, es conocer la estructura y el funcionamiento de la persona para adaptarse de acuerdo a sus rasgos de personalidad emocionales en diferentes contestos ya sean familiares, sociales, de salud entre otros,  con la intención de brindar seguimiento.</p>
+                                <h5>Instrucciones:</h5>
+                                <p>Lee con atencion cada una de las preguntas, y selecciona la opcion que elijas como correcta.</p>
                                 <center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
                             </form>
                             </div>

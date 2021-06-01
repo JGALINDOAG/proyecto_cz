@@ -13,12 +13,13 @@
                     <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
                         <div class="media d-flex align-items-center">
                             <div class="media-body">
-                            <form action="<?php echo 'index.php?accion=PersonalidadUno'; ?>" method="post">
-                                <h4>PERSONALIDAD 1</h4>
+                            <form action="<?php echo 'index.php?accion=Cultura'; ?>" method="post">
+                                <h4>TIPO DE CULTURA ORGANIZACIONAL</h4>
                                 <h5>Descripcion Examen</h5>
-                                <p>El propósito de este test, es conocer la estructura y el funcionamiento de la persona, además de descubrir emociones o conflictos internos, con la intención de brindar seguimiento.</p>
+                                <p>Este cuestionario tiene como finalidad autodeterminar el tipo de cultura organizacional que mejor te adecua o te agrada.</p>
                                 <h5>Instrucciones:</h5>
-                                <p>Lee con atención cada una de las preguntas, y selecciona la opción que elijas como correcta.</p>
+                                <p>Esta prueba tiene como finalidad obtener información con relación al tipo de cultura organizacional que mejor te adapta; no hay respuestas correctas o incorrectas por lo que se solicita contestar con toda sinceridad. Para responder, utiliza solamente los espacios sombreados, utilizando la escala:
+1  Muy en desacuerdo; 2  Desacuerdo; 3  No sé; 4  De acuerdo; 5 Muy de acuerdo</p>
                                 <center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
                             </form>
                             </div>
@@ -31,7 +32,7 @@
                     <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
                         <div class="media d-flex align-items-center">
                             <div class="media-body">
-                            <h3>HA CONCLUIDO SATISFACTORIAMENTE LA PRUEBA PERSONALIDAD 1.</h3>
+                            <h3>HA CONCLUIDO SATISFACTORIAMENTE LA PRUEBA TIPO DE CULTURA ORGANIZACIONAL.</h3>
                             <h3>PULSE <a href="<?php echo 'index.php?accion=Tests'; ?>">AQUÍ</a> PARA REGRESAR AL MENÚ DE PRUEBAS.</h3>
                             </div>
                         </div>

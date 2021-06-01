@@ -1,13 +1,13 @@
-<?php
+<?php 
 $idDetalle=$_SESSION["idDetalle"];
 require_once("models/pruebas.php");
 $u = new Pruebas();
 //Valida si el usuario ya termino la prueba en el día actual
-$avance = $u->fin_prueba($idDetalle,$id_prueba=5);
-if ($avance[0]["Total"] == 10) {
+$avance = $u->fin_prueba_op($idDetalle,$id_prueba=14);
+if ($avance[0]["Total"] == 2) {
     $progreso = 'Finalizo';
 } else {
     $progreso = 'Progreso';
 }
-require_once("views/test/intereses_ej.php");
+require_once("views/test/retroalimentacion_ej.php");
 ?>

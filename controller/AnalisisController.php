@@ -1,9 +1,9 @@
 <?php
 $idDetalle=$_SESSION["idDetalle"];
 require_once("models/pruebas.php");
-$id_prueba=3;
-$limit=20;
-$sum="-24";
+$id_prueba=7;
+$limit=30;
+$sum="";
 $t = new Pruebas();
 //Lista de las preguntas que aún no ha respondido la persona para la prueba en el día actual
 $preguntas = $t->ultima_prg($idDetalle,$id_prueba,$limit);
@@ -20,7 +20,7 @@ if (isset($_POST["save"])) {
             }
         }
     }
-    header("Location: index.php?accion=PersonalidadDos");
+    header("Location: index.php?accion=Analisis");
 }
 
 //Si el usuario ha respondido todas las peguntas se procesa su resultado
@@ -38,8 +38,8 @@ if (empty($preguntas)) {
     }
     //Una vez resguardado el resultado final de esta prueba se eliminan las respuestas del usuario en la tabla "respuestas"
     $t->delete_respuestas($idDetalle,$id_prueba);
-    header("Location: index.php?accion=PersonalidadDosEj");
+    header("Location: index.php?accion=AnalisisEj");
 } else {
-    require_once("views/test/personalidad_dos.php");
+    require_once("views/test/analisis.php");
 }
 ?>

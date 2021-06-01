@@ -5,7 +5,7 @@ require_once("controller/navbarUsuarioController.php");
 #CREAMOS UNA SESION O REANUDAMOS LA ACTUAL
 session_start();
 #SI EXISTE LA SESION REALIZA LO SIGUIENTE
-if(isset($_SESSION["idAdmin"]))
+if(isset($_SESSION["idAdmin"]) || isset($_SESSION["idDetalle"]))
 {
 	#SI LA VARIABLE ACCIÓN QUE VIENE POR CABECERA VIENE VACÍA, A LA VARIABLE ACCIÓN LE DAMOS EL VALOR DEL ARRAY ASOCIATIVO QUE VINE POR LA URL
 	if(!empty($_GET["accion"]))

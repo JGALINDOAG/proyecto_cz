@@ -8,22 +8,35 @@
         <!-- -->
             <form action="" method="post">
                 <input type="hidden" name="save" value="ok">
-                <?php
-                for ($i = 0; $i < sizeof($preguntas); $i++) {
+                <table border="0" width="100%" class="table table-striped">
+                <tbody>
+                <thead class="table-dark">
+                <tr>
+                    <th width="80%">PREGUNTAS</th>
+                    <th colspan="2" width="20%">OPCIONES</th>
+                </tr>
+                </thead>
+                <?php 
+                for ($i = 0; $i < sizeof($preguntas); $i++) { 
                     ?>
-                    <p><strong><?php echo $preguntas[$i]["pregunta"]; ?></strong></p>
-                    <?php
-                    $op = new Pruebas();
-                    //Muestra las opciones que contiene una pregunta
-                    $opcion = $op->opciones_pregunta($preguntas[$i]["id_pregunta"]);
-                    for ($o = 0; $o < sizeof($opcion); $o++) {
+                    <tr>
+                        <td><strong><?php echo $preguntas[$i]["pregunta"]; ?></strong></td>
+                        <?php
+                        $op = new Pruebas();
+                        //Muestra las opciones que contiene una pregunta
+                        $opcion = $op->opciones_pregunta($preguntas[$i]["id_pregunta"]);
+                        for ($o = 0; $o < sizeof($opcion); $o++) {
                         ?>
-                        <input type="radio" name="<?php echo $opcion[$o]["id_pregunta"]; ?>" value="<?php echo $opcion[$o]["id_opcion"]; ?>" required />
-                        <label><?php echo $opcion[$o]['opcion']; ?></label><br>
+                        <td><input type="radio" name="<?php echo $opcion[$o]["id_pregunta"]; ?>" value="<?php echo $opcion[$o]["id_opcion"]; ?>" required />&nbsp;<label><?php echo $opcion[$o]['opcion']; ?></label></td>
                         <?php
                     }
+                    ?>
+                    </tr>
+                    <?php
                 }
                 ?>
+                </tbody>
+                </table>
                 <br><br><center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
             </form>
         <!-- -->

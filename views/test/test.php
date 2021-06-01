@@ -22,8 +22,29 @@
                 for ($l = 0; $l<sizeof($list); $l++) { 
                     $cadena=str_replace(' ','',$list[$l]["prueba"]);
                     ?>
-                    <input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php echo $cadena; ?>" value="<?php echo $list[$l]["prueba"]; ?>">
+                    <!--<input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php //echo $cadena; ?>" value="<?php //echo $list[$l]["prueba"]; ?>">-->
                     <?php
+                    //
+                    if($list[$l]["id_prueba"]!=13){
+                        if($list[$l]["id_prueba"]==1){
+                            if($estud=="bachillerato" || $estud=="licenciatura" || $estud=="posgrados"){
+                                ?>
+                                <input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php echo $cadena; ?>" value="<?php echo $list[$l]["prueba"]; ?>">
+                                <?php
+                            }
+                        }elseif($list[$l]["id_prueba"]==4){
+                            if($estud=="ninguno" || $estud=="preescolar" || $estud=="primaria" || $estud=="secundaria"){
+                                ?>
+                                <input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php echo $cadena; ?>" value="<?php echo $list[$l]["prueba"]; ?>">
+                                <?php
+                            }
+                        }else{
+                            ?>
+                            <input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php echo $cadena; ?>" value="<?php echo $list[$l]["prueba"]; ?>">
+                            <?php
+                        }
+                    }
+                    //
                 }
                 ?>
             </form>
