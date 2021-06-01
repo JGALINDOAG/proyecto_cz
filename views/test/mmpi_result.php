@@ -14,7 +14,7 @@ $(function () {
             marginBottom: 25
         },
         title: {
-            text: '',
+            text: 'Escalas de validez',
             x: -20
         },
         subtitle: {
@@ -86,7 +86,7 @@ $(function () {
                 marginBottom: 25
             },
             title: {
-                text: '',
+                text: 'Escalas clínicas',
                 x: -20
             },
             subtitle: {

@@ -14,7 +14,7 @@
                         <div class="media d-flex align-items-center">
                             <div class="media-body">
                             <form action="<?php echo 'index.php?accion=Compromiso'; ?>" method="post">
-                                <h4>COMPROMISO A LA ORGANIZACIÓN</h4>
+                                <h4>COMPROMISO CON LA ORGANIZACIÓN</h4>
                                 <h5>Descripcion Examen</h5>
                                 <p>Esta prueba tiene como finalidad obtener información con relación a tu grado de compromiso organizacional.</p>
                                 <h5>Instrucciones:</h5>

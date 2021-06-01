@@ -7,6 +7,9 @@ $activo = $objactivo->activo_detalle_personas($idDetalle);
 $obj = new Pruebas ();
 $list = $obj->list_pruebas_persona($idDetalle);
 //print_r($list);
+$sex = new Pruebas();
+$info = $sex->info_persona($idDetalle);
+$estud=$info[0]['grado_estudios'];
 if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
     if (isset($_POST["TERMAN"])) {
         header("Location: index.php?accion=TermanEj");
@@ -26,7 +29,7 @@ if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
         header("Location: index.php?accion=AnalisisEj");
     }elseif (isset($_POST["NIVELDEESCUCHA"])) {
         header("Location: index.php?accion=EscuchaEj");
-    }elseif (isset($_POST["COMPROMISOALAORGANIZACIÓN"])) {
+    }elseif (isset($_POST["COMPROMISOCONLAORGANIZACIÓN"])) {
         header("Location: index.php?accion=CompromisoEj");
     }elseif (isset($_POST["TIPODECULTURAORGANIZACIONAL"])) {
         header("Location: index.php?accion=CulturaEj");

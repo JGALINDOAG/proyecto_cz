@@ -158,7 +158,7 @@ if (empty($preguntas)) {
 
     # # # # # '5-MF' # # # # #
     $sex = new Pruebas();
-    $sexo = $sex->sexo($idDetalle);
+    $sexo = $sex->info_persona($idDetalle);
     if($sexo[0]['sexo']=='H'){
         $id_indicador=76;
     }elseif($sexo[0]['sexo']=='M'){

@@ -211,7 +211,7 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
+            
             $sql = "SELECT preguntas.id_pregunta, preguntas.pregunta 
             FROM pruebas 
             INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba  
@@ -246,7 +246,7 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
+            
             $sql = "SELECT pregunta_indicador.id_indicador, SUM(opciones.valor) $sum AS Result 
             FROM pruebas 
             INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
@@ -276,7 +276,7 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
+            
             $sql = "SELECT opcion_indicador.id_indicador, SUM(opciones.valor) AS Result
             FROM pruebas
             INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
@@ -307,7 +307,7 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
+            
             $stmt = $this->dbh->prepare("SELECT COUNT(DISTINCT(resultados.id_indicador)) AS Total
             FROM pruebas 
             INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba
@@ -334,7 +334,7 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
+            
             $stmt = $this->dbh->prepare("SELECT 
                 COUNT(DISTINCT (resultados.id_indicador)) AS Total
             FROM
@@ -372,7 +372,7 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
+            
             $sql = "SELECT * FROM opciones WHERE id_pregunta = ?";
             $stmt = $this->dbh->prepare($sql);
             $stmt->bindParam(1, $pregunta, PDO::PARAM_INT);
@@ -395,7 +395,7 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
+            
             $stmt = $this->dbh->prepare("SELECT COUNT(*) 
             FROM resultados 
             WHERE id_detalle = ? 
@@ -419,15 +419,12 @@ class Pruebas extends AccesoDatos
     public function add_resultados($idDetalle,$id_indicador, $resultado, $id_prueba, $escala) {
         try {
             $this->dbh = AccesoDatos::conexion();
-            //$fecha = 'NOW()';
-            $fecha = parent::Fecha_actual();
-            $stmt = $this->dbh->prepare("INSERT INTO resultados (id_indicador, resultado, fecha_aplicacion, id_prueba, id_detalle, escala) VALUES (?, ?, ?, ?, ?, ?);");
+            $stmt = $this->dbh->prepare("INSERT INTO resultados (id_indicador, resultado, fecha_aplicacion, id_prueba, id_detalle, escala) VALUES (?, ?, NOW(), ?, ?, ?);");
             $stmt->bindvalue(1, $id_indicador, PDO::PARAM_INT);
             $stmt->bindvalue(2, $resultado, PDO::PARAM_STR);
-            $stmt->bindvalue(3, $fecha, PDO::PARAM_STR);
-            $stmt->bindvalue(4, $id_prueba, PDO::PARAM_INT);
-            $stmt->bindvalue(5, $idDetalle, PDO::PARAM_INT);
-            $stmt->bindvalue(6, $escala, PDO::PARAM_INT);
+            $stmt->bindvalue(3, $id_prueba, PDO::PARAM_INT);
+            $stmt->bindvalue(4, $idDetalle, PDO::PARAM_INT);
+            $stmt->bindvalue(5, $escala, PDO::PARAM_INT);
             $stmt->execute();
             $this->dbh = null;
         } catch (Exception $e) {
@@ -442,12 +439,10 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
-            $stmt = $this->dbh->prepare("INSERT INTO respuestas (id_detalle, id_pregunta, id_opcion, fecha_respuesta) VALUES (?, ?, ?, ?);");
+            $stmt = $this->dbh->prepare("INSERT INTO respuestas (id_detalle, id_pregunta, id_opcion, fecha_respuesta) VALUES (?, ?, ?, NOW());");
             $stmt->bindvalue(1, $idDetalle, PDO::PARAM_INT);
             $stmt->bindvalue(2, $id_pregunta, PDO::PARAM_INT);
             $stmt->bindvalue(3, $id_opcion, PDO::PARAM_INT);
-            $stmt->bindvalue(4, $fecha, PDO::PARAM_STR);
             $stmt->execute();
             $this->dbh = null;
         } catch (Exception $e) {
@@ -459,11 +454,9 @@ class Pruebas extends AccesoDatos
     public function valida_duplicado_respuesta($idDetalle,$id_pregunta) {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
-            $stmt = $this->dbh->prepare("SELECT COUNT(*) FROM respuestas WHERE id_detalle = ? AND id_pregunta = ? AND fecha_respuesta = ?");
+            $stmt = $this->dbh->prepare("SELECT COUNT(*) FROM respuestas WHERE id_detalle = ? AND id_pregunta = ?");
             $stmt->bindParam(1, $idDetalle, PDO::PARAM_INT);
             $stmt->bindParam(2, $id_pregunta, PDO::PARAM_INT);
-            $stmt->bindParam(3, $fecha, PDO::PARAM_STR);
             if ($stmt->execute()) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
@@ -480,7 +473,6 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
             $stmt = $this->dbh->prepare("DELETE respuestas 
             FROM pruebas 
             INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
@@ -488,11 +480,9 @@ class Pruebas extends AccesoDatos
             INNER JOIN indicadores ON pregunta_indicador.id_indicador = indicadores.id_indicador 
             INNER JOIN respuestas ON preguntas.id_pregunta = respuestas.id_pregunta 
             WHERE pruebas.id_prueba = ? 
-            AND respuestas.id_detalle = ? 
-            AND respuestas.fecha_respuesta = ?");
+            AND respuestas.id_detalle = ?");
             $stmt->bindvalue(1, $id_prueba, PDO::PARAM_INT);
             $stmt->bindvalue(2, $idDetalle, PDO::PARAM_INT);
-            $stmt->bindvalue(3, $fecha, PDO::PARAM_STR);
             $stmt->execute();
             $this->dbh = null;
         } catch (Exception $e) {
@@ -504,7 +494,6 @@ class Pruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $fecha = parent::Fecha_actual();
             $stmt = $this->dbh->prepare("DELETE respuestas 
             FROM pruebas
             INNER JOIN preguntas ON pruebas.id_prueba = preguntas.id_prueba 
@@ -513,11 +502,9 @@ class Pruebas extends AccesoDatos
             INNER JOIN indicadores ON opcion_indicador.id_indicador = indicadores.id_indicador
             INNER JOIN respuestas ON opciones.id_opcion = respuestas.id_opcion
                         WHERE pruebas.id_prueba = ?
-                        AND respuestas.id_detalle = ? 
-                        AND respuestas.fecha_respuesta = ?");
+                        AND respuestas.id_detalle = ?");
             $stmt->bindvalue(1, $id_prueba, PDO::PARAM_INT);
             $stmt->bindvalue(2, $idDetalle, PDO::PARAM_INT);
-            $stmt->bindvalue(3, $fecha, PDO::PARAM_STR);
             $stmt->execute();
             $this->dbh = null;
         } catch (Exception $e) {
@@ -625,10 +612,10 @@ class Pruebas extends AccesoDatos
         }
     }
 
-    public function sexo($idDetalle) {
+    public function info_persona($idDetalle) {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $stmt = $this->dbh->prepare("SELECT sexo FROM personas INNER JOIN detalle_personas_pruebas ON personas.Id_persona = detalle_personas_pruebas.Id_persona WHERE id_detalle = ?");
+            $stmt = $this->dbh->prepare("SELECT * FROM personas INNER JOIN detalle_personas_pruebas ON personas.Id_persona = detalle_personas_pruebas.Id_persona WHERE id_detalle = ?");
             $stmt->bindParam(1, $idDetalle, PDO::PARAM_INT);
             if ($stmt->execute()) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);

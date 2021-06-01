@@ -16,28 +16,29 @@
         </div>
         <!-- -->
         <?php 
-        $sex = new Pruebas();
-        $sexo = $sex->sexo($idDetalle);
         if($activo[0]['activo']==1){
             require_once("models/reporte.php");
-            for ($l = 0; $l<sizeof($list); $l++) {
+            $estud=$info[0]['grado_estudios'];
+            for ($l = 0; $l<sizeof($list); $l++){
                 if($list[$l]["id_prueba"]==1){
-                    //TERMAN
-                    echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
-                    $av1 = new Pruebas();
-                    $avance1 = $av1->fin_prueba($idDetalle,1);
-                    if ($avance1[0]["Total"] == 10) {
-                        $r1 = new Reporte();
-                        $terman = $r1->res_total($idDetalle,$list[$l]["id_prueba"]);
-                        $datos1 = new Reporte();
-                        $data1 = $datos1->perfil_terman($terman[0]['total']);//$terman[0]['total']
-                        echo '<p><strong>Resultados obtenidos:</strong></p>';
-                        echo '<p>El evaluado obtuvo un coeficiente intelectual de <strong>'.$data1['ci'].'</strong> equivalente a la categoría <strong>'.$data1['categoria'].'</strong> de acuerdo con su grupo de edad en esta escala.</p>';
-                        echo '<p><strong>Definición:</strong></p>';
-                        echo $data1['definicion'];
-                        echo '<p><strong>Alternativas de Tratamiento:</strong></p>';
-                        echo '<p>'.$data1['tratamiento'].'</p>';
-                        echo '<p><strong>Perfil: </strong>'.$data1['perfil'].'</p>';
+                    if($estud=="bachillerato" || $estud=="licenciatura" || $estud=="posgrados"){
+                        //TERMAN
+                        echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
+                        $av1 = new Pruebas();
+                        $avance1 = $av1->fin_prueba($idDetalle,1);
+                        if ($avance1[0]["Total"] == 10) {
+                            $r1 = new Reporte();
+                            $terman = $r1->res_total($idDetalle,$list[$l]["id_prueba"]);
+                            $datos1 = new Reporte();
+                            $data1 = $datos1->perfil_terman($terman[0]['total']);//$terman[0]['total']
+                            echo '<p><strong>Resultados obtenidos:</strong></p>';
+                            echo '<p>El evaluado obtuvo un coeficiente intelectual de <strong>'.$data1['ci'].'</strong> equivalente a la categoría <strong>'.$data1['categoria'].'</strong> de acuerdo con su grupo de edad en esta escala.</p>';
+                            echo '<p><strong>Definición:</strong></p>';
+                            echo $data1['definicion'];
+                            echo '<p><strong>Alternativas de Tratamiento:</strong></p>';
+                            echo '<p>'.$data1['tratamiento'].'</p>';
+                            echo '<p><strong>Perfil: </strong>'.$data1['perfil'].'</p>';
+                        }
                     }
                 }elseif($list[$l]["id_prueba"]==2){
                     //PERSONALIDAD 1
@@ -50,7 +51,7 @@
                         //print_r($smp02);
                         for ($i=0; $i<sizeof($smp02); $i++) {
                             $int2 = new Reporte();
-                            $int = $int2->perfil_smp02($smp02[$i]["id_indicador"],abs($smp02[$i]["resultado"]),$sexo[0]['sexo']);
+                            $int = $int2->perfil_smp02($smp02[$i]["id_indicador"],abs($smp02[$i]["resultado"]),$info[0]['sexo']);
                             //print_r($int);
                             echo '<p><strong>'.strtoupper($smp02[$i]["indicador"]).'</strong>: '.abs($smp02[$i]["resultado"]).'</p>';
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
@@ -80,22 +81,24 @@
                         }
                     }
                 }elseif($list[$l]["id_prueba"]==4){
-                    //RAVEN
-                    echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
-                    $av4 = new Pruebas();
-                    $avance4 = $av4->fin_prueba($idDetalle,4);
-                    if ($avance4[0]["Total"] == 5) {
-                        $r4 = new Reporte();
-                        $raven = $r4->res_total($idDetalle,$list[$l]["id_prueba"]);
-                        $datos4 = new Reporte();
-                        $data4 = $datos4->perfil_raven($raven[0]['total']);//$raven[0]['total']
-                        echo '<p><strong>Resultados obtenidos:</strong></p>';
-                        echo '<p>El evaluado obtuvo un coeficiente intelectual de <strong>'.$data4['ci'].'</strong> equivalente a la categoría <strong>'.$data4['categoria'].'</strong> de acuerdo con su grupo de edad en esta escala.</p>';
-                        echo '<p><strong>Definición:</strong></p>';
-                        echo $data4['definicion'];
-                        echo '<p><strong>Alternativas de Tratamiento:</strong></p>';
-                        echo '<p>'.$data4['tratamiento'].'</p>';
-                        echo '<p><strong>Perfil: </strong>'.$data4['perfil'].'</p>';
+                    if($estud=="ninguno" || $estud=="preescolar" || $estud=="primaria" || $estud=="secundaria"){
+                        //RAVEN
+                        echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
+                        $av4 = new Pruebas();
+                        $avance4 = $av4->fin_prueba($idDetalle,4);
+                        if ($avance4[0]["Total"] == 5) {
+                            $r4 = new Reporte();
+                            $raven = $r4->res_total($idDetalle,$list[$l]["id_prueba"]);
+                            $datos4 = new Reporte();
+                            $data4 = $datos4->perfil_raven($raven[0]['total']);//$raven[0]['total']
+                            echo '<p><strong>Resultados obtenidos:</strong></p>';
+                            echo '<p>El evaluado obtuvo un coeficiente intelectual de <strong>'.$data4['ci'].'</strong> equivalente a la categoría <strong>'.$data4['categoria'].'</strong> de acuerdo con su grupo de edad en esta escala.</p>';
+                            echo '<p><strong>Definición:</strong></p>';
+                            echo $data4['definicion'];
+                            echo '<p><strong>Alternativas de Tratamiento:</strong></p>';
+                            echo '<p>'.$data4['tratamiento'].'</p>';
+                            echo '<p><strong>Perfil: </strong>'.$data4['perfil'].'</p>';
+                        }
                     }
                 }elseif($list[$l]["id_prueba"]==5 || $list[$l]["id_prueba"]==6){
                     //INTERESES APTITUDES
@@ -132,15 +135,67 @@
                 }elseif($list[$l]["id_prueba"]==8){
                     //COMPROMISO A LA ORGANIZACIÓN
                     echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
+                    $av8 = new Pruebas();
+                    $avance8 = $av8->fin_prueba($idDetalle,8);
+                    //print_r($avance8);
+                    if($avance8[0]["Total"] == 1) {
+                        $r8 = new Reporte();
+                        $cultura = $r8->res_ind($idDetalle,$list[$l]["id_prueba"]);
+                        //print_r($cultura);
+                        $int8 = new Reporte();
+                        $int = $int8->gral_test_definicion($cultura[0]["id_indicador"],$cultura[0]["resultado"]);
+                        echo '<p><strong>'.strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
+                        echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
+                        echo '<hr>';  
+                    }
                 }elseif($list[$l]["id_prueba"]==9){
                     //TIPO DE CULTURA ORGANIZACIONAL
                     echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
+                    $av9 = new Pruebas();
+                    $avance9 = $av9->fin_prueba($idDetalle,9);
+                    //print_r($avance10);
+                    if ($avance9[0]["Total"] == 1) {
+                        $r9 = new Reporte();
+                        $cultura = $r9->res_ind($idDetalle,$list[$l]["id_prueba"]);
+                        //print_r($cultura);
+                        $int9 = new Reporte();
+                        $int = $int9->gral_test_definicion($cultura[0]["id_indicador"],$cultura[0]["resultado"]);
+                        echo '<p><strong>'.strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
+                        echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
+                        echo '<hr>';  
+                    }
                 }elseif($list[$l]["id_prueba"]==10){
                     //CLIMA PARA EL CAMBIO
                     echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
+                    $av10 = new Pruebas();
+                    $avance10 = $av10->fin_prueba($idDetalle,10);
+                    //print_r($avance10);
+                    if ($avance10[0]["Total"] == 1) {
+                        $r10 = new Reporte();
+                        $clima = $r10->res_ind($idDetalle,$list[$l]["id_prueba"]);
+                        //print_r($clima);
+                        $int10 = new Reporte();
+                        $int = $int10->gral_test_definicion($clima[0]["id_indicador"],$clima[0]["resultado"]);
+                        echo '<p><strong>'.strtoupper($clima[0]["indicador"]).'</strong>: '.$clima[0]["resultado"].'</p>';
+                        echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
+                        echo '<hr>';  
+                    }
                 }elseif($list[$l]["id_prueba"]==11){
                     //NIVEL DE ESCUCHA
                     echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
+                    $av11 = new Pruebas();
+                    $avance11 = $av11->fin_prueba($idDetalle,11);
+                    //print_r($avance11);
+                    if ($avance11[0]["Total"] == 1) {
+                        $r11 = new Reporte();
+                        $escucha = $r11->res_ind($idDetalle,$list[$l]["id_prueba"]);
+                        //print_r($escucha);
+                        $int11 = new Reporte();
+                        $int = $int11->gral_test_definicion($escucha[0]["id_indicador"],$escucha[0]["resultado"]);
+                        echo '<p><strong>'.strtoupper($escucha[0]["indicador"]).'</strong>: '.$escucha[0]["resultado"].'</p>';
+                        echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
+                        echo '<hr>';  
+                    }
                 }elseif($list[$l]["id_prueba"]==12){
                     //MMPI
                     echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
@@ -172,18 +227,18 @@
                     $av14 = new Pruebas();
                     $avance14 = $av14->fin_prueba_op($idDetalle,14);
                     if ($avance14[0]["Total"] == 2) {
-
                         $r14 = new Reporte();
                         $grado = $r14->res_ind($idDetalle,$list[$l]["id_prueba"]);
-                        //print_r($grado);
+                        if($grado[0]['resultado']>=6 and $grado[0]['resultado']<=8){
+                            echo '<p><strong>'.strtoupper($grado[0]["indicador"]).'</strong>: '.$grado[0]['resultado'].'</p>';
+                            echo '<p><strong>Definición:</strong></p><p>Hacen referencia a toda aquella información que devuelve el receptor al emisor sobre su propia comunicación. El sujeto posee las fortalezas necesarias para desarrollar el saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Son de gran ayuda en la organización, por lo que al usar correctamente esta herramienta  se puede generar el cambio que se espera y además comprometer más explícitamente al alumno que lo recibe.</p>';
+                            echo '<hr>';
+                        }else{
+                            echo '<p><strong>'.strtoupper($grado[1]["indicador"]).'</strong>: '.$grado[1]['resultado'].'</p>';
+                            echo '<p><strong>Definición:</strong></p><p>Como receptor no tiene la capacidad para devolver información al emisor sobre su propia comunicación. El sujeto no posee las fortalezas necesarias para saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Esto no es de gran ayuda en la organización, y al no usar correctamente esta herramienta  es dificil que pueda generar el cambio que se espera y además no compromete a el alumno que lo recibe.</p>';
+                            echo '<hr>';
+                          }
 
-                        echo '<p style="color:red;">¿solo son 8 preguntas?</p>';
-
-                        echo '<h6>'.strtoupper($grado[0]['indicador']).'</h6>';
-                        echo $grado[0]['resultado'];
-
-                        echo '<h6>'.strtoupper($grado[1]['indicador']).'</h6>';
-                        echo $grado[1]['resultado'];
                     }
                 }
             }
