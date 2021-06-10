@@ -33,7 +33,7 @@
         <form name="form" method="post" class="needs-validation" novalidate>
             <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="alert alert-light" role="alert">
-                    <div class="d-flex align-items-center">DETALLES DE LA VENTA</div>
+                    <div class="d-flex align-items-center">VENTA DE PRUEBAS</div>
                     <hr>
                 </div>
                 <div class="form-row">
@@ -50,9 +50,9 @@
                         </select>
                     </div>
                     <div class="form-group col-sm-12 col-md-6">
-                        <label>Administrador de la Institución</label>
+                        <label>Vendedor de la Institución</label>
                         <select name="cmbAdmin" id="cmbAdmin" class="form-control" required>
-                            <option value="" selected>Selecciona un administrador</option>
+                            <option value="" selected>Selecciona un vendedor</option>
                         </select>
                     </div>
                 </div>

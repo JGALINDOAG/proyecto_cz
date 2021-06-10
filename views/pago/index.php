@@ -18,7 +18,15 @@
                         switch ($m){
                             case '1':
                                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong><hr>El pago se realizo exitosamente
+                                    <strong>¡AVISO!</strong><hr>El pago se realizo exitosamente, en breve se notificará y se evaluará su pago para la activación del folio.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                            break;
+                            case '2':
+                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>¡AVISO!</strong><hr>El voucher se cargo exitosamente, en breve se notificará y se evaluará su pago para la activación del folio.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -37,65 +45,95 @@
                 </div>
                 <hr>
             </div>
-            <form name="" action="#" method="post" enctype="multipart/form-data">
+            <?php if(empty($rowInstitucion)): ?> 
                 <div class="form-row">
-                    <div class="form-group col-sm-12">
-                        <label>Folio</label>
-                        <select class="form-control" id="cmbFolio" required>
-                            <option value="" disabled selected>Selecciona el folio a pagar</option>
-                            <?php foreach($rowInstitucion as $item): ?>
-                            <option value=<?php echo $item['id_folio']; ?>><?php echo $item['id_folio']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-sm-12 col-md-6">
-                        <label>Forma de pago</label>
-                        <select class="form-control" id="cmbFormaPago" required>
-                            <option value="" disabled selected>Selecciona una opción</option>
-                            <option value="1">Pagar con PayPal</option>
-                            <option value="2">Efectivo</option>
-                            <option value="3">Transferencia</option>
-                            <option value="4">Pago por banco</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-12 col-md-6">
-                        <label>Cantidad</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <input type="text" class="form-control" id="cantidad" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text">.00</span>
-                            </div>
+                    <div class="form-group col-md-12">
+                        <div class="alert alert-light text-center" role="alert">
+                            SIN FOLIOS ACTIVOS A PAGAR
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div id="pay" class="form-group col-sm-6">
-                        <!-- Set up a container element for the button -->
-                        <div id="paypal-button-container"></div>
+            </div>
+            </div>
+            <?php else: ?> 
+                <form name="" action="#" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Folio</label>
+                            <select class="form-control" id="cmbFolio" name="cmbFolio" required>
+                                <option value="" disabled selected>Selecciona el folio a pagar</option>
+                                <?php foreach($rowInstitucion as $item): ?>
+                                <option value=<?php echo $item['id_folio']; ?>><?php echo $item['id_folio']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div id="file" class="form-group col-sm-12">
-                        <label>Carga de comprobante</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Cargar</span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="hidenCarga" accept="image/jpeg" name="documento">
-                                <label class="custom-file-label">Choose file</label>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>Forma de pago</label>
+                            <select class="form-control" id="cmbFormaPago" name="cmbFormaPago" required>
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value='{"key":1, "item":"PayPal"}'>Pagar con PayPal</option>
+                                <option value='{"key":2, "item":"Efectivo"}'>Efectivo</option>
+                                <option value='{"key":3, "item":"Transferencia"}'>Transferencia</option>
+                                <option value='{"key":4, "item":"Deposito"}'>Deposito</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>Cantidad</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" class="form-control" id="cantidad" name="txtCantidad" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
                             </div>
                         </div>
-                        <small id="emailHelp" class="form-text text-muted">Solo se permite imagenes jpg/jpge.</small>
-                        <small id="emailHelp" class="form-text text-muted">El tamaño del archivo no mayor a 10MB.</small>
                     </div>
-                </div>
-                <input type="hidden" name="validUsuario" value="save">
-                <input type="submit" value="Enviar comprobante" id="pagar" class="btn btn-outline-green btn-lg btn-block">
-            </form>
+                    <div id="pay" class="form-row">
+                        <div class="form-group col-sm-6">
+                            <!-- Set up a container element for the button -->
+                            <div id="paypal-button-container"></div>
+                        </div>
+                    </div>
+                    <div id="file" class="form-row">
+                        <div  class="form-group col-sm-6">
+                            <label>Voucher/Comprobante de pago</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cargar</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="hidenCarga" name="file" accept="application/pdf" name="documento">
+                                    <label class="custom-file-label">Choose file</label>
+                                </div>
+                            </div>
+                            <small class="form-text text-muted">Solo se permite pdf.</small>
+                            <small class="form-text text-muted">El tamaño del archivo no mayor a 10MB.</small>
+                        </div>
+                        <div id="divReferencia" class="form-group col-sm-2">
+                            <label>No. Referencia</label>
+                            <input type="number" id="txtReferencia" name="txtReferencia" placeholder="Ejem: 0805210" class="form-control">
+                        </div>
+                        <div id="divRastreo" class="form-group col-sm-4">
+                            <label>Clave de rastreo</label>
+                            <input type="text" id="txtRastreo" name="txtRastreo" placeholder="Ejem: 50112251TRANSBPI96491762" class="form-control">
+                        </div>
+                        <div id="divFolio" class="form-group col-sm-2">
+                            <label>Folio</label>
+                            <input type="number" id="txtFolio" name="txtFolio" placeholder="Ejem: 707820" class="form-control">
+                        </div>
+                        <div id="divLinea" class="form-group col-sm-4">
+                            <label>Linea de captura</label>
+                            <input type="text" id="txtLinea" name="txtLinea" placeholder="Ejem: 212000000018673495748368078" class="form-control">
+                        </div>
+                    </div>
+                    <input type="hidden" name="validUsuario" value="save">
+                    <input type="submit" value="Notificar" id="pagar" class="btn btn-outline-green btn-lg btn-block">
+                </form>
+            <?php endif; ?> 
         </div>
     </section>
     <!-- Invoca al Footer -->

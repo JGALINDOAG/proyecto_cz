@@ -67,6 +67,31 @@ class Pruebas extends AccesoDatos
             die("¡Error!: list_pruebas_persona() " . $e->getMessage());
         }
     }
+    
+    public function list_pruebas_institucion($idFolio)
+    {
+        try {
+            $this->dbh = parent::conexion();
+            $pruebas = $this->dbh->prepare("SELECT pruebas 
+            FROM institucion
+            INNER JOIN administradores USING (id_institucion) 
+            INNER JOIN institucion_administrador USING (id_admin) 
+            WHERE id_folio = BINARY ?");
+            $pruebas->bindParam(1, $idFolio, PDO::PARAM_STR);
+            $pruebas->execute();
+            $rowPruebas = $pruebas->fetch(PDO::FETCH_NUM);
+            $stmt = $this->dbh->prepare("SELECT * FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
+            if ($stmt->execute()) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->result[] = $row;
+                }
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: list_pruebas_institucion() " . $e->getMessage());
+        }
+    }
 
     public function list_byInstitucion()
     {

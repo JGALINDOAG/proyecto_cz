@@ -106,95 +106,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="alert alert-light" role="alert">
-                    <div class="d-flex align-items-center">DATOS DEL ADMINISTRADOR</div>
-                    <hr>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-sm-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="btn btn-outline-secondary">Nombre(s)</span>
-                            </div>
-                            <input type="text" name="txtNombre" placeholder="Nombre del Administrador" class="form-control"
-                            onkeyup="conMayusculas(this);" onkeypress="return soloLetras(event);" value="<?php echo @$_POST["txtNombre"]; ?>" required>
-                            <div class="invalid-feedback">
-                                Escriba el nombre del administrador.
-                            </div>
-                        </div>                                          
+                    <div class="d-flex justify-content-end align-items-center ">
+                        <input type="hidden" name="errno[]">
+                        <input type="hidden" name="validUsuario" value="save">
+                        <?php echo '<button type="submit" class="btn-link"><img src="assets/img/next.svg" width="35" height="35" class="d-inline-block align-top" title="Siguiente"></button>'; ?>
+                        &nbsp;|&nbsp;SIGUIENTE
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-sm-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="btn btn-outline-secondary">Apellidos</span>
-                            </div>
-                            <input type="text" name="txtApPaterno" onkeyup="conMayusculas(this);" onkeypress="return soloLetras(event);" placeholder="Apellido Paterno" class="form-control" value="<?php echo @$_POST["txtApPaterno"]; ?>" required>
-                            <input type="text" name="txtApMaterno" onkeyup="conMayusculas(this);" onkeypress="return soloLetras(event);" placeholder="Apellido Materno" class="form-control" value="<?php echo @$_POST["txtApMaterno"]; ?>">
-                            <div class="invalid-feedback">
-                                Por favor escriba el apellido Paterno.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="shadow p-3 mb-5 bg-white rounded">
-                <div class="alert alert-light" role="alert">
-                    <div class="d-flex align-items-center">DETALLES DE LA VENTA</div>
-                    <hr>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-sm-12 col-md-6">
-                        <label>Selección de pruebas a vender</label>
-                        <select class="selectpicker form-control" name="cmbPrueba[]" multiple data-actions-box="true" data-selected-text-format="count > 4" required>
-                            <?php foreach ($rowPruebas as $item): ?>
-                                <option value="<?php echo $item['id_prueba']; ?>"
-                                    <?php if(isset($_POST["cmbPrueba"] )): foreach ($_POST["cmbPrueba"] as $item2): if($item2 == $item['id_prueba']) echo "selected"; endforeach; endif;?>>
-                                    <?php echo $item['prueba']; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-12 col-md-6">
-                        <label>Costo</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="btn btn-outline-secondary">$</span>
-                            </div>
-                            <input type="text" name="txtCosto" value="<?php echo @$_POST["txtCosto"]; ?>" class="form-control" onkeypress="return soloNumeros(this);" required >
-                            <div class="input-group-append">
-                                <span class="btn btn-outline-secondary">.00</span>
-                            </div>
-                            <div class="invalid-feedback">
-                                Escriba el costo del paquete.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-sm-12 col-md-6">
-                        <label>Num. pruebas vendidas</label>
-                        <input type="text" name="txtNoPVendidas" placeholder="0" class="form-control"
-                            onkeypress="return soloNumeros(this);" value="<?php echo @$_POST["txtNoPVendidas"]; ?>" required>
-                        <div class="invalid-feedback">
-                            Escriba el num. de pruebas a vender.
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-12 col-md-6">
-                        <label>Num. pruebas gratis</label>
-                        <input type="text" name="txtNoPGratis" placeholder="0" class="form-control"
-                            onkeypress="return soloNumeros(this);" value="<?php echo @$_POST["txtNoPGratis"]; ?>" required>
-                        <div class="invalid-feedback">
-                            Escriba el num. de pruebas gratis.
-                        </div>
-                    </div>
-                </div>
-                <input type="hidden" name="errno[]">
-                <input type="hidden" name="validUsuario" value="save">
-                <input type="submit" value="Agregar Institución" class="btn btn-outline-green btn-lg btn-block">
             </div>
         </form>
     </section>
@@ -220,6 +139,19 @@
         }, false);
         })();
     </script>
+    <style>
+        .btn-link {
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            color: #0000EE;
+            padding: 0;
+            text-decoration: underline;
+            font-family: inherit;
+            font-size: inherit;
+        }
+    </style>
 </body>
 
 </html>

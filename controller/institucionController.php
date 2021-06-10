@@ -11,33 +11,14 @@ class InstitucionController
 
   public static function save() {
     require_once 'models/institucion.php';
-    require_once 'models/administradores.php';
-    require_once 'models/institucionAdministrador.php';
-
-    $pruebas = "";
-    foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
-    $pruebas = rtrim($pruebas, ",");
-    $apellidos = $_POST["txtApPaterno"].' '.$_POST["txtApMaterno"];
-   
     $objInstitucion = new Institucion();
     $validInstitucion = $objInstitucion->valid_institucion($_POST["txtRFC"]);
-    $objAdministradores = new Administradores();
-    $validAdministradores = $objAdministradores->valid_administradores($_POST["txtNombre"], $apellidos);
-    
-    if(empty($validInstitucion) && empty($validAdministradores)): 
+    if(empty($validInstitucion)): 
       $telefono = $_POST["txtLada"].'-'.$_POST["txtTelefono"];
-      $usuario = AccesoDatos::usuario($_POST["txtNombre"], $_POST["txtApPaterno"], $_POST["txtApMaterno"]);
-      $clave = AccesoDatos::codigo();
-      $idFolio = AccesoDatos::folio();
-      $objInstitucionAdministrador = new InstitucionAdministrador();
-
-      $idInstitucion = $objInstitucion->add_institucion($_POST["txtNombreInst"], $_POST["txtAbreviatura"], $_POST["txtRFC"], $_POST["txtEmail"], $telefono, $pruebas);
-      $idAdmin = $objAdministradores->add_administradores($idInstitucion, 2, $_POST["txtNombre"], $apellidos, $usuario, $clave);
-      $objInstitucionAdministrador->add_institucionAdministrador($idFolio, $idAdmin, $_POST["txtCosto"], $_POST["txtNoPGratis"], $_POST["txtNoPVendidas"]);
-      header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=index&m=".AccesoDatos::encriptar(1)."");
+      $idInstitucion = $objInstitucion->add_institucion($_POST["txtNombreInst"], $_POST["txtAbreviatura"], $_POST["txtRFC"], $_POST["txtEmail"], $telefono, '');
+      header("Location: ".AccesoDatos::ruta()."?accion=administradores&institution=".AccesoDatos::encriptar($idInstitucion));
     else:
       if(count($validInstitucion) == 1) $errno[] = 1;
-      if(count($validAdministradores) == 1) $errno[] = 2;
       $_POST["errno"] = $errno;
     endif;
   }

@@ -8,9 +8,9 @@
                 <li class="nav-item ">
                     <a class="nav-link text-white bg-dark" href="<?php echo AccesoDatos::ruta();?>?accion=Tests">Pruebas</a>
                 </li>
-                <li class="nav-item ">
+                <!-- <li class="nav-item ">
                     <a class="nav-link text-white bg-dark" href="<?php echo AccesoDatos::ruta();?>?accion=Result">Resultados</a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

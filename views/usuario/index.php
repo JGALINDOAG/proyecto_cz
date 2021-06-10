@@ -30,6 +30,7 @@
                             @$m=AccesoDatos::desencriptar($m);
                             if(isset($m)){
                                 switch ($m){
+                                    
                                     case '1':
                                         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                             <strong>¡AVISO!</strong>&nbsp;Los datos están vacíos
