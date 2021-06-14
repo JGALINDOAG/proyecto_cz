@@ -115,7 +115,8 @@ class Administradores extends AccesoDatos
       $query = "SELECT a.id_institucion, a.id_admin, a.id_rol, cr.nombre as rol, CONCAT(a.nombre,' ',a.apellidos) as nombre FROM administradores a
       INNER JOIN institucion b USING(id_institucion)
       INNER JOIN c_rol cr USING(id_rol)
-      WHERE id_institucion = ?";
+      WHERE id_institucion = ?
+      AND id_rol = 3";
       $stmt = $this->dbh->prepare($query);
       $stmt->bindParam(1, $cveInstitucion, PDO::PARAM_INT);
       if ($stmt->execute()) {
@@ -167,19 +168,20 @@ class Administradores extends AccesoDatos
     }
     // Finalmente, destruir la sesión.
     session_destroy();
-    header("Location:" . AccesoDatos::ruta() . "?accion=indexUsuario&m=" . AccesoDatos::encriptar(3) . "");
+    header("Location:" . AccesoDatos::ruta() . "?accion=loginUsuario&m=" . AccesoDatos::encriptar(3) . "");
     exit();
   }
   
   # Valida duplicados por nombres y usuario
-  public function valid_administradores($nombre, $apellidos)
+  public function valid_administradores($nombre, $apellidos, $idInstitucion)
   {
     try {
       $this->dbh = AccesoDatos::conexion();
-      $query = "SELECT * FROM administradores WHERE nombre = ? AND apellidos = ?";
+      $query = "SELECT * FROM administradores WHERE nombre = ? AND apellidos = ? AND id_institucion = ?";
       $stmt = $this->dbh->prepare($query);
       $stmt->bindParam(1, $nombre, PDO::PARAM_STR);
       $stmt->bindParam(2, $apellidos, PDO::PARAM_STR);
+      $stmt->bindParam(3, $idInstitucion, PDO::PARAM_INT);
       if ($stmt->execute()) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if($row != null) $this->result[] = $row;

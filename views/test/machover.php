@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- Invoca al Head -->
 <?php require_once 'views/layout/head.php'; ?>
+
 <body>
-<?php require_once 'views/layout/navtest.php'; ?>
+    <!-- Invoca al Navbar -->
+    <?php NavbarUsuarioController::navResultado(); ?>
     <section class="container pt-5">
         <div class="shadow p-3 mb-5 bg-white rounded">
         <!-- -->

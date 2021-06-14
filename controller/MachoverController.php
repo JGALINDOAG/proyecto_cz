@@ -1,5 +1,5 @@
 <?php
-$idDetalle=$_SESSION["idDetalle"];//POST['id_detalle'];
+$idDetalle=$_GET["idDetalle"];//POST['id_detalle'];
 require_once("models/pruebas.php");
 $id_prueba=13;
 //Valida si el usuario ya termino la prueba en el día actual

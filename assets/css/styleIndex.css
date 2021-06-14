@@ -12,7 +12,7 @@ https://www.youtube.com/watch?v=vnHGvMlpeok
     font-family: 'Cheddar Jack';
     font-style: normal;
     font-weight: normal;
-    src: local('Cheddar Jack'), url('./fonts/cheddar_jack.woff') format('woff');
+    src: local('Cheddar Jack'), url('../img/fonts/cheddar_jack.woff') format('woff');
     }
 
 *, *::before, *::after {
@@ -152,7 +152,7 @@ hr:not([size]) {
 header {
     width: 100%;
     height: 100vh;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .9), transparent), url("images/hero2.jpeg") bottom no-repeat;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .9), transparent), url("../img/images/hero2.jpeg") bottom no-repeat;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -342,7 +342,7 @@ header {
 .store {
     width: 100%;
     min-height: 30rem;
-    background: url("images/store2.jpeg") center no-repeat;
+    background: url("../img/images/store2.jpeg") center no-repeat;
     border-radius: .30rem;
     background-size: cover;
 }
@@ -352,7 +352,7 @@ header {
 .education {
     width: 100%;
     min-height: 30rem;
-    background: url("images/education.jpeg") center no-repeat;
+    background: url("../img/images/education.jpeg") center no-repeat;
     border-radius: .30rem;
     background-size: cover;
 }
@@ -362,7 +362,7 @@ header {
 .business {
     width: 100%;
     min-height: 30rem;
-    background: url("images/business.jpeg") center no-repeat;
+    background: url("../img/images/business.jpeg") center no-repeat;
     border-radius: .30rem;
     background-size: cover;
 }
@@ -371,7 +371,7 @@ header {
 
 .educative-area {
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("images/between_2.jpeg") center no-repeat;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("../img/images/between_2.jpeg") center no-repeat;
     background-size: cover;
 }
 
@@ -379,7 +379,7 @@ header {
 
 .business-area {
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("images/between_3.jpeg") center no-repeat;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("../img/images/between_3.jpeg") center no-repeat;
     background-size: cover;
 }
 
@@ -387,7 +387,7 @@ header {
 
 .services-area {
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("images/between_5.jpeg") center no-repeat;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("../img/images/between_5.jpeg") center no-repeat;
     background-size: cover;
 }
 
@@ -408,7 +408,7 @@ header {
 
 .citrus-goodness {
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("images/between_4.jpeg") center no-repeat;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)), url("../img/images/between_4.jpeg") center no-repeat;
     background-size: cover;
 }
 

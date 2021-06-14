@@ -14,8 +14,8 @@
         <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
             <div class="media d-flex align-items-center">
                 <div class="media-body">
-                    <h5 class="mt-0">...</h5>
-                    <p>...</p>
+                    <h5 class="mt-0">Resultados</h5>
+                    <p><?php echo $info[0]["nombre"].' '.$info[0]["primer_apellido"].' '.$info[0]["segundo_apellido"]; ?></p>
                 </div>
             </div>
         </div>

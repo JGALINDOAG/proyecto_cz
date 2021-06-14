@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chrome</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="assets/css/styleIndex.css">
+    <link rel="stylesheet" href="assets/css/modal.css" />
 </head>
 
 <body>
@@ -15,7 +15,7 @@
             <span class="bar"></span>
         </div>
         <nav class="nav">
-            <a href="index.html" id="logo">Chrome</a>
+            <a href="?accion=indexUsuario" id="logo">Chrome</a>
             <div class="overlay">
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -30,7 +30,7 @@
         <div class="main-text">
             <h1>Bienvenido</h1>
             <h2>Chrome</h2>
-            <a href="http://localhost:8888/proyecto_cz/" class="btn main-btn">Inicia sesión</a>
+            <a href="?accion=loginUsuario" class="btn main-btn">Inicia sesión</a>
         </div>
     </header>
 
@@ -157,15 +157,21 @@
 
     <footer>
         <div class="locations">
-            <h4>Locations</h4>
+            <h4>localización</h4>
             <div class="location">
-                <h5>500 Lemonade Rd <br> Manhattan, NY - 11111</h5>
+                <h5>Ajoloapan núm. 18 mz. 9 lt. 19.<br> Tecámac Centro, Estado México</h5>
+                <p><a href="#maps_modal" rel="modal:open" class="btn btn-info">Ver en Google Maps</a></p>
             </div>
         </div>
         <div class="hours">
-            <h4>Hours</h4>
+            <h4>Horario</h4>
             <div class="days">
-                <h5>Monday - Saturday <br> 10:30am - 8:00pm</h5>
+                <h5>Lunes - Viernes <br> 10:0am - 6:00pm</h5>
+            </div>
+            <br>
+            <h4>Telefonos</h4>
+            <div class="days">
+                <h5>Tel. 01(55)59343939, Cel. 5517431183</h5>
             </div>
         </div>
     </footer>
@@ -231,8 +237,18 @@
         <a href="#" rel="modal:close">Close</a>
     </div>
 
+    <!-- Modal Maps -->
+    <div id="maps_modal" class="modalMaps">
+        <h1 class="custom-font">Ubícanos</h1>
+        <!-- <aside class="overflow"> -->
+            <h2 class="custom-font-secondary-modal">en Google Maps</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7512.139423079386!2d-98.97819600000001!3d19.709656!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ed24e2631b5b%3A0xca538c37c4ebf172!2sAjoloapan%2C%20Tecamac%2C%2055740%20Tec%C3%A1mac%20de%20Felipe%20Villanueva%2C%20M%C3%A9x.!5e0!3m2!1ses-419!2smx!4v1622646572283!5m2!1ses-419!2smx" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <!-- </aside> -->
+        <a href="#" rel="modal:close">Close</a>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="assets/js/menuIndex.js"></script>
 </body>
 
 <!-- Remember to include jQuery :) -->

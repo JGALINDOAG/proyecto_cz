@@ -17,7 +17,9 @@ class NavbarUsuarioController
     require_once 'views/layout/navbar.php';
   }
 
-  public static function save(){ }
+  public static function navResultado(){ 
+    require_once 'views/layout/navbarResultado.php';
+  }
 
   public static function update(){ }
 

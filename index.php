@@ -35,6 +35,8 @@ else
 			require_once("controller/recoveryController.php");
 		elseif ($_GET["accion"] == 'indexUsuario'):
 			require_once("controller/indexUsuarioController.php");
+		elseif ($_GET["accion"] == 'loginUsuario'):
+			require_once("controller/loginUsuarioController.php");
 		elseif ($_GET["accion"] == 'VerificaFolio'):
 			require_once("controller/VerificaFolioController.php");
 		else:

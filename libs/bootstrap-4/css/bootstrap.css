@@ -6904,12 +6904,12 @@ button.bg-dark:focus {
 
 .bg-login {
   background-color: #fff !important;
-  width: 35ch;
+  width: 32ch;
 }
 
-.bg-login-footer {
-  background-color: #f6f6f6 !important;
-  width: 35ch;
+.bg-login-footer, .bg-login-header {
+  background-color: #FFFFFF !important;
+  width: 32ch;
 }
 
 .bg-transparent {
@@ -7001,6 +7001,10 @@ button.bg-dark:focus {
 }
 
 .rounded-login {
+  border-radius: 0 0 0 0 !important;
+}
+
+.rounded-login-header {
   border-radius: 0.50rem 0.50rem 0 0 !important;
 }
 
@@ -10244,6 +10248,14 @@ a.text-warning:hover, a.text-warning:focus {
 
 a.text-danger:hover, a.text-danger:focus {
   color: #a71d2a !important;
+}
+
+.text-green {
+  color: #007770 !important;
+}
+
+a.text-green:hover, a.text-green:focus {
+  color: #007770 !important;
 }
 
 .text-light {

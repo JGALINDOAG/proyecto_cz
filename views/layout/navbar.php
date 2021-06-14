@@ -1,7 +1,7 @@
 <?php $uri = basename($_SERVER["REQUEST_URI"]); ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="http://localhost:8888/proyecto_cz/home/index.html">
+        <a class="navbar-brand d-flex align-items-center" href="<?php echo AccesoDatos::ruta();?>?accion=indexUsuario">
             <img src="<?php echo AccesoDatos::ruta(); ?>assets/img/ico.png" width="35" height="35" class="d-inline-block align-top" alt="">
             &nbsp;CHROME
         </a>
@@ -46,6 +46,35 @@
                     if($title['sub_menu'] == 2):
                     ?>
                     <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Activación
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php 
+                    foreach ($menu as $key=>$title):  
+                    if($title['sub_menu'] == 3):
+                    ?>
+                    <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
+                    <!-- <div class="dropdown-divider"></div> -->
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reporte
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php 
+                    foreach ($menu as $key=>$title):  
+                    if($title['sub_menu'] == 4):
+                    ?>
+                    <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
                     <!-- <div class="dropdown-divider"></div> -->
                     <?php endif; ?>
                     <?php endforeach; ?>
@@ -69,7 +98,7 @@
             <?php else: ?>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>">Login</a>
+                    <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>?accion=loginUsuario">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>?accion=Home">Test</a>

@@ -118,7 +118,8 @@ class Institucion extends AccesoDatos
           $query = "SELECT id_folio FROM institucion i
           INNER JOIN administradores a USING (id_institucion)
           INNER JOIN institucion_administrador ia USING (id_admin)
-          WHERE id_institucion = ?";
+          WHERE i.id_institucion = ?
+          AND ia.id_folio NOT IN(SELECT id_folio FROM pago)";
           $stmt = $this->dbh->prepare($query);
           $stmt->bindParam(1, $idInstitucion, PDO::PARAM_STR);
           if ($stmt->execute()) {
