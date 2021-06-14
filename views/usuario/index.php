@@ -88,7 +88,7 @@
                     <hr>
                     <!-- <div class="form-group row text-center"> -->
                     <div class="text-center">
-                        <a href="<?php echo AccesoDatos::ruta(); ?>?accion=recovery"><small>¿Olvidaste tu contraseña?</small></a>
+                        <a href="<?php echo AccesoDatos::ruta(); ?>?accion=recovery"><small class="font-weight-bold text-green">¿Olvidaste tu contraseña?</small></a>
                     </div>
                     <!-- </div> -->
                 </div>

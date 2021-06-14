@@ -10250,6 +10250,14 @@ a.text-danger:hover, a.text-danger:focus {
   color: #a71d2a !important;
 }
 
+.text-green {
+  color: #007770 !important;
+}
+
+a.text-green:hover, a.text-green:focus {
+  color: #007770 !important;
+}
+
 .text-light {
   color: #f8f9fa !important;
 }
