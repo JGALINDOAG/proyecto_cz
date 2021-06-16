@@ -6,7 +6,7 @@ $(document).ready(function () {
         $.post("?accion=resultados&pag=getListPruebas", { folio: folio })
             .done(function (data) {
                 var dataList = JSON.parse(data)
-                console.log(dataList)
+                // console.log(dataList)
 
                 var tableDescript = ''
                 tableDescript += '<table class="table table-hover" style="width:100%"><tbody>';
@@ -23,18 +23,18 @@ $(document).ready(function () {
                         tableDescript += '<th>'+ element.id_prueba +'</th>'+
                         '<td>'+ element.prueba +'</td>';
                         band += 1 
-                        console.log(band)
+                        // console.log(band)
                     } else if (band > 0 && band < 3){
                         tableDescript += '<th>'+ element.id_prueba +'</th>'+
                         '<td>'+ element.prueba +'</td>';
                         band += 1
-                        console.log(band)
+                        // console.log(band)
                     } else {
                         tableDescript += '<th>'+ element.id_prueba +'</th>'+
                         '<td>'+ element.prueba +'</td>';
                         tableDescript += trc
                         band = 0
-                        console.log(band)
+                        // console.log(band)
                     } 
 
                     table += '<th scope="col">'+ element.id_prueba +'</th>';
