@@ -43,23 +43,25 @@ class DetallePersonasPruebas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            // $sql = "SELECT dpp.id_detalle, dpp.id_folio, CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre, p.email, dpp.fecha_registro
+            // $sql = "SELECT dpp.id_detalle, dpp.id_folio, CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre, p.email, dpp.fecha_registro,
             // FROM detalle_personas_pruebas dpp
             // INNER JOIN personas p USING(Id_persona)
             // WHERE dpp.id_folio = BINARY ?
-            // -- AND dpp.id_detalle IN (SELECT id_detalle FROM resultados)
+            // AND dpp.id_detalle IN (SELECT id_detalle FROM resultados)
             // ";
             $sql = "SELECT dpp.id_detalle, dpp.id_folio, CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre, p.email, dpp.fecha_registro,
             (
-                SELECT if(dpp.id_detalle = null, 'NoEsta', 'SiEsta')
-                FROM detalle_personas_pruebas dpp 
-                INNER JOIN personas per USING(Id_persona)    
-                WHERE per.Id_persona = p.Id_persona
-                AND dpp.id_detalle IN (SELECT id_detalle FROM resultados)
-            ) AS viewResultado 
+                SELECT dpp2.id_detalle
+                FROM detalle_personas_pruebas dpp2 
+                INNER JOIN personas p2 USING(Id_persona)    
+                WHERE p2.Id_persona = p.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
+                AND dpp2.id_detalle IN (SELECT id_detalle FROM resultados)
+            ) AS viewResultado  
             FROM detalle_personas_pruebas dpp
             INNER JOIN personas p USING(Id_persona)
-            WHERE dpp.id_folio = BINARY ?";
+            WHERE dpp.id_folio = BINARY ?
+            AND dpp.activo = 1";
             $stmt = $this->dbh->prepare($sql);
             $stmt->bindParam(1, $folio, PDO::PARAM_STR);
             if ($stmt->execute()) {
@@ -96,92 +98,106 @@ class DetallePersonasPruebas extends AccesoDatos
             $this->dbh = AccesoDatos::conexion();
             $sql = "SELECT dpp.id_folio, p.id_persona, CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre,
             (
-                SELECT if(COUNT(id_prueba) = 10, '1','0') FROM resultados r 
-                  INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 1
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 10, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 1
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS ter,
             (
-                SELECT if(COUNT(id_prueba) = 11, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 2
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 11, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 2
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS per1,
             (
-                SELECT if(COUNT(id_prueba) = 5, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 3
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 5, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 3
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS per2,
             (
-                SELECT if(COUNT(id_prueba) = 5, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 4
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 5, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 4
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS rav,
             (
-                SELECT if(COUNT(id_prueba) = 10, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 5
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 10, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 5
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS inte,
             (
-                SELECT if(COUNT(id_prueba) = 10, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 6
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 10, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 6
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS apt,
             (
-                SELECT if(COUNT(id_prueba) = 12, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 7
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 12, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 7
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS atr,
             (
-                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 8
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 8
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS clo,
             (
-                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 9
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 9
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS tco,
             (
-                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 10
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 10
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS cpec,
             (
-                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 11
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 1, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 11
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS nde,
             (
-                SELECT if(COUNT(id_prueba) = 13, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 12
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 13, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 12
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS mmpi,
             (
-                SELECT if(COUNT(id_prueba) = 16, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 13
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 16, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 13
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS km,
             (
-                SELECT if(COUNT(id_prueba) = 2, '1','0') FROM resultados r 
-                INNER JOIN detalle_personas_pruebas p USING(id_detalle)
-                WHERE r.id_prueba = 14
-                AND p.Id_persona = dpp.Id_persona
+                SELECT if(COUNT(id_prueba) = 2, '1','0') FROM resultados r2
+                INNER JOIN detalle_personas_pruebas dpp2 USING(id_detalle)
+                WHERE r2.id_prueba = 14
+                AND dpp2.Id_persona = dpp.Id_persona
+                AND dpp2.id_folio = BINARY dpp.id_folio
             ) AS gdr
             FROM personas p
             INNER JOIN detalle_personas_pruebas dpp USING(Id_persona)
-            WHERE id_detalle IN (SELECT id_detalle FROM resultados)
+            WHERE dpp.activo = 1
             AND dpp.id_folio = BINARY ?";
             $stmt = $this->dbh->prepare($sql);
             $stmt->bindParam(1, $folio, PDO::PARAM_STR);
@@ -193,7 +209,7 @@ class DetallePersonasPruebas extends AccesoDatos
                 $this->dbh = null;
             }
         } catch (Exception $e) {
-            die("¡Error!: get_resultados() ".$e->getMessage());
+            die("¡Error!: get_avance() ".$e->getMessage());
         }
     }
 }

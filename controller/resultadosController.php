@@ -45,7 +45,7 @@ class ResultadosController
 //obtiene los datos del usuario desde la vista y redirecciona a UsuarioController.php
 if (isset($_POST['validUsuario'])) {
   if ($_POST["validUsuario"] == "save") { 
-    ResultadosController::save();
+    // ResultadosController::save();
   }
 }
 //se verifica que action esté definida

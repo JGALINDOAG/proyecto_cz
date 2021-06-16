@@ -49,7 +49,8 @@ function dataTable(folio){
                 },
                 {
                     "data": 'fecha_registro'
-                },
+                }
+                ,
                 {
                     "data": 'id_detalle', 'render': function (data, type, row) {
                         var resul = ''
