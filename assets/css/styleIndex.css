@@ -28,11 +28,12 @@ html {
 }
 
 :root {
-    --main-font-color: #f2b632;
+    --main-font-color: #007770;
     --main-white: #fff;
     --main-font-dark-gray: #4d4d4d;
     --main-footer-bg-color: #141414;
     --main-font-family: "Cheddar Jack", cursive;
+    --main-blue: #
 }
 
 section {
@@ -99,6 +100,14 @@ hr:not([size]) {
 .custom-font {
     font-family: var(--main-font-family);
     color: var(--main-font-color);
+    font-size: 6.5rem;
+    line-height: 1;
+    font-weight: 100;
+}
+
+.custom-font-white {
+    font-family: var(--main-font-family);
+    color: var(--main-white);
     font-size: 6.5rem;
     line-height: 1;
     font-weight: 100;
@@ -283,7 +292,7 @@ header {
 
 .main-text h1 {
     font-family: var(--main-font-family);
-    color: var(--main-font-color);
+    /* color: var(--main-font-color); */
     font-size: 8rem;
     font-weight: 100;
     margin-bottom: 5rem;
@@ -457,7 +466,8 @@ header {
 }
 
 .btn-submit:hover {
-    background-color: #e1aa2f;
+    /* background-color: #e1aa2f; */
+    background-color: #10707f;
 }
 
 /*Footer*/
