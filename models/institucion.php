@@ -28,6 +28,24 @@ class Institucion extends AccesoDatos
       }
     }
 
+    public function get_id_institucion($idInstitucion)
+    {
+      try {
+        $this->dbh = AccesoDatos::conexion();
+        $query = "SELECT * FROM institucion WHERE id_institucion = ?";
+        $stmt = $this->dbh->prepare($query);
+        $stmt->bindParam(1, $idInstitucion, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          if($row != null) $this->result[] = $row;
+          return $this->result;
+          $this->dbh = null;
+        }
+      } catch (Exception $e) {
+        die("¡Error!: get_id_institucion() " . $e->getMessage());
+      }
+    }
+
     public function add_institucion($nombre, $abreviatura, $rfc, $email, $telefono, $pruebas)
     {
       try {

@@ -18,7 +18,7 @@ class InstitucionController
       foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
       $pruebas = rtrim($pruebas, ",");
       $idInstitucion = $objInstitucion->add_institucion($_POST["txtNombreInst"], $_POST["txtAbreviatura"], $_POST["txtRFC"], $_POST["txtEmail"], $_POST["txtTelefono"], $pruebas);
-      header("Location: ".AccesoDatos::ruta()."?accion=administradores&institution=".AccesoDatos::encriptar($idInstitucion)."&t=".AccesoDatos::encriptar($_POST["txtTelefono"]));
+      header("Location: ".AccesoDatos::ruta()."?accion=administradores&institution=".AccesoDatos::encriptar($idInstitucion));
     else:
       if(count($validInstitucion) == 1) $errno[] = 1;
       $_POST["errno"] = $errno;

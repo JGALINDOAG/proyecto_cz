@@ -22,7 +22,12 @@ class AdministradoresController
     $validAdministradores = $objAdministradores->valid_administradores($_POST["txtNombre"], $apellidos, $cmbInstitucion);
     if(empty($validAdministradores)):
       $nombre = $_POST["txtNombre"]." ".$_POST["txtApPaterno"]." ".$_POST["txtApMaterno"];
-      $tel = "52".AccesoDatos::desencriptar(str_replace(' ', '+', $_GET["t"]));
+
+      require_once 'models/institucion.php';
+      $objInstitucion = new Institucion();
+      $rowInstitucion = $objInstitucion->get_id_institucion($cmbInstitucion); 
+      $tel = "52".$rowInstitucion[0]['telefono'];
+
       $usuario = AccesoDatos::usuario($_POST["txtNombre"], $_POST["txtApPaterno"], $_POST["txtApMaterno"]);
       $clave = AccesoDatos::codigo();
       // $idFolio = AccesoDatos::folio();
