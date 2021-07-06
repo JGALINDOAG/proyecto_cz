@@ -14,7 +14,9 @@ class CROL extends AccesoDatos
     {
       try {
         $this->dbh = AccesoDatos::conexion();
-        $query = "SELECT * FROM c_rol WHERE id_rol > 1";
+        if($_SESSION['idRol'] == 1) $rol = ' > 1';
+        else $rol = ' > 2';
+        $query = "SELECT * FROM c_rol WHERE id_rol $rol";
         $stmt = $this->dbh->prepare($query);
         if ($stmt->execute()) {
           while($row = $stmt->fetch(PDO::FETCH_ASSOC)){

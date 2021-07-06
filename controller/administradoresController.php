@@ -21,12 +21,21 @@ class AdministradoresController
     $apellidos = $_POST["txtApPaterno"].' '.$_POST["txtApMaterno"];
     $validAdministradores = $objAdministradores->valid_administradores($_POST["txtNombre"], $apellidos, $cmbInstitucion);
     if(empty($validAdministradores)):
+      $nombre = $_POST["txtNombre"]." ".$_POST["txtApPaterno"]." ".$_POST["txtApMaterno"];
+      $tel = "52".AccesoDatos::desencriptar(str_replace(' ', '+', $_GET["t"]));
       $usuario = AccesoDatos::usuario($_POST["txtNombre"], $_POST["txtApPaterno"], $_POST["txtApMaterno"]);
       $clave = AccesoDatos::codigo();
-      $idFolio = AccesoDatos::folio();
-      $idAdmin = $objAdministradores->add_administradores($cmbInstitucion,  $_POST["cmbCargo"], $_POST["txtNombre"], $apellidos, $usuario, $clave);
-      if(isset($_GET["institution"])) header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=index&m=".AccesoDatos::encriptar(1)."");
-      else header("Location: ".AccesoDatos::ruta()."?accion=administradores&m=".AccesoDatos::encriptar(1)."");
+      // $idFolio = AccesoDatos::folio();
+      $objAdministradores->add_administradores($cmbInstitucion,  $_POST["cmbCargo"], $_POST["txtNombre"], $apellidos, $usuario, $clave);
+      if(isset($_GET["institution"])):
+         header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=index&m=".AccesoDatos::encriptar(1).
+        "&u=".AccesoDatos::encriptar($usuario)."&p=".AccesoDatos::encriptar($clave).
+        "&t=".$tel."&n=".AccesoDatos::encriptar($nombre));
+      else:
+        header("Location: ".AccesoDatos::ruta()."?accion=administradores&m=".AccesoDatos::encriptar(1).
+        "&u=".AccesoDatos::encriptar($usuario)."&p=".AccesoDatos::encriptar($clave).
+        "&t=".AccesoDatos::encriptar($tel)."&n=".AccesoDatos::encriptar($nombre));
+      endif;
     else:
       if(count($validAdministradores) == 1) $errno[] = 1;
       $_POST["errno"] = $errno;

@@ -22,8 +22,6 @@ class DetallePersonasPruebas extends AccesoDatos
             INNER JOIN administradores a USING(id_admin)
             INNER JOIN institucion i USING(id_institucion)
             WHERE dpp.activo = 0
-            AND ia.id_folio IN (SELECT id_folio FROM pago)
-            AND ia.activo = 1
             $band";
             $stmt = $this->dbh->prepare($sql);
             $stmt->bindParam(":idIntitucion", $_SESSION["idInstitucion"], PDO::PARAM_INT);

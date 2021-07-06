@@ -84,9 +84,11 @@ class Privilegio extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
+
             $query = "SELECT * FROM privilegio AS a
             INNER JOIN c_menu AS b ON a.id_menu = b.id_menu
             WHERE a.id_rol = ?";
+            
             $stmt = $this->dbh->prepare($query);
             $stmt->bindParam(1, $idRol, PDO::PARAM_INT);
             if ($stmt->execute()) {

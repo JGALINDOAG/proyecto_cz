@@ -21,50 +21,56 @@
                 </li>
                 <?php endif; ?>
                 <?php endforeach; ?>
-                <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Institución
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <?php
-                    foreach ($menu as $key=>$title):  
-                    if($title['sub_menu'] == 1):
-                    ?>
-                    <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
-                    <!-- <div class="dropdown-divider"></div> -->
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                    </div>
-                </li>
-                <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Pago
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <?php 
-                    foreach ($menu as $key=>$title):  
-                    if($title['sub_menu'] == 2):
-                    ?>
-                    <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                    </div>
-                </li>
-                <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Activación
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <?php 
-                    foreach ($menu as $key=>$title):  
-                    if($title['sub_menu'] == 3):
-                    ?>
-                    <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
-                    <!-- <div class="dropdown-divider"></div> -->
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                    </div>
-                </li>
+                <?php if($_SESSION["idRol"] != 4 && $_SESSION["idRol"] != 3): ?>
+                    <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Institución
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php
+                        foreach ($menu as $key=>$title):  
+                        if($title['sub_menu'] == 1):
+                        ?>
+                        <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
+                        <!-- <div class="dropdown-divider"></div> -->
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <?php if($_SESSION["idRol"] == 2): ?>
+                    <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pago
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php 
+                        foreach ($menu as $key=>$title):  
+                        if($title['sub_menu'] == 2):
+                        ?>
+                        <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <?php if($_SESSION["idRol"] != 4): ?>
+                    <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Activación
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php 
+                        foreach ($menu as $key=>$title):  
+                        if($title['sub_menu'] == 3):
+                        ?>
+                        <a class="dropdown-item" href="<?php echo $title['enlace']; ?>"><?php echo $title['texto_enlace']; ?></a>
+                        <!-- <div class="dropdown-divider"></div> -->
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        </div>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Reporte

@@ -36,3 +36,14 @@ function soloNumeros(e){
     	return true;        
         return /\d/.test(String.fromCharCode(keynum));
 }
+
+function validarPassword(password, confirmPassword){
+	if(password === confirmPassword){
+		document.getElementById("actualizar").removeAttribute("disabled"); 
+		document.getElementById("result").innerHTML = '';
+	} else {
+		document.getElementById("actualizar").setAttribute("disabled", ""); 
+		var str = '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>¡AVISO!</strong><hr>Las contraseñas no son identicas<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button></div>';
+        document.getElementById("result").innerHTML = str;
+	}
+}

@@ -3,7 +3,7 @@
 #SI SE INTENTA CARGAR EL INDEX "FORMULARIO DE LOGEO" UNA VEZ QUE YA EXISTA UNA SESIÓN NO PERMITA ACCEDER Y SE RE DIRECCIONE A HOME -> ?accion=index  X
 if(isset($_SESSION["idAdmin"]))
 {
-	header("Location:".AccesoDatos::ruta()."?accion=homeUsuario");
+	header("Location:".AccesoDatos::ruta()."?accion=homeUsuario&pag=index");
 }else{
 	#LLAMAMOS AL MODELO
 	require_once("models/administradores.php");
@@ -31,7 +31,7 @@ if(isset($_SESSION["idAdmin"]))
 					$_SESSION["idAdmin"] = $rowAdministradores[0]["id_admin"];
 					$_SESSION["idInstitucion"] = $rowAdministradores[0]["id_institucion"];
 					$_SESSION["isLoggedIn"] = true;
-					header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario");
+					header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario&pag=index");
 					exit;
 				else:
 					header("Location: ".AccesoDatos::ruta()."?accion=loginUsuario&m=".AccesoDatos::encriptar(2)."");
