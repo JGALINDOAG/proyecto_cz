@@ -56,7 +56,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-group col-sm-12">
                         <label>Selección de pruebas a vender</label>
                         <select class="selectpicker form-control" name="cmbPrueba[]" multiple data-actions-box="true" data-selected-text-format="count > 6" required>
@@ -68,7 +68,7 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-row">
                     <div class="form-group col-sm-12 col-md-4">
                         <label>Costo</label>

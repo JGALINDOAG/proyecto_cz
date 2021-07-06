@@ -18,11 +18,20 @@
                     if(isset($m)){
                         switch ($m){
                             case '1':
+                                $text = 'Estimado Sr (a). '.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['n'])).'%0A
+                                ¡Te damos la bienvenida al Sistema CHROME!%0A
+                                Ahora ya puedes comenzar a administrar tu cuenta e interactuar con la Plataforma.%0A
+                                No olvides tus credenciales generadas para ingresar al sistema, son las siguientes:%0A
+                                USUARIO:&nbsp;'.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['u'])).'%0A
+                                CONTRASEÑA:&nbsp;'.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['p'])).'%0A
+                                Una vez ingresando al sistema podrás cambiar tu contrase&ntilde;a si así lo deseas';
+
                                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong><hr>La persona a sido agregada exitosamente
+                                    <strong>¡AVISO!</strong><hr>El personal a sido agregado exitosamente
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
+                                    &nbsp;|&nbsp;<a href="https://api.whatsapp.com/send?phone='.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['t'])).'&text='.$text.'" target="_blank">Enviar datos de sesi&oacute;n por WhatSapp</a>
                                     </div>';
                             break;
                         }
@@ -47,7 +56,7 @@
         <form name="form" method="post" class="needs-validation" novalidate>
             <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="alert alert-light" role="alert">
-                    <div class="d-flex align-items-center">DATOS DEL ADMINISTRADOR</div>
+                    <div class="d-flex align-items-center">DATOS DEL PERSONAL</div>
                     <hr>
                 </div>
                 <?php if($_SESSION['idInstitucion'] == 1): ?>

@@ -48,6 +48,28 @@ class Administradores extends AccesoDatos
       die("¡Error!: get_id_admin() " . $e->getMessage());
     }
   }
+  
+  public function get_InnerPersona($idAdmin)
+  {
+    try {
+      $this->dbh = AccesoDatos::conexion();
+      #$idAdminDs = AccesoDatos::desencriptar(str_replace(' ', '+', $idAdmin));
+      $query = "SELECT a.*, cr.nombre as rol FROM administradores a
+      INNER JOIN c_rol cr USING(id_rol) 
+      where id_admin = ?";
+      $stmt = $this->dbh->prepare($query);
+      $stmt->bindParam(1, $idAdmin, PDO::PARAM_INT);
+      if ($stmt->execute()) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          $this->result[] = $row;
+        }
+      }
+      return $this->result;
+      $this->dbh = null;
+    } catch (Exception $e) {
+      die("¡Error!: get_id_admin() " . $e->getMessage());
+    }
+  }
 
   public function add_administradores($idInstitucion, $idRol, $nombre, $apellidos, $usuario, $clave)
   {
@@ -72,23 +94,38 @@ class Administradores extends AccesoDatos
     }
   }
 
-  public function update_id_admin($idAdmin, $idRol, $nombre, $apellidos, $usuario, $clave)
+  public function update_id_admin($idAdmin, $idRol, $nombre, $apellidos)
   {
     try {
       $this->dbh = AccesoDatos::conexion();
       # $idAdmin = AccesoDatos::desencriptar(str_replace(' ', '+', $idAdmin));
-      $query = "UPDATE administradores SET id_rol = ?, nombre = ?, apellidos = ?, usuario = ?, clave = ? WHERE id_admin = ?";
+      $query = "UPDATE administradores SET id_rol = ?, nombre = ?, apellidos = ? WHERE id_admin = ?";
       $stmt = $this->dbh->prepare($query);
       $stmt->bindValue(1, $idRol, PDO::PARAM_INT);
       $stmt->bindValue(2, $nombre, PDO::PARAM_STR);
       $stmt->bindValue(3, $apellidos, PDO::PARAM_STR);
-      $stmt->bindValue(4, $usuario, PDO::PARAM_STR);
-      $stmt->bindValue(5, $clave, PDO::PARAM_STR);
-      $stmt->bindValue(6, $idAdmin, PDO::PARAM_INT);
+      $stmt->bindValue(4, $idAdmin, PDO::PARAM_INT);
       $stmt->execute();
       $this->dbh = null;
     } catch (PDOException $e) {
       die("¡Error!: update_id_admin()" . $e->getMessage());
+    }
+  }
+  
+  public function update_id_admin_pass($idAdmin, $usuario, $clave)
+  {
+    try {
+      $this->dbh = AccesoDatos::conexion();
+      # $idAdmin = AccesoDatos::desencriptar(str_replace(' ', '+', $idAdmin));
+      $query = "UPDATE administradores SET usuario = ?, clave = ? WHERE id_admin = ?";
+      $stmt = $this->dbh->prepare($query);
+      $stmt->bindValue(1, $usuario, PDO::PARAM_STR);
+      $stmt->bindValue(2, $clave, PDO::PARAM_STR);
+      $stmt->bindValue(3, $idAdmin, PDO::PARAM_INT);
+      $stmt->execute();
+      $this->dbh = null;
+    } catch (PDOException $e) {
+      die("¡Error!: update_id_admin_pass()" . $e->getMessage());
     }
   }
 

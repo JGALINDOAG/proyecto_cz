@@ -14,9 +14,11 @@ class InstitucionController
     $objInstitucion = new Institucion();
     $validInstitucion = $objInstitucion->valid_institucion($_POST["txtRFC"]);
     if(empty($validInstitucion)): 
-      $telefono = $_POST["txtLada"].'-'.$_POST["txtTelefono"];
-      $idInstitucion = $objInstitucion->add_institucion($_POST["txtNombreInst"], $_POST["txtAbreviatura"], $_POST["txtRFC"], $_POST["txtEmail"], $telefono, '');
-      header("Location: ".AccesoDatos::ruta()."?accion=administradores&institution=".AccesoDatos::encriptar($idInstitucion));
+      $pruebas = "";
+      foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
+      $pruebas = rtrim($pruebas, ",");
+      $idInstitucion = $objInstitucion->add_institucion($_POST["txtNombreInst"], $_POST["txtAbreviatura"], $_POST["txtRFC"], $_POST["txtEmail"], $_POST["txtTelefono"], $pruebas);
+      header("Location: ".AccesoDatos::ruta()."?accion=administradores&institution=".AccesoDatos::encriptar($idInstitucion)."&t=".AccesoDatos::encriptar($_POST["txtTelefono"]));
     else:
       if(count($validInstitucion) == 1) $errno[] = 1;
       $_POST["errno"] = $errno;
@@ -43,18 +45,18 @@ class InstitucionController
 
   public static function addVenta() {
     require_once 'models/institucionAdministrador.php';
-    require_once 'models/institucion.php';
-    $pruebas = "";
-    foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
-    $pruebas = rtrim($pruebas, ",");
+    // require_once 'models/institucion.php';
+    // $pruebas = "";
+    // foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
+    // $pruebas = rtrim($pruebas, ",");
 
     $idFolio = AccesoDatos::folio();
     $objInstitucionAdministrador = new InstitucionAdministrador();
 
     $objInstitucionAdministrador->add_institucionAdministrador($idFolio, $_POST["cmbAdmin"], $_POST["txtCosto"], $_POST["txtNoPGratis"], $_POST["txtNoPVendidas"]);
 
-    $objInstitucion= new Institucion();
-    $objInstitucion->update_pruebas($_POST["cmbInstitucion"], $pruebas);
+    // $objInstitucion= new Institucion();
+    // $objInstitucion->update_pruebas($_POST["cmbInstitucion"], $pruebas);
     header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=venta&m=".AccesoDatos::encriptar(1)."");
   }
 

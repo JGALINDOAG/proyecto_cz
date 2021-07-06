@@ -91,9 +91,9 @@ function dataTable(folio) {
                 {
                     "data": 'ter', 'render': function (data, type, row) {
                         if (row.ter == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -101,9 +101,9 @@ function dataTable(folio) {
                 {
                     "data": 'per1', 'render': function (data, type, row) {
                         if (row.per1 == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -111,9 +111,9 @@ function dataTable(folio) {
                 {
                     "data": 'per2', 'render': function (data, type, row) {
                         if (row.per2 == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -121,9 +121,9 @@ function dataTable(folio) {
                 {
                     "data": 'rav', 'render': function (data, type, row) {
                         if (row.rav == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -131,9 +131,9 @@ function dataTable(folio) {
                 {
                     "data": 'inte', 'render': function (data, type, row) {
                         if (row.inte == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -141,9 +141,9 @@ function dataTable(folio) {
                 {
                     "data": 'apt', 'render': function (data, type, row) {
                         if (row.apt == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -151,9 +151,9 @@ function dataTable(folio) {
                 {
                     "data": 'atr', 'render': function (data, type, row) {
                         if (row.atr == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -161,9 +161,9 @@ function dataTable(folio) {
                 {
                     "data": 'clo', 'render': function (data, type, row) {
                         if (row.clo == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -171,9 +171,9 @@ function dataTable(folio) {
                 {
                     "data": 'tco', 'render': function (data, type, row) {
                         if (row.tco == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -181,9 +181,9 @@ function dataTable(folio) {
                 {
                     "data": 'cpec', 'render': function (data, type, row) {
                         if (row.cpec == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -191,9 +191,9 @@ function dataTable(folio) {
                 {
                     "data": 'nde', 'render': function (data, type, row) {
                         if (row.nde == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -201,9 +201,9 @@ function dataTable(folio) {
                 {
                     "data": 'mmpi', 'render': function (data, type, row) {
                         if (row.mmpi == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -211,9 +211,9 @@ function dataTable(folio) {
                 {
                     "data": 'km', 'render': function (data, type, row) {
                         if (row.km == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
@@ -221,9 +221,9 @@ function dataTable(folio) {
                 {
                     "data": 'gdr', 'render': function (data, type, row) {
                         if (row.gdr == 1) {
-                            var value = '<img src="assets/img/check.svg" title="Descargar" width="27px"></img>';
+                            var value = '<img src="assets/img/check.svg" title="Realizado" width="27px"></img>';
                         } else {
-                            var value = '<img src="assets/img/process.svg" title="Descargar" width="30px"></img>';
+                            var value = '<img src="assets/img/process.svg" title="En proceso" width="30px"></img>';
                         }
                         return value;
                     }
