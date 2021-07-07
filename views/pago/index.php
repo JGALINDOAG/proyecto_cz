@@ -3,6 +3,7 @@
 
 <!-- Invoca al Head -->
 <?php require_once 'views/layout/head.php'; ?>
+
 <body>
     <!-- Invoca al Navbar -->
     <?php NavbarUsuarioController::index(); ?>
@@ -12,29 +13,29 @@
         <div class="form-group row d-flex justify-content-center">
             <div class="col-sm-12">
                 <?php
-                    @$m=str_replace(' ','+',$_GET['m']);
-                    // @$m=AccesoDatos::desencriptar($m);
-                    if(isset($m)){
-                        switch ($m){
-                            case '1':
-                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                @$m = str_replace(' ', '+', $_GET['m']);
+                // @$m=AccesoDatos::desencriptar($m);
+                if (isset($m)) {
+                    switch ($m) {
+                        case '1':
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>¡AVISO!</strong><hr>El pago se realizo exitosamente, en breve se notificará y se evaluará su pago para la activación del folio.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                     </div>';
                             break;
-                            case '2':
-                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        case '2':
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>¡AVISO!</strong><hr>El voucher se cargo exitosamente, en breve se notificará y se evaluará su pago para la activación del folio.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                     </div>';
                             break;
-                        }
                     }
-                    ?>
+                }
+                ?>
             </div>
         </div>
         <!-- wrap -->
@@ -45,29 +46,59 @@
                 </div>
                 <hr>
             </div>
-            <?php if(empty($rowInstitucion)): ?> 
+
+            <form name="" action="#" method="post" enctype="multipart/form-data">
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="alert alert-light text-center" role="alert">
-                            SIN FOLIOS ACTIVOS A PAGAR
+                    <div class="form-group col-sm-12">
+                        <label>Folio</label>
+                        <select class="selectpicker form-control" data-live-search="true" id="cmbFolio_uno" name="cmbFolio" required>
+                            <option value="" disabled selected>Selecciona el folio a pagar</option>
+                            <?php foreach ($rowInstitucion as $item) : ?>
+                                <option value='{"id_folio":"<?php echo $item["id_folio"]; ?>", "total": <?php echo $item["total"]; ?>}'><?php echo $item["id_folio"]; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <!--  -->
+                <div id='completed'>
+                    <div class="form-group card">
+                        <div class="card-body text-center text-muted">
+                            El folio se pago correctamente.
                         </div>
                     </div>
                 </div>
-            </div>
-            </div>
-            <?php else: ?> 
-                <form name="" action="#" method="post" enctype="multipart/form-data">
-                    <div class="form-row">
-                        <div class="form-group col-sm-12">
-                            <label>Folio</label>
-                            <select class="form-control" id="cmbFolio" name="cmbFolio" required>
-                                <option value="" disabled selected>Selecciona el folio a pagar</option>
-                                <?php foreach($rowInstitucion as $item): ?>
-                                <option value=<?php echo $item['id_folio']; ?>><?php echo $item['id_folio']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex bd-highlight text-muted">
+                            <div class="flex-grow-1 bd-highlight">Total de costo por las pruebas:</div>
+                            <div id="spanCantidad" class="bd-highlight"><b>$0.00</b></div>
                         </div>
                     </div>
+                </div>
+                <div class="table-responsive pt-5">
+                    <table class="table table-hover" id="reporte" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tipo de pago</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3" class="text-center">No hay datos disponibles en la tabla.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="text-right" colspan="2">Total</th>
+                                <th id="total">---</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!--  -->
+                <div id='incompleted'>
                     <div class="form-row">
                         <div class="form-group col-sm-12 col-md-6">
                             <label>Forma de pago</label>
@@ -99,7 +130,7 @@
                         </div>
                     </div>
                     <div id="file" class="form-row">
-                        <div  class="form-group col-sm-6">
+                        <div class="form-group col-sm-6">
                             <label>Voucher/Comprobante de pago</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -132,13 +163,16 @@
                     </div>
                     <input type="hidden" name="validUsuario" value="save">
                     <input type="submit" value="Notificar" id="pagar" class="btn btn-outline-green btn-lg btn-block">
-                </form>
-            <?php endif; ?> 
+                </div>
+            </form>
         </div>
     </section>
     <!-- Invoca al Footer -->
     <?php require_once 'views/layout/footer.php'; ?>
     <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/JqueryPago.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AcMUqZGxC9nXvrr994-RqCSDmpIXDC1njOYsj1R0K3lRy3TlUuzhgvkVkPQrAr03RccvK0pbzfHPSAW_&currency=MXN"> // Replace YOUR_CLIENT_ID with your sandbox client ID</script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AcMUqZGxC9nXvrr994-RqCSDmpIXDC1njOYsj1R0K3lRy3TlUuzhgvkVkPQrAr03RccvK0pbzfHPSAW_&currency=MXN">
+        // Replace YOUR_CLIENT_ID with your sandbox client ID
+    </script>
 </body>
+
 </html>

@@ -16,7 +16,7 @@ class InstitucionAdministrador extends AccesoDatos
         $this->dbh = AccesoDatos::conexion();
         $where = '';
         if($_SESSION['idInstitucion'] != 1) $where = 'WHERE i.id_institucion = ?';
-        $query = "SELECT ia.*, i.id_institucion FROM institucion_administrador ia
+        $query = "SELECT ia.*, i.id_institucion, (ia.costo * ia.num_vendidas) as total FROM institucion_administrador ia
         INNER JOIN administradores a USING (id_admin)
         INNER JOIN institucion i USING(id_institucion)
         $where";
@@ -52,27 +52,27 @@ class InstitucionAdministrador extends AccesoDatos
       }
     }
 
-    // public function get_foliosDesactivos() 
-    // {
-    //     try {
-    //         $this->dbh = AccesoDatos::conexion();
-    //         $sql = "SELECT i.id_institucion, i.nombre, a.id_admin, CONCAT(a.nombre,' ',a.apellidos) AS nombre, ia.id_folio FROM institucion i
-    //         INNER JOIN administradores a USING (id_institucion)
-    //         INNER JOIN institucion_administrador ia USING (id_admin)
-    //         WHERE ia.id_folio IN (SELECT id_folio FROM pago)";
-    //         $stmt = $this->dbh->prepare($sql);
-    //         $stmt->bindParam("idIntitucion", $_SESSION["idInstitucion"], PDO::PARAM_INT);
-    //         if ($stmt->execute()) {
-    //             while($row = $stmt->fetch(PDO::FETCH_NUM)){
-    //                 $this->result[] = $row;
-    //             }
-    //             return $this->result;
-    //             $this->dbh = null;
-    //         }
-    //     } catch (Exception $e) {
-    //         die("¡Error!: get_detallePersonasPruebas() ".$e->getMessage());
-    //     }
-    // }
+    public function get_folios_by_institucion($idInstitucion) 
+    {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $sql = "SELECT a.id_institucion, ia.id_folio, (ia.costo * ia.num_vendidas) as total FROM administradores a
+            INNER JOIN institucion b USING(id_institucion)
+            INNER JOIN institucion_administrador ia USING(id_admin)
+            WHERE id_institucion = :idInstitucion";
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->bindParam("idInstitucion", $idInstitucion, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $this->result[] = $row;
+                }
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: get_folios_by_institucion() ".$e->getMessage());
+        }
+    }
 
     public function add_institucionAdministrador($idFolio, $idAdmin, $costo, $numGratis, $numVendidas)
     {

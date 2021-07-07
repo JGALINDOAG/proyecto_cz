@@ -133,11 +133,14 @@ class Institucion extends AccesoDatos
     {
       try {
           $this->dbh = AccesoDatos::conexion();
-          $query = "SELECT id_folio FROM institucion i
+          $query = "SELECT id_folio, (ia.costo * ia.num_vendidas) as total FROM institucion i
           INNER JOIN administradores a USING (id_institucion)
           INNER JOIN institucion_administrador ia USING (id_admin)
           WHERE i.id_institucion = ?
-          AND ia.id_folio NOT IN(SELECT id_folio FROM pago)";
+          -- AND (ia.costo * ia.num_vendidas) > (
+          -- 	SELECT SUM(JSON_EXTRACT(transaccion, '$.total')) FROM pago
+          -- )
+          ";
           $stmt = $this->dbh->prepare($query);
           $stmt->bindParam(1, $idInstitucion, PDO::PARAM_STR);
           if ($stmt->execute()) {
