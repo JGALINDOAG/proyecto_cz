@@ -29,9 +29,11 @@ if(isset($_SESSION["idAdmin"]))
 			elseif($rowAdministradores[0]["activo"] == 1):
 				if($rowAdministradores[0]["clave"] === $_POST["pass"]):
 					$_SESSION["idAdmin"] = $rowAdministradores[0]["id_admin"];
+					$_SESSION["idRol"] = $rowAdministradores[0]["id_rol"];
 					$_SESSION["idInstitucion"] = $rowAdministradores[0]["id_institucion"];
 					$_SESSION["isLoggedIn"] = true;
-					header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario&pag=index");
+					if($_SESSION["idRol"] == 4) header("Location: ".AccesoDatos::ruta()."?accion=resultados&pag=index");
+					else header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario&pag=index");
 					exit;
 				else:
 					header("Location: ".AccesoDatos::ruta()."?accion=loginUsuario&m=".AccesoDatos::encriptar(2)."");

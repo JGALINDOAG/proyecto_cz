@@ -5,27 +5,60 @@ $(document).ready( function () {
     $('#referencia').hide();
     $('#rastreo').hide();
     $('#cmbFormaPago').prop('disabled', true);
-    $('#cantidad').prop('readonly', true);
+    // $('#cantidad').prop('readonly', true);
     $("#txtFechaFin").prop('disabled', true);
-
-    $("#cmbFolio").change(function () {
-        var folio = $(this).val()
-        var cmbFolio = $.ajax({
+    $('#cmbFolio_dos').prop('disabled', true);
+    $('#cmbInstitucion').on('change', function() {
+        var id = $(this).val()
+        $('#costo').html('')
+        $('#statusPago').html('Status de pago del Folio')
+        var cmbInstitucion = $.ajax({
             method: "POST",
-            url: "?accion=institucionAdministrador&pag=getFolio",
-            data: { folio: folio }
+            url: "?accion=institucionAdministrador&pag=getFolioByInst",
+            data: { idInstitucion: id }
         })
 
-        cmbFolio.done(function( res ) {
-            $('#cantidad').empty()
-            $('#cmbFormaPago').prop('disabled', false);
-            var data = JSON.parse(res)
-            $('#cantidad').val(data[0].costo)
+        cmbInstitucion.done(function( res ) {
+            var option = ''
+            $('#cmbFolio_dos').empty()
+            var data = JSON.parse(res);
+            option +='<option value="" selected>Selecciona un folio</option>';
+            data.forEach(element => {
+                var opc = new Object();
+                console.log(element)
+                opc.id_folio = element.id_folio;
+                opc.total = element.total;
+                var myString = JSON.stringify(opc);
+                option +='<option value='+ myString +'>' + element.id_folio +'</option>';
+            });
+            $('#cmbFolio_dos').append(option);
+            $('#cmbFolio_dos').prop('disabled', false);
         });
 
-        cmbFolio.fail(function() {
+        cmbInstitucion.fail(function() {
             alert("error")
         })
+    });
+
+    $("#cmbFolio_uno").change(function () {
+        var opc = 1
+        var cmbFolio = $(this).val()
+        var data = JSON.parse(cmbFolio)
+        var folio = data.id_folio
+        $('#cmbFormaPago').prop('disabled', false);
+        const total = data.total
+        $('#spanCantidad').html('<b>$'+ total +'</b>')
+        datatable_by_folio(folio, opc)
+    });
+    
+    $("#cmbFolio_dos").change(function () {
+        var opc = 2
+        var cmbFolio = $(this).val()
+        var data = JSON.parse(cmbFolio)
+        var folio = data.id_folio
+        const total = data.total
+        $('#costo').html('<b>$'+ total +'</b>')
+        datatable_by_folio(folio, opc)
     });
 
     $("#cmbFormaPago").change(function () {
@@ -164,7 +197,7 @@ function datatable(fechaInicio, fechaFin) {
 
     result.done(function( res ) {
         var dataPagos = JSON.parse(res)
-        $('#reporte').DataTable({
+        $('#reporte_uno').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",
                 "info": "Del _START_ al _END_ de _TOTAL_ ",
@@ -209,6 +242,9 @@ function datatable(fechaInicio, fechaFin) {
                         return transaccion.total
                     }
                 }
+            ],
+            columnDefs: [
+                { className: 'text-center', targets: [2,3,4] }
             ]
         });
 
@@ -217,7 +253,93 @@ function datatable(fechaInicio, fechaFin) {
             var transaccion = JSON.parse(element.transaccion)
             total = parseInt(transaccion.total) + total
         });
-        $('#total').html(total)
+        $('#total_uno').html(total)
+    });
+
+    result.fail(function() {
+        alert("error")
+    })
+    
+}
+
+function datatable_by_folio(folio, opc) {
+    var result = $.ajax({
+        method: "POST",
+        url: "?accion=pago&pag=getPagos",
+        data: { folio: folio }
+    })
+
+    result.done(function( res ) {
+        var dataPagos = JSON.parse(res)
+        console.log(dataPagos)
+        $('#reporte').DataTable({
+            "language": {
+                "emptyTable": "No hay datos disponibles en la tabla.",
+                "info": "Del _START_ al _END_ de _TOTAL_ ",
+                "infoEmpty": "Mostrando 0 registros de un total de 0.",
+                "infoFiltered": "(filtrados de un total de _MAX_ registros)",
+                "infoPostFix": "(actualizados)",
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "searchPlaceholder": "Dato para buscar",
+                "zeroRecords": "No se han encontrado coincidencias.",
+                "paginate": {
+                    "first": "Primera",
+                    "last": "Última",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": "Ordenación ascendente",
+                    "sortDescending": "Ordenación descendente"
+                }
+            },
+            "destroy": true,
+            "data": dataPagos,
+            "columns": [
+                {
+                    "data": 'tipo_pago'
+                },
+                {
+                    "data": 'fecha_registro'
+                },
+                {
+                    "data": 'transaccion', "render": function (data, type, row) {
+                        var transaccion = JSON.parse(row.transaccion)
+                        return transaccion.total
+                    }
+                }
+            ],
+            columnDefs: [
+                { className: 'text-center', targets: [1,2] }
+            ],
+            order: []
+        });
+
+        var pago = 0
+        dataPagos.forEach(element => {
+            var transaccion = JSON.parse(element.transaccion)
+            pago = parseInt(transaccion.total) + pago
+        });
+        $('#total').html(pago)
+        if(opc === 2) {
+            var folio = $('#cmbFolio_dos').val()
+        } else {
+            var folio = $('#cmbFolio_uno').val()
+        }
+        var data = JSON.parse(folio)
+        if(pago == data.total) {
+            $('#completed').show();
+            $('#incompleted').hide();
+        } 
+        else {
+            var resta = data.total - pago
+            if(opc === 2) $('#statusPago').html('El folio cuenta con adeudo de $'+ resta + ' pesos')
+            $('#incompleted').show();
+            $('#completed').hide();
+        } 
     });
 
     result.fail(function() {

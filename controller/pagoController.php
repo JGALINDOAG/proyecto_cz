@@ -73,6 +73,13 @@ class PagoController
 	}
 
   public static function report(){
+    require_once 'models/institucion.php';
+    $objInstitucion = new Institucion();
+    $rowInstitucion = $objInstitucion->get_institucion();
+
+    // require_once "models/institucionAdministrador.php";
+    // $objInstitucionAdministrador = new InstitucionAdministrador();
+    // $rowFolios = $objInstitucionAdministrador->get_institucionAdministrador();
     require_once "views/pago/report.php";
   }
   
@@ -80,6 +87,14 @@ class PagoController
     require_once "models/pago.php";
     $objPago = new Pago();
     $rowPago = $objPago->get_reportPago($_POST['fechaInicio'], $_POST['fechaFin']);
+    $dataJson = json_encode($rowPago, JSON_UNESCAPED_UNICODE);
+		print $dataJson;
+  }
+  
+  public static function getPagos(){
+    require_once "models/pago.php";
+    $objPago = new Pago();
+    $rowPago = $objPago->get_pagos_by_folio($_POST['folio']);
     $dataJson = json_encode($rowPago, JSON_UNESCAPED_UNICODE);
 		print $dataJson;
   }
@@ -104,6 +119,8 @@ if (isset($_GET["accion"])) {
     PagoController::report();
   } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "getReport") {
     PagoController::getReport();
+  } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "getPagos") {
+    PagoController::getPagos();
   }
 }
 ?>

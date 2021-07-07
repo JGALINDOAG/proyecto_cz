@@ -106,5 +106,26 @@ class Pago extends AccesoDatos
             die("¡Error!: get_reportPago() " . $e->getMessage());
         }
     }
+    
+    public function get_pagos_by_folio($folio)
+    {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $query = "SELECT * FROM pago p 
+            WHERE p.id_folio = ?
+            ORDER BY p.fecha_registro DESC";
+            $stmt = $this->dbh->prepare($query);
+            $stmt->bindParam(1, $folio, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->result[] = $row;
+                }
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: get_pagos_by_folio() " . $e->getMessage());
+        }
+    }
 
 }
