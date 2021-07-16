@@ -10,6 +10,13 @@ $list = $obj->list_pruebas_persona($idDetalle);
 $sex = new Pruebas();
 $info = $sex->info_persona($idDetalle);
 $estud=$info[0]['grado_estudios'];
+
+if (isset($_POST["costo"])){
+    require_once("models/personas.php");
+    $up = new Personas();
+    $up->update_costo($_POST["costo"],$idDetalle);
+}
+
 if (isset($_POST["select_test"]) and $_POST["select_test"] == "ok") {
     if (isset($_POST["TERMAN"])) {
         header("Location: index.php?accion=TermanEj");

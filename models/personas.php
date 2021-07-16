@@ -10,12 +10,59 @@ class Personas extends AccesoDatos
         $this->result = array();
     }
 
+    public function update_costo($costo,$idDetalle)
+    {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("UPDATE `detalle_personas_pruebas` SET `costo_pago` = ? WHERE `detalle_personas_pruebas`.`id_detalle` = ?");
+            $stmt->bindValue(1, $costo, PDO::PARAM_INT);
+            $stmt->bindParam(2, $idDetalle, PDO::PARAM_INT);
+            $stmt->execute();
+            $this->dbh = null;
+        } catch (PDOException $e) {
+            die("¡Error!: ".$e->getMessage());
+        }
+    }
+
+    public function total_sistema($id_folio)
+    {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("SELECT (`num_gratis`+`num_vendidas`) as total_sistema FROM `institucion_administrador` WHERE  binary  `id_folio`=?");
+            $stmt->bindValue(1, $id_folio, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!:".$e->getMessage());
+        }
+    }
+
+    public function total_registros($id_folio)
+    {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $stmt = $this->dbh->prepare("SELECT count(*) as total_registros FROM detalle_personas_pruebas WHERE binary id_folio=?");
+            $stmt->bindValue(1, $id_folio, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!:".$e->getMessage());
+        }
+    }
+//
     public function verifica_idfolio($id_folio)
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $stmt = $this->dbh->prepare("SELECT count(*) as valor FROM institucion_administrador WHERE id_folio=?");
-            //$stmt->bindParam(1, $id_folio, PDO::PARAM_INT);
+            $stmt = $this->dbh->prepare("SELECT count(*) as valor FROM institucion_administrador WHERE binary id_folio=?");
             $stmt->bindValue(1, $id_folio, PDO::PARAM_STR);
             if ($stmt->execute()) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -105,7 +152,7 @@ class Personas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $stmt = $this->dbh->prepare("SELECT * FROM detalle_personas_pruebas where Id_persona=? and id_folio=?");
+            $stmt = $this->dbh->prepare("SELECT * FROM detalle_personas_pruebas where Id_persona=? and  binary id_folio=?");
             $stmt->bindValue(1, $Id_persona, PDO::PARAM_INT);
             $stmt->bindValue(2, $id_folio, PDO::PARAM_STR);
             if ($stmt->execute()) {

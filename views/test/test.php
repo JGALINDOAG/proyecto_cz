@@ -12,6 +12,18 @@
                     <div class="media-body">
                         <h5 class="mt-0">PRUEBAS DISPONIBLES</h5>
                         <p>De clic sobre la prueba que desea realizar.</p>
+                        <?php
+                        $costo = new Pruebas();
+                        $money = $costo->activo_detalle_personas($idDetalle);
+                        if(empty($money[0]["costo_pago"])){
+                            ?>
+                                <form action="" method="post">
+                                <p>Por favor indique la cantidad que pago por la prueba.<input type="number" name="costo" required></p>
+                                <input type="submit" class="btn btn-outline-green btn-lg btn-block">
+                                </form>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
