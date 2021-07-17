@@ -117,7 +117,10 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Costo total por folio <span id="costo">---</span></li>
-                    <li class="list-group-item">Costo total por folio, declarado por los evaluados <span id="costo_evaluado">---</span></li>
+                    <li class="list-group-item">
+                        Precio fijo declarado por los evaluados <span id="costo_evaluado">---</span><br/>
+                        Suma total, declarado por los evaluados <span id="costo_total_evaluado">---</span>
+                    </li>
                 </ul>
             </div>
             <div class="table-responsive pt-5">
