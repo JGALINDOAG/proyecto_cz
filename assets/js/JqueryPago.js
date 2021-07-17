@@ -8,6 +8,7 @@ $(document).ready( function () {
     // $('#cantidad').prop('readonly', true);
     $("#txtFechaFin").prop('disabled', true);
     $('#cmbFolio_dos').prop('disabled', true);
+    
     $('#cmbInstitucion').on('change', function() {
         var id = $(this).val()
         $('#costo').html('')
@@ -25,7 +26,7 @@ $(document).ready( function () {
             option +='<option value="" selected>Selecciona un folio</option>';
             data.forEach(element => {
                 var opc = new Object();
-                console.log(element)
+                // console.log(element)
                 opc.id_folio = element.id_folio;
                 opc.total = element.total;
                 var myString = JSON.stringify(opc);
@@ -58,6 +59,19 @@ $(document).ready( function () {
         var folio = data.id_folio
         const total = data.total
         $('#costo').html('<b>$'+ total +'</b>')
+        $('#costo_evaluado').html('---')
+
+        $.post( "?accion=pago&pag=pagoByUser", { folio: folio })
+            .done(function( data ) {
+                var dataPagos = JSON.parse(data)
+                var costoBruto = '<b>$' + dataPagos[0].pagoUser + '</b>'
+                var total = '<b>$' + dataPagos[0].costo_individual + '</b>'
+                if(dataPagos[0].pagoUser != null) {
+                    $('#costo_evaluado').html(costoBruto); 
+                    $('#costo_total_evaluado').html(total);
+                }
+            });
+
         datatable_by_folio(folio, opc)
     });
 
@@ -271,7 +285,7 @@ function datatable_by_folio(folio, opc) {
 
     result.done(function( res ) {
         var dataPagos = JSON.parse(res)
-        console.log(dataPagos)
+        // console.log(dataPagos)
         $('#reporte').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",

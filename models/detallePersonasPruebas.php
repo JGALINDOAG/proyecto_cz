@@ -210,4 +210,22 @@ class DetallePersonasPruebas extends AccesoDatos
             die("¡Error!: get_avance() ".$e->getMessage());
         }
     }
+
+    public function get_pagos_by_folio_user($folio)
+    {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $query = "SELECT SUM(costo_pago) pagoUser, MAX(costo_pago) costo_individual FROM detalle_personas_pruebas WHERE id_folio = BINARY ?";
+            $stmt = $this->dbh->prepare($query);
+            $stmt->bindParam(1, $folio, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->result[] = $row;
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: get_pagos_by_folio_user() " . $e->getMessage());
+        }
+    }
 }

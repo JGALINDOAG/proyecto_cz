@@ -98,6 +98,14 @@ class PagoController
     $dataJson = json_encode($rowPago, JSON_UNESCAPED_UNICODE);
 		print $dataJson;
   }
+  
+  public static function pagoByUser(){
+    require_once "models/detallePersonasPruebas.php";
+    $objDPersonasPrueba = new DetallePersonasPruebas();
+    $rowPersonasPrueba = $objDPersonasPrueba->get_pagos_by_folio_user($_POST['folio']);
+    $dataJson = json_encode($rowPersonasPrueba, JSON_UNESCAPED_UNICODE);
+		print $dataJson;
+  }
 
   public static function delete(){ }
 
@@ -121,6 +129,8 @@ if (isset($_GET["accion"])) {
     PagoController::getReport();
   } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "getPagos") {
     PagoController::getPagos();
+  } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "pagoByUser") {
+    PagoController::pagoByUser();
   }
 }
 ?>
