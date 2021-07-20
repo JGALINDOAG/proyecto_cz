@@ -5,6 +5,8 @@ $(document).ready( function () {
     });
 } );
 function dataTable(folio){
+    var rol = $('#rol').html()
+
     var cmbFolio = $.ajax({
         method: "POST",
         url: "?accion=resultados&pag=getList",
@@ -54,10 +56,9 @@ function dataTable(folio){
                 {
                     "data": 'id_detalle', 'render': function (data, type, row) {
                         var resul = ''
-                        if(row.viewResultado != null) { 
-                            var resul = '<a href="?accion=Result&idDetalle=' + row.id_detalle + '" target="_blank"><img src="assets/img/result.svg" title="Ver resultados" width="35px"></img></a>'
-                        }
-                        var km = '<a href="?accion=Machover&idDetalle=' + row.id_detalle + '" target="_blank"><img src="assets/img/km.svg" title="Karen Machover" width="35px"></img></a>' 
+                        var km = ''
+                        if(row.viewResultado != null) resul = '<a href="?accion=Result&idDetalle=' + row.id_detalle + '" target="_blank"><img src="assets/img/result.svg" title="Ver resultados" width="35px"></img></a>'
+                        if(rol == 1 || rol == 4) km = '<a href="?accion=Machover&idDetalle=' + row.id_detalle + '" target="_blank"><img src="assets/img/km.svg" title="Karen Machover" width="35px"></img></a>' 
                         var val = resul + km
                         return val
                     }

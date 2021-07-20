@@ -95,10 +95,6 @@
                         <label>Email</label>
                         <input type="email" name="txtEmail" placeholder="Email" value="<?php echo @$_POST["txtEmail"]; ?>" class="form-control">
                     </div>
-                    <!-- <div class="form-group col-sm-12 col-lg-1">
-                        <label>Lada</label>
-                        <input type="text" name="txtLada" maxlength="5" placeholder="55" onkeypress="return soloNumeros(this);" value="<?php echo @$_POST["txtLada"]; ?>" class="form-control" required>
-                    </div> -->
                     <div class="form-group col-sm-12 col-lg-5">
                         <label>Número telefonico</label>
                         <input type="text" name="txtTelefono" maxlength="10" placeholder="Número telefonico: 5537126509" onkeypress="return soloNumeros(this);" value="<?php echo @$_POST["txtTelefono"]; ?>" class="form-control" required>

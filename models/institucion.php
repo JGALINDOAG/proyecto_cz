@@ -103,30 +103,6 @@ class Institucion extends AccesoDatos
         die("¡Error!: valid_institucion() " . $e->getMessage());
       }
     }
-
-    #Recupera contraseñas valida e-mail inicial.
-    public function get_recoveryEmail($email, $usuario) 
-    {
-      try {
-          $this->dbh = AccesoDatos::conexion();
-          $query = "SELECT * FROM institucion AS i
-          INNER JOIN administradores a ON i.id_institucion = a.id_institucion
-          WHERE email = ?
-          AND usuario = ? ";
-          $stmt = $this->dbh->prepare($query);
-          $stmt->bindParam(1, $email, PDO::PARAM_STR);
-          $stmt->bindParam(2, $usuario, PDO::PARAM_STR);
-          if ($stmt->execute()) {
-              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  $this->result[] = $row;
-              }
-              return $this->result;
-              $this->dbh = null;
-          }
-      } catch (Exception $e) {
-          die("¡Error!: get_recoveryEmail()" . $e->getMessage());
-      }
-    }
     
     #Obtiene los folios no pagados por la institución.
     public function get_folio($idInstitucion) 

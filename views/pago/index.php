@@ -27,7 +27,7 @@
                             break;
                         case '2':
                             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong><hr>El voucher se cargo exitosamente, en breve se notificará y se evaluará su pago para la activación del folio.
+                                    <strong>¡AVISO!</strong><hr>El (La) voucher/notificación se cargo exitosamente, en breve se notificará y se evaluará su pago .
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -67,13 +67,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex bd-highlight text-muted">
-                            <div class="flex-grow-1 bd-highlight">Total de costo por las pruebas:</div>
-                            <div id="spanCantidad" class="bd-highlight"><b>$0.00</b></div>
-                        </div>
+                <div class="card" style="width: 28rem;">
+                    <div class="card-header">
+                        <span id="statusPago">Status de pago del Folio</span>
                     </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Costo total por folio <span id="costo">---</span></li>
+                    </ul>
                 </div>
                 <div class="table-responsive pt-5">
                     <table class="table table-hover" id="reporte" style="width:100%">

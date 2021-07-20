@@ -38,7 +38,9 @@ class InstitucionAdministrador extends AccesoDatos
     {
       try {
         $this->dbh = AccesoDatos::conexion();
-        $query = "SELECT * FROM institucion_administrador WHERE id_folio = BINARY ? ";
+        $query = "SELECT ia.*, CONCAT(a.nombre,' ',a.apellidos) nombre FROM institucion_administrador ia
+        INNER JOIN administradores a USING (id_admin)
+        WHERE ia.id_folio = BINARY ? ";
         $stmt = $this->dbh->prepare($query);
         $stmt->bindParam(1, $folio, PDO::PARAM_STR);
         if ($stmt->execute()) {

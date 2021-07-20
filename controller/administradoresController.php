@@ -22,29 +22,29 @@ class AdministradoresController
     $validAdministradores = $objAdministradores->valid_administradores($_POST["txtNombre"], $apellidos, $cmbInstitucion);
     if(empty($validAdministradores)):
       $nombre = $_POST["txtNombre"]." ".$_POST["txtApPaterno"]." ".$_POST["txtApMaterno"];
-
-      require_once 'models/institucion.php';
-      $objInstitucion = new Institucion();
-      $rowInstitucion = $objInstitucion->get_id_institucion($cmbInstitucion); 
-      $tel = "52".$rowInstitucion[0]['telefono'];
-
       $usuario = AccesoDatos::usuario($_POST["txtNombre"], $_POST["txtApPaterno"], $_POST["txtApMaterno"]);
       $clave = AccesoDatos::codigo();
-      // $idFolio = AccesoDatos::folio();
-      $objAdministradores->add_administradores($cmbInstitucion,  $_POST["cmbCargo"], $_POST["txtNombre"], $apellidos, $usuario, $clave);
+      $objAdministradores->add_administradores($cmbInstitucion, $_POST["cmbCargo"], $_POST["txtNombre"], $apellidos, $_POST["txtEmail"], $_POST["txtTelefono"], $usuario, $clave);
+
+      $tel = "52".$_POST["txtTelefono"];
       if(isset($_GET["institution"])):
-         header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=index&m=".AccesoDatos::encriptar(1).
-        "&u=".AccesoDatos::encriptar($usuario)."&p=".AccesoDatos::encriptar($clave).
-        "&t=".$tel."&n=".AccesoDatos::encriptar($nombre));
+        $url = "?accion=institucion";
       else:
-        header("Location: ".AccesoDatos::ruta()."?accion=administradores&m=".AccesoDatos::encriptar(1).
-        "&u=".AccesoDatos::encriptar($usuario)."&p=".AccesoDatos::encriptar($clave).
-        "&t=".AccesoDatos::encriptar($tel)."&n=".AccesoDatos::encriptar($nombre));
+        $url = "?accion=administradores";
       endif;
+      $email = $_POST["txtEmail"];
+      header("Location: ".AccesoDatos::ruta().$url."&pag=index&m=".AccesoDatos::encriptar(1).
+      "&u=".AccesoDatos::encriptar($usuario)."&c=".AccesoDatos::encriptar($clave).
+      "&e=".AccesoDatos::encriptar($email)."&t=".AccesoDatos::encriptar($tel)."&n=".AccesoDatos::encriptar($nombre));
     else:
       if(count($validAdministradores) == 1) $errno[] = 1;
       $_POST["errno"] = $errno;
     endif;
+  }
+
+  public static function messageEmail(){
+    $respuesta = AccesoDatos::addAdmin($_POST['email'], $_POST['nombre'], $_POST['usuario'], $_POST['clave']);
+    if($respuesta === false) print $respuesta;
   }
 }
 
@@ -52,12 +52,14 @@ class AdministradoresController
 if (isset($_POST['validUsuario'])) {
   if ($_POST["validUsuario"] == "save") {
     AdministradoresController::save();
-  }
+  } 
 }
 //se verifica que action esté definida
 if (isset($_GET["accion"])) {
-  if ($_GET["accion"] == "administradores") {
+  if ($_GET["accion"] == "administradores" && $_GET["pag"] == "index") {
     AdministradoresController::index();
+  } elseif ($_GET["accion"] == "administradores" && $_GET["pag"] == "messageEmail") {
+    AdministradoresController::messageEmail();
   }
 }
 ?>

@@ -66,6 +66,7 @@
                     </tbody>
                 </table>
             </div>
+            <div id="rol" style="display:none"><?php echo $_SESSION["idRol"]; ?></div>
         </div>
     </section>
     <!-- Invoca al Footer -->

@@ -71,20 +71,22 @@ class Administradores extends AccesoDatos
     }
   }
 
-  public function add_administradores($idInstitucion, $idRol, $nombre, $apellidos, $usuario, $clave)
+  public function add_administradores($idInstitucion, $idRol, $nombre, $apellidos, $email, $telefono, $usuario, $clave)
   {
     try {
       $this->dbh = AccesoDatos::conexion();
-      $query = "INSERT INTO administradores VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+      $query = "INSERT INTO administradores VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       $stmt = $this->dbh->prepare($query);
       $stmt->bindValue(1, null, PDO::PARAM_INT);
       $stmt->bindValue(2, $idInstitucion, PDO::PARAM_INT);
       $stmt->bindValue(3, $idRol, PDO::PARAM_INT);
       $stmt->bindValue(4, $nombre, PDO::PARAM_STR);
       $stmt->bindValue(5, $apellidos, PDO::PARAM_STR);
-      $stmt->bindValue(6, $usuario, PDO::PARAM_STR);
-      $stmt->bindValue(7, $clave, PDO::PARAM_STR);
-      $stmt->bindValue(8, 1, PDO::PARAM_INT);
+      $stmt->bindValue(6, $email, PDO::PARAM_STR);
+      $stmt->bindValue(7, $telefono, PDO::PARAM_STR);
+      $stmt->bindValue(8, $usuario, PDO::PARAM_STR);
+      $stmt->bindValue(9, $clave, PDO::PARAM_STR);
+      $stmt->bindValue(10, 1, PDO::PARAM_INT);
       $stmt->execute();
       $id = $this->dbh->lastInsertId();
       return $this->result[] = $id;
@@ -227,6 +229,29 @@ class Administradores extends AccesoDatos
       }
     } catch (Exception $e) {
       die("¡Error!: valid_administradores() " . $e->getMessage());
+    }
+  }
+
+  #Recupera contraseñas valida e-mail inicial.
+  public function get_recoveryEmail($email, $usuario) 
+  {
+    try {
+        $this->dbh = AccesoDatos::conexion();
+        $query = "SELECT * FROM administradores a
+        WHERE a.email = ?
+        AND a.usuario = ?";
+        $stmt = $this->dbh->prepare($query);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        $stmt->bindParam(2, $usuario, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $this->result[] = $row;
+            }
+            return $this->result;
+            $this->dbh = null;
+        }
+    } catch (Exception $e) {
+        die("¡Error!: get_recoveryEmail()" . $e->getMessage());
     }
   }
 
