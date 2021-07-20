@@ -12,6 +12,7 @@ class PagoController
   public static function save(){ 
     require_once "models/administradores.php";
     require_once "models/pago.php";
+    $jsonCmbFolio = json_decode($_POST['cmbFolio'], true);
     $json = json_decode($_POST['cmbFormaPago'], true);
     $objPago = new Pago();
     if(isset($_FILES['file']['name'])) $dir = 'assets/files/voucher/'.$_FILES['file']['name'];
@@ -37,13 +38,13 @@ class PagoController
       ];
       $transaccion = json_encode($array);
     endif;
-    $objPago->add_pago($_POST['cmbFolio'], $json['item'], $transaccion);
+    $objPago->add_pago($jsonCmbFolio['id_folio'], $json['item'], $transaccion);
     if($json['key'] == 3 || $json['key'] == 4) PagoController::move_file($_FILES['file']['name'], $_FILES["file"]["tmp_name"]);
     $date = strftime("%d de %B del %Y a las %r", strtotime(date('Y-m-d G:i:s')));
     $objAdministradores = new Administradores();
     $rowAdministradores = $objAdministradores->get_id_admin($_SESSION['idAdmin']);
     $nameAdmin = $rowAdministradores[0]['nombre'].' '.$rowAdministradores[0]['apellidos'];
-    $respuesta = AccesoDatos::payFolio($nameAdmin, $_POST['cmbFolio'], gethostname(), $date);
+    $respuesta = AccesoDatos::payFolio($nameAdmin, $jsonCmbFolio['id_folio'], gethostname(), $date);
     if($respuesta === true) header("Location: ".AccesoDatos::ruta()."?accion=pago&pag=index&m=2");
     else echo $respuesta;
   }
@@ -76,10 +77,6 @@ class PagoController
     require_once 'models/institucion.php';
     $objInstitucion = new Institucion();
     $rowInstitucion = $objInstitucion->get_institucion();
-
-    // require_once "models/institucionAdministrador.php";
-    // $objInstitucionAdministrador = new InstitucionAdministrador();
-    // $rowFolios = $objInstitucionAdministrador->get_institucionAdministrador();
     require_once "views/pago/report.php";
   }
   
@@ -104,6 +101,14 @@ class PagoController
     $objDPersonasPrueba = new DetallePersonasPruebas();
     $rowPersonasPrueba = $objDPersonasPrueba->get_pagos_by_folio_user($_POST['folio']);
     $dataJson = json_encode($rowPersonasPrueba, JSON_UNESCAPED_UNICODE);
+		print $dataJson;
+  }
+  
+  public static function getAdminFolio(){
+    require_once "models/institucionAdministrador.php";
+    $objIAdministrador = new InstitucionAdministrador();
+    $rowIAdministrador= $objIAdministrador->get_idFolio($_POST['folio']);
+    $dataJson = json_encode($rowIAdministrador, JSON_UNESCAPED_UNICODE);
 		print $dataJson;
   }
 
@@ -131,6 +136,8 @@ if (isset($_GET["accion"])) {
     PagoController::getPagos();
   } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "pagoByUser") {
     PagoController::pagoByUser();
+  } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "getAdminFolio") {
+    PagoController::getAdminFolio();
   }
 }
 ?>

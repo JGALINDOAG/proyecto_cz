@@ -54,7 +54,7 @@
                         </div>
                     </li>
                 <?php endif; ?>
-                <?php if($_SESSION["idRol"] != 4): ?>
+                <?php if($_SESSION["idRol"] != 4 && $_SESSION["idRol"] != 3): ?>
                     <li class="nav-item dropdown" <?php if ($uri == @$title['enlace']) echo 'active'; ?>>
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Activación

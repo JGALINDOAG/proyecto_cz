@@ -40,6 +40,13 @@ class ResultadosController
 		print $dataJson;
   }
 
+  public static function perfiles(){
+    require_once 'models/institucion.php';
+    $objInstitucion = new Institucion();
+    $rowInstitucion = $objInstitucion->get_institucion();
+    require_once "views/resultados/perfiles.php";
+  }
+
 }
 
 //obtiene los datos del usuario desde la vista y redirecciona a UsuarioController.php
@@ -60,6 +67,8 @@ if (isset($_GET["accion"])) {
     ResultadosController::getListPruebas();
   } elseif ($_GET["accion"] == "resultados" && $_GET["pag"] == "getAvanceList") {
     ResultadosController::getAvanceList();
+  } elseif ($_GET["accion"] == "resultados" && $_GET["pag"] == "perfiles") {
+    ResultadosController::perfiles();
   }
 }
 ?>

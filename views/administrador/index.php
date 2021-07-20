@@ -18,20 +18,33 @@
                     if(isset($m)){
                         switch ($m){
                             case '1':
-                                $text = 'Estimado Sr (a). '.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['n'])).'%0A
+                                $nombre = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['n']));
+                                $usuario = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['u']));
+                                $clave = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['c']));
+                                $telefono = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['t']));
+                                $email = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['e']));
+                                $text = 'Estimado Sr (a). '.$nombre.'%0A
                                 ¡Te damos la bienvenida al Sistema CHROME!%0A
                                 Ahora ya puedes comenzar a administrar tu cuenta e interactuar con la Plataforma.%0A
                                 No olvides tus credenciales generadas para ingresar al sistema, son las siguientes:%0A
-                                USUARIO:&nbsp;'.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['u'])).'%0A
-                                CONTRASEÑA:&nbsp;'.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['p'])).'%0A
+                                USUARIO:&nbsp;'.$usuario.'%0A
+                                CONTRASEÑA:&nbsp;'.$clave.'%0A
                                 Una vez ingresando al sistema podrás cambiar tu contrase&ntilde;a si así lo deseas';
+
+                                echo '<div class="alert alert-info alert-dismissible fade show" role="alert" id="confirm">
+                                <strong>¡AVISO!</strong> El mensaje por e-mail fue enviado correctamente.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
 
                                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>¡AVISO!</strong><hr>El personal a sido agregado exitosamente
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
-                                    &nbsp;|&nbsp;<a href="https://api.whatsapp.com/send?phone='.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['t'])).'&text='.$text.'" target="_blank">Enviar datos de sesi&oacute;n por WhatSapp</a>
+                                    &nbsp;|&nbsp;<a href="https://api.whatsapp.com/send?phone='.$telefono.'&text='.$text.'" target="_blank">Enviar datos de sesi&oacute;n por WhatSapp</a>
+                                    &nbsp;|&nbsp;<a href="javascript:void(0);" id="msnEmail" data-email="'.$email.'" data-nombre="'.$nombre.'" data-usuario="'.$usuario.'" data-clave="'.$clave.'">Enviar datos de sesi&oacute;n por e-mail</a>
                                     </div>';
                             break;
                         }
@@ -111,6 +124,27 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-sm-12 col-lg-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-outline-secondary">Email</span>
+                            </div>
+                            <input type="email" name="txtEmail" placeholder="Email" value="<?php echo @$_POST["txtEmail"]; ?>" class="form-control">
+                        </div> 
+                    </div>
+                    <div class="form-group col-sm-12 col-lg-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-outline-secondary">Número telefonico</span>
+                            </div>
+                            <input type="text" name="txtTelefono" maxlength="10" placeholder="Número telefonico: 5537126509" onkeypress="return soloNumeros(this);" value="<?php echo @$_POST["txtTelefono"]; ?>" class="form-control" required>
+                        </div> 
+                        <div class="invalid-feedback">
+                            Por favor escriba el # de telefóno.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-sm-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -136,6 +170,7 @@
     </section>
     <!-- Invoca al Footer -->
     <?php require_once 'views/layout/footer.php'; ?>
+    <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/jqueryAdministradores.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {

@@ -38,50 +38,6 @@
                 ?>
             </div>
         </div>
-        <!-- Reporte general -->
-        <div class="shadow p-3 mb-5 bg-white rounded pt-4">
-            <div class="alert alert-light" role="alert">
-                <div class="form-row">
-                    <div class="col-11">REPORTE GENERAL</div>
-                </div>
-                <hr>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-sm-6">
-                    <label>Fecha inicio</label>
-                    <input type="date" id="txtFechaInicio" name="txtFechaInicio" class="form-control">
-                </div>
-                <div class="form-group col-sm-6">
-                    <label>Fecha fin</label>
-                    <input type="date" id="txtFechaFin" name="txtFechaFin" class="form-control">
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover" id="reporte_uno" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">Folio</th>
-                            <th scope="col">Institución</th>
-                            <th scope="col">Vendedor</th>
-                            <th scope="col">Tipo de Pago</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="5" class="text-center">No hay datos disponibles en la tabla.</td>
-                        </tr>
-                    </tbody>
-                    <tfooter>
-                        <tr>
-                            <th class="text-right" colspan="4">Total</th>
-                            <th id="total_uno" class="text-center">---</th>
-                        </tr>
-                    </tfooter>
-                </table>
-            </div>
-        </div>
         <!-- Reporte por folio -->
         <div class="shadow p-3 mb-5 bg-white rounded pt-4">
             <div class="alert alert-light" role="alert">
@@ -106,26 +62,10 @@
             <div class="form-row">
                 <div class="form-group col-sm-12">
                     <label>Folio</label>
-                    <select id="cmbFolio_dos" name="cmbFolio" class="form-control">
+                    <select id="cmbFolio" name="cmbFolio" class="form-control">
                         <option value="" disabled selected>Selecciona el folio a pagar</option>
                     </select>
                 </div>
-            </div>
-
-            <div class="card" style="width: 30rem;">
-                <div class="card-header">
-                    El vendedor a cargo es <span id="vendedor"></span>
-                </div>
-                <div class="card-header">
-                    <span id="statusPago">Status de pago del Folio</span>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Costo total por folio <span id="costo">---</span></li>
-                    <li class="list-group-item">
-                        Precio fijo declarado por los evaluados <span id="costo_evaluado">---</span><br/>
-                        Suma total, declarado por los evaluados <span id="costo_total_evaluado">---</span>
-                    </li>
-                </ul>
             </div>
             <div class="table-responsive pt-5">
                 <table class="table table-hover" id="reporte" style="width:100%">
@@ -153,7 +93,7 @@
     </section>
     <!-- Invoca al Footer -->
     <?php require_once 'views/layout/footer.php'; ?>
-    <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/JqueryPago.js"></script>
+    <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/JqueryReportPerfiles.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AcMUqZGxC9nXvrr994-RqCSDmpIXDC1njOYsj1R0K3lRy3TlUuzhgvkVkPQrAr03RccvK0pbzfHPSAW_&currency=MXN">
         // Replace YOUR_CLIENT_ID with your sandbox client ID
     </script>

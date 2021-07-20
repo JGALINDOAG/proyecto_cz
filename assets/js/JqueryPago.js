@@ -8,7 +8,7 @@ $(document).ready( function () {
     // $('#cantidad').prop('readonly', true);
     $("#txtFechaFin").prop('disabled', true);
     $('#cmbFolio_dos').prop('disabled', true);
-    
+    $('#completed').hide();
     $('#cmbInstitucion').on('change', function() {
         var id = $(this).val()
         $('#costo').html('')
@@ -48,7 +48,8 @@ $(document).ready( function () {
         var folio = data.id_folio
         $('#cmbFormaPago').prop('disabled', false);
         const total = data.total
-        $('#spanCantidad').html('<b>$'+ total +'</b>')
+        $('#costo').html('<b>$'+ total +'</b>')
+        $('#costo_evaluado').html('---')
         datatable_by_folio(folio, opc)
     });
     
@@ -70,6 +71,13 @@ $(document).ready( function () {
                     $('#costo_evaluado').html(costoBruto); 
                     $('#costo_total_evaluado').html(total);
                 }
+            });
+        
+            $.post( "?accion=pago&pag=getAdminFolio", { folio: folio })
+            .done(function( data ) {
+                var json = JSON.parse(data)
+                var nombre = '<b>' + json[0].nombre + '</b>'
+                $('#vendedor').html(nombre); 
             });
 
         datatable_by_folio(folio, opc)
@@ -245,6 +253,9 @@ function datatable(fechaInicio, fechaFin) {
                     "data": 'institucion'
                 },
                 {
+                    "data": 'nombre'
+                },
+                {
                     "data": 'tipo_pago'
                 },
                 {
@@ -350,7 +361,7 @@ function datatable_by_folio(folio, opc) {
         } 
         else {
             var resta = data.total - pago
-            if(opc === 2) $('#statusPago').html('El folio cuenta con adeudo de $'+ resta + ' pesos')
+            $('#statusPago').html('El folio cuenta con adeudo de <b>$'+ resta + '</b> pesos')
             $('#incompleted').show();
             $('#completed').hide();
         } 

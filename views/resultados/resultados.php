@@ -247,6 +247,17 @@
                     }
                 }
             }
+            ?>
+            <div class="row">
+                <div class="text-center font-weight-bold col-md-5 align-self-end">
+                   <div class="align-self-end"><hr>Psic. Christian Zepeda Alcantara</div>
+                </div>
+                <div class="col-md-7">
+                    <label class="font-weight-bold">Comentarios</label>
+                    <textarea class="form-control" placeholder="Ingrese algún comentario si es necesario" rows="5"></textarea>
+                </div>
+            </div>
+            <?php
         }elseif($activo[0]['activo']==0){
             echo '<p>Se requiere activación de las pruebas.</p>';
         } 

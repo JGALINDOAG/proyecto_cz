@@ -47,3 +47,7 @@ function validarPassword(password, confirmPassword){
         document.getElementById("result").innerHTML = str;
 	}
 }
+
+function getPassAdmin($email, $nombre, $usuario, $clave){
+	alert('entra')
+}

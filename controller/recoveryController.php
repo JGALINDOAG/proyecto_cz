@@ -9,22 +9,21 @@ class RecoveryController
     public static function save(){ }
 
     public static function update() {
-      require_once ("models/institucion.php");
-      $objPersona = new Institucion();	
-      $rowValidEmail = $objPersona->get_recoveryEmail($_POST["txtEmail"], $_POST["txtUsuario"]);	
+      require_once ("models/administradores.php");
+      $objAdministradores = new Administradores();	
+      $rowValidEmail = $objAdministradores->get_recoveryEmail($_POST["txtEmail"], $_POST["txtUsuario"]);	
       if(empty($rowValidEmail)){
         echo"<script type='text/javascript'>window.location='?accion=recovery&m=".AccesoDatos::encriptar(1)."';</script>";					
-      }else{ 
-        #OBTIENE DATOS DE USUARIO
-        require_once ("models/administradores.php");
-        $objAdministradores = new Administradores();	
-        $rowAdministradores = $objAdministradores->get_id_admin($rowValidEmail[0]["id_admin"]);	
-
-        $nombre = $rowAdministradores[0]["apellidos"]." ".$rowAdministradores[0]["nombre"];
-        $date = strftime("%d de %B del %Y a las %r", strtotime(date('Y-m-d G:i:s')));
-        $respuesta = AccesoDatos::recoveryPass($_POST["txtEmail"], $nombre, gethostname(), $date, $rowAdministradores[0]["usuario"], $rowAdministradores[0]["clave"]);
-        if($respuesta === true) echo"<script type='text/javascript'>window.location='?accion=recovery&m=".AccesoDatos::encriptar(2)."';</script>";
-        else echo $respuesta;
+      }else{
+        if($rowValidEmail[0]["activo"] == 0) {
+          echo"<script type='text/javascript'>window.location='?accion=recovery&m=".AccesoDatos::encriptar(3)."';</script>";		
+        } else {
+          $nombre = $rowValidEmail[0]["apellidos"]." ".$rowValidEmail[0]["nombre"];
+          $date = strftime("%d de %B del %Y a las %r", strtotime(date('Y-m-d G:i:s')));
+          $respuesta = AccesoDatos::recoveryPass($_POST["txtEmail"], $nombre, gethostname(), $date, $rowValidEmail[0]["usuario"], $rowValidEmail[0]["clave"]);
+          if($respuesta === true) echo"<script type='text/javascript'>window.location='?accion=recovery&m=".AccesoDatos::encriptar(2)."';</script>";
+          else echo $respuesta;
+        }
       }
     }
 

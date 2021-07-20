@@ -86,7 +86,7 @@ class Pago extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $query = "SELECT p.*, i.nombre AS institucion FROM pago p 
+            $query = "SELECT p.*, i.nombre AS institucion, CONCAT(a.nombre,' ',a.apellidos) nombre FROM pago p 
             INNER JOIN institucion_administrador ia USING(id_folio)
             INNER JOIN administradores a USING(id_admin)
             INNER JOIN institucion i USING(id_institucion)
