@@ -42,7 +42,7 @@
         <div class="shadow p-3 mb-5 bg-white rounded pt-4">
             <div class="alert alert-light" role="alert">
                 <div class="form-row">
-                    <div class="col-11">REPORTE POR FOLIO</div>
+                    <div class="col-11">REPORTE DE PERFILES</div>
                 </div>
                 <hr>
             </div>
