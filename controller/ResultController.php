@@ -1,4 +1,5 @@
 <?php 
+//$idDetalle=2;
 $idDetalle=$_GET["idDetalle"];
 require_once("models/pruebas.php");
 $objactivo = new Pruebas();
