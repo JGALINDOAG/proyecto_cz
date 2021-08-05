@@ -236,6 +236,21 @@
                     <?php
                     break;
                 case 10:
+                    $r1 = new Reporte();
+                    $terman = $r1->res_total($idDetalle,1);
+                    $datos1 = new Reporte();
+                    $data1 = $datos1->perfil_terman($terman[0]['total']);
+                    $perfil=$data1['perfil'];
+                    $test='ci';
+                    $addperfil = new Reporte();
+                    $addperfil->perfil_test($test,$perfil,$idDetalle);
+
+                    $getfinal = new Reporte();
+                    $perfilfinal = $getfinal->perfil_final($idDetalle);
+                    if($perfilfinal>0){
+                        $addperfil = new Reporte();
+                        $addperfil->perfil_test($test='final',$perfilfinal,$idDetalle);
+                    }
                     ?>
                     <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
                         <div class="media d-flex align-items-center">
