@@ -1,57 +1,65 @@
-$(document).ready( function () {
+$(document).ready(function () {
+    var isTableCreated = false;
+
+    $(document).ajaxStart(function () {
+        if (isTableCreated == true) {
+            $('#reporte').DataTable().clear();
+            $('#reporte').DataTable().destroy();
+            $("#reporte").append('<tr><td colspan="4" class="text-center">No hay datos disponibles en la tabla.</td></tr>');
+            isTableCreated = false
+        }
+    });
+
+    $(document).ajaxStop(function () { });
+
     $('#cmbFolio').prop('disabled', true);
-    $('#cmbInstitucion').on('change', function() {
+    $('#cmbInstitucion').on('change', function () {
         var id = $(this).val()
-        $('#costo').html('')
-        $('#statusPago').html('Status de pago del Folio')
         var cmbInstitucion = $.ajax({
             method: "POST",
             url: "?accion=institucionAdministrador&pag=getFolioByInst",
             data: { idInstitucion: id }
         })
 
-        cmbInstitucion.done(function( res ) {
+        cmbInstitucion.done(function (res) {
             var option = ''
             $('#cmbFolio').empty()
             var data = JSON.parse(res);
-            option +='<option value="" selected>Selecciona un folio</option>';
+            option += '<option value="" selected>Selecciona un folio</option>';
             data.forEach(element => {
                 var opc = new Object();
-                // console.log(element)
                 opc.id_folio = element.id_folio;
-                opc.total = element.total;
                 var myString = JSON.stringify(opc);
-                option +='<option value='+ myString +'>' + element.id_folio +'</option>';
+                option += '<option value=' + myString + '>' + element.id_folio + '</option>';
             });
             $('#cmbFolio').append(option);
             $('#cmbFolio').prop('disabled', false);
         });
 
-        cmbInstitucion.fail(function() {
+        cmbInstitucion.fail(function () {
             alert("error")
         })
     });
 
     $("#cmbFolio").change(function () {
-        var opc = 2
         var cmbFolio = $(this).val()
         var data = JSON.parse(cmbFolio)
         var folio = data.id_folio
-        
-        // datatable_by_folio(folio, opc)
+        datatable_by_folio(folio)
+        isTableCreated = true
     });
-} );
+});
 
-function datatable_by_folio(folio, opc) {
+function datatable_by_folio(folio) {
     var result = $.ajax({
         method: "POST",
-        url: "?accion=pago&pag=getPagos",
+        url: "?accion=resultados&pag=getPerfiles",
         data: { folio: folio }
     })
 
-    result.done(function( res ) {
-        var dataPagos = JSON.parse(res)
-        // console.log(dataPagos)
+    result.done(function (res) {
+        var dataPerfiles = JSON.parse(res)
+        console.log(dataPerfiles)
         $('#reporte').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",
@@ -77,31 +85,149 @@ function datatable_by_folio(folio, opc) {
                 }
             },
             "destroy": true,
-            "data": dataPagos,
+            dom: 'Bfrtip',
+            buttons: [
+                // 'copy', 'csv', 'excel', 'pdf', 'print'
+                'csv', 'pdf', 'print'
+            ],
+            "data": dataPerfiles,
             "columns": [
                 {
-                    "data": ''
+                    "data": 'nombre'
                 },
                 {
-                    "data": ''
+                    "data": 'grado_estudios'
                 },
                 {
-                    "data": '', "render": function (data, type, row) {
-                        // var transaccion = JSON.parse(row.transaccion)
-                        return transaccion.total
+                    "data": 'area'
+                },
+                {
+                    "data": 'turno'
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[0]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[1]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[2]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[3]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[4]['resultado'] 
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[5]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[6]['resultado']    
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[7]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[8]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[9]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_1', "render": function (data, type, row) {
+                        return row.personalidad_1[10]['resultado']
+                    }
+                },
+                {
+                    "data": 'perfil', "render": function (data, type, row) {
+                        var p1 = JSON.parse(row.perfil)
+                        return p1.smpuno
+                    }
+                },
+                {
+                    "data": 'personalidad_2', "render": function (data, type, row) {
+                        return row.personalidad_2[0]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_2', "render": function (data, type, row) {
+                        return row.personalidad_2[1]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_2', "render": function (data, type, row) {
+                        return row.personalidad_2[2]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_2', "render": function (data, type, row) {
+                        return row.personalidad_2[3]['resultado']
+                    }
+                },
+                {
+                    "data": 'personalidad_2', "render": function (data, type, row) {
+                        return row.personalidad_2[4]['resultado']
+                    }
+                },
+                {
+                    "data": 'perfil', "render": function (data, type, row) {
+                        var p1 = JSON.parse(row.perfil)
+                        return p1.smpdos
+                    }
+                },
+                {
+                    "data": 'perfil', "render": function (data, type, row) {
+                        return row.ci_terman
+                    }
+                },
+                {
+                    "data": 'perfil', "render": function (data, type, row) {
+                        return row.ci_raven
+                    }
+                },
+                {
+                    "data": 'perfil', "render": function (data, type, row) {
+                        var p1 = JSON.parse(row.perfil)
+                        return p1.ci
+                    }
+                },
+                {
+                    "data": 'perfil', "render": function (data, type, row) {
+                        var p1 = JSON.parse(row.perfil)
+                        return p1.final
                     }
                 }
             ],
             columnDefs: [
-                { className: 'text-center', targets: [1,2] }
+                { className: 'text-center', targets: [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] }
             ],
             order: []
         });
-
     });
 
-    result.fail(function() {
+    result.fail(function () {
         alert("error")
     })
-    
+
 }

@@ -228,4 +228,26 @@ class DetallePersonasPruebas extends AccesoDatos
             die("¡Error!: get_pagos_by_folio_user() " . $e->getMessage());
         }
     }
+
+    public function get_personas_folio($folio)
+    {
+        try {
+            $this->dbh = AccesoDatos::conexion();
+            $query = "SELECT dpp.*,CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre, p.grado_estudios, p.area, p.turno
+            FROM perfiles.detalle_personas_pruebas dpp
+            INNER JOIN personas p USING (id_persona)
+            WHERE dpp.id_folio = BINARY ?;";
+            $stmt = $this->dbh->prepare($query);
+            $stmt->bindParam(1, $folio, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    if($row != null) $this->result[] = $row;
+                }
+                return $this->result;
+                $this->dbh = null;
+            }
+        } catch (Exception $e) {
+            die("¡Error!: get_personas_folio() " . $e->getMessage());
+        }
+    }
 }
