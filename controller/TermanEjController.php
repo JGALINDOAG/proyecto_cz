@@ -1,6 +1,7 @@
 <?php 
 $idDetalle=$_SESSION["idDetalle"];
 require_once("models/pruebas.php");
+require_once("models/reporte.php");
 $u = new Pruebas();
 // Obtiene el último indicador registrado en la base de datos para la prueba de inteligencia mediante el usuario y la fecha actual, 
 // para saber cuál es la próxima serie que le sistema debe mostrar o dar por finalizada la prueba.

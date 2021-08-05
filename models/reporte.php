@@ -9,6 +9,53 @@ class Reporte extends AccesoDatos
         $this->result = array();
     }
 
+    public function perfil_test($test,$perfil,$idDetalle)
+    {
+      try {
+        $this->dbh = parent::conexion();
+        $stmt = $this->dbh->prepare("UPDATE detalle_personas_pruebas SET perfil = JSON_SET(perfil, '$.".$test."', $perfil) where id_detalle = $idDetalle");
+        $stmt->execute();
+        $this->dbh = null;
+      } catch (PDOException $e) {
+          die("¡Error!: perfil_test".$e->getMessage());
+      }
+    }
+
+    public function perfil_final($idDetalle)
+    {
+      try {
+        $this->dbh = parent::conexion();
+        $stmt = $this->dbh->prepare("SELECT JSON_EXTRACT(perfil, '$.smpuno') AS smpuno, JSON_EXTRACT(perfil, '$.smpdos') AS smpdos, JSON_EXTRACT(perfil, '$.ci') AS ci FROM detalle_personas_pruebas where `id_detalle` = ?");
+        $stmt->bindParam(1, $idDetalle, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          $smpuno=$row['smpuno'];
+          $smpdos=$row['smpdos'];
+          $ci=$row['ci'];
+          if(!empty($smpuno) and !empty($smpdos) and !empty($ci)){
+            $pila = array();
+            array_push($pila, $smpuno);
+            array_push($pila, $smpdos);
+            array_push($pila, $ci);
+            rsort($pila);
+            if (in_array(3,$pila)) {
+              $perfil=3;
+            }elseif(in_array(2,$pila)){
+              $perfil=2;
+            }elseif(in_array(1,$pila)){
+              $perfil=1;
+            }
+            return $perfil;
+          }else{
+            return $perfil=0;
+          }
+          $this->dbh = null;
+        }
+      } catch (Exception $e) {
+        die("¡Error!: res_mmpi() " . $e->getMessage());
+      }
+    }
+
     public function res_total($idDetalle,$id_prueba)
     {
         try {
@@ -98,7 +145,7 @@ class Reporte extends AccesoDatos
       <ul>
         <li>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada.</li>
       </ul>';
-      $perfil='III';
+      $perfil=3;
     }
     if($terman>=67 and $terman<=93){
       if($terman>=67 and $terman<=69){$ci=80;}
@@ -118,7 +165,7 @@ class Reporte extends AccesoDatos
         <li>Es probable que el evaluado manifieste conductas de   necedad o de conflicto al no poder resolver determinadas situaciones familiares, sociales, emocionales, entre otros.</li>
       </ul>';
       $tratamiento='<p>El Grado de Éxito se encuentra  en riesgo, se recomienda canalización del sujeto a un especialista con el fin de favorecer y "activar"  su desempeño académico, además de otras áreas de oportunidad.</p>';
-      $perfil='II';
+      $perfil=2;
     }
     if($terman>=94){
       if($terman>=94 and $terman<=162){
@@ -160,7 +207,7 @@ class Reporte extends AccesoDatos
       }
       $definicion='<p>En este apartado se considera  al sujeto con un pronóstico Exitoso adecuado para resolver dificultades o problemas de tipo racional (mental) en sus diferentes modalidades, es decir ya sean académicas, profesionales, sociales, familiares, laborales, etc., (independientemente de sus áreas emocionales, las cuales se recomienda analizar).</p>';
       $tratamiento='<p>Se considera al sujeto evaluado, con capacidad cerebral suficiente  para poder llegar al logro de sus Éxitos.</p>';
-      $perfil='I';
+      $perfil=1;
     }
     $out['ci'] = $ci;
     $out['categoria'] = $categoria;
@@ -188,7 +235,7 @@ class Reporte extends AccesoDatos
       <ul>
         <li>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada.</li>
       </ul>';
-      $perfil='III';
+      $perfil=3;
     }
     if($raven>=25 and $raven<=51){
       if($raven>=25 and $raven<=40){
@@ -230,7 +277,7 @@ class Reporte extends AccesoDatos
         <li>Es probable que el evaluado manifieste conductas de   necedad o de conflicto al no poder resolver determinadas situaciones familiares, sociales, emocionales, entre otros.</li>
       </ul>';
       $tratamiento='<p>El Grado de Éxito se encuentra  en riesgo, se recomienda canalización del sujeto a un especialista con el fin de favorecer y "activar"  su desempeño académico, además de otras áreas de oportunidad.</p>';
-      $perfil='II';
+      $perfil=2;
     } 
     if($raven>=52){
       if($raven>=52 and $raven<=55){
@@ -250,7 +297,7 @@ class Reporte extends AccesoDatos
       }
       $definicion='<p>En este apartado se considera  al sujeto con un pronóstico Exitoso adecuado para resolver dificultades o problemas de tipo racional (mental) en sus diferentes modalidades, es decir ya sean académicas, profesionales, sociales, familiares, laborales, etc., (independientemente de sus áreas emocionales, las cuales se recomienda analizar).</p>';
       $tratamiento='<p>Se considera al sujeto evaluado, con capacidad cerebral suficiente  para poder llegar al logro de sus Éxitos.</p>';
-      $perfil='I';
+      $perfil=1;
     }
     $out['ci'] = $ci;
     $out['categoria'] = $categoria;
@@ -270,7 +317,7 @@ class Reporte extends AccesoDatos
           <li>Canalización ante un especialista en la materia, a efecto de que exista  una valoración mas profunda con intervenciones (atenciones) oportunas y eficaces y que a su vez le  permita al sujeto  tener una funcionalidad adecuada ante las situaciones o circunstancias que generen estrés en su vida cotidiana.</li>
           <li>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada.</li>
         </ul>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=6 and $valor<=7){
         $definicion='<p>El grado de Éxito del evaluado va a disminuir en la medida en que esta escala se eleve, dado que  el nivel de estrés se encuentra bajo circunstancias que son distinguidas por el individuo con mucha presión, preocupación, tensión corporal, inquietud emocional o corporal, entre otros. De no controlarse esta situación el individuo puede comenzar a manifestar padecimientos (enfermedades) como: Colitis, dolor estomacal, dolor de espalda o de cabeza, entre otro tipo de malestares nerviosos.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona, se requiere que el trabajo pueda ser colegiado (especializado), entre el terapeuta (profesional especializado) y el tutor (padre, psicólogo,  maestro, orientador, entre otros), de tal manera en que se puede recomendar lo siguiente:</p>
@@ -279,11 +326,11 @@ class Reporte extends AccesoDatos
           <li>Enseñanza y manejo de técnicas de relajación.</li>
           <li>Sugerir de acuerdo al contexto en el que se encuentra el sujeto actividades que pudieran resultar  relajantes.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=5){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //SOLEDAD
@@ -295,7 +342,7 @@ class Reporte extends AccesoDatos
           <li>Canalización del sujeto a un especialista con el fin de favorecer  la disminución del distanciamiento en las relaciones familiares, sociales, de pareja, entre otros.</li>
           <li>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</li>
         </ul>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=6 and $valor<=7){
         $definicion='<p>El grado de Éxito del evaluado va a disminuir en la medida en que esta escala se eleve dado que  el sujeto está marcando cada vez más un distanciamiento de las relaciones sociales además de aparentar y mostrar sentimientos y emociones disminuidas (como si no hubiese motivo para mostrar una sonrisa, o ser más agradable). En resumidas cuentas, parece que prefieren emplear el tiempo en sí mismo, antes que con otras personas. Suelen estar casi siempre aislados y prefieren escoger actividades solitarias que no requieran actividades con otras personas e incluso la propia familia.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona, se requiere que la atención sea coordinada entre el tutor (padre, psicólogo, maestro, orientador, entre otros) y el terapeuta (especialista profesional) en donde se pueden realizar acciones como:</p>
@@ -303,11 +350,11 @@ class Reporte extends AccesoDatos
           <li>Asesorías individuales y/o grupales a efecto de orientar sobre las relaciones sociales, familiares interpersonales y su importancia en la vida académica, laboral, entre otras.</li>
           <li>Buscar actividades que promuevan una adecuada integración pudiendo ser de tipo  académico, extra académico, laboral, entre otros.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=5){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //TRISTEZA
@@ -318,7 +365,7 @@ class Reporte extends AccesoDatos
           <li>Se considera necesario sea canalizado el sujeto a un especialista a fin de que se le proporcione una atención y seguimiento  adecuado  a su depresión.</li>
           <li>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</li>
         </ul>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=6 and $valor<=7){
         $definicion='<p>El grado de Éxito del evaluado está disminuyendo dado que el sujeto se encuentra manifestando un periodo de tristeza (o depresión) importante, el cual puede ser temporal o permanente. En la mayoría de los casos, el sujeto relata su estado y así lo ven los demás, como derribado, abatido, débil, con poca energía para realizar actividades, y perdiendo capacidades para resolver problemas como por ejemplo: laboral, académico, social, familiar, de pareja, entre otros.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona, se requiere que la orientación por parte del tutor (padre, psicólogo,  maestro, orientador, entre otros) y el terapeuta (especialista profesional),donde se sugiere:</p>
@@ -326,11 +373,11 @@ class Reporte extends AccesoDatos
           <li>Brindar asesoría especializada sobre  la depresión y establecer en la medida de lo posible compromiso departe del sujeto para no violentar su integridad y apegarse en la medida de lo posible a una atención personalizada o bien grupal, dependiendo del nivel de depresión del sujeto.</li>
           <li>Continuar con seguimiento para determinar si la tristeza (depresión)  es transitoria o permanente y así poder brindar un  manejo adecuado.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=5){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //IMPULSIVO
@@ -339,7 +386,7 @@ class Reporte extends AccesoDatos
         $definicion='<p>El Grado de Éxito se encuentra  muy bajo. El evaluado presenta severos problemas emocionales y de agresividad, los cuales van a estar más representados por constantes manifestaciones de violencia  física.</p>';
         $tratamiento='<p>Canalizar al evaluado con especialista.</p>
         <p>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=6 and $valor<=7){
         $definicion='<p>El grado de Éxito del evaluado está disminuyendo  dado que el sujeto va mostrando cada vez más dificultades en el control de sus impulsos, es decir la agresividad, su forma de actuar es más precipitada. Esto se observa en la dificultad para esperar su turno en la participación de actividades laborales, sociales, académicas, familiares, entre otros. Por ejemplo en el  juego y en la selección de conductas riesgosas y no medir las consecuencias. Son frecuentes las peleas y discusiones, afectando el área social.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  sugiere que el seguimiento sea especializado y al mismo tiempo el tutor (padre, psicólogo maestro, orientador, entre otros) oriente a este tipo de personas a:</p>
@@ -349,11 +396,11 @@ class Reporte extends AccesoDatos
           <li>Generar actividades de entrenamiento en habilidades sociales como la asertividad.</li>
           <li>Realizar actividades deportivas, donde el sujeto pueda canalizar energía física.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=5){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //INTEGRACION SOCIAL
@@ -362,7 +409,7 @@ class Reporte extends AccesoDatos
         $definicion='<p>El Grado de Éxito se encuentra  muy bajo. El evaluado presenta severos problemas antisociales (no aceptados por las leyes y reglamentos sociales) o delictivos, los cuales cada vez más  van a estar representados por conductas abiertas (cada vez con mas problemáticas sociales)  y menos aceptadas.</p>';
         $tratamiento='<p>Canalizar al evaluado con especialista.</p>
         <p>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=6 and $valor<=7){
         $definicion='<p>El grado de Éxito del evaluado está disminuyendo  dado que el sujeto muestra conductas no muy agradables socialmente como: astuto de conveniencia, intrigante, calculador, ingrato, premeditado, aprovechado, oportunista, ofensivo, abusador, indiferente, "amante de lo ajeno”, engañador, entre otros.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  sugiere que el seguimiento sea coordinado entre tutor (padre, psicólogo, maestro, orientador, entre otros)  y terapeuta (especialista profesional) sugiriendo lo siguiente:</p>
@@ -371,11 +418,11 @@ class Reporte extends AccesoDatos
           <li>Destacar la importancia de valores individuales y sociales que fomentan adecuadas relaciones interpersonales (amistad, de pareja, familiares, entre otros).</li>
           <li>De ser necesario, apoyo familiar con la intención de modificar patrones de conducta aprendidas en la dinámica (en el comportamiento) de la misma familia.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=5){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //DISTANCIAMIENTO DEL YO
@@ -384,7 +431,7 @@ class Reporte extends AccesoDatos
         $definicion='<p>El Grado de Éxito se encuentra  muy bajo. El evaluado presenta severos problemas emocionales y autodestructivos, los cuales van a estar mas matizados (combinados, mezclados) de conductas transgresoras (de hacer daño) de sí mismo, o con los demás.</p>';
         $tratamiento='<p>Canalizar al evaluado con especialista.</p>
         <p>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=5 and $valor<=7){
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo. En la medida en que se eleve este perfil, el sujeto va mostrando signos o comportamientos relacionados con la baja autoestima, la pérdida de sentido de vida, el no tener proyectos ni visualización hacia adelante. "Pareciera que la vida se paró para ellos". Muchas veces lo que dice es ilógico o incoherente, fantasioso, entre otros. Puede manejar  ideas de muerte o de posibles intentos  suicidas, primero piensa que la muerte es una solución, y no sólo para ellos incluso para quienes están alrededor de ellos.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  sugiere que el seguimiento sea especializado y al mismo tiempo el tutor (padre, psicólogo, maestro, orientador, especialista en el ramo, entre otros) oriente a este tipo de personas a:</p>
@@ -393,11 +440,11 @@ class Reporte extends AccesoDatos
           <li>Trabajo de autoestima del individuo.</li>
           <li>Entrenamiento en habilidades sociales y asertividad, así como el de prevenir y estar atento para que no se repitan las mismas conductas.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=4){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //ALCOHOLISMO
@@ -406,7 +453,7 @@ class Reporte extends AccesoDatos
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo. El evaluado presenta severos problemas de conducta en lo que se refiere a la ingesta de bebidas alcohólicas.</p>';
         $tratamiento='<p>Canalizar al evaluado con especialista o a un centro de atención de  alcoholismo (p. ej. Un centro de integración juvenil, ó Alcohólicos Anónimos).</p>
         <p>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=5 and $valor<=7){
         $definicion='<p>El Grado de Éxito se encuentra  disminuyendo dado que el sujeto se encuentra con algunas dificultades para controlar dos cosas importantes: abuso de alcohol y dependencia del alcohol; si bien esta diferenciación no es relevante desde el punto de vista clínico, sin embargo es muy importante el abuso de alcohol en la dependencia psicológica, es decir, la necesidad de consumir alcohol para el funcionamiento mental adecuado, junto con consumo ocasional excesivo y continuación alcohólica a pesar de los problemas sociales.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  sugiere que el trabajo sea colegiado (especializado), entre el terapeuta (profesional especializado) y el tutor (padre, psicólogo, maestro, orientador, entre otros), de tal manera en que se puede recomendar lo siguiente:</p>
@@ -416,11 +463,11 @@ class Reporte extends AccesoDatos
           <li>Manejo conductual sobre el alcoholismo.</li>
           <li>En casos específicos trabajo  de asesoría con los padres y/o tutor del sujeto evaluado.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=4){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //FARMACODEPENDENCIA
@@ -429,7 +476,7 @@ class Reporte extends AccesoDatos
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo. El evaluado presenta severos problemas de conducta en lo que se refiere a la ingesta de drogas. Es importante considerar si el evaluado está involucrado en actividades ilícitas de tipo criminal o delictivo, o por el contrario se encuentre consumiendo  medicamentos de tipo psiquiátrico.</p>';
         $tratamiento='<p>Canalizar al evaluado con un especialista en adicciones o bien a un centro especializado en atención de adicciones (p. ej. Un centro de Integración Juvenil).</p>
         <p>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=6 and $valor<=7){
         $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido dado que el sujeto va mostrando  cada vez más la necesidad de uso de drogas  y la  dependencia de las mismas (dado que considera que para ser funcional social o emocionalmente, necesita de algún tipo de droga), independientemente de  su búsqueda de satisfacción física (la parte corporal y mental  que exige la administración periódica o continua de la misma).</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  sugiere que el trabajo sea coordinado entre terapeuta (especialista profesional) y tutor  (padre, psicólogo, maestro, orientador, entre otros) donde se sugiere:</p>
@@ -439,11 +486,11 @@ class Reporte extends AccesoDatos
           <li>Manejo conductual sobre la adicción a drogas.</li>
           <li>En casos específicos se sugiere trabajo y asesoría a los padres y/o tutor del sujeto evaluado.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=5){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //GÉNERO
@@ -452,29 +499,29 @@ class Reporte extends AccesoDatos
         if($valor>=8 and $valor<=10){
           $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  El evaluado presenta severos conflictos en lo que respecta sus preferencias de género.</p>';
           $tratamiento='<p>Canalizar con especialista.</p>';
-          $perfil='III';
+          $perfil=3;
         }elseif($valor>=6 and $valor<=7){
           $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido dado que presenta algunas dificultades para entender algunas preferencias de género en cuanto a su sexualidad. Es muy probable que haya presencia de actitudes y conductas conflictivas.</p>';
           $tratamiento='<p>Para mejorar el Éxito de esta persona se  sugiere que un profesional de la salud (muy en especial  psicólogo), dé seguimiento a este tipo de personas.</p>';
-          $perfil='II';
+          $perfil=2;
         }elseif($valor<=5){
           $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
           $tratamiento='<p></p>';
-          $perfil='I';
+          $perfil=1;
         }
       }elseif($sexo=='M'){
         if($valor<=3){
           $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  El evaluado presenta severos conflictos en lo que respecta sus preferencias de género.</p>';
           $tratamiento='<p>Canalizar con especialista.</p>';
-          $perfil='III';
+          $perfil=3;
         }elseif($valor>=4 and $valor<=5){
           $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido dado que presenta algunas dificultades para entender algunas preferencias de género en cuanto a su sexualidad. Es muy probable que haya presencia de actitudes y conductas conflictivas.</p>';
           $tratamiento='<p>Para mejorar el Éxito de esta persona se  sugiere que un profesional de la salud (muy en especial  psicólogo), dé seguimiento a este tipo de personas.</p>';
-          $perfil='II';
+          $perfil=2;
         }elseif($valor>=6 and $valor<=10){
           $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
           $tratamiento='<p></p>';
-          $perfil='I';
+          $perfil=1;
         }
       }
     }
@@ -484,7 +531,7 @@ class Reporte extends AccesoDatos
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  El evaluado presenta severos problemas de conducta en lo que se refiere a las figuras de autoridad, las cuales cada vez más se van a manifestar de manera retadora, provocadora o impulsiva (no sabe como controlarse).</p>';
         $tratamiento='<p>Canalizar con especialista.</p>
         <p>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=5 and $valor<=7){
         $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido ya que la persona evaluada presenta características para el adecuado manejo de la disciplina (no cuenta con el poder para regular sus impulsos, es decir no sabe cómo controlarse). Por ejemplo:</p>
         <ul>
@@ -505,11 +552,11 @@ class Reporte extends AccesoDatos
           <li>Fomentar actitudes de responsabilidad ante las consecuencias de su conducta, por medio de la sensibilización.</li>
           <li>En casos específicos se sugiere trabajo y asesoría a los padres y/o tutor del sujeto evaluado.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=4){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //DIFICULTAD EN EL SUPER YO
@@ -518,7 +565,7 @@ class Reporte extends AccesoDatos
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  El evaluado presenta severos problemas psicológicos en lo que se refiere a la confusión para poder diferenciar la realidad con la fantasía, además de presentar cada vez más aspectos de tipo fantástico.</p>';
         $tratamiento='<p>Canalizar con un especialista.</p>
         <p>Se sugiere que antes de que ingrese a alguna institución educativa o laboral, primero reciba atención especializada, sin embargo, aunque el sujeto lleve adecuadamente su tratamiento  no garantiza un  adecuado progreso del mismo.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=5 and $valor<=7){
         $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido ya que en la medida en que aumenta este rango, se puede considerar la presencia de ideas fantasiosas (su imaginación va más allá de la realidad) y estas pueden definirse como falsas creencias de diferentes  contenidos  imaginarios y no reales (celos, mentiras, cuentos, ideas, creencias, entre otros). Puede creer que una o un grupo de personas actúan en su contra con ánimo de perjudicarlo, pero estas ideas por supuesto no son reales.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  considera necesario el seguimiento coordinado entre psicólogo con experiencia en psicología clínica y tutor (padre, maestro, orientador, entre otros) donde se aconseja:</p>
@@ -529,11 +576,11 @@ class Reporte extends AccesoDatos
           <li>Seguimiento para ayudar al sujeto a discriminar fantasía de realidad (ubicarlo en lo que es real de lo imaginario).</li>
           <li>Apoyo terapéutico para adecuado manejo de ansiedad (Hay pacientes que pueden sentir  acoso, miedo, angustia, entre otros de manera irreal).</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=4){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     
@@ -549,7 +596,7 @@ class Reporte extends AccesoDatos
       if($valor>=19 and $valor<=24){
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  El individuo posee serios problemas para relacionarse y adaptarse a su entorno familiar, lo cual generará inestabilidad familiar y por supuesto emocional.</p>';
         $tratamiento='<p>Canalización al especialista.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=13 and $valor<=18){
         $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido ya que en la medida en que aumenta este rango, se puede considerar la presencia de dificultades  y problemas que va enfrentando la  familia, en la que se pueden estar sumando: violencia intrafamiliar, divorcio, entre otros.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  considera necesario atención y seguimiento por parte del padre o tutor y terapeuta.</p>
@@ -557,11 +604,11 @@ class Reporte extends AccesoDatos
           <li>Sesiones para evaluar la dinámica familiar a través de las referencias del evaluado.</li>
           <li>Apoyo terapéutico para enfrentar en caso necesario de una manera funcional alguna problemática familiar.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=12){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //ADAPTACIÓN A LA SALUD
@@ -569,7 +616,7 @@ class Reporte extends AccesoDatos
       if($valor>=18 and $valor<=24){
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  El evaluado presentará importantes y recurrentes afecciones en la salud física básicamente asociadas situaciones emocionales y/o de ansiedad.</p>';
         $tratamiento='<p>Canalización al especialista.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=12 and $valor<=17){
         $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido ya que en la medida que  aumente este rango es porque el evaluado se encuentra ya con problemas físicos o de enfermedad causados por un mal manejo de las emociones o porque las circunstancias a las que se encuentra expuesta son muy tensas o estresantes.</p>
         <p>Por ejemplo: Colitis, dolor de cabeza o espalda, diarreas, gripas, pérdida del cuero cabelludo, u otro malestar físico.</p>';
@@ -580,11 +627,11 @@ class Reporte extends AccesoDatos
           <li>Realizar valoración médica.</li>
           <li>Enseñar técnicas o dinámicas para control de ansiedad.</li> 
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=11){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //ADAPTACIÓN SOCIAL
@@ -592,7 +639,7 @@ class Reporte extends AccesoDatos
       if($valor>=23 and $valor<=24){
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  La persona presenta severas dificultades para  establecer relaciones sociales estables y duraderas.</p>';
         $tratamiento='<p>Canalización al especialista.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=20 and $valor<=22){
         $definicion='<p>El Grado de Éxito de esta persona se encuentra  disminuido ya que  en la medida en que este perfil aumente, nos va señalando las dificultades que el sujeto presenta para tener relaciones sociales estables y ello está afectando la capacidad de adaptarse a los diferentes entornos (social, académico, familiar, entre otros).</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  considera necesario  apoyo y seguimiento  por parte del padre o tutor y terapeuta, sugiriéndose:</p>
@@ -601,11 +648,11 @@ class Reporte extends AccesoDatos
           <li>Sesiones para tratar autoestima y habilidades sociales.</li>
           <li>Dar seguimiento de lo anterior  en el ámbito académico.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=19){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //ADAPTACIÓN EMOCIÓN
@@ -613,7 +660,7 @@ class Reporte extends AccesoDatos
       if($valor>=20 and $valor<=24){
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  Habrá una acentuada disminución en la funcionalidad del evaluado debido a los cambios recurrentes del estado emocional, los cuales pueden ser de gran intensidad (enojo, llanto, ira, risa injustificada, entre otros) que afectarán de manera importante la realización de sus actividades en la vida diaria.</p>';
         $tratamiento='<p>Canalización al especialista.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=16 and $valor<=19){
         $definicion='<p>El Grado de Éxito de  esta persona se encuentra  disminuido ya que  en la medida en que este perfil aumente, el sujeto se va caracterizando por presentar cambios emocionales constantes y en su mayoría no adecuados a las circunstancias como depresión, enojo, llanto, risa injustificada, o en su caso cambios repentinos de tristeza a llanto, o de llanto a enojo, entre otros.</p>';
         $tratamiento='
@@ -624,11 +671,11 @@ class Reporte extends AccesoDatos
           <li>Sesiones para ayudar al evaluado a descubrir y valorar aspectos importantes de su persona así como cualidades, aptitudes y comportamientos dirigidos a hacerle sentir motivado.</li>
           <li>Sesiones de apoyo para trabajar autoestima.</li>
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=15){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }
     //ADAPTACIÓN PROFESIONAL
@@ -636,7 +683,7 @@ class Reporte extends AccesoDatos
       if($valor>=20 and $valor<=24){
         $definicion='<p>El Grado de Éxito se encuentra  en riesgo.  El individuo presenta un desajuste muy marcado en la realización de actividades  de tipo académico, lo que impedirá que pueda terminar algún proyecto o carrera profesional.</p>';
         $tratamiento='<p>Canalización al especialista.</p>';
-        $perfil='III';
+        $perfil=3;
       }elseif($valor>=15 and $valor<=19){
         $definicion='<p>El Grado de Éxito de  esta persona se encuentra  disminuido ya que  en la medida en que este perfil se eleve, el sujeto cada vez más mostrará  dificultades y deficiencias en cuanto a sus necesidades y deseos emocionales por iniciar o terminar algún proyecto de tipo profesional. Por ejemplo tienen dificultades para dar seguimiento a: Cursos, talleres, o concluir  una carrera y/o actividad profesional, entre otros.</p>';
         $tratamiento='<p>Para mejorar el Éxito de esta persona se  considera necesario  el apoyo coordinado entre el terapeuta- padre o tutor recomendando:</p>
@@ -645,11 +692,11 @@ class Reporte extends AccesoDatos
           <li>Evaluación sobre habilidades y aptitudes a fin de determinar las áreas profesionales para las que el sujeto sea más adecuado.
           <li>Brindar asesorías sobre la importancia de concluir una carrera profesional para la que sea apto.
         </ul>';
-        $perfil='II';
+        $perfil=2;
       }elseif($valor<=14){
         $definicion='<p>El Grado de Éxito de esta persona es elevado dado que  no presenta alteraciones en esta área.</p>';
         $tratamiento='<p></p>';
-        $perfil='I';
+        $perfil=1;
       }
     }  
     $out['definicion'] = $definicion;
