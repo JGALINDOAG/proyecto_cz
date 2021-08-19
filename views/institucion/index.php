@@ -13,17 +13,16 @@
         <div class="form-group row d-flex justify-content-center">
             <div class="col-sm-12">
                 <?php
-                @$m = str_replace(' ', '+', $_GET['m']);
-                @$m = AccesoDatos::desencriptar($m);
+                @$m = AccesoDatos::desencriptar($_GET['m']);
                 if (isset($m)) {
                     switch ($m) {
                         case '1':
-                            $text = 'Estimado Sr (a). '.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['n'])).'%0A
+                            $text = 'Estimado Sr (a). '.AccesoDatos::desencriptar($_GET['n']).'%0A
                                 ¡Te damos la bienvenida al Sistema CHROME!%0A
                                 Ahora ya puedes comenzar a administrar tu cuenta e interactuar con la Plataforma.%0A
                                 No olvides tus credenciales generadas para ingresar al sistema, son las siguientes:%0A
-                                USUARIO:&nbsp;'.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['u'])).'%0A
-                                CONTRASEÑA:&nbsp;'.AccesoDatos::desencriptar(str_replace(' ','+',$_GET['p'])).'%0A
+                                USUARIO:&nbsp;'.AccesoDatos::desencriptar($_GET['u']).'%0A
+                                CONTRASEÑA:&nbsp;'.AccesoDatos::desencriptar($_GET['p']).'%0A
                                 Una vez ingresando al sistema podrás cambiar tu contrase&ntilde;a si así lo deseas';
 
                                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

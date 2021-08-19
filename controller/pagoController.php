@@ -45,7 +45,7 @@ class PagoController
     $rowAdministradores = $objAdministradores->get_id_admin($_SESSION['idAdmin']);
     $nameAdmin = $rowAdministradores[0]['nombre'].' '.$rowAdministradores[0]['apellidos'];
     $respuesta = AccesoDatos::payFolio($nameAdmin, $jsonCmbFolio['id_folio'], gethostname(), $date);
-    if($respuesta === true) header("Location: ".AccesoDatos::ruta()."?accion=pago&pag=index&m=2");
+    if($respuesta === true) header("Location: ".AccesoDatos::ruta()."?accion=pago&pag=index&m=".AccesoDatos::encriptar(2));
     else echo $respuesta;
   }
   
@@ -62,7 +62,7 @@ class PagoController
     $rowAdministradores = $objAdministradores->get_id_admin($_SESSION['idAdmin']);
     $nameAdmin = $rowAdministradores[0]['nombre'].' '.$rowAdministradores[0]['apellidos'];
     $respuesta = AccesoDatos::payFolio($nameAdmin, $_POST['cmbFolio'], gethostname(), $date);
-    if($respuesta === true) header("Location: ".AccesoDatos::ruta()."?accion=pago&pag=index&m=2");
+    if($respuesta === true) header("Location: ".AccesoDatos::ruta()."?accion=pago&pag=index&m=".AccesoDatos::encriptar(2));
     else echo $respuesta;
   }
 

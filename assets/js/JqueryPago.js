@@ -118,7 +118,7 @@ $(document).ready( function () {
                             // console.log(details)
                             $.get( "?accion=pago&pag=paypal", { cmbFolio: $('#cmbFolio').val(), cmbFormaPago: $('#cmbFormaPago').val(), txtCantidad: $('#cantidad').val()})
                                 .done(function( data ) {
-                                    location.href ="?accion=pago&pag=index&m=1";
+                                    location.href ="?accion=pago&pag=index&m=vLBLfhA6DNi1R2MFHO8IvFWr4Cn9665eHUF+L/sqAKNhbGdvcml0bW8xL0NydXplYWM=";
                                 }
                             );
                         }
