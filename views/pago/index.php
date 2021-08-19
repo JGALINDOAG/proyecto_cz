@@ -104,7 +104,7 @@
                             <label>Forma de pago</label>
                             <select class="form-control" id="cmbFormaPago" name="cmbFormaPago" required>
                                 <option value="" disabled selected>Selecciona una opción</option>
-                                <option value='{"key":1, "item":"PayPal"}'>Pagar con PayPal</option>
+                                <!-- <option value='{"key":1, "item":"PayPal"}'>Pagar con PayPal</option> -->
                                 <option value='{"key":2, "item":"Efectivo"}'>Efectivo</option>
                                 <option value='{"key":3, "item":"Transferencia"}'>Transferencia</option>
                                 <option value='{"key":4, "item":"Deposito"}'>Deposito</option>

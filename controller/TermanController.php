@@ -38,15 +38,26 @@ if (isset($_POST["serie"])) {
     $contesto = "";
     $count = count($_POST);
     $cuenta = 0;
-    while ($POST = each($_POST)) {
+    // while ($POST = each($_POST)) {
+    //     $cuenta++;
+    //     if ($POST[0] != 'save') {
+    //         if ($count != $cuenta) {
+    //             $coma = ",";
+    //         } else {
+    //             $coma = "";
+    //         }
+    //         $contesto = $contesto . $POST[1] . $coma;
+    //     }
+    // }
+    foreach($_POST as $key => $item) {
         $cuenta++;
-        if ($POST[0] != 'save') {
+        if ($key != 'save') {
             if ($count != $cuenta) {
                 $coma = ",";
             } else {
                 $coma = "";
             }
-            $contesto = $contesto . $POST[1] . $coma;
+            $contesto = $contesto . $item . $coma;
         }
     }
     echo '<p>'.$contesto.'</p>';
