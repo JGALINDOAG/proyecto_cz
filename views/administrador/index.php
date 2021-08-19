@@ -13,16 +13,15 @@
         <div class="form-group row d-flex justify-content-center">
             <div class="col-sm-12">
                 <?php
-                    @$m=str_replace(' ','+',$_GET['m']);
-                    @$m=AccesoDatos::desencriptar($m);
+                    @$m=AccesoDatos::desencriptar($_GET['m']);
                     if(isset($m)){
                         switch ($m){
                             case '1':
-                                $nombre = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['n']));
-                                $usuario = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['u']));
-                                $clave = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['c']));
-                                $telefono = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['t']));
-                                $email = AccesoDatos::desencriptar(str_replace(' ','+',$_GET['e']));
+                                $nombre = AccesoDatos::desencriptar($_GET['n']);
+                                $usuario = AccesoDatos::desencriptar($_GET['u']);
+                                $clave = AccesoDatos::desencriptar($_GET['c']);
+                                $telefono = AccesoDatos::desencriptar($_GET['t']);
+                                $email = AccesoDatos::desencriptar($_GET['e']);
                                 $text = 'Estimado Sr (a). '.$nombre.'%0A
                                 ¡Te damos la bienvenida al Sistema CHROME!%0A
                                 Ahora ya puedes comenzar a administrar tu cuenta e interactuar con la Plataforma.%0A

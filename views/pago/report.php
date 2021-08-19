@@ -13,8 +13,7 @@
         <div class="form-group row d-flex justify-content-center">
             <div class="col-sm-12">
                 <?php
-                @$m = str_replace(' ', '+', $_GET['m']);
-                // @$m=AccesoDatos::desencriptar($m);
+                @$m=AccesoDatos::desencriptar($_GET['m']);
                 if (isset($m)) {
                     switch ($m) {
                         case '1':

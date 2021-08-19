@@ -11,8 +11,7 @@
         <div class="col-sm-12">
             <?php
             // echo AccesoDatos::encriptar("12345678");
-            @$m = str_replace(' ', '+', $_GET['m']);
-            @$m = AccesoDatos::desencriptar($m);
+            @$m = AccesoDatos::desencriptar($_GET['m']);
             if (isset($m)) {
                 switch ($m) {
                     case '1':
