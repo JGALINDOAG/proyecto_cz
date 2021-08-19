@@ -15,14 +15,23 @@ if ($avance[0]["Total"] == 16) {
 }
 
 if (isset($_POST["save"])) {
-    while ($POST = each($_POST)) {
-        if ($POST[0] != 'save') {
+    foreach($_POST as $key => $item) {
+        if ($key != 'save') {
             $no = new Pruebas();
-            $total=$no->valida_duplicado_respuesta($idDetalle,$POST[0]);
+            $total=$no->valida_duplicado_respuesta($idDetalle,$key);
             if($total[0]['COUNT(*)']==0){
                 //Registra las respuestas del usuario
-                $ad = new Pruebas();
-                $ad->add_respuesta($idDetalle,$POST[0], $POST[1]);
+                $t->add_respuesta($idDetalle,$key, $item);
+            }
+        }
+    }
+    foreach($_POST as $key => $item) {
+        if ($key != 'save') {
+            $no = new Pruebas();
+            $total=$no->valida_duplicado_respuesta($idDetalle,$key);
+            if($total[0]['COUNT(*)']==0){
+                //Registra las respuestas del usuario
+                $t->add_respuesta($idDetalle,$key, $item);
             }
         }
     }

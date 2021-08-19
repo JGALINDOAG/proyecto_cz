@@ -45,18 +45,9 @@ class InstitucionController
 
   public static function addVenta() {
     require_once 'models/institucionAdministrador.php';
-    // require_once 'models/institucion.php';
-    // $pruebas = "";
-    // foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
-    // $pruebas = rtrim($pruebas, ",");
-
     $idFolio = AccesoDatos::folio();
     $objInstitucionAdministrador = new InstitucionAdministrador();
-
     $objInstitucionAdministrador->add_institucionAdministrador($idFolio, $_POST["cmbAdmin"], $_POST["txtCosto"], $_POST["txtNoPGratis"], $_POST["txtNoPVendidas"]);
-
-    // $objInstitucion= new Institucion();
-    // $objInstitucion->update_pruebas($_POST["cmbInstitucion"], $pruebas);
     header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=venta&m=".AccesoDatos::encriptar(1)."");
   }
 
