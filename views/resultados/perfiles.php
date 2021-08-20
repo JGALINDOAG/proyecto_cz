@@ -24,9 +24,7 @@
                     <select name="cmbInstitucion" id="cmbInstitucion" class="selectpicker form-control" data-live-search="true" required>
                         <option value="" selected>Selecciona una Institucion</option>
                         <?php foreach ($rowInstitucion as $item) : ?>
-                            <option value="<?php echo $item['id_institucion']; ?>" <?php if (isset($_POST["cmbInstitucion"]) == $item['id_institucion']) echo "selected"; ?>>
-                                <?php echo $item['nombre']; ?>
-                            </option>
+                            <option value="<?php echo $item['id_institucion']; ?>" <?php if (isset($_POST["cmbInstitucion"]) == $item['id_institucion']) echo "selected"; ?>><?php echo $item['nombre']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -48,46 +46,46 @@
                         </tr>
                         <tr>
                             <!-- Personalidad 1 -->
-                            <th>1 - ESTRES</th>
-                            <th>12 - ADAPTACIÓN FAMILIAR</th>
+                            <th>A - Estres</th>
+                            <th>L - Adaptación familiar</th>
                         </tr>
                         <tr>
-                            <th>2 - SOLEDAD</th>
-                            <th>13 - ADAPTACIÓN A LA SALUD</th>
+                            <th>B - Soledad</th>
+                            <th>M - Adaptación a la salud</th>
                         </tr>
                         <tr>
-                            <th>3 - TRISTEZA</th>
-                            <th>14 - ADAPTACIÓN SOCIAL</th>
+                            <th>C - Tristeza</th>
+                            <th>N - Adaptación socila</th>
                         </tr>
                         <tr>
-                            <th>4 - IMPULSIVO</th>
-                            <th>15 - ADAPTACIÓN EMOCIÓN</th>
+                            <th>D - Impulsivo</th>
+                            <th>O - Adaptación emoción</th>
                         </tr>
                         <tr>
-                            <th>5 - INTEGRACION SOCIAL</th>
-                            <th>16 - ADAPTACIÓN PROFESIONAL</th>
+                            <th>E - Integración social</th>
+                            <th>P - Adaptación profesional</th>
                         </tr>
                         <tr>
-                            <th>6 - DISTANCIAMIENTO DEL YO</th>
+                            <th>F - Distanciamiento del yo</th>
                         </tr>
                         <tr>
-                            <th>7 - ALCOHOLISMO</th>
+                            <th>G - Alcoholismo</th>
                             <th>&nbsp;</th>
                         </tr>
                         <tr>
-                            <th>8 - FARMACODEPENDENCIA</th>
+                            <th>H - Farmacodependencia</th>
                             <th>&nbsp;</th>
                         </tr>
                         <tr>
-                            <th>9 - GÉNERO</th>
+                            <th>I - Género</th>
                             <th>&nbsp;</th>
                         </tr>
                         <tr>
-                            <th>10 - AUTODISCIPLINA</th>
+                            <th>J - Autodisciplina</th>
                             <th>&nbsp;</th>
                         </tr>
                         <tr>
-                            <th>11 - DIFICULTAD EN EL SUPER YO</th>
+                            <th>K - Dificultad en el super yo</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -110,24 +108,24 @@
                         </tr>
                         <tr>
                             <!-- Personalidad 1 -->
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
-                            <th>10</th>
-                            <th>11</th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>F</th>
+                            <th>G</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>J</th>
+                            <th>K</th>
                             <th>Perfil</th>
                             <!-- Personalidad 2 -->
-                            <th>12</th>
-                            <th>13</th>
-                            <th>14</th>
-                            <th>15</th>
-                            <th>16</th>
+                            <th>L</th>
+                            <th>M</th>
+                            <th>N</th>
+                            <th>O</th>
+                            <th>P</th>
                             <th>Perfil</th>
                         </tr>
                     </thead>

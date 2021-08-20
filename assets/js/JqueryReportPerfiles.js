@@ -59,7 +59,7 @@ function datatable_by_folio(folio) {
 
     result.done(function (res) {
         var dataPerfiles = JSON.parse(res)
-        console.log(dataPerfiles)
+        // console.log(dataPerfiles)
         $('#reporte').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",
@@ -88,7 +88,12 @@ function datatable_by_folio(folio) {
             dom: 'Bfrtip',
             buttons: [
                 // 'copy', 'csv', 'excel', 'pdf', 'print'
-                'csv', 'pdf', 'print'
+                { 
+                    extend: 'excel',
+                    autoFilter: true,
+                    title: $('select[name="cmbInstitucion"] option:selected').text()+'-'+$('select[name="cmbFolio"] option:selected').text(),
+                    sheetName: $('select[name="cmbInstitucion"] option:selected').text()+'-'+$('select[name="cmbFolio"] option:selected').text()
+                }
             ],
             "data": dataPerfiles,
             "columns": [
