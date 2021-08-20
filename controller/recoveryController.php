@@ -20,7 +20,7 @@ class RecoveryController
         } else {
           $nombre = $rowValidEmail[0]["apellidos"]." ".$rowValidEmail[0]["nombre"];
           $date = strftime("%d de %B del %Y a las %r", strtotime(date('Y-m-d G:i:s')));
-          $respuesta = AccesoDatos::recoveryPass($_POST["txtEmail"], $nombre, gethostname(), $date, $rowValidEmail[0]["usuario"], $rowValidEmail[0]["clave"]);
+          $respuesta = AccesoDatos::recoveryPass($_POST["txtEmail"], $nombre, $date, $rowValidEmail[0]["usuario"], $rowValidEmail[0]["clave"]);
           if($respuesta === true) echo"<script type='text/javascript'>window.location='?accion=recovery&m=".AccesoDatos::encriptar(2)."';</script>";
           else echo $respuesta;
         }
