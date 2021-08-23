@@ -8,27 +8,27 @@
     <!-- Invoca al Navbar -->
     <?php NavbarUsuarioController::index(); ?>
 
-    <!-- Cuerpo de la pagina -->
-    <section class="container pt-5">
-        <div class="form-group row d-flex justify-content-center">
-            <div class="col-sm-12">
-                <?php
-                @$m = AccesoDatos::desencriptar($_GET['m']);
-                if (isset($m)) {
-                    switch ($m) {
-                        case '1':
-                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>¡AVISO!</strong><hr>La contraseña ha sido actualizada exitosamente.
+    <div class="row">
+        <div class="col-sm-12">
+            <?php
+            @$m = AccesoDatos::desencriptar($_GET['m']);
+            if (isset($m)) {
+                switch ($m) {
+                    case '1':
+                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>¡AVISO!</strong>&nbsp;La contraseña ha sido actualizada exitosamente.
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                         </div>';
-                            break;
-                    }
+                        break;
                 }
-                ?>
-            </div>
+            }
+            ?>
         </div>
+    </div>
+    <!-- Cuerpo de la pagina -->
+    <section class="container pt-5">
         <div class="shadow p-3 mb-5 bg-white rounded pt-4">
             <form name="form1" action="" method="post">
                 <div class="alert alert-light" role="alert">
@@ -63,7 +63,7 @@
                 <div class="form-group row d-flex justify-content-center">
                     <div class="col-12 text-center">
                         <input type="hidden" name="validUsuario" value="updateUsuario" />
-                        <input type="submit" name="Guardar" id="actualizar" class="btn btn-outline-green btn-lg btn-block" value="Actualizar contraseña" disabled/>
+                        <input type="submit" name="Guardar" id="actualizar" class="btn btn-outline-green btn-lg btn-block" value="Actualizar contraseña" disabled />
                     </div>
                 </div>
             </form>
