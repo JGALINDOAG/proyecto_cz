@@ -17,26 +17,26 @@
     <link rel="icon" type="image/svg" sizes="192x192" href="<?php echo AccesoDatos::ruta(); ?>assets/img/ico.png">
     <!-- RAVEN -->
     <style>
-    .group-item img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 35%;
-    }
-    
-    /* Media query for mobile viewport */
-    /* @media screen and (max-width: 400px) {
-        #paypal-button-container {
-            width: 100%;
+        .group-item img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 35%;
         }
-    } */
-        
-    /* Media query for desktop viewport */
-    /* @media screen and (min-width: 400px) {
-         #paypal-button-container {
-            width: 250px;
-         }
-     } */
     </style>
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/jquery-3.5.1.min.js"></script>
+    <script src="<?php echo AccesoDatos::ruta(); ?>libs/bootstrap-4/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTable -->
+    <script src="<?php echo AccesoDatos::ruta(); ?>libs/DataTables/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo AccesoDatos::ruta(); ?>libs/DataTables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.2/js/dataTables.select.min.js"></script>
+    <!-- Bootstrap-select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?php echo AccesoDatos::ruta(); ?>libs/sweetalert2.js"></script>
+    <!-- FUNCIONES -->
+    <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/function.js"></script>
     <title>Chrome | S. A. de C. V.</title>
 </head>
