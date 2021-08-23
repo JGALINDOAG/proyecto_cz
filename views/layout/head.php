@@ -23,6 +23,9 @@
             margin-right: auto;
             width: 35%;
         }
+        body{
+            overflow-x: hidden;
+        }
     </style>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/jquery-3.5.1.min.js"></script>

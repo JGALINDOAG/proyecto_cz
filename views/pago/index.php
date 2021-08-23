@@ -7,37 +7,35 @@
 <body>
     <!-- Invoca al Navbar -->
     <?php NavbarUsuarioController::index(); ?>
-
+    <div class="row">
+        <div class="col-sm-12">
+            <?php
+            @$m=AccesoDatos::desencriptar($_GET['m']);
+            if (isset($m)) {
+                switch ($m) {
+                    case '1':
+                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>¡AVISO!</strong>&nbsp;El pago se realizo exitosamente, en breve se notificará y se evaluará su pago para la activación del folio.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                        break;
+                    case '2':
+                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>¡AVISO!</strong>&nbsp;El (La) voucher/notificación se cargo exitosamente, en breve se notificará y se evaluará su pago.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                        break;
+                }
+            }
+            ?>
+        </div>
+    </div>
     <!-- Cuerpo de la pagina -->
     <section class="container pt-5">
-        <div class="form-group row d-flex justify-content-center">
-            <div class="col-sm-12">
-                <?php
-                @$m = str_replace(' ', '+', $_GET['m']);
-                // @$m=AccesoDatos::desencriptar($m);
-                if (isset($m)) {
-                    switch ($m) {
-                        case '1':
-                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong><hr>El pago se realizo exitosamente, en breve se notificará y se evaluará su pago para la activación del folio.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>';
-                            break;
-                        case '2':
-                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong><hr>El (La) voucher/notificación se cargo exitosamente, en breve se notificará y se evaluará su pago .
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>';
-                            break;
-                    }
-                }
-                ?>
-            </div>
-        </div>
         <!-- wrap -->
         <div class="shadow p-3 mb-5 bg-white rounded pt-4">
             <div class="alert alert-light" role="alert">

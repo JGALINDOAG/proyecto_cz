@@ -7,59 +7,72 @@
 <body>
     <!-- Invoca al Navbar -->
     <?php NavbarUsuarioController::index(); ?>
-
-    <!-- Cuerpo de la pagina -->
-    <section class="container pt-5">
-        <div class="form-group row d-flex justify-content-center">
-            <div class="col-sm-12">
-                <?php
-                @$m = AccesoDatos::desencriptar($_GET['m']);
-                if (isset($m)) {
-                    switch ($m) {
-                        case '1':
-                            $text = 'Estimado Sr (a). '.AccesoDatos::desencriptar($_GET['n']).'%0A
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            @$m = AccesoDatos::desencriptar($_GET['m']);
+            if (isset($m)) {
+                switch ($m) {
+                    case '1':
+                        $nombre = AccesoDatos::desencriptar($_GET['n']);
+                        $usuario = AccesoDatos::desencriptar($_GET['u']);
+                        $clave = AccesoDatos::desencriptar($_GET['c']);
+                        $telefono = AccesoDatos::desencriptar($_GET['t']);
+                        $email = AccesoDatos::desencriptar($_GET['e']);
+                        $text = 'Estimado Sr (a). ' . $nombre . '%0A
                                 ¡Te damos la bienvenida al Sistema CHROME!%0A
                                 Ahora ya puedes comenzar a administrar tu cuenta e interactuar con la Plataforma.%0A
                                 No olvides tus credenciales generadas para ingresar al sistema, son las siguientes:%0A
-                                USUARIO:&nbsp;'.AccesoDatos::desencriptar($_GET['u']).'%0A
-                                CONTRASEÑA:&nbsp;'.AccesoDatos::desencriptar($_GET['p']).'%0A
+                                USUARIO:&nbsp;' . $usuario . '%0A
+                                CONTRASEÑA:&nbsp;' . $clave . '%0A
                                 Una vez ingresando al sistema podrás cambiar tu contrase&ntilde;a si así lo deseas';
 
-                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong><hr>La Institución a sido agregado exitosamente
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    &nbsp;|&nbsp;<a href="https://api.whatsapp.com/send?phone='.$_GET['t'].'&text='.$text.'" target="_blank">Enviar datos de sesi&oacute;n por WhatSapp</a>
-                                    </div>';
-                            break;
-                    }
+                        echo '<div class="doble-alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>¡AVISO!</strong>&nbsp;La Institución a sido agregado exitosamente
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                &nbsp;|&nbsp;<a href="https://api.whatsapp.com/send?phone=' . $telefono . '&text=' . $text . '" target="_blank">Enviar datos de sesi&oacute;n por WhatSapp</a>
+                                &nbsp;|&nbsp;<a href="javascript:void(0);" id="msnEmail" data-email="'.$email.'" data-nombre="'.$nombre.'" data-usuario="'.$usuario.'" data-clave="'.$clave.'">Enviar datos de sesi&oacute;n por e-mail</a>
+                                
+                                </div>';
+
+                        echo '<div class="doble-alert alert-info alert-dismissible fade show" role="alert" id="confirm" style="margin-bottom: 0;">
+                                <strong>¡AVISO!</strong>&nbsp;El mensaje por e-mail fue enviado correctamente.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                        break;
                 }
-                if (isset($_POST["errno"])) {
-                    foreach ($_POST["errno"] as $errno) :
-                        switch ($errno) {
-                            case 1:
-                                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            }
+            if (isset($_POST["errno"])) {
+                foreach ($_POST["errno"] as $errno) :
+                    switch ($errno) {
+                        case 1:
+                            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                         <strong>¡AVISO!</strong>&nbsp;La Institución ya existe en los registros.
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                         </div>';
-                                break;
-                            case 2:
-                                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            break;
+                        case 2:
+                            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                         <strong>¡AVISO!</strong>&nbsp;El Administrador ya existe en los registros.
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                         </div>';
-                                break;
-                        }
-                    endforeach;
-                }
-                ?>
-            </div>
+                            break;
+                    }
+                endforeach;
+            }
+            ?>
         </div>
+    </div>
+    <!-- Cuerpo de la pagina -->
+    <section class="container pt-5">
         <form name="form" method="post" class="needs-validation" novalidate>
             <div class="shadow p-3 mb-5 bg-white rounded pt-4">
                 <div class="alert alert-light" role="alert">
@@ -107,7 +120,7 @@
                         <label>Selección de pruebas a vender</label>
                         <select class="selectpicker form-control" name="cmbPrueba[]" multiple data-actions-box="true" data-selected-text-format="count > 6" required>
                             <?php foreach ($rowPruebas as $item) : ?>
-                                <option value="<?php echo $item['id_prueba']; ?>" >
+                                <option value="<?php echo $item['id_prueba']; ?>">
                                     <?php echo $item['prueba']; ?>
                                 </option>
                             <?php endforeach; ?>
@@ -127,6 +140,7 @@
     </section>
     <!-- Invoca al Footer -->
     <?php require_once 'views/layout/footer.php'; ?>
+    <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/jqueryInstitucion.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
@@ -158,6 +172,13 @@
             text-decoration: underline;
             font-family: inherit;
             font-size: inherit;
+        }
+
+        .doble-alert {
+            position: relative;
+            padding: 0.75rem 1.25rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
         }
     </style>
 </body>
