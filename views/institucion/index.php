@@ -27,17 +27,16 @@
                                 CONTRASEÑA:&nbsp;' . $clave . '%0A
                                 Una vez ingresando al sistema podrás cambiar tu contrase&ntilde;a si así lo deseas';
 
-                        echo '<div class="doble-alert alert-success alert-dismissible fade show" role="alert">
+                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>¡AVISO!</strong>&nbsp;La Institución a sido agregado exitosamente
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                                 &nbsp;|&nbsp;<a href="https://api.whatsapp.com/send?phone=' . $telefono . '&text=' . $text . '" target="_blank">Enviar datos de sesi&oacute;n por WhatSapp</a>
                                 &nbsp;|&nbsp;<a href="javascript:void(0);" id="msnEmail" data-email="'.$email.'" data-nombre="'.$nombre.'" data-usuario="'.$usuario.'" data-clave="'.$clave.'">Enviar datos de sesi&oacute;n por e-mail</a>
-                                
                                 </div>';
 
-                        echo '<div class="doble-alert alert-info alert-dismissible fade show" role="alert" id="confirm" style="margin-bottom: 0;">
+                        echo '<div class="alert alert-info alert-dismissible fade show" role="alert" id="confirm" style="margin-bottom: 0;">
                                 <strong>¡AVISO!</strong>&nbsp;El mensaje por e-mail fue enviado correctamente.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -172,13 +171,6 @@
             text-decoration: underline;
             font-family: inherit;
             font-size: inherit;
-        }
-
-        .doble-alert {
-            position: relative;
-            padding: 0.75rem 1.25rem;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
         }
     </style>
 </body>
