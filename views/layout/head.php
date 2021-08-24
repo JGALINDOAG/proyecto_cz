@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.2/css/select.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
     <!-- bootstrap-select -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.9/css/bootstrap-select.min.css" />
     <!-- CSS -->
@@ -37,8 +36,6 @@
     <script src="https://cdn.datatables.net/select/1.3.2/js/dataTables.select.min.js"></script>
     <!-- Bootstrap-select -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="<?php echo AccesoDatos::ruta(); ?>libs/sweetalert2.js"></script>
     <!-- FUNCIONES -->
     <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/function.js"></script>
     <title>Chrome | S. A. de C. V.</title>
