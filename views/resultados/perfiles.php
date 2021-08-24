@@ -92,18 +92,18 @@
                 </table>
             </div>
             <div class="table-responsive pt-5">
-                <table class="table table-hover table-sm" id="reporte" style="width:100%">
+                <table class="display table table-hover table-sm" id="reporte" style="width:100%">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" rowspan="2">Nombre</th>
                             <th scope="col" rowspan="2">Grado estudios</th>
                             <th scope="col" rowspan="2">Area</th>
                             <th scope="col" rowspan="2">Turno</th>
+                            <th scope="col" rowspan="2">Perfil CI</th>
                             <th colspan="12">Personalidad 1</th>
                             <th colspan="6">Personalidad 2</th>
                             <th scope="col" rowspan="2">CI Terman</th>
                             <th scope="col" rowspan="2">CI RAVEN</th>
-                            <th scope="col" rowspan="2">Perfil CI</th>
                             <th scope="col" rowspan="2">Perfil Final</th>
                         </tr>
                         <tr>
@@ -142,10 +142,10 @@
     <?php require_once 'views/layout/footer.php'; ?>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script> -->
     <script src="<?php echo AccesoDatos::ruta(); ?>assets/js/JqueryReportPerfiles.js"></script>
 </body>
 

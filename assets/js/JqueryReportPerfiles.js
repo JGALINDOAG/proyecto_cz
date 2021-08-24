@@ -59,6 +59,8 @@ function datatable_by_folio(folio) {
 
     result.done(function (res) {
         var dataPerfiles = JSON.parse(res)
+        var shetName_excel = $('select[name="cmbInstitucion"] option:selected').text() + '-' + $('select[name="cmbFolio"] option:selected').text()
+
         // console.log(dataPerfiles)
         $('#reporte').DataTable({
             "language": {
@@ -86,15 +88,43 @@ function datatable_by_folio(folio) {
             },
             "destroy": true,
             dom: 'Bfrtip',
-            buttons: [
+            buttons: [{
                 // 'copy', 'csv', 'excel', 'pdf', 'print'
-                { 
-                    extend: 'excel',
-                    autoFilter: true,
-                    title: $('select[name="cmbInstitucion"] option:selected').text()+'-'+$('select[name="cmbFolio"] option:selected').text(),
-                    sheetName: $('select[name="cmbInstitucion"] option:selected').text()+'-'+$('select[name="cmbFolio"] option:selected').text()
+                extend: 'excelHtml5',
+                title: shetName_excel,
+                sheetName: shetName_excel,
+                autoFilter: true,
+                exportOptions: {
+                    modifier: {
+                        page: 'current'
+                    }
+                },
+                customize: function (xlsx) {
+                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                    // Loop over the cells in column `C`
+                    $('row c[r^="E"]', sheet).each(function () {
+                        // Get the value
+                        if ($('is t', this).text() < 10) {
+                            $(this).attr( 's', '10' );
+                        } else if ( $('is t', this).text() >= 54 && $('is t', this).text() <= 87 ) {
+                            $(this).attr( 's', '20' );     
+                        } else if ( $('is t', this).text() >= 89 && $('is t', this).text() <= 110 ) {
+                            $(this).attr( 's', '15' );     
+                        }
+                    });
+                    // Loop over the cells in column `C`
+                    $('row c[r^="Q"]', sheet).each(function () {
+                        // Get the value
+                        if ($(this).text() == 1) {
+                            $(this).attr( 's', '10' );
+                        } else if ( $(this).text() == 2 ) {
+                            $(this).attr( 's', '20' );     
+                        } else if ( $(this).text() == 3 ) {
+                            $(this).attr( 's', '15' );     
+                        }
+                    });
                 }
-            ],
+            }],
             "data": dataPerfiles,
             "columns": [
                 {
@@ -108,6 +138,12 @@ function datatable_by_folio(folio) {
                 },
                 {
                     "data": 'turno'
+                },
+                {
+                    "data": 'perfil', "render": function (data, type, row) {
+                        var p1 = JSON.parse(row.perfil)
+                        return p1.ci
+                    }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
@@ -131,7 +167,7 @@ function datatable_by_folio(folio) {
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[4]['resultado'] 
+                        return row.personalidad_1[4]['resultado']
                     }
                 },
                 {
@@ -141,7 +177,7 @@ function datatable_by_folio(folio) {
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[6]['resultado']    
+                        return row.personalidad_1[6]['resultado']
                     }
                 },
                 {
@@ -214,18 +250,13 @@ function datatable_by_folio(folio) {
                 {
                     "data": 'perfil', "render": function (data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        return p1.ci
-                    }
-                },
-                {
-                    "data": 'perfil', "render": function (data, type, row) {
-                        var p1 = JSON.parse(row.perfil)
                         return p1.final
                     }
                 }
             ],
             columnDefs: [
-                { className: 'text-center', targets: [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] }
+                { orderable: false, targets: [0, 1, 2, 3] },
+                { className: 'text-center', targets: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] }
             ],
             order: []
         });
