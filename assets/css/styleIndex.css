@@ -180,8 +180,9 @@ header {
     text-transform: uppercase;
     font-size: 2rem;
     font-weight: 300;
+    padding-bottom: 5px;
     border-bottom: 1px solid #fff;
-    margin-bottom: -5px;
+    margin-bottom: -9px;
 }
 
 .menu {
