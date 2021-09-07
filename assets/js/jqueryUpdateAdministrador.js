@@ -1,10 +1,14 @@
 $(document).ready(function() {
     $('#updateModal #msnUpdate').hide()
+    var idInstitucion = $('#idInstitucion').val()
 
-    $('#cmbInstitucion').on('change', function() {
-        var idInstitucion = $(this).val()
-        dataTable(idInstitucion)
-    });
+    if(idInstitucion != 1) dataTable($('#idInstitucion').val())
+    // else {
+        $('#cmbInstitucion').on('change', function() {
+            var idInstitucion = $(this).val()
+            dataTable(idInstitucion)
+        });
+    // }
 
     $('#updateModal').on('show.bs.modal', function (event) {
         $('#cmbCargo').empty()

@@ -18,6 +18,8 @@
                 </div>
                 <hr>
             </div>
+            <input type="hidden" id="idInstitucion" value="<?php echo $_SESSION["idInstitucion"]; ?>">
+            <?php if ($_SESSION['idInstitucion'] == 1) : ?>
             <div class="form-row">
                 <div class="form-group col-sm-12">
                     <label>Nombre de la Institución</label>
@@ -29,7 +31,8 @@
                     </select>
                 </div>
             </div>
-            <div class="table-responsive pt-5">
+            <?php endif; ?>
+            <div class="table-responsive <?php if ($_SESSION['idInstitucion'] == 1) echo "pt-5"; ?>">
                 <table class="display table table-hover table-sm" id="listPersonal" style="width:100%">
                     <thead class="thead-dark">
                         <tr>
