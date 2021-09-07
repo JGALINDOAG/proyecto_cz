@@ -50,6 +50,41 @@ class InstitucionController
     $objInstitucionAdministrador->add_institucionAdministrador($idFolio, $_POST["cmbAdmin"], $_POST["txtCosto"], $_POST["txtNoPGratis"], $_POST["txtNoPVendidas"]);
     header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=venta&m=".AccesoDatos::encriptar(1)."");
   }
+  
+  public static function listInstitucion() {
+    require_once 'models/institucion.php';
+    require_once 'models/pruebas.php';
+    $objInstitucion = new Institucion();
+    $rowInstitucion = $objInstitucion->get_institucion();
+    $objPruebas = new Pruebas();
+    $rowPruebas = $objPruebas->list_byInstitucion();
+    require_once 'views/institucion/getInstitucion.php';
+  }
+  
+  public static function listPruebas() {
+    require_once 'models/pruebas.php';
+    $objPruebas = new Pruebas();
+    $rowPruebas = $objPruebas->list_byInstitucion();
+    $dataJson = json_encode($rowPruebas, JSON_UNESCAPED_UNICODE);
+    print $dataJson;
+  }
+ 
+  public static function getInstitucion() {
+    require_once 'models/institucion.php';
+    $objInstitucion = new Institucion();
+    $rowInstitucion = $objInstitucion->get_id_institucion($_POST['idInstitucion']);
+    $dataJson = json_encode($rowInstitucion[0], JSON_UNESCAPED_UNICODE);
+    print $dataJson;
+  }
+  
+  public static function updateIntitucion() {
+    require_once 'models/institucion.php';
+    $objInstitucion = new Institucion();
+    $pruebas = "";
+    foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
+    $objInstitucion->update_institucion($_POST['cmbInstitucion'], $_POST['txtNombreInst'], $_POST['txtAbreviatura'], $_POST['txtRFC'], $_POST['txtEmail'], $_POST['txtTelefono'], $pruebas);
+    header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=listInstitucion&m=".AccesoDatos::encriptar(1)."");
+  }
 
 }
 
@@ -59,6 +94,8 @@ if (isset($_POST['validUsuario'])) {
     InstitucionController::save();
   } elseif ($_POST["validUsuario"] == "addVenta") {
     InstitucionController::addVenta();
+  } elseif ($_POST["validUsuario"] == "updateIntitucion") {
+    InstitucionController::updateIntitucion();
   }
 }
 //se verifica que action esté definida
@@ -69,6 +106,12 @@ if (isset($_GET["accion"])) {
     InstitucionController::venta();
   } elseif ($_GET["accion"] == "institucion" && $_GET["pag"] == "listAdmin") {
     InstitucionController::getAdmin();
+  } elseif ($_GET["accion"] == "institucion" && $_GET["pag"] == "listInstitucion") {
+    InstitucionController::listInstitucion();
+  } elseif ($_GET["accion"] == "institucion" && $_GET["pag"] == "getInstitucion") {
+    InstitucionController::getInstitucion();
+  } elseif ($_GET["accion"] == "institucion" && $_GET["pag"] == "listPruebas") {
+    InstitucionController::listPruebas();
   }
 }
 ?>

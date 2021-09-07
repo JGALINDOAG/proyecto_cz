@@ -10,9 +10,9 @@ class NavbarUsuarioController
       $rowAdmin = $objAdministradores->get_id_admin($_SESSION["idAdmin"]);
       $_SESSION["nombre"] = ucwords(strtolower($rowAdmin[0]["nombre"]." ".$rowAdmin[0]["apellidos"]));
       $_SESSION["idRol"] = $rowAdmin[0]["id_rol"];
-      
       $objPrivilegio = new Privilegio();
-      $menu = $objPrivilegio->get_menu($_SESSION["idRol"]);
+      $menu_fijo = $objPrivilegio->get_menu($_SESSION["idRol"]);
+      $json_menu_fijo = json_decode($menu_fijo[0]['menu'], true);
     endif;
     require_once 'views/layout/navbar.php';
   }
