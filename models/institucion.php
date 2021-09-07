@@ -69,19 +69,23 @@ class Institucion extends AccesoDatos
       }
     }
 
-    public function update_pruebas($idInstitucion, $pruebas)
+    public function update_institucion($idInstitucion, $nombre, $abreviatura, $rfc, $email, $telefono, $pruebas)
     {
       try {
         $this->dbh = AccesoDatos::conexion();
-        # $idAdmin = AccesoDatos::desencriptar(str_replace(' ', '+', $idAdmin));
-        $query = "UPDATE institucion SET pruebas = ? WHERE id_institucion = ?";
+        $query = "UPDATE institucion SET nombre = ?,abreviatura = ?,rfc = ?,email = ?,telefono = ?,pruebas = ? WHERE id_institucion = ?";
         $stmt = $this->dbh->prepare($query);
-        $stmt->bindValue(1, $pruebas, PDO::PARAM_STR);
-        $stmt->bindValue(2, $idInstitucion, PDO::PARAM_INT);
+        $stmt->bindValue(1, $nombre, PDO::PARAM_STR);
+        $stmt->bindValue(2, $abreviatura, PDO::PARAM_STR);
+        $stmt->bindValue(3, $rfc, PDO::PARAM_STR);
+        $stmt->bindValue(4, $email, PDO::PARAM_STR);
+        $stmt->bindValue(5, $telefono, PDO::PARAM_STR);
+        $stmt->bindValue(6, $pruebas, PDO::PARAM_STR);
+        $stmt->bindValue(7, $idInstitucion, PDO::PARAM_INT);
         $stmt->execute();
         $this->dbh = null;
       } catch (PDOException $e) {
-        die("¡Error!: update_pruebas()" . $e->getMessage());
+        die("¡Error!: update_institucion()" . $e->getMessage());
       }
     }
 

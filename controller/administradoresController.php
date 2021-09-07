@@ -46,6 +46,43 @@ class AdministradoresController
     $respuesta = AccesoDatos::addAdmin($_POST['email'], $_POST['nombre'], $_POST['usuario'], $_POST['clave']);
     if($respuesta === false) print $respuesta;
   }
+
+  public static function ctg_institucion () {
+    require_once 'models/institucion.php';
+    $objInstitucion = new Institucion();
+    $rowInstitucion = $objInstitucion->get_institucion();
+    $dataJson = json_encode($rowInstitucion, JSON_UNESCAPED_UNICODE);
+    print $dataJson;
+  }
+  
+  public static function ctg_cRol () {
+    require_once 'models/cRol.php';
+    $objRol = new CROL();
+    $rowRol = $objRol->get_c_rol();
+    $dataJson = json_encode($rowRol, JSON_UNESCAPED_UNICODE);
+    print $dataJson;
+  }
+
+  public static function listAdmin(){
+    require_once 'models/institucion.php';
+    $objInstitucion = new Institucion();
+    $rowInstitucion = $objInstitucion->get_institucion();
+    require_once 'views/administrador/update.php';
+  }
+  
+  public static function getAdmin(){
+    require_once 'models/administradores.php';
+    $objAdministradores = new Administradores();
+    $rowAdmin = $objAdministradores->get_personalByInstitucion($_POST['idInstitucion']);
+    $dataJson = json_encode($rowAdmin, JSON_UNESCAPED_UNICODE);
+    print $dataJson;
+  }
+  
+  public static function update(){
+    require_once 'models/administradores.php';
+    $objAdministradores = new Administradores();
+    $objAdministradores->update_id_admin($_POST['idAdmin'], $_POST['cmbCargo'], $_POST['txtNombre'], $_POST['txtApellido'], $_POST['txtEmail'], $_POST['txtTelefono']);
+  }
 }
 
 //obtiene los datos del usuario desde la vista y redirecciona a UsuarioController.php
@@ -60,6 +97,16 @@ if (isset($_GET["accion"])) {
     AdministradoresController::index();
   } elseif ($_GET["accion"] == "administradores" && $_GET["pag"] == "messageEmail") {
     AdministradoresController::messageEmail();
+  } elseif ($_GET["accion"] == "administradores" && $_GET["pag"] == "listAdmin") {
+    AdministradoresController::listAdmin();
+  } elseif ($_GET["accion"] == "administradores" && $_GET["pag"] == "getAdmin") {
+    AdministradoresController::getAdmin();
+  } elseif ($_GET["accion"] == "administradores" && $_GET["pag"] == "ctg_institucion") {
+    AdministradoresController::ctg_institucion();
+  } elseif ($_GET["accion"] == "administradores" && $_GET["pag"] == "ctg_cRol") {
+    AdministradoresController::ctg_cRol();
+  } elseif ($_GET["accion"] == "administradores" && $_GET["pag"] == "update") {
+    AdministradoresController::update();
   }
 }
 ?>

@@ -96,17 +96,19 @@ class Administradores extends AccesoDatos
     }
   }
 
-  public function update_id_admin($idAdmin, $idRol, $nombre, $apellidos)
+  public function update_id_admin($idAdmin, $idRol, $nombre, $apellidos, $email, $telefono)
   {
     try {
       $this->dbh = AccesoDatos::conexion();
       # $idAdmin = AccesoDatos::desencriptar(str_replace(' ', '+', $idAdmin));
-      $query = "UPDATE administradores SET id_rol = ?, nombre = ?, apellidos = ? WHERE id_admin = ?";
+      $query = "UPDATE administradores SET id_rol=?, nombre=?, apellidos=?, email=?, telefono=? WHERE id_admin = ?";
       $stmt = $this->dbh->prepare($query);
       $stmt->bindValue(1, $idRol, PDO::PARAM_INT);
       $stmt->bindValue(2, $nombre, PDO::PARAM_STR);
       $stmt->bindValue(3, $apellidos, PDO::PARAM_STR);
-      $stmt->bindValue(4, $idAdmin, PDO::PARAM_INT);
+      $stmt->bindValue(4, $email, PDO::PARAM_STR);
+      $stmt->bindValue(5, $telefono, PDO::PARAM_STR);
+      $stmt->bindValue(6, $idAdmin, PDO::PARAM_INT);
       $stmt->execute();
       $this->dbh = null;
     } catch (PDOException $e) {
@@ -252,6 +254,28 @@ class Administradores extends AccesoDatos
         }
     } catch (Exception $e) {
         die("¡Error!: get_recoveryEmail()" . $e->getMessage());
+    }
+  }
+
+  public function get_personalByInstitucion($cveInstitucion)
+  {
+    try {
+      $this->dbh = AccesoDatos::conexion();
+      $query = "SELECT a.id_institucion, a.id_admin, a.id_rol, cr.nombre as rol, a.nombre, a.apellidos, a.email, a.telefono FROM administradores a
+      INNER JOIN institucion b USING(id_institucion)
+      INNER JOIN c_rol cr USING(id_rol)
+      WHERE id_institucion = ?";
+      $stmt = $this->dbh->prepare($query);
+      $stmt->bindParam(1, $cveInstitucion, PDO::PARAM_INT);
+      if ($stmt->execute()) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          $this->result[] = $row;
+        }
+        return $this->result;
+        $this->dbh = null;
+      }
+    } catch (Exception $e) {
+      die("¡Error!: get_idInstitucion()" . $e->getMessage());
     }
   }
 
