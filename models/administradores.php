@@ -261,10 +261,13 @@ class Administradores extends AccesoDatos
   {
     try {
       $this->dbh = AccesoDatos::conexion();
+      $and = '';
+      if($_SESSION["idInstitucion"] != 1) $and = 'AND id_rol not in (2)';
       $query = "SELECT a.id_institucion, a.id_admin, a.id_rol, cr.nombre as rol, a.nombre, a.apellidos, a.email, a.telefono FROM administradores a
       INNER JOIN institucion b USING(id_institucion)
       INNER JOIN c_rol cr USING(id_rol)
-      WHERE id_institucion = ?";
+      WHERE id_institucion = ?
+      $and ";
       $stmt = $this->dbh->prepare($query);
       $stmt->bindParam(1, $cveInstitucion, PDO::PARAM_INT);
       if ($stmt->execute()) {
