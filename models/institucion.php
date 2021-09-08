@@ -14,7 +14,7 @@ class Institucion extends AccesoDatos
     {
       try {
         $this->dbh = AccesoDatos::conexion();
-        $query = "SELECT * FROM institucion WHERE id_institucion != 1";
+        $query = "SELECT * FROM institucion WHERE 1";
         $stmt = $this->dbh->prepare($query);
         if ($stmt->execute()) {
           while($row = $stmt->fetch(PDO::FETCH_ASSOC)){

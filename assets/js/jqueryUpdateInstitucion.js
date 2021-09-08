@@ -19,6 +19,8 @@ $(document).ready(function() {
             $('#txtEmail').val(json['email'])
             $('#txtTelefono').val(json['telefono'])
             $('#cmbPrueba').empty()
+            if (id == 1) $('#cmbPrueba').prop('disabled', true)
+            else $('#cmbPrueba').prop('disabled', false)
             // console.log(json['pruebas'])
             $.post( "?accion=institucion&pag=listPruebas", function( data ) {
                 var jsonPruebas = JSON.parse(data)
