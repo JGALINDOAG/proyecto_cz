@@ -45,6 +45,9 @@ $(document).ready(function() {
         //     $('#cmbInstitucion_modal').append(option)
         // });
 
+        // if (idRol == 1) $('#cmbCargo').prop('disabled', true)
+        // else $('#cmbCargo').prop('disabled', false)
+
         $.post( "?accion=administradores&pag=ctg_cRol", function( data ) {
             var option = ''
             var json = JSON.parse(data)
