@@ -55,6 +55,23 @@ class Reporte extends AccesoDatos
         die("¡Error!: res_mmpi() " . $e->getMessage());
       }
     }
+    //add
+    public function p_final($idDetalle)
+    {
+      try {
+        $this->dbh = parent::conexion();
+        $stmt = $this->dbh->prepare("SELECT JSON_EXTRACT(perfil, '$.final') AS final, JSON_EXTRACT(perfil, '$.smpuno') AS smpuno, JSON_EXTRACT(perfil, '$.smpdos') AS smpdos, JSON_EXTRACT(perfil, '$.ci') AS ci FROM detalle_personas_pruebas where `id_detalle` = ?");
+        $stmt->bindParam(1, $idDetalle, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          $this->result[] = $row;
+          return $this->result;
+          $this->dbh = null;
+        }
+      } catch (Exception $e) {
+        die("¡Error!: p_final() " . $e->getMessage());
+      }
+    }
 
     public function res_total($idDetalle,$id_prueba)
     {

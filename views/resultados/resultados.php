@@ -24,6 +24,10 @@
         if($activo[0]['activo']==1){
             require_once("models/reporte.php");
             $estud=$info[0]['grado_estudios'];
+            $f = new Reporte();
+            $fnl = $f->p_final($idDetalle);
+            //print_r($fnl);
+            echo '<p><strong>Perfil final: '.$fnl[0]['final'].'</strong></p>';
             for ($l = 0; $l<sizeof($list); $l++){
                 if($list[$l]["id_prueba"]==1){
                     if($estud=="bachillerato" || $estud=="licenciatura" || $estud=="posgrados"){
@@ -42,7 +46,8 @@
                             echo $data1['definicion'];
                             echo '<p><strong>Alternativas de Tratamiento:</strong></p>';
                             echo '<p>'.$data1['tratamiento'].'</p>';
-                            echo '<p><strong>Perfil: </strong>'.$data1['perfil'].'</p>';
+                            echo '<p><strong>Perfil en la prueba: '.$data1['perfil'].'</strong></p>';
+                            //echo '<p><strong>Perfil en la prueba: </strong>'.$fnl[0]['ci'].'</p>';
                         }
                     }
                 }elseif($list[$l]["id_prueba"]==2){
@@ -62,8 +67,9 @@
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                             echo '<p><strong>Alternativas de Tratamiento:</strong></p>'.$int['tratamiento'];
                             echo '<p><strong>Perfil en indicador: '.$int['perfil'].'</strong></p>';
-                            echo '<hr>';
                         }
+                        echo '<p><strong>Perfil en la prueba: '.$fnl[0]['smpuno'].'</strong></p>';
+                        //echo '<hr>';
                     }
                 }elseif($list[$l]["id_prueba"]==3){
                     //PERSONALIDAD 2
@@ -82,8 +88,9 @@
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                             echo '<p><strong>Alternativas de Tratamiento:</strong></p>'.$int['tratamiento'];
                             echo '<p><strong>Perfil en indicador: '.$int['perfil'].'</strong></p>';
-                            echo '<hr>';
                         }
+                        echo '<p><strong>Perfil en la prueba: '.$fnl[0]['smpdos'].'</strong></p>';
+                        //echo '<hr>';
                     }
                 }elseif($list[$l]["id_prueba"]==4){
                     if($estud=="ninguno" || $estud=="preescolar" || $estud=="primaria" || $estud=="secundaria"){
@@ -102,11 +109,13 @@
                             echo $data4['definicion'];
                             echo '<p><strong>Alternativas de Tratamiento:</strong></p>';
                             echo '<p>'.$data4['tratamiento'].'</p>';
-                            echo '<p><strong>Perfil: </strong>'.$data4['perfil'].'</p>';
+                            echo '<p><strong>Perfil en la prueba: '.$data4['perfil'].'</strong></p>';
+                            //echo '<p><strong>Perfil en la prueba: </strong>'.$fnl[0]['ci'].'</p>';
                         }
                     }
                 }elseif($list[$l]["id_prueba"]==5 || $list[$l]["id_prueba"]==6){
                     //INTERESES APTITUDES
+                    //echo "<hr><center><h5>...</h5></center>";
                     $av5 = new Pruebas();
                     $avance5 = $av5->fin_prueba($idDetalle,5);
                     $av6 = new Pruebas();
@@ -134,7 +143,7 @@
                             //print_r($int);
                             echo '<p><strong>'.strtoupper($analisis[$i]["indicador"]).'</strong>: '.$analisis[$i]["resultado"].'</p>';
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
-                            echo '<hr>';
+                            //echo '<hr>';
                         }
                     }
                 }elseif($list[$l]["id_prueba"]==8){
@@ -151,7 +160,7 @@
                         $int = $int8->gral_test_definicion($cultura[0]["id_indicador"],$cultura[0]["resultado"]);
                         echo '<p><strong>'.strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
-                        echo '<hr>';  
+                        //echo '<hr>';  
                     }
                 }elseif($list[$l]["id_prueba"]==9){
                     //TIPO DE CULTURA ORGANIZACIONAL
@@ -167,7 +176,7 @@
                         $int = $int9->gral_test_definicion($cultura[0]["id_indicador"],$cultura[0]["resultado"]);
                         echo '<p><strong>'.strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
-                        echo '<hr>';  
+                        //echo '<hr>';  
                     }
                 }elseif($list[$l]["id_prueba"]==10){
                     //CLIMA PARA EL CAMBIO
@@ -183,7 +192,7 @@
                         $int = $int10->gral_test_definicion($clima[0]["id_indicador"],$clima[0]["resultado"]);
                         echo '<p><strong>'.strtoupper($clima[0]["indicador"]).'</strong>: '.$clima[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
-                        echo '<hr>';  
+                        //echo '<hr>';  
                     }
                 }elseif($list[$l]["id_prueba"]==11){
                     //NIVEL DE ESCUCHA
@@ -199,7 +208,7 @@
                         $int = $int11->gral_test_definicion($escucha[0]["id_indicador"],$escucha[0]["resultado"]);
                         echo '<p><strong>'.strtoupper($escucha[0]["indicador"]).'</strong>: '.$escucha[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
-                        echo '<hr>';  
+                        //echo '<hr>';  
                     }
                 }elseif($list[$l]["id_prueba"]==12){
                     //MMPI
@@ -223,7 +232,7 @@
                             //print_r($int);
                             echo '<p><strong>'.strtoupper($machover[$i]["indicador"]).'</strong>: '.$machover[$i]["resultado"].'</p>';
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
-                            echo '<hr>';
+                            //echo '<hr>';
                         }
                     }
                 }elseif($list[$l]["id_prueba"]==14){
@@ -237,11 +246,11 @@
                         if($grado[0]['resultado']>=6 and $grado[0]['resultado']<=8){
                             echo '<p><strong>'.strtoupper($grado[0]["indicador"]).'</strong>: '.$grado[0]['resultado'].'</p>';
                             echo '<p><strong>Definición:</strong></p><p>Hacen referencia a toda aquella información que devuelve el receptor al emisor sobre su propia comunicación. El sujeto posee las fortalezas necesarias para desarrollar el saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Son de gran ayuda en la organización, por lo que al usar correctamente esta herramienta  se puede generar el cambio que se espera y además comprometer más explícitamente al alumno que lo recibe.</p>';
-                            echo '<hr>';
+                            //echo '<hr>';
                         }else{
                             echo '<p><strong>'.strtoupper($grado[1]["indicador"]).'</strong>: '.$grado[1]['resultado'].'</p>';
                             echo '<p><strong>Definición:</strong></p><p>Como receptor no tiene la capacidad para devolver información al emisor sobre su propia comunicación. El sujeto no posee las fortalezas necesarias para saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Esto no es de gran ayuda en la organización, y al no usar correctamente esta herramienta  es dificil que pueda generar el cambio que se espera y además no compromete a el alumno que lo recibe.</p>';
-                            echo '<hr>';
+                            //echo '<hr>';
                           }
 
                     }
