@@ -66,7 +66,7 @@
                             <th>P - Adaptación profesional</th>
                         </tr>
                         <tr>
-                            <th>F - Distanciamiento del yo</th>
+                            <th>F - Rasgos autodestructivos o destructivos</th>
                         </tr>
                         <tr>
                             <th>G - Alcoholismo</th>
@@ -85,7 +85,7 @@
                             <th>&nbsp;</th>
                         </tr>
                         <tr>
-                            <th>K - Dificultad en el super yo</th>
+                            <th>K - Conflictos con la imaginación</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
