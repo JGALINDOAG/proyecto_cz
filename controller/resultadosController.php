@@ -3,16 +3,17 @@ class ResultadosController
 {
   
   public static function index(){
-    require_once "models/institucionAdministrador.php";
-    $objInstitucionAdministrador = new InstitucionAdministrador();
-    $rowFolios = $objInstitucionAdministrador->get_institucionAdministrador();
+    // require_once "models/institucionAdministrador.php";
+    // $objInstitucionAdministrador = new InstitucionAdministrador();
+    // $rowFolios = $objInstitucionAdministrador->get_institucionAdministrador();
     require_once "views/resultados/index.php";
   }
   
   public static function getList(){
     require_once "models/detallePersonasPruebas.php";
     $objDetallePersonasPruebas = new DetallePersonasPruebas();
-    $rowDetallePersonas = $objDetallePersonasPruebas->get_resultados($_POST['folio']);
+    // $rowDetallePersonas = $objDetallePersonasPruebas->get_resultados($_POST['folio']);
+    $rowDetallePersonas = $objDetallePersonasPruebas->get_resultados();
     $dataJson = json_encode($rowDetallePersonas, JSON_UNESCAPED_UNICODE);
 		print $dataJson;
   }

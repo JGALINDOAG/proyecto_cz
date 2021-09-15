@@ -37,16 +37,12 @@ class DetallePersonasPruebas extends AccesoDatos
         }
     }
     
-    public function get_resultados($folio) 
+    public function get_resultados() 
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            // $sql = "SELECT dpp.id_detalle, dpp.id_folio, CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre, p.email, dpp.fecha_registro,
-            // FROM detalle_personas_pruebas dpp
-            // INNER JOIN personas p USING(Id_persona)
-            // WHERE dpp.id_folio = BINARY ?
-            // AND dpp.id_detalle IN (SELECT id_detalle FROM resultados)
-            // ";
+            $band = '';
+            if($_SESSION['idInstitucion'] != 1) $band = 'AND i.id_institucion = ?';
             $sql = "SELECT dpp.id_detalle, dpp.id_folio, CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre, p.email, dpp.fecha_registro,
             (
                 SELECT dpp2.id_detalle
@@ -55,13 +51,16 @@ class DetallePersonasPruebas extends AccesoDatos
                 WHERE p2.Id_persona = p.Id_persona
                 AND dpp2.id_folio = BINARY dpp.id_folio
                 AND dpp2.id_detalle IN (SELECT id_detalle FROM resultados)
-            ) AS viewResultado  
+            ) AS viewResultado,
+            i.nombre as institucion
             FROM detalle_personas_pruebas dpp
             INNER JOIN personas p USING(Id_persona)
-            WHERE dpp.id_folio = BINARY ?
-            AND dpp.activo = 1";
+            INNER JOIN institucion_administrador ia USING(id_folio)
+            INNER JOIN administradores a USING (id_admin)
+            INNER JOIN institucion i USING(id_institucion)
+            WHERE dpp.activo = 1 $band";
             $stmt = $this->dbh->prepare($sql);
-            $stmt->bindParam(1, $folio, PDO::PARAM_STR);
+            $stmt->bindParam(1, $_SESSION['idInstitucion'], PDO::PARAM_INT);
             if ($stmt->execute()) {
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $this->result[] = $row;
@@ -234,7 +233,7 @@ class DetallePersonasPruebas extends AccesoDatos
         try {
             $this->dbh = AccesoDatos::conexion();
             $query = "SELECT dpp.*,CONCAT(p.nombre,' ',p.primer_apellido,' ',p.segundo_apellido) nombre, p.grado_estudios, p.area, p.turno
-            FROM perfiles.detalle_personas_pruebas dpp
+            FROM detalle_personas_pruebas dpp
             INNER JOIN personas p USING (id_persona)
             WHERE dpp.id_folio = BINARY ?;";
             $stmt = $this->dbh->prepare($query);

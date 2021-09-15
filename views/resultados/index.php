@@ -36,7 +36,7 @@
                 </div>
                 <hr>
             </div>
-            <div class="form-row">
+            <!-- <div class="form-row">
                 <div class="form-group col-sm-12">
                     <label>Folio</label>
                     <select id="cmbFolio" name="cmbFolio" class="selectpicker form-control" data-live-search="true">
@@ -46,13 +46,15 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="table-responsive">
                 <table class="table table-hover" id="listPersonas" style="width:100%">
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Folio</th>
+                            <th scope="col">Intitución</th>
                             <th scope="col">Fecha registro</th>
                             <th scope="col">Opción</th>
                         </tr>

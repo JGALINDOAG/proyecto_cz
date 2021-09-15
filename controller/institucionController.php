@@ -45,10 +45,23 @@ class InstitucionController
 
   public static function addVenta() {
     require_once 'models/institucionAdministrador.php';
+    require_once 'models/administradores.php';
     $idFolio = AccesoDatos::folio();
     $objInstitucionAdministrador = new InstitucionAdministrador();
     $objInstitucionAdministrador->add_institucionAdministrador($idFolio, $_POST["cmbAdmin"], $_POST["txtCosto"], $_POST["txtNoPGratis"], $_POST["txtNoPVendidas"]);
-    header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=venta&m=".AccesoDatos::encriptar(1)."");
+    
+    $objAdministradores = new Administradores();
+    $rowAdmin = $objAdministradores->get_id_admin($_POST["cmbAdmin"]);
+
+    $nombre = $rowAdmin[0]['nombre']." ".$rowAdmin[0]['apellidos'];
+    $telefono = "52".$rowAdmin[0]['telefono'];
+
+    $respuesta = AccesoDatos::sendFolio($nombre, $idFolio, $rowAdmin[0]['email'], $_POST["txtNoPVendidas"], $_POST["txtNoPGratis"], $_POST["txtCosto"]);
+    if($respuesta === false) print $respuesta;
+
+    header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=venta&m=".AccesoDatos::encriptar(1).
+    "&f=".AccesoDatos::encriptar($idFolio)."&t=".AccesoDatos::encriptar($telefono)."&n=".AccesoDatos::encriptar($nombre)."&c=".AccesoDatos::encriptar($_POST["txtCosto"]).
+    "&v=".AccesoDatos::encriptar($_POST["txtNoPVendidas"])."&g=".AccesoDatos::encriptar($_POST["txtNoPGratis"]));
   }
   
   public static function listInstitucion() {

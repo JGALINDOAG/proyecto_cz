@@ -97,7 +97,7 @@
                 <div class="form-row">
                     <div class="form-group col-sm-12 col-lg-3">
                         <label>RFC</label>
-                        <input type="text" name="txtRFC" placeholder="RFC" class="form-control" onkeyup="conMayusculas(this);" value="<?php echo @$_POST["txtRFC"]; ?>" pattern="[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]" required>
+                        <input type="text" name="txtRFC" placeholder="RFC" class="form-control" onkeyup="conMayusculas(this);" value="<?php echo @$_POST["txtRFC"]; ?>" pattern="^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$" required>
                         <div class="invalid-feedback">
                             Por favor escriba el RFC.
                         </div>
