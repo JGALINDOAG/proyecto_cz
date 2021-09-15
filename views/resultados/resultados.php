@@ -54,13 +54,14 @@
                 $fnl = $f->p_final($idDetalle);
                 //print_r($fnl);
                 echo '<p><strong>Perfil final: ' . $fnl[0]['final'] . '</strong></p>';
+                $av = new Pruebas();
                 for ($l = 0; $l < sizeof($list); $l++) {
                     if ($list[$l]["id_prueba"] == 1) {
                         if ($estud == "bachillerato" || $estud == "licenciatura" || $estud == "posgrados") {
                             //TERMAN
                             echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                            $av1 = new Pruebas();
-                            $avance1 = $av1->fin_prueba($idDetalle, 1);
+                            // $av1 = new Pruebas();
+                            $avance1 = $av->fin_prueba($idDetalle, 1);
                             if ($avance1[0]["Total"] == 10) {
                                 $r1 = new Reporte();
                                 $terman = $r1->res_total($idDetalle, $list[$l]["id_prueba"]);
@@ -79,8 +80,8 @@
                     } elseif ($list[$l]["id_prueba"] == 2) {
                         //PERSONALIDAD 1
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av2 = new Pruebas();
-                        $avance2 = $av2->fin_prueba($idDetalle, 2);
+                        // $av2 = new Pruebas();
+                        $avance2 = $av->fin_prueba($idDetalle, 2);
                         if ($avance2[0]["Total"] == 11) {
                             $r2 = new Reporte();
                             $smp02 = $r2->res_ind($idDetalle, $list[$l]["id_prueba"]);
@@ -100,8 +101,8 @@
                     } elseif ($list[$l]["id_prueba"] == 3) {
                         //PERSONALIDAD 2
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av3 = new Pruebas();
-                        $avance3 = $av3->fin_prueba($idDetalle, 3);
+                        // $av3 = new Pruebas();
+                        $avance3 = $av->fin_prueba($idDetalle, 3);
                         if ($avance3[0]["Total"] == 5) {
                             $r3 = new Reporte();
                             $smp03 = $r3->res_ind($idDetalle, $list[$l]["id_prueba"]);
@@ -122,8 +123,8 @@
                         if ($estud == "ninguno" || $estud == "preescolar" || $estud == "primaria" || $estud == "secundaria") {
                             //RAVEN
                             echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                            $av4 = new Pruebas();
-                            $avance4 = $av4->fin_prueba($idDetalle, 4);
+                            // $av4 = new Pruebas();
+                            $avance4 = $av->fin_prueba($idDetalle, 4);
                             if ($avance4[0]["Total"] == 5) {
                                 $r4 = new Reporte();
                                 $raven = $r4->res_total($idDetalle, $list[$l]["id_prueba"]);
@@ -142,8 +143,8 @@
                     } elseif ($list[$l]["id_prueba"] == 5 || $list[$l]["id_prueba"] == 6) {
                         //INTERESES APTITUDES
                         //echo "<hr><center><h5>...</h5></center>";
-                        $av5 = new Pruebas();
-                        $avance5 = $av5->fin_prueba($idDetalle, 5);
+                        // $av5 = new Pruebas();
+                        $avance5 = $av->fin_prueba($idDetalle, 5);
                         $av6 = new Pruebas();
                         $avance6 = $av6->fin_prueba($idDetalle, 6);
                         if ($avance5[0]["Total"] == 10 and $avance6[0]["Total"] == 10) {
@@ -158,8 +159,8 @@
                     } elseif ($list[$l]["id_prueba"] == 7) {
                         //ANÁLISIS TRANSACCIONAL
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av7 = new Pruebas();
-                        $avance7 = $av7->fin_prueba($idDetalle, 7);
+                        // $av7 = new Pruebas();
+                        $avance7 = $av->fin_prueba($idDetalle, 7);
                         if ($avance7[0]["Total"] == 12) {
                             $r7 = new Reporte();
                             $analisis = $r7->res_ind($idDetalle, $list[$l]["id_prueba"]);
@@ -191,8 +192,8 @@
                     } elseif ($list[$l]["id_prueba"] == 9) {
                         //TIPO DE CULTURA ORGANIZACIONAL
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av9 = new Pruebas();
-                        $avance9 = $av9->fin_prueba($idDetalle, 9);
+                        // $av9 = new Pruebas();
+                        $avance9 = $av->fin_prueba($idDetalle, 9);
                         //print_r($avance10);
                         if ($avance9[0]["Total"] == 1) {
                             $r9 = new Reporte();
@@ -207,8 +208,8 @@
                     } elseif ($list[$l]["id_prueba"] == 10) {
                         //CLIMA PARA EL CAMBIO
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av10 = new Pruebas();
-                        $avance10 = $av10->fin_prueba($idDetalle, 10);
+                        // $av10 = new Pruebas();
+                        $avance10 = $av->fin_prueba($idDetalle, 10);
                         //print_r($avance10);
                         if ($avance10[0]["Total"] == 1) {
                             $r10 = new Reporte();
@@ -223,8 +224,8 @@
                     } elseif ($list[$l]["id_prueba"] == 11) {
                         //NIVEL DE ESCUCHA
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av11 = new Pruebas();
-                        $avance11 = $av11->fin_prueba($idDetalle, 11);
+                        // $av11 = new Pruebas();
+                        $avance11 = $av->fin_prueba($idDetalle, 11);
                         //print_r($avance11);
                         if ($avance11[0]["Total"] == 1) {
                             $r11 = new Reporte();
@@ -239,16 +240,16 @@
                     } elseif ($list[$l]["id_prueba"] == 12) {
                         //MMPI
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av12 = new Pruebas();
-                        $avance12 = $av12->fin_prueba($idDetalle, 12);
+                        // $av12 = new Pruebas();
+                        $avance12 = $av->fin_prueba($idDetalle, 12);
                         if ($avance12[0]["Total"] == 13) {
                             require_once 'views/test/mmpi_result.php';
                         }
                     } elseif ($list[$l]["id_prueba"] == 13) {
                         //TEST PROYECTIVO KAREN MACHOVER
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av13 = new Pruebas();
-                        $avance13 = $av13->fin_prueba($idDetalle, 13);
+                        // $av13 = new Pruebas();
+                        $avance13 = $av->fin_prueba($idDetalle, 13);
                         if ($avance13[0]["Total"] == 16) {
                             $r13 = new Reporte();
                             $machover = $r13->res_ind($idDetalle, $list[$l]["id_prueba"]);
@@ -264,8 +265,8 @@
                     } elseif ($list[$l]["id_prueba"] == 14) {
                         //GRADO DE RETROALIMENTACIÓN
                         echo "<hr><center><h5>" . $list[$l]["prueba"] . "</h5></center>";
-                        $av14 = new Pruebas();
-                        $avance14 = $av14->fin_prueba_op($idDetalle, 14);
+                        // $av14 = new Pruebas();
+                        $avance14 = $av->fin_prueba_op($idDetalle, 14);
                         if ($avance14[0]["Total"] == 2) {
                             $r14 = new Reporte();
                             $grado = $r14->res_ind($idDetalle, $list[$l]["id_prueba"]);

@@ -23,6 +23,8 @@ class CROL extends AccesoDatos
             $this->result[] = $row;
           }
           return $this->result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {

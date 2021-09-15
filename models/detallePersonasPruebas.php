@@ -30,6 +30,8 @@ class DetallePersonasPruebas extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -66,6 +68,8 @@ class DetallePersonasPruebas extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -83,6 +87,8 @@ class DetallePersonasPruebas extends AccesoDatos
         $stmt->bindValue(1, 1, PDO::PARAM_STR);
         $stmt->bindValue(2, $idDetalle, PDO::PARAM_INT);
         $stmt->execute();
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       } catch (PDOException $e) {
         die("¡Error!: update_detallePersonasPruebas()" . $e->getMessage());
@@ -203,6 +209,8 @@ class DetallePersonasPruebas extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -221,6 +229,8 @@ class DetallePersonasPruebas extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -243,6 +253,8 @@ class DetallePersonasPruebas extends AccesoDatos
                     if($row != null) $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {

@@ -21,6 +21,8 @@ class Privilegio extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -41,6 +43,8 @@ class Privilegio extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -57,6 +61,8 @@ class Privilegio extends AccesoDatos
             $stmt = $this->dbh->prepare($query);
             $stmt->bindValue(1, $cvePrivilegio, PDO::PARAM_INT);
             $stmt->execute();
+            $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+            $stmt = null; // obligado para cerrar la conexión
             $this->dbh = null;
         } catch (PDOException $e) {
             die("¡Error!: delete_id_privilegio() " . $e->getMessage());
@@ -73,6 +79,8 @@ class Privilegio extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -98,6 +106,8 @@ class Privilegio extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {

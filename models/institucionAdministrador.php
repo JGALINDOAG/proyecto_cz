@@ -27,6 +27,8 @@ class InstitucionAdministrador extends AccesoDatos
             $this->result[] = $row;
           }
           return $this->result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
@@ -47,6 +49,8 @@ class InstitucionAdministrador extends AccesoDatos
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
           if($row != null) $this->result[] = $row;
           return $this->result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
@@ -69,6 +73,8 @@ class InstitucionAdministrador extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -88,6 +94,8 @@ class InstitucionAdministrador extends AccesoDatos
         $stmt->bindValue(4, $numGratis, PDO::PARAM_INT);
         $stmt->bindValue(5, $numVendidas, PDO::PARAM_INT);
         $stmt->execute();
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       } catch (Exception $e) {
         die("¡Error!: add_institucionAdministrador() " . $e->getMessage());

@@ -21,6 +21,8 @@ class Institucion extends AccesoDatos
             $this->result[] = $row;
           }
           return $this->result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
@@ -39,6 +41,8 @@ class Institucion extends AccesoDatos
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
           if($row != null) $this->result[] = $row;
           return $this->result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
@@ -63,6 +67,8 @@ class Institucion extends AccesoDatos
         $stmt->execute();
         $id = $this->dbh->lastInsertId();
         return $this->result[] = $id;
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       } catch (Exception $e) {
         die("¡Error!: add_institucion() " . $e->getMessage());
@@ -83,6 +89,8 @@ class Institucion extends AccesoDatos
         $stmt->bindValue(6, $pruebas, PDO::PARAM_STR);
         $stmt->bindValue(7, $idInstitucion, PDO::PARAM_INT);
         $stmt->execute();
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       } catch (PDOException $e) {
         die("¡Error!: update_institucion()" . $e->getMessage());
@@ -101,6 +109,8 @@ class Institucion extends AccesoDatos
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
           if($row != null) $this->result[] = $row;
           return $this->result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
@@ -128,6 +138,8 @@ class Institucion extends AccesoDatos
                   $this->result[] = $row;
               }
               return $this->result;
+              $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+              $stmt = null; // obligado para cerrar la conexión
               $this->dbh = null;
           }
       } catch (Exception $e) {

@@ -21,6 +21,8 @@ class ObservacionResultado extends AccesoDatos
         $stmt->execute();
         // $id = $this->dbh->lastInsertId();
         // return $this->result[] = $id;
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       } catch (Exception $e) {
         die("¡Error!: add_observacion_resultado() " . $e->getMessage());
@@ -36,6 +38,8 @@ class ObservacionResultado extends AccesoDatos
         $stmt->bindValue(1, $observacion, PDO::PARAM_STR);
         $stmt->bindValue(2, $idObservacion, PDO::PARAM_INT);
         $stmt->execute();
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       } catch (PDOException $e) {
         die("¡Error!: update_observacion_resultado()" . $e->getMessage());
@@ -54,6 +58,8 @@ class ObservacionResultado extends AccesoDatos
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
           if($row != null) $this->result[] = $row;
           return $this->result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
