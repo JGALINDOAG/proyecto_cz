@@ -59,8 +59,8 @@ function datatable_by_folio(folio) {
 
     result.done(function (res) {
         var dataPerfiles = JSON.parse(res)
-        var shetName_excel = $('select[name="cmbInstitucion"] option:selected').text() + '-' + $('select[name="cmbFolio"] option:selected').text()
-
+        var shetName_excel = $('select[name="cmbFolio"] option:selected').text()
+        let date = new Date()
         // console.log(dataPerfiles)
         $('#reporte').DataTable({
             "language": {
@@ -91,36 +91,60 @@ function datatable_by_folio(folio) {
             buttons: [{
                 // 'copy', 'csv', 'excel', 'pdf', 'print'
                 extend: 'excelHtml5',
-                title: shetName_excel,
+                title: shetName_excel+'_'+date.getDate()+'_'+(date.getMonth()+1)+'_'+date.getFullYear(),
                 sheetName: shetName_excel,
                 autoFilter: true,
-                exportOptions: {
-                    modifier: {
-                        page: 'current'
-                    }
-                },
                 customize: function (xlsx) {
                     var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                    // Loop over the cells in column `C`
+                    // Loop over the cells in column `E`
                     $('row c[r^="E"]', sheet).each(function () {
                         // Get the value
-                        if ($('is t', this).text() < 10) {
-                            $(this).attr( 's', '10' );
-                        } else if ( $('is t', this).text() >= 54 && $('is t', this).text() <= 87 ) {
+                        // if ($('is t', this).text() < 10) {
+                        //     $(this).attr( 's', '10' );
+                        // } else if ( $('is t', this).text() >= 54 && $('is t', this).text() <= 87 ) {
+                        //     $(this).attr( 's', '20' );     
+                        // } else if ( $('is t', this).text() >= 89 && $('is t', this).text() <= 110 ) {
+                        //     $(this).attr( 's', '15' );     
+                        // }
+                        if ($(this).text() == 1) {
+                            $(this).attr( 's', '15' ); 
+                        } else if ( $(this).text() == 2 ) {
                             $(this).attr( 's', '20' );     
-                        } else if ( $('is t', this).text() >= 89 && $('is t', this).text() <= 110 ) {
-                            $(this).attr( 's', '15' );     
+                        } else if ( $(this).text() == 3 ) {
+                            $(this).attr( 's', '10' );   
                         }
                     });
                     // Loop over the cells in column `C`
                     $('row c[r^="Q"]', sheet).each(function () {
                         // Get the value
                         if ($(this).text() == 1) {
-                            $(this).attr( 's', '10' );
+                            $(this).attr( 's', '15' ); 
                         } else if ( $(this).text() == 2 ) {
                             $(this).attr( 's', '20' );     
                         } else if ( $(this).text() == 3 ) {
-                            $(this).attr( 's', '15' );     
+                            $(this).attr( 's', '10' );   
+                        }
+                    });
+                    // Loop over the cells in column `W`
+                    $('row c[r^="W"]', sheet).each(function () {
+                        // Get the value
+                        if ($(this).text() == 1) {
+                            $(this).attr( 's', '15' ); 
+                        } else if ( $(this).text() == 2 ) {
+                            $(this).attr( 's', '20' );     
+                        } else if ( $(this).text() == 3 ) {
+                            $(this).attr( 's', '10' );   
+                        }
+                    });
+                    // Loop over the cells in column `Z`
+                    $('row c[r^="Z"]', sheet).each(function () {
+                        // Get the value
+                        if ($(this).text() == 1) {
+                            $(this).attr( 's', '15' ); 
+                        } else if ( $(this).text() == 2 ) {
+                            $(this).attr( 's', '20' );     
+                        } else if ( $(this).text() == 3 ) {
+                            $(this).attr( 's', '10' );   
                         }
                     });
                 }
