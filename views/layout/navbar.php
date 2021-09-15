@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="<?php echo AccesoDatos::ruta(); ?>?accion=indexUsuario">
-            <img src="<?php echo AccesoDatos::ruta(); ?>assets/img/ico.png" width="35" height="35" class="d-inline-block align-top" alt="">
+            <img src="<?php echo AccesoDatos::ruta(); ?>assets/img/ico.png" width="45" height="45" class="d-inline-block align-top" alt="">
             &nbsp;CHROME
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
                         <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>?accion=loginUsuario">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>?accion=Home">Test</a>
+                        <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>?accion=Home">Realizar pruebas</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav my-2 my-lg-0">

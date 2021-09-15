@@ -1,16 +1,16 @@
 $(document).ready( function () {
-    $("#cmbFolio").change(function () {
-        var folio = $(this).val()
-        dataTable(folio)
-    });
+    // $("#cmbFolio").change(function () {
+    //     var folio = $(this).val()
+           dataTable()
+    // });
 } );
-function dataTable(folio){
+function dataTable(){
     var rol = $('#rol').html()
 
     var cmbFolio = $.ajax({
         method: "POST",
-        url: "?accion=resultados&pag=getList",
-        data: { folio: folio }
+        url: "?accion=resultados&pag=getList"
+        // data: { folio: folio }
     })
 
     cmbFolio.done(function( res ) {
@@ -48,6 +48,12 @@ function dataTable(folio){
                 },
                 {
                     "data": 'email'
+                },
+                {
+                    "data": 'id_folio'
+                },
+                {
+                    "data": 'institucion'
                 },
                 {
                     "data": 'fecha_registro'

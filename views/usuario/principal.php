@@ -16,7 +16,7 @@
         </div>
         <nav class="nav">
             <a href="?accion=indexUsuario" id="logo" style="display: flex; align-items: center;">
-                <img src="assets/img/ico.png" width="35" height="35" style="display: inline-block; vertical-align: top;" alt="">&nbsp;Chrome
+                <img src="assets/img/ico.png" width="45" height="45" style="display: inline-block; vertical-align: top;" alt="">&nbsp;Chrome
             </a>
             <div class="overlay">
                 <ul>
@@ -113,7 +113,7 @@
                     <li>Gastos innecesarios, <b>AHORRO E INVERSIÓN</b></li>
                     <li>Mejorar sus perfiles de ingreso. </li>
                     <li>Promover cursos, talleres, seguimientos especializados, etc</li>
-                    <li>El ofrecimiento de una llave <em>(Administrador vía web)</em> donde podrán realizar las evaluaciones deseadas, con los reslitados de sus perfiles. </li>
+                    <li>El ofrecimiento de una llave <em>(Administrador vía web)</em> donde podrán realizar las evaluaciones deseadas, con los resultados de sus perfiles. </li>
                     <li>Generar un histórico del personal evaluado.</li>
                 </ul>
                 <!-- <a href="#" class="btn btn-info">Full Menu</a> -->
@@ -147,10 +147,25 @@
                 <p>Te ofrecemos, a continuación, los diferentes canales a través de los cuales puedes contactar con nosotros. Si lo deseas, puedes rellenar el formulario que encontrarás a continuación y te responderemos muy pronto.</p>
             </div>
             <div class="form-container add-flex">
-                <form action="">
+                <?php
+                @$m = AccesoDatos::desencriptar($_GET['m']);
+                echo $m;
+                if (isset($m)) {
+                    switch ($m) {
+                        case '1':
+                            echo '<div class="center add-padding-center second">
+                                <h1 class="custom-font">El mesnaje se envio</h1>
+                                <h2 class="custom-font-secondary-text">Correctamente</h2>
+                            </div>';
+                            break;
+                    }
+                }
+                ?>
+                <form action="" method="POST">
                     <input type="text" class="input" placeholder="Nombre completo" name="name" required>
                     <input type="email" class="input" placeholder="Email" name="email" required>
                     <textarea name="message" class="text-area" placeholder="¿En qué podemos ayudarte?" required></textarea>
+                    <input type="hidden" name="validUsuario" value="send">
                     <input type="submit" class="input btn-submit">
                 </form>
             </div>
@@ -173,7 +188,9 @@
             <br>
             <h4>Telefonos</h4>
             <div class="days">
-                <h5>Tel. 01(55)59343939, Cel. 5517431183</h5>
+                <p><h5>Tel. Oficina (55) 8857 1239</h5></p>
+                <p><h5>Cel. 55 3388 1247 (Solo mensajes)</h5></p>
+                <p><h5>Cel. 55 3388 1247 (Solo mensajes)</h5></p>
             </div>
         </div>
     </footer>
@@ -256,5 +273,4 @@
 <!-- Remember to include jQuery :) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-
 </html>

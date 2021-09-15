@@ -15,12 +15,30 @@
             if (isset($m)) {
                 switch ($m) {
                     case '1':
+                        $folio = AccesoDatos::desencriptar($_GET['f']);
+                        $nombre = AccesoDatos::desencriptar($_GET['n']);
+                        $telefono = AccesoDatos::desencriptar($_GET['t']);
+                        $costo = AccesoDatos::desencriptar($_GET['c']);
+                        $noPruebas = AccesoDatos::desencriptar($_GET['v']);
+                        $noPGratis = AccesoDatos::desencriptar($_GET['g']);
+                        $text = '';
+                        $text .= 'Estimado Sr (a). ' . $nombre . '%0A
+                                El equipo que trabaja en CHROME le envia  un cordial saludo y le agradecemos su preferencia.%0A
+                                A continuaci&oacute;n le proporcionamos los datos de la venta:%0A
+                                El costo por la pruebas es de $'.$costo.'.00 %0A
+                                N&uacute;mero de pruebas vendidas '.$noPruebas.'%0A';
+                                if($noPGratis != 0):
+                                    $text .= 'N&uacute;mero de pruebas gratis '.$noPGratis.'%0A';  
+                                endif;
+                                $text .= 'El folio generado para esta venta es '.$folio.'%0A';
+
                         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>¡AVISO!</strong>&nbsp;Se realizó la venta a la Institución exitosamente
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>';
+                                <strong>¡AVISO!</strong>&nbsp;Se realizó la venta a la Institución exitosamente&nbsp;|&nbsp;El folio generado para esta venta es <b>'.$folio.'</b>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                &nbsp;|&nbsp;<a href="https://api.whatsapp.com/send?phone=' . $telefono . '&text=' . $text . '" target="_blank">Enviar datos de la venta por WhatSapp</a>
+                                </div>';
                         break;
                 }
             }
