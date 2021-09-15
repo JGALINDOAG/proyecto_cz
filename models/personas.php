@@ -18,6 +18,8 @@ class Personas extends AccesoDatos
             $stmt->bindValue(1, $costo, PDO::PARAM_INT);
             $stmt->bindParam(2, $idDetalle, PDO::PARAM_INT);
             $stmt->execute();
+            $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+            $stmt = null; // obligado para cerrar la conexión
             $this->dbh = null;
         } catch (PDOException $e) {
             die("¡Error!: ".$e->getMessage());
@@ -34,6 +36,8 @@ class Personas extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -51,6 +55,8 @@ class Personas extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -68,6 +74,8 @@ class Personas extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -88,6 +96,8 @@ class Personas extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -112,6 +122,8 @@ class Personas extends AccesoDatos
             $stmt->execute();
             //$id = $this->dbh->lastInsertId();
             //return $this->result[]=$id;
+            $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+            $stmt = null; // obligado para cerrar la conexión
             $this->dbh = null;
         } catch (PDOException $e) {
             die("¡Error!: ".$e->getMessage());
@@ -127,6 +139,8 @@ class Personas extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -142,6 +156,8 @@ class Personas extends AccesoDatos
             $stmt->bindValue(1, $Id_persona, PDO::PARAM_INT);
             $stmt->bindValue(2, $id_folio, PDO::PARAM_STR);
             $stmt->execute();
+            $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+            $stmt = null; // obligado para cerrar la conexión
             $this->dbh = null;
         } catch (PDOException $e) {
             die("¡Error!: ".$e->getMessage());
@@ -161,6 +177,8 @@ class Personas extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {

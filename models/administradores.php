@@ -21,6 +21,8 @@ class Administradores extends AccesoDatos
           $this->result[] = $row;
         }
         return $this->result;
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       }
     } catch (Exception $e) {
@@ -43,6 +45,8 @@ class Administradores extends AccesoDatos
         }
       }
       return $this->result;
+      $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+      $stmt = null; // obligado para cerrar la conexión
       $this->dbh = null;
     } catch (Exception $e) {
       die("¡Error!: get_id_admin() " . $e->getMessage());
@@ -65,6 +69,8 @@ class Administradores extends AccesoDatos
         }
       }
       return $this->result;
+      $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+      $stmt = null; // obligado para cerrar la conexión
       $this->dbh = null;
     } catch (Exception $e) {
       die("¡Error!: get_id_admin() " . $e->getMessage());
@@ -90,6 +96,8 @@ class Administradores extends AccesoDatos
       $stmt->execute();
       $id = $this->dbh->lastInsertId();
       return $this->result[] = $id;
+      $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+      $stmt = null; // obligado para cerrar la conexión
       $this->dbh = null;
     } catch (Exception $e) {
       die("¡Error!: add_administradores() " . $e->getMessage());
@@ -110,6 +118,8 @@ class Administradores extends AccesoDatos
       $stmt->bindValue(5, $telefono, PDO::PARAM_STR);
       $stmt->bindValue(6, $idAdmin, PDO::PARAM_INT);
       $stmt->execute();
+      $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+      $stmt = null; // obligado para cerrar la conexión
       $this->dbh = null;
     } catch (PDOException $e) {
       die("¡Error!: update_id_admin()" . $e->getMessage());
@@ -127,6 +137,8 @@ class Administradores extends AccesoDatos
       $stmt->bindValue(2, $clave, PDO::PARAM_STR);
       $stmt->bindValue(3, $idAdmin, PDO::PARAM_INT);
       $stmt->execute();
+      $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+      $stmt = null; // obligado para cerrar la conexión
       $this->dbh = null;
     } catch (PDOException $e) {
       die("¡Error!: update_id_admin_pass()" . $e->getMessage());
@@ -143,6 +155,8 @@ class Administradores extends AccesoDatos
       $stmt->bindValue(1, $activo, PDO::PARAM_INT);
       $stmt->bindValue(2, $idAdmin, PDO::PARAM_INT);
       $stmt->execute();
+      $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+      $stmt = null; // obligado para cerrar la conexión
       $this->dbh = null;
     } catch (PDOException $e) {
       die("¡Error!: delete_id_admin() " . $e->getMessage());
@@ -165,6 +179,8 @@ class Administradores extends AccesoDatos
           $this->result[] = $row;
         }
         return $this->result;
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       }
     } catch (Exception $e) {
@@ -185,6 +201,8 @@ class Administradores extends AccesoDatos
           $this->result[] = $row;
         }
         return $this->result;
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       }
     } catch (Exception $e) {
@@ -227,6 +245,8 @@ class Administradores extends AccesoDatos
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if($row != null) $this->result[] = $row;
         return $this->result;
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       }
     } catch (Exception $e) {
@@ -250,6 +270,8 @@ class Administradores extends AccesoDatos
                 $this->result[] = $row;
             }
             return $this->result;
+            $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+            $stmt = null; // obligado para cerrar la conexión
             $this->dbh = null;
         }
     } catch (Exception $e) {
@@ -275,6 +297,8 @@ class Administradores extends AccesoDatos
           $this->result[] = $row;
         }
         return $this->result;
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       }
     } catch (Exception $e) {

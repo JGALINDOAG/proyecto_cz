@@ -2,7 +2,7 @@
 class Reporte extends AccesoDatos
 {
     private $dbh;
-    private $result;
+    // private $result;
 
     public function __construct()
     {
@@ -15,6 +15,8 @@ class Reporte extends AccesoDatos
         $this->dbh = parent::conexion();
         $stmt = $this->dbh->prepare("UPDATE detalle_personas_pruebas SET perfil = JSON_SET(perfil, '$.".$test."', $perfil) where id_detalle = $idDetalle");
         $stmt->execute();
+        $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+        $stmt = null; // obligado para cerrar la conexión
         $this->dbh = null;
       } catch (PDOException $e) {
           die("¡Error!: perfil_test".$e->getMessage());
@@ -49,6 +51,8 @@ class Reporte extends AccesoDatos
           }else{
             return $perfil=0;
           }
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
@@ -64,8 +68,10 @@ class Reporte extends AccesoDatos
         $stmt->bindParam(1, $idDetalle, PDO::PARAM_INT);
         if ($stmt->execute()) {
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
-          $this->result[] = $row;
-          return $this->result;
+          $result[] = $row;
+          return $result;
+          $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+          $stmt = null; // obligado para cerrar la conexión
           $this->dbh = null;
         }
       } catch (Exception $e) {
@@ -92,9 +98,11 @@ class Reporte extends AccesoDatos
         $stmt->bindParam(2, $id_prueba, PDO::PARAM_INT);
             if ($stmt->execute()) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $this->result[] = $row;
+                    $result[] = $row;
                 }
-                return $this->result;
+                return $result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -127,9 +135,11 @@ class Reporte extends AccesoDatos
       $stmt->bindParam(2, $id_prueba, PDO::PARAM_INT);
           if ($stmt->execute()) {
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  $this->result[] = $row;
+                  $result[] = $row;
               }
-              return $this->result;
+              return $result;
+              $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+              $stmt = null; // obligado para cerrar la conexión
               $this->dbh = null;
           }
       } catch (Exception $e) {

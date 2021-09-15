@@ -21,6 +21,8 @@ class Pago extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -41,6 +43,8 @@ class Pago extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -59,6 +63,8 @@ class Pago extends AccesoDatos
             $stmt->execute();
             //$id = $this->dbh->lastInsertId();
             //return $this->result[]=$id;
+            $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+            $stmt = null; // obligado para cerrar la conexión
             $this->dbh = null;
         } catch (PDOException $e) {
             die("¡Error!: add_pago() ".$e->getMessage());
@@ -75,6 +81,8 @@ class Pago extends AccesoDatos
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->result[] = $row;
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -100,6 +108,8 @@ class Pago extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
@@ -121,6 +131,8 @@ class Pago extends AccesoDatos
                     $this->result[] = $row;
                 }
                 return $this->result;
+                $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
+                $stmt = null; // obligado para cerrar la conexión
                 $this->dbh = null;
             }
         } catch (Exception $e) {
