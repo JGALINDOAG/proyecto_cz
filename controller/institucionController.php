@@ -16,7 +16,7 @@ class InstitucionController
     if(empty($validInstitucion)): 
       $pruebas = "";
       foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
-      $pruebas = rtrim($pruebas, ",");
+      $pruebas = trim($pruebas, ",");
       $idInstitucion = $objInstitucion->add_institucion($_POST["txtNombreInst"], $_POST["txtAbreviatura"], $_POST["txtRFC"], $_POST["txtEmail"], $_POST["txtTelefono"], $pruebas);
       header("Location: ".AccesoDatos::ruta()."?accion=administradores&pag=index&institution=".AccesoDatos::encriptar($idInstitucion));
     else:
