@@ -65,8 +65,8 @@ $(document).ready( function () {
         $.post( "?accion=pago&pag=pagoByUser", { folio: folio })
             .done(function( data ) {
                 var dataPagos = JSON.parse(data)
-                var costoBruto = '<b>$' + dataPagos[0].pagoUser + '</b>'
-                var total = '<b>$' + dataPagos[0].costo_individual + '</b>'
+                var costoBruto = '<b>$' + dataPagos[0].costo_individual + '</b>'
+                var total = '<b>$' + dataPagos[0].pagoUser + '</b>'
                 if(dataPagos[0].pagoUser != null) {
                     $('#costo_evaluado').html(costoBruto); 
                     $('#costo_total_evaluado').html(total);
