@@ -1,4 +1,18 @@
 $(document).ready( function () {
+    var isTableCreated = false;
+
+    $(document).ajaxStart(function() {  
+        $('#vendedor').html(''); 
+        $('#costo_evaluado').html(''); 
+        $('#costo_total_evaluado').html('');      
+        if (isTableCreated==true) {
+            $('#reporte').DataTable().clear();
+            $('#reporte').DataTable().destroy();
+            $("#reporte").append('<tr class="text-center"><td colspan="3"><b>¡Sin resultados! Por favor elija una Generación</b></td></tr>')
+            isTableCreated = false
+        }
+    });
+
     $('#pay').hide();
     $("#pagar").hide();
     $('#file').hide();
@@ -13,6 +27,7 @@ $(document).ready( function () {
         var id = $(this).val()
         $('#costo').html('')
         $('#statusPago').html('Status de pago del Folio')
+
         var cmbInstitucion = $.ajax({
             method: "POST",
             url: "?accion=institucionAdministrador&pag=getFolioByInst",
@@ -81,6 +96,7 @@ $(document).ready( function () {
             });
 
         datatable_by_folio(folio, opc)
+        isTableCreated = true;
     });
 
     $("#cmbFormaPago").change(function () {
