@@ -8,7 +8,7 @@ $(document).ready( function () {
         if (isTableCreated==true) {
             $('#reporte').DataTable().clear();
             $('#reporte').DataTable().destroy();
-            $("#reporte").append('<tr class="text-center"><td colspan="3"><b>¡Sin resultados! Por favor elija una Generación</b></td></tr>')
+            $("#reporte").append('<tr class="text-center"><td colspan="3"><b>¡Sin resultados! Por favor elija un folio</b></td></tr>')
             isTableCreated = false
         }
     });
