@@ -3,8 +3,9 @@ $(document).ready( function () {
 
     $(document).ajaxStart(function() {  
         $('#vendedor').html(''); 
-        $('#costo_evaluado').html(''); 
-        $('#costo_total_evaluado').html('');      
+        $('#costo_evaluado').html('---'); 
+        $('#costo_total_evaluado').html('---');      
+        $('#total').html('---');      
         if (isTableCreated==true) {
             $('#reporte').DataTable().clear();
             $('#reporte').DataTable().destroy();
@@ -25,7 +26,7 @@ $(document).ready( function () {
     $('#completed').hide();
     $('#cmbInstitucion').on('change', function() {
         var id = $(this).val()
-        $('#costo').html('')
+        $('#costo').html('---')
         $('#statusPago').html('Status de pago del Folio')
 
         var cmbInstitucion = $.ajax({
