@@ -190,7 +190,7 @@
             <div class="days">
                 <p><h5>Tel. Oficina (55) 8857 1239</h5></p>
                 <p><h5>Cel. 55 3388 1247 (Solo mensajes)</h5></p>
-                <p><h5>Cel. 55 3388 1247 (Solo mensajes)</h5></p>
+                <p><h5>Cel. 55 3421 7372 (Solo mensajes)</h5></p>
             </div>
         </div>
     </footer>
