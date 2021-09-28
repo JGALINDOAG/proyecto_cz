@@ -11,7 +11,7 @@
                 <div class="media d-flex align-items-center">
                     <div class="media-body">
                         <h5 class="mt-0">PRUEBAS DISPONIBLES</h5>
-                        <p>De clic sobre la prueba que desea realizar.</p>
+                        <p>De clic sobre la prueba que desea realizar y las que vaya realizando se irán bloqueando.</p>
                         <?php
                         $costo = new Pruebas();
                         $money = $costo->activo_detalle_personas($idDetalle);
@@ -33,7 +33,8 @@
                 <?php 
                 for ($l = 0; $l<sizeof($list); $l++) {
                     $pendiente = "<input type='submit' class='btn btn-outline-green btn-lg btn-block' name='".$list[$l]["idprueba"]."' value='".$list[$l]["prueba"]."'>";
-                    $termino = "<br><p><img src='assets/img/check.svg'>".$list[$l]["prueba"]."</p>";
+                    $termino = "<button class='btn btn-green btn-lg btn-block' disabled>".$list[$l]["prueba"]."</button>";
+                    // $termino = "<br><p><img src='assets/img/check.svg'>".$list[$l]["prueba"]."</p>";
                     if($list[$l]["idprueba"]!=13){
                         //1
                         if($list[$l]["idprueba"]==1 and $list[$l]["avance"]<10){
