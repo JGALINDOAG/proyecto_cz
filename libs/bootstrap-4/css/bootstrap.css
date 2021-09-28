@@ -3106,14 +3106,16 @@ fieldset:disabled a.btn {
 /* BNT PROPIOS */
 .btn-green {
   color: #fff;
-  background-color: #007770;
-  border-color: #007770;
+  /* background-color: #007770;
+  border-color: #007770; */
+  background-color: #138496;
+  border-color: #138496;
 }
 
 .btn-green:hover {
   color: #fff;
-  background-color: #138496;
-  border-color: #117a8b;
+  /* background-color: #138496;
+  border-color: #117a8b; */
 }
 
 .btn-green:focus, .btn-green.focus {
@@ -3125,8 +3127,8 @@ fieldset:disabled a.btn {
 
 .btn-green.disabled, .btn-green:disabled {
   color: #fff;
-  background-color: #007770;
-  border-color: #007770;
+  background-color: #138496;
+  border-color: #138496;
 }
 
 .btn-green:not(:disabled):not(.disabled):active, .btn-green:not(:disabled):not(.disabled).active,
