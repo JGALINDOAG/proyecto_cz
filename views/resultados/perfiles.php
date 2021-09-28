@@ -41,11 +41,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Personalidad 1</th>
-                            <th>Personalidad 2</th>
+                            <th>Rasgos de personalidad</th>
+                            <th>Capacidad para adaptarse</th>
                         </tr>
                         <tr>
-                            <!-- Personalidad 1 -->
+                            <!-- Rasgos de personalidad -->
                             <th>A - Estres</th>
                             <th>L - Adaptación familiar</th>
                         </tr>
@@ -100,14 +100,14 @@
                             <th scope="col" rowspan="2">Area</th>
                             <th scope="col" rowspan="2">Turno</th>
                             <th scope="col" rowspan="2">Perfil CI</th>
-                            <th colspan="12">Personalidad 1</th>
-                            <th colspan="6">Personalidad 2</th>
+                            <th colspan="12">Rasgos de personalidad</th>
+                            <th colspan="6">Capacidad para adaptarse</th>
                             <th scope="col" rowspan="2">CI Terman</th>
                             <th scope="col" rowspan="2">CI RAVEN</th>
                             <th scope="col" rowspan="2">Perfil Final</th>
                         </tr>
                         <tr>
-                            <!-- Personalidad 1 -->
+                            <!-- Rasgos de personalidad -->
                             <th>A</th>
                             <th>B</th>
                             <th>C</th>
@@ -120,7 +120,7 @@
                             <th>J</th>
                             <th>K</th>
                             <th>Perfil P1</th>
-                            <!-- Personalidad 2 -->
+                            <!-- Capacidad para adaptarse -->
                             <th>L</th>
                             <th>M</th>
                             <th>N</th>

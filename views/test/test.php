@@ -31,32 +31,93 @@
             <form action="" class="flexcontainerthree" method="post">
                 <input type="hidden" name="select_test" value="ok">
                 <?php 
-                for ($l = 0; $l<sizeof($list); $l++) { 
-                    $cadena=str_replace(' ','',$list[$l]["prueba"]);
-                    ?>
-                    <!--<input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php //echo $cadena; ?>" value="<?php //echo $list[$l]["prueba"]; ?>">-->
-                    <?php
-                    //
-                    if($list[$l]["id_prueba"]!=13){
-                        if($list[$l]["id_prueba"]==1){
+                for ($l = 0; $l<sizeof($list); $l++) {
+                    $pendiente = "<input type='submit' class='btn btn-outline-green btn-lg btn-block' name='".$list[$l]["idprueba"]."' value='".$list[$l]["prueba"]."'>";
+                    $termino = "<br><p><img src='assets/img/check.svg'>".$list[$l]["prueba"]."</p>";
+                    if($list[$l]["idprueba"]!=13){
+                        //1
+                        if($list[$l]["idprueba"]==1 and $list[$l]["avance"]<10){
                             if($estud=="bachillerato" || $estud=="licenciatura" || $estud=="posgrados"){
-                                ?>
-                                <input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php echo $cadena; ?>" value="<?php echo $list[$l]["prueba"]; ?>">
-                                <?php
+                                echo $pendiente;
                             }
-                        }elseif($list[$l]["id_prueba"]==4){
+                        }elseif($list[$l]["idprueba"]==1 and $list[$l]["avance"]==10){
+                            echo $termino;
+                        }
+                        //2
+                        if($list[$l]["idprueba"]==2 and $list[$l]["avance"]<11){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==2 and $list[$l]["avance"]==11){
+                            echo $termino;
+                        } 
+                        //3
+                        if($list[$l]["idprueba"]==3 and $list[$l]["avance"]<5){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==3 and $list[$l]["avance"]==5){
+                            echo $termino;
+                        }
+                        //4
+                        if($list[$l]["idprueba"]==4 and $list[$l]["avance"]<5){
                             if($estud=="ninguno" || $estud=="preescolar" || $estud=="primaria" || $estud=="secundaria"){
-                                ?>
-                                <input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php echo $cadena; ?>" value="<?php echo $list[$l]["prueba"]; ?>">
-                                <?php
+                                echo $pendiente;
                             }
-                        }else{
-                            ?>
-                            <input type="submit" class="btn btn-outline-green btn-lg btn-block" name="<?php echo $cadena; ?>" value="<?php echo $list[$l]["prueba"]; ?>">
-                            <?php
+                        }elseif($list[$l]["idprueba"]==4 and $list[$l]["avance"]==5){
+                            echo $termino;
+                        }
+                        //5
+                        if($list[$l]["idprueba"]==5 and $list[$l]["avance"]<10){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==5 and $list[$l]["avance"]==10){
+                            echo $termino;
+                        }
+                        //6
+                        if($list[$l]["idprueba"]==6 and $list[$l]["avance"]<10){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==6 and $list[$l]["avance"]==10){
+                            echo $termino;
+                        }
+                        //7
+                        if($list[$l]["idprueba"]==7 and $list[$l]["avance"]<12){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==7 and $list[$l]["avance"]==12){
+                            echo $termino;
+                        }
+                        //8
+                        if($list[$l]["idprueba"]==8 and $list[$l]["avance"]<1){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==8 and $list[$l]["avance"]==1){
+                            echo $termino;
+                        }
+                        //9
+                        if($list[$l]["idprueba"]==9 and $list[$l]["avance"]<1){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==9 and $list[$l]["avance"]==1){
+                            echo $termino;
+                        }
+                        //10
+                        if($list[$l]["idprueba"]==10 and $list[$l]["avance"]<1){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==10 and $list[$l]["avance"]==1){
+                            echo $termino;
+                        }
+                        //11
+                        if($list[$l]["idprueba"]==11 and $list[$l]["avance"]<1){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==11 and $list[$l]["avance"]==1){
+                            echo $termino;
+                        }
+                        //12
+                        if($list[$l]["idprueba"]==12 and $list[$l]["avance"]<13){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==12 and $list[$l]["avance"]==13){
+                            echo $termino;
+                        }
+                        //14
+                        if($list[$l]["idprueba"]==14 and $list[$l]["avance"]<2){
+                            echo $pendiente;
+                        }elseif($list[$l]["idprueba"]==14 and $list[$l]["avance"]==2){
+                            echo $termino;
                         }
                     }
-                    //
                 }
                 ?>
             </form>

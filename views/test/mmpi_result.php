@@ -138,9 +138,7 @@ $(function () {
 </script>
 
 <?php
-$r12 = new Reporte();
-$mmpi = $r12->res_ind($idDetalle,$list[$l]["id_prueba"]);
-//print_r($mmpi);
+$mmpi = $obj_reporte->res_ind($idDetalle,$list[$l]["idprueba"]);
 
 //ESCALA DE MENTIRA
 echo '<input type="hidden" id="1" name="'.$mmpi[0]["id_indicador"].'" value="'.$mmpi[0]["escala"].'"/>';

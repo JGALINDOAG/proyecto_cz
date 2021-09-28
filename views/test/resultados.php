@@ -46,7 +46,7 @@
                         }
                     }
                 }elseif($list[$l]["id_prueba"]==2){
-                    //PERSONALIDAD 1
+                    //RASGOS DE PERSONALIDAD
                     echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
                     $av2 = new Pruebas();
                     $avance2 = $av2->fin_prueba($idDetalle,2);
@@ -66,7 +66,7 @@
                         }
                     }
                 }elseif($list[$l]["id_prueba"]==3){
-                    //PERSONALIDAD 2
+                    //CAPACIDAD PARA ADAPTARSE
                     echo "<hr><center><h5>".$list[$l]["prueba"]."</h5></center>";
                     $av3 = new Pruebas();
                     $avance3 = $av3->fin_prueba($idDetalle,3);

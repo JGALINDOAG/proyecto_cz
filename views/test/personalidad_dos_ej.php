@@ -14,7 +14,7 @@
                         <div class="media d-flex align-items-center">
                             <div class="media-body">
                             <form action="<?php echo 'index.php?accion=PersonalidadDos'; ?>" method="post">
-                                <h4>PERSONALIDAD 2</h4>
+                                <h4>CAPACIDAD PARA ADAPTARSE</h4>
                                 <h5>Descripcion Examen</h5>
                                 <p>El propósito de este test, es conocer la estructura y el funcionamiento de la persona para adaptarse de acuerdo a sus rasgos de personalidad emocionales en diferentes contestos ya sean familiares, sociales, de salud entre otros,  con la intención de brindar seguimiento.</p>
                                 <h5>Instrucciones:</h5>
@@ -31,7 +31,7 @@
                     <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
                         <div class="media d-flex align-items-center">
                             <div class="media-body">
-                            <h3>HA CONCLUIDO SATISFACTORIAMENTE LA PRUEBA PERSONALIDAD 2.</h3>
+                            <h3>HA CONCLUIDO SATISFACTORIAMENTE LA PRUEBA CAPACIDAD PARA ADAPTARSE.</h3>
                             <h3>PULSE <a href="<?php echo 'index.php?accion=Tests'; ?>">AQUÍ</a> PARA REGRESAR AL MENÚ DE PRUEBAS.</h3>
                             </div>
                         </div>

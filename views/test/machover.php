@@ -16,7 +16,7 @@
                     <!-- -->
                     <form action="" method="post">
                         <input type="hidden" name="save" value="ok">
-                        <table border="0" width="100%" class="table table-striped">
+                        <table border="1" width="100%" class="table table-striped">
                         <tbody>
                         <thead class="table-dark">
                         <tr>
@@ -25,7 +25,57 @@
                         </tr>
                         </thead>
                         <?php 
+                        //print_r($preguntas);
                         for ($i = 0; $i < sizeof($preguntas); $i++) { 
+                            if($preguntas[$i]["id_pregunta"]==1203){
+                                echo '<tr><td colspan="3" align="center">Indicador del rol sexual</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1204){
+                                echo '<tr><td colspan="3" align="center">Indicador de conflicto sexual</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1209){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de rasgos asociados al abuso sexual.</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1211){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de impulsividad</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1215){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales suicidas</td></tr>';
+                            }
+                            
+                            if($preguntas[$i]["id_pregunta"]==1219){
+                                echo '<tr><td colspan="3" align="center">Indicadores rasgos narcisistas</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1221){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de inseguridad</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1229){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de ansiedad</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1235){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales para socializar (esquizoides)</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1239){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de dependencia</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1243){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de timidez</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1251){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de depresión</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1253){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de agresividad</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1261){
+                                echo '<tr><td colspan="3" align="center">Indicadores emocionales de rasgos antisociales y delictivos</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1266){
+                                echo '<tr><td colspan="3" align="center">Indicadores de deterioro o daño orgánico cerebral</td></tr>';
+                            }
+                            if($preguntas[$i]["id_pregunta"]==1271){
+                                echo '<tr><td colspan="3" align="center">Indicadores textuales conflictivos</td></tr>';
+                            }
                             ?>
                             <tr>
                                 <td><strong><?php echo $preguntas[$i]["pregunta"]; ?></strong></td>

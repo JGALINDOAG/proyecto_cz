@@ -2,7 +2,7 @@
 class Reporte extends AccesoDatos
 {
     private $dbh;
-    // private $result;
+    private $result;
 
     public function __construct()
     {
@@ -59,7 +59,7 @@ class Reporte extends AccesoDatos
         die("¡Error!: res_mmpi() " . $e->getMessage());
       }
     }
-    //add
+    # # # OK # # #
     public function p_final($idDetalle)
     {
       try {
@@ -78,7 +78,7 @@ class Reporte extends AccesoDatos
         die("¡Error!: p_final() " . $e->getMessage());
       }
     }
-
+    # # # OK # # #
     public function res_total($idDetalle,$id_prueba)
     {
         try {
@@ -109,7 +109,7 @@ class Reporte extends AccesoDatos
             die("¡Error!: res_mmpi() " . $e->getMessage());
         }
     }
-
+    # # # OK # # #
   public function res_ind($idDetalle,$id_prueba)
   {
       try {
@@ -146,7 +146,7 @@ class Reporte extends AccesoDatos
           die("¡Error!: res_mmpi() " . $e->getMessage());
       }
   }
-
+  # # # OK # # #
   public function perfil_terman($terman){
     if($terman<=66){
       if($terman<=44){
@@ -243,7 +243,7 @@ class Reporte extends AccesoDatos
     $out['perfil'] = $perfil;
     return $out;
   }
-
+# # # OK # # #
   public function perfil_raven($raven){
     if($raven<=24){
       if($raven<=19){$ci=40;}
@@ -333,7 +333,7 @@ class Reporte extends AccesoDatos
     $out['perfil'] = $perfil;
     return $out;
   }
-
+  # # # OK # # #
   public function perfil_smp02($indicador,$valor,$sexo){
     //ESTRES
     if($indicador==11){
@@ -616,7 +616,7 @@ class Reporte extends AccesoDatos
     $out['perfil'] = $perfil;
     return $out;
   }
-
+  # # # OK # # #
   public function perfil_smp03($indicador,$valor){
     //ADAPTACIÓN FAMILIAR
     if($indicador==22){
@@ -731,7 +731,7 @@ class Reporte extends AccesoDatos
     $out['perfil'] = $perfil;
     return $out;
   }
-
+  # # # OK # # #
   public function analisis($indicador,$valor){
     if($indicador==53){
       //Dirigente
@@ -844,7 +844,7 @@ class Reporte extends AccesoDatos
     $out['definicion'] = $definicion;
     return $out;
   }
-
+  # # # OK # # #
   public function machover($indicador,$valor){
     if($indicador==84){
       //Indicador del rol sexual
@@ -945,7 +945,7 @@ class Reporte extends AccesoDatos
     $out['definicion'] = $definicion;
     return $out;
   }
-
+  # # # OK # # #
   public function gral_test_definicion($indicador,$valor){
     //COMPROMISO A LA ORGANIZACIÓN
     if($indicador==65){

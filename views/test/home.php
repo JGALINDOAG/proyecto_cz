@@ -11,8 +11,9 @@
             <div class="form-group row d-flex text-center justify-content-center pt-3 pb-3">
                 <div class="media d-flex align-items-center">
                     <div class="media-body">
-                        <h5 class="mt-0">TITULO</h5>
-                        <p>Instrucción.</p>
+                        <h5 class="mt-0">REALIZA TU REGISTRO</h5>
+                        <p>Como primer paso es necesario realizar el registro inicial, para ello registre cada uno de los datos solicitados y de clic en "Continuar".</p>
+                        <p>Una vez que finalice el registro, será necesario esperar a la activación las pruebas y actualizar la pagina, de lo contrarios podrá intentarlo mas tarde tan solo registrando el folio y la cuenta de correo electrónico.</p>
                     </div>
                 </div>
             </div>
@@ -74,27 +75,36 @@
                         <option value="posgrados">Posgrados</option>
                     </select>
                     </div>
+<!--
                     <div class="alert alert-secondary" role="alert">Si usted pertenece a la institución, favor de marcar la casilla y llenar la información solicitada.</div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Si, pertenezco a la institución.</label>
                     </div>
                     <br>
-                    <div id="divsub" style="display:none;">
-                        <div class="form-group">
-                            <label>Área</label>
-                            <input class="form-control" type="text" name="area" id="area" placeholder="Ingrese el área al cual pertenece">
-                        </div>
-                        <label>Turno</label>
-                        <select class="form-control" name="turno" id="turno">
+-->
+<!--
+                    <div class="form-group">
+                    <label>Actividad que ejerce en la institución:</label>
+                    <select class="form-control" id="grado_estudios" name="grado_estudios">
                         <option value="">seleccione una opción</option>
-                            <option value="matutino">Matutino</option>
-                            <option value="vespertino">Vespertino</option>
-                            <option value="nocturno">Nocturno</option>
-                        </select>
+                        <option value="laboral">Laboral / Otros</option>
+                        <option value="educacion">Educación</option>
+                    </select>
                     </div>
-                    <br>
-                    <br>
+-->
+                    <div class="form-group">
+                        <label>Área ó Grupo</label>
+                        <input class="form-control" type="text" name="area" id="area" placeholder="Ingrese el área al cual pertenece">
+                    </div>
+                    <label>Turno</label>
+                    <select class="form-control" name="turno" id="turno">
+                    <option value="">seleccione una opción</option>
+                        <option value="matutino">Matutino</option>
+                        <option value="vespertino">Vespertino</option>
+                        <option value="nocturno">Nocturno</option>
+                    </select>
+                    <br><br>
                     <input type="submit" class="btn btn-outline-green btn-lg btn-block" value="Continuar">
                 </form>
             </div>
@@ -155,7 +165,7 @@
                 $("#turno").attr({disabled:"true"});
             }
         });
-    
+    /*
         $("#exampleCheck1").click(function(){
             if($('#exampleCheck1').is(':checked')){
                 $("#divsub").css("display", "block");
@@ -169,6 +179,7 @@
                 $("#turno").val("");
             }
         });
+        */
     });
     </script>
 </body>

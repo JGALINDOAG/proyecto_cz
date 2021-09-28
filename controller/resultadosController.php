@@ -54,7 +54,7 @@ class ResultadosController
     $objDetallePersonasPruebas = new DetallePersonasPruebas();
     $rowDP = $objDetallePersonasPruebas->get_personas_folio($_POST['folio']);
     foreach ($rowDP as $key=>$item):
-      # Personalidad 1
+      # Rasgos de personalidad
       $r2 = new Reporte();
       $smp02 = $r2->res_ind($item["id_detalle"], 2);
       for ($i=0; $i<sizeof($smp02); $i++) {
@@ -64,7 +64,7 @@ class ResultadosController
             "resultado" => $smp02[$i]["resultado"]
         ];
       }
-      # Personalidad 2
+      # Capacidad para adaptarse
       $r2 = new Reporte();
       $smp02 = $r2->res_ind($item["id_detalle"], 3);
       for ($i=0; $i<sizeof($smp02); $i++) {
