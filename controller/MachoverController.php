@@ -1,4 +1,4 @@
-<?php
+<?php 
 $idDetalle=$_GET["idDetalle"];//POST['id_detalle'];
 require_once("models/pruebas.php");
 $id_prueba=13;

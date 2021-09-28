@@ -9,7 +9,7 @@ class Pruebas extends AccesoDatos
     {
         $this->result = array();
     }
-    //OK
+    # # # OK # # #
     public function activo_detalle_personas($idDetalle) {
         try {
             $this->dbh = parent::conexion();
@@ -46,7 +46,7 @@ class Pruebas extends AccesoDatos
             die("¡Error!: list_pruebas() " . $e->getMessage());
         }
     }
-    //OK
+    # # # OK # # #
     public function list_pruebas_persona($idDetalle)
     {
         try {
@@ -59,7 +59,8 @@ class Pruebas extends AccesoDatos
             $pruebas->bindParam(1, $idDetalle, PDO::PARAM_INT);
             $pruebas->execute();
             $rowPruebas = $pruebas->fetch(PDO::FETCH_NUM);
-            $stmt = $this->dbh->prepare("SELECT * FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
+            //$stmt = $this->dbh->prepare("SELECT * FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
+            $stmt = $this->dbh->prepare("SELECT id_prueba AS idprueba, prueba,(SELECT COUNT(*) AS total FROM resultados WHERE id_detalle = $idDetalle AND id_prueba = idprueba) AS avance FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
             if ($stmt->execute()) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $result[] = $row;
@@ -353,7 +354,7 @@ class Pruebas extends AccesoDatos
         }
     }
 
-    //ok
+    # # # OK # # #
     public function fin_prueba($idDetalle,$id_prueba)
     {
         try {
@@ -382,7 +383,7 @@ class Pruebas extends AccesoDatos
             die("¡Error!: fin_prueba " . $e->getMessage());
         }
     }
-    //OK
+    # # # OK # # #
     public function fin_prueba_op($idDetalle,$id_prueba)
     {
         try {
@@ -688,7 +689,7 @@ class Pruebas extends AccesoDatos
             die("¡Error!: frac_k".$e->getMessage());
         }
     }
-
+    # # # OK # # #
     public function info_persona($idDetalle) {
         try {
             $this->dbh = AccesoDatos::conexion();
