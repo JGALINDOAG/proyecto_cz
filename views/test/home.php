@@ -9,7 +9,7 @@
     <section class="container pt-5">
         <div class="shadow p-3 mb-5 bg-white rounded">
             <!-- -->
-            <div class="pt-4">
+            <div class="container pt-4">
                 <div class="card">
                     <h5 class="card-header text-center">REALIZA TU REGISTRO</h5>
                     <div class="card-body">
