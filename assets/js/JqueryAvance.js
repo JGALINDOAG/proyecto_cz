@@ -1,54 +1,45 @@
 $(document).ready(function () {
     $("#cmbFolio").change(function () {
-        $("#table").empty();
+        // $("#table").empty();
         $("#descript").empty();
         var folio = $(this).val()
+        var array_pruebas = []
         $.post("?accion=resultados&pag=getListPruebas", { folio: folio })
             .done(function (data) {
                 var dataList = JSON.parse(data)
                 // console.log(dataList)
-
                 var tableDescript = ''
-                tableDescript += '<table class="table table-hover" style="width:100%"><tbody>';
+                tableDescript += '<table class="table table-borderless" style="width:100%"><tbody>';
                 var band = 0
                 var tra = '<tr>'
                 var trc = '</tr>'
-
-                var table = ''
-                table += '<table class="table table-hover" id="listPersonas" style="width:100%"><thead><tr><th scope="col">Nombre</th>';
-
                 dataList.forEach(element => {
-                    if(band == 0) {
+                    if (band == 0) {
                         tableDescript += tra
-                        tableDescript += '<th>'+ element.id_prueba +'</th>'+
-                        '<td>'+ element.prueba +'</td>';
-                        band += 1 
-                        // console.log(band)
-                    } else if (band > 0 && band < 3){
-                        tableDescript += '<th>'+ element.id_prueba +'</th>'+
-                        '<td>'+ element.prueba +'</td>';
+                        tableDescript += '<th>' + element.id_prueba + '</th>' +
+                            '<td>' + element.prueba + '</td>';
                         band += 1
-                        // console.log(band)
+                    } else if (band > 0 && band <= 2) {
+                        tableDescript += '<th>' + element.id_prueba + '</th>' +
+                            '<td>' + element.prueba + '</td>';
+                        band += 1
                     } else {
-                        tableDescript += '<th>'+ element.id_prueba +'</th>'+
-                        '<td>'+ element.prueba +'</td>';
+                        tableDescript += '<th>' + element.id_prueba + '</th>' +
+                            '<td>' + element.prueba + '</td>';
                         tableDescript += trc
                         band = 0
-                        // console.log(band)
-                    } 
-
-                    table += '<th scope="col">'+ element.id_prueba +'</th>';
-
+                    }
+                    table += '<th>' + element.id_prueba + '</th>';
+                    // Crea array de las pruebas disponibles para la institucion y pasarlo al DataTable
+                    array_pruebas.push(Number(element.id_prueba))
                 });
-                tableDescript +='</tbody></table>';
-                table +='</tr></thead></table>';
-                $("#table").append(table);
+                tableDescript += '</tbody></table>';
                 $("#descript").append(tableDescript);
+                dataTable(folio, array_pruebas)
             });
-            dataTable(folio)
     });
 });
-function dataTable(folio) {
+function dataTable(folio, array_pruebas) {
     var cmbFolio = $.ajax({
         method: "POST",
         url: "?accion=resultados&pag=getAvanceList",
@@ -56,8 +47,15 @@ function dataTable(folio) {
     })
 
     cmbFolio.done(function (res) {
+        // console.log(array_pruebas)
         var dataList = JSON.parse(res)
         // console.log(dataList)
+        var list_pruebas = []
+        // Obtiene las pruebas no disponibles para bloquearlas en el DataTable
+        for (var i = 1; i <= 14; i++) {
+            if (array_pruebas.includes(i) == false) list_pruebas.push(i)
+        }
+        // console.log(list_pruebas)
         $('#listPersonas').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",
@@ -230,9 +228,13 @@ function dataTable(folio) {
                 }
             ],
             columnDefs: [
-                { "orderable": false, "targets": [1,2,3,4,5,6,7,8,9,10,11,12,13,14] },
-                { className: 'text-center', targets: [1,2,3,4,5,6,7,8,9,10,11,12,13,14] },
-            ]
+                { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
+                { className: 'text-center', targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
+                {
+                    targets: list_pruebas,
+                    visible: false
+                },
+            ],
         });
     });
 
