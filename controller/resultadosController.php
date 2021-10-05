@@ -75,17 +75,21 @@ class ResultadosController
         ];
       }
       # TERMAN
-      $r1 = new Reporte();
-      $terman = $r1->res_total($item["id_detalle"], 1);
-      $datos1 = new Reporte();
-      $data1 = $datos1->perfil_terman($terman[0]['total']);
-      $rowDP[$key]['ci_terman'] = $data1['ci'];
+      $objReporte = new Reporte();
+      $terman = $objReporte->res_total($item["id_detalle"], 1);
+      if($terman[0]['total'] != null):
+        // $datos1 = new Reporte();
+        $data1 = $objReporte->perfil_terman($terman[0]['total']);
+        $rowDP[$key]['ci_terman'] = $data1['ci'];
+      endif;
       # RAVEN
-      $r4 = new Reporte();
-      $raven = $r4->res_total($item["id_detalle"], 4);
-      $datos4 = new Reporte();
-      $data4 = $datos4->perfil_raven($raven[0]['total']);
-      $rowDP[$key]['ci_raven'] = $data4['ci'];
+      // $r4 = new Reporte();
+      $raven = $objReporte->res_total($item["id_detalle"], 4);
+      if($raven[0]['total'] != null):
+        // $datos4 = new Reporte();
+        $data4 = $objReporte->perfil_raven($raven[0]['total']);
+        $rowDP[$key]['ci_raven'] = $data4['ci'];
+      endif;
     endforeach;
     $dataJson = json_encode($rowDP, JSON_UNESCAPED_UNICODE);
     print $dataJson;
