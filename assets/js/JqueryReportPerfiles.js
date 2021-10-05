@@ -62,6 +62,11 @@ function datatable_by_folio(folio) {
         var shetName_excel = $('select[name="cmbFolio"] option:selected').text()
         let date = new Date()
         // console.log(dataPerfiles)
+
+        function isKeyExists(obj,key){
+            return key in obj;
+        }
+
         $('#reporte').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",
@@ -166,115 +171,137 @@ function datatable_by_folio(folio) {
                 {
                     "data": 'perfil', "render": function (data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        return p1.ci
+                        if(isKeyExists(p1, "ci")) return p1.ci
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[0]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[0]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[1]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[1]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[2]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[2]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[3]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[3]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[4]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[4]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[5]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[5]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[6]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[6]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[7]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[7]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[8]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[8]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[9]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[9]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        return row.personalidad_1[10]['resultado']
+                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[10]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'perfil', "render": function (data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        return p1.smpuno
+                        if(isKeyExists(p1, "smpuno")) return p1.smpuno
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        return row.personalidad_2[0]['resultado']
+                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[0]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        return row.personalidad_2[1]['resultado']
+                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[1]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        return row.personalidad_2[2]['resultado']
+                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[2]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        return row.personalidad_2[3]['resultado']
+                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[3]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        return row.personalidad_2[4]['resultado']
+                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[4]['resultado']
+                        else return '--'
                     }
                 },
                 {
                     "data": 'perfil', "render": function (data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        return p1.smpdos
+                        if(isKeyExists(p1, "smpdos")) return p1.smpdos
+                        else return '--'
                     }
                 },
                 {
-                    "data": 'perfil', "render": function (data, type, row) {
-                        return row.ci_terman
+                    "data": 'ci_terman', "render": function (data, type, row) {
+                        if(isKeyExists(row, "ci_terman")) return row.ci_terman
+                        else return '--'
                     }
                 },
                 {
-                    "data": 'perfil', "render": function (data, type, row) {
-                        return row.ci_raven
+                    "data": 'ci_raven', "render": function (data, type, row) {
+                        if(isKeyExists(row, "ci_raven")) return row.ci_raven
+                        else return '--'
                     }
                 },
                 {
                     "data": 'perfil', "render": function (data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        return p1.final
+                        if(isKeyExists(p1, "final")) return p1.final
+                        else return '--'
                     }
                 }
             ],
