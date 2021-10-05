@@ -177,67 +177,67 @@ function datatable_by_folio(folio) {
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[0]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[0]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[1]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[1]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[2]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[2]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[3]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[3]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[4]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[4]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[5]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[5]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[6]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[6]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[7]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[7]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[8]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[8]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[9]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[9]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1")) return row.personalidad_1[10]['resultado']
+                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[10]['resultado']
                         else return '--'
                     }
                 },
@@ -250,31 +250,31 @@ function datatable_by_folio(folio) {
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[0]['resultado']
+                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[0]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[1]['resultado']
+                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[1]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[2]['resultado']
+                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[2]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[3]['resultado']
+                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[3]['resultado']
                         else return '--'
                     }
                 },
                 {
                     "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2")) return row.personalidad_2[4]['resultado']
+                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[4]['resultado']
                         else return '--'
                     }
                 },
