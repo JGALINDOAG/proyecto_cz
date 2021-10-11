@@ -19,7 +19,7 @@ if(isset($_SESSION["idAdmin"]))
 			exit;
 		}else{
 			#SI SE CUMPLE LA CONDICIÓN ENTONCES SE EJECUTA UN MÉTODO O EN ESTE CASO EL OBJETO LOGEO
-			$rowAdministradores=$objAdministradores->logueo($_POST["login"]);	
+			$rowAdministradores=$objAdministradores->logueo($_POST["login"], $_POST["pass"]);	
 			if(count($rowAdministradores) == null):
 				header("Location: ".AccesoDatos::ruta()."?accion=loginUsuario&m=".AccesoDatos::encriptar(2)."");
 				exit;
