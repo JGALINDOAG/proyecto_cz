@@ -189,13 +189,14 @@ class Administradores extends AccesoDatos
   }
 
   #METODO PARA INICIAR SESION
-  public function logueo($suario)
+  public function logueo($usuario, $clave)
   {
     try {
       $this->dbh = AccesoDatos::conexion();
-      $query = "SELECT * FROM administradores WHERE usuario = ? ";
+      $query = "SELECT * FROM administradores WHERE usuario = BINARY ? AND clave = ?";
       $stmt = $this->dbh->prepare($query);
-      $stmt->bindParam(1, $suario, PDO::PARAM_STR);
+      $stmt->bindParam(1, $usuario, PDO::PARAM_STR);
+      $stmt->bindParam(2, $clave, PDO::PARAM_STR);
       if ($stmt->execute()) {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           $this->result[] = $row;
