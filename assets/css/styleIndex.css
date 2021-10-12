@@ -501,7 +501,7 @@ footer h4 {
 
 /* Imagen de trasfondo */
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 830px) {
     header, .between-sec {
         background-attachment: fixed;
     }
@@ -603,5 +603,11 @@ footer h4 {
         100% {
             opacity: 1;
         }
+    }
+}
+
+@media screen and (max-width: 382px) {
+    .custom-font-secondary {
+         letter-spacing: 0px;
     }
 }
