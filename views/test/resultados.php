@@ -236,7 +236,7 @@
                         $grado = $r14->res_ind($idDetalle,$list[$l]["id_prueba"]);
                         if($grado[0]['resultado']>=6 and $grado[0]['resultado']<=8){
                             echo '<p><strong>'.strtoupper($grado[0]["indicador"]).'</strong>: '.$grado[0]['resultado'].'</p>';
-                            echo '<p><strong>Definición:</strong></p><p>Hacen referencia a toda aquella información que devuelve el receptor al emisor sobre su propia comunicación. El sujeto posee las fortalezas necesarias para desarrollar el saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Son de gran ayuda en la organización, por lo que al usar correctamente esta herramienta  se puede generar el cambio que se espera y además comprometer más explícitamente al alumno que lo recibe.</p>';
+                            echo '<p><strong>Definición:</strong></p><p>Hacen referencia a toda aquella información que devuelve el receptor al emisor sobre su propia comunicación. El sujeto posee las fortalezas necesarias para desarrollar el saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Son de gran ayuda en la organización, por lo que al usar correctamente esta herramienta  se puede generar el cambio que se espera y además comprometer más explícitamente a la persona evaluada que lo recibe.</p>';
                             echo '<hr>';
                         }else{
                             echo '<p><strong>'.strtoupper($grado[1]["indicador"]).'</strong>: '.$grado[1]['resultado'].'</p>';

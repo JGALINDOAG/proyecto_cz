@@ -800,7 +800,7 @@ class Reporte extends AccesoDatos
     if($indicador==60){
       //Burócrata
       if($valor>=6 and $valor<=10){
-        $definicion='<p>Excesivo apego a los reglamentos, su rutina genera una resistencia al cambio, miedo: a la pérdida del trabajo, a las relaciones sociales frente a frente, a tener problemas con superiores desconocidos para él. Tiene actitud pasiva, despersonalizada, irresponsable, se limita a favorecer a los altos mandos permitiendo las jerarquías con la finalidad de conseguir poder colectivo, su vida laboral se limita a los procedimientos impersonales y uniformes, es reconocido por que cumple con las normas administrativas y tiene amplio un dominio legal, pero no por sus facultades personales como son: lealtad e individualidad.</p>';
+        $definicion='<p>Excesivo apego a los reglamentos, su rutina genera una resistencia al cambio, miedo: a la pérdida del trabajo, a las relaciones sociales frente a frente, a tener problemas con superiores desconocidos para él. Tiene actitud pasiva, despersonalizada, irresponsable, se limita a favorecer a los altos mandos permitiendo las jerarquías con la finalidad de conseguir poder colectivo, su vida laboral se limita a los procedimientos impersonales y uniformes, es reconocido porque cumple con las normas administrativas y tiene un amplio dominio legal, pero no por sus facultades personales como son: lealtad e individualidad.</p>';
       }elseif($valor<=5){
         $definicion='<p>No presenta ponderaciones significativas en esta área.</p>';
       }
@@ -818,7 +818,7 @@ class Reporte extends AccesoDatos
     if($indicador==62){
       //Contradictorio
       if($valor>=6 and $valor<=10){
-        $definicion='<p>se mantiene en contradicción consigo mismo, pero también se contradice constantemente con otras personas. Su actitud siempre es opuesta entre lo que dice y lo que hace, no sostienen lo que hacen o lo que dicen, tiene el mismo comportamiento en todos los aspectos de su vida y su personalidad gira en entorno a la mentira.</p>';
+        $definicion='<p>Se mantiene en contradicción consigo mismo, pero también se contradice constantemente con otras personas. Su actitud siempre es opuesta entre lo que dice y lo que hace, no sostienen lo que hacen o lo que dicen, tiene el mismo comportamiento en todos los aspectos de su vida y su personalidad gira en entorno a la mentira.</p>';
       }elseif($valor<=5){
         $definicion='<p>No presenta ponderaciones significativas en esta área.</p>';
       }
@@ -836,7 +836,7 @@ class Reporte extends AccesoDatos
     if($indicador==64){
       //Evasivo
       if($valor>=6 and $valor<=10){
-        $definicion='<p>Evasivo: Se caracteriza por observar las situaciones de "afuera hacia adentro”, le gustaría mantener relación con otras personas, pero es complicado porque le cuesta mucho trabajo tiene que soportar la sensación de que al acercarse a otras personas sea inaceptable, incapaz de ser amado y es difícil cambiar para ellos. Sobreviven alejándose de las personas manteniendo una conducta laboral mínima. Es retraído social, temeroso al maltrato, se siente humillado fácilmente con las críticas y manifestaciones de desaprobación, no tiene amigos en quien confiar solo miembros de su familia, para establecer una relación social debe tener la seguridad de caer bien, evita las actividades donde se desarrolle contacto interpersonal, no acepta promociones si es necesario relacionarse con otras  personas, es reservado en reuniones por miedo: a decir algo inadecuado, vergüenza a sonrojarse, llorar o demostrar intranquilidad a la gente.</p>';
+        $definicion='<p>Se caracteriza por observar las situaciones de "afuera hacia adentro”, le gustaría mantener relación con otras personas, pero es complicado porque le cuesta mucho trabajo tiene que soportar la sensación de que al acercarse a otras personas sea inaceptable, incapaz de ser amado y es difícil cambiar para ellos. Sobreviven alejándose de las personas manteniendo una conducta laboral mínima. Es retraído social, temeroso al maltrato, se siente humillado fácilmente con las críticas y manifestaciones de desaprobación, no tiene amigos en quien confiar solo miembros de su familia, para establecer una relación social debe tener la seguridad de caer bien, evita las actividades donde se desarrolle contacto interpersonal, no acepta promociones si es necesario relacionarse con otras  personas, es reservado en reuniones por miedo: a decir algo inadecuado, vergüenza a sonrojarse, llorar o demostrar intranquilidad a la gente.</p>';
       }elseif($valor<=5){
         $definicion='<p>No presenta ponderaciones significativas en esta área.</p>';
       }

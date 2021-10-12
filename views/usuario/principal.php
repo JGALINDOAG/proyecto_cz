@@ -144,7 +144,7 @@
             <div class="center add-padding-right">
                 <h1 class="custom-font">Contacta</h1>
                 <h2 class="custom-font-secondary">con nosotros</h2>
-                <p>Te ofrecemos, a continuación, los diferentes canales a través de los cuales puedes contactar con nosotros. Si lo deseas, puedes rellenar el formulario que encontrarás a continuación y te responderemos muy pronto.</p>
+                <p>Te ofrecemos, a continuación, los diferentes canales a través de los cuales puedes contactar ya sea para alguna duda, comentario, aclaración o incluso solicitar empleo rellenando el formulario que encontrarás a continuación y te responderemos muy pronto.</p>
             </div>
             <div class="form-container add-flex">
                 <?php
