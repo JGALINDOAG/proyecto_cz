@@ -79,7 +79,7 @@
                             $smp02 = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             for ($i = 0; $i < sizeof($smp02); $i++) {
                                 $int = $obj_reporte->perfil_smp02($smp02[$i]["id_indicador"], abs($smp02[$i]["resultado"]), $info[0]['sexo']);#
-                                echo '<p><strong>' . strtoupper($smp02[$i]["indicador"]) . '</strong>: ' . abs($smp02[$i]["resultado"]) . '</p>';
+                                echo '<p><strong>' . ucfirst(strtolower($smp02[$i]["indicador"])) . '</strong>: ' . abs($smp02[$i]["resultado"]) . '</p>';
                                 echo '<p><strong>Definición:</strong></p>' . $int['definicion'];
                                 echo '<p><strong>Alternativas de Tratamiento:</strong></p>' . $int['tratamiento'];
                                 echo '<p><strong>Perfil en indicador: ' . $int['perfil'] . '</strong></p>';
@@ -94,7 +94,7 @@
                             $smp03 = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             for ($i = 0; $i < sizeof($smp03); $i++) {
                                 $int = $obj_reporte->perfil_smp03($smp03[$i]["id_indicador"], abs($smp03[$i]["resultado"]));#
-                                echo '<p><strong>' . strtoupper($smp03[$i]["indicador"]) . '</strong>: ' . abs($smp03[$i]["resultado"]) . '</p>';
+                                echo '<p><strong>' . ucfirst(strtolower($smp03[$i]["indicador"])) . '</strong>: ' . abs($smp03[$i]["resultado"]) . '</p>';
                                 echo '<p><strong>Definición:</strong></p>' . $int['definicion'];
                                 echo '<p><strong>Alternativas de Tratamiento:</strong></p>' . $int['tratamiento'];
                                 echo '<p><strong>Perfil en indicador: ' . $int['perfil'] . '</strong></p>';
@@ -135,7 +135,7 @@
                             $analisis = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             for ($i = 0; $i < sizeof($analisis); $i++) {
                                 $int = $obj_reporte->analisis($analisis[$i]["id_indicador"], $analisis[$i]["resultado"]);#
-                                echo '<p><strong>' . strtoupper($analisis[$i]["indicador"]) . '</strong>: ' . $analisis[$i]["resultado"] . '</p>';
+                                echo '<p><strong>' . ucfirst(strtolower($analisis[$i]["indicador"])) . '</strong>: ' . $analisis[$i]["resultado"] . '</p>';
                                 echo '<p><strong>Definición:</strong></p>' . $int['definicion'];
                             }
                         }
@@ -146,7 +146,7 @@
                         if ($avance8[0]["Total"] == 1) {
                             $cultura = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             $int = $obj_reporte->gral_test_definicion($cultura[0]["id_indicador"], $cultura[0]["resultado"]);#
-                            echo '<p><strong>' . strtoupper($cultura[0]["indicador"]) . '</strong>: ' . $cultura[0]["resultado"] . '</p>';
+                            echo '<p><strong>' . ucfirst(strtolower($cultura[0]["indicador"])) . '</strong>: ' . $cultura[0]["resultado"] . '</p>';
                             echo '<p><strong>Definición:</strong></p>' . $int['definicion']; 
                         }
                     } elseif ($list[$l]["idprueba"] == 9) {
@@ -156,7 +156,7 @@
                         if ($avance9[0]["Total"] == 1) {
                             $cultura = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             $int = $obj_reporte->gral_test_definicion($cultura[0]["id_indicador"], $cultura[0]["resultado"]);#
-                            echo '<p><strong>' . strtoupper($cultura[0]["indicador"]) . '</strong>: ' . $cultura[0]["resultado"] . '</p>';
+                            echo '<p><strong>' . ucfirst(strtolower($cultura[0]["indicador"])) . '</strong>: ' . $cultura[0]["resultado"] . '</p>';
                             echo '<p><strong>Definición:</strong></p>' . $int['definicion'];  
                         }
                     } elseif ($list[$l]["idprueba"] == 10) {
@@ -166,7 +166,7 @@
                         if ($avance10[0]["Total"] == 1) {
                             $clima = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             $int = $obj_reporte->gral_test_definicion($clima[0]["id_indicador"], $clima[0]["resultado"]);#
-                            echo '<p><strong>' . strtoupper($clima[0]["indicador"]) . '</strong>: ' . $clima[0]["resultado"] . '</p>';
+                            echo '<p><strong>' . ucfirst(strtolower($clima[0]["indicador"])) . '</strong>: ' . $clima[0]["resultado"] . '</p>';
                             echo '<p><strong>Definición:</strong></p>' . $int['definicion']; 
                         }
                     } elseif ($list[$l]["idprueba"] == 11) {
@@ -176,7 +176,7 @@
                         if ($avance11[0]["Total"] == 1) {
                             $escucha = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             $int = $obj_reporte->gral_test_definicion($escucha[0]["id_indicador"], $escucha[0]["resultado"]);#
-                            echo '<p><strong>' . strtoupper($escucha[0]["indicador"]) . '</strong>: ' . $escucha[0]["resultado"] . '</p>';
+                            echo '<p><strong>' . ucfirst(strtolower($escucha[0]["indicador"])) . '</strong>: ' . $escucha[0]["resultado"] . '</p>';
                             echo '<p><strong>Definición:</strong></p>' . $int['definicion']; 
                         }
                     } elseif ($list[$l]["idprueba"] == 12) {
@@ -194,7 +194,7 @@
                             $machover = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             for ($i = 0; $i < sizeof($machover); $i++) {
                                 $int = $obj_reporte->machover($machover[$i]["id_indicador"], $machover[$i]["resultado"]);
-                                echo '<p><strong>' . strtoupper($machover[$i]["indicador"]) . '</strong>: ' . $machover[$i]["resultado"] . '</p>';
+                                echo '<p><strong>' . ucfirst(strtolower($machover[$i]["indicador"])) . '</strong>: ' . $machover[$i]["resultado"] . '</p>';
                                 echo '<p><strong>Definición:</strong></p>' . $int['definicion'];
                             }
                         }
@@ -205,10 +205,10 @@
                         if ($avance14[0]["Total"] == 2) {
                             $grado = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]);#
                             if ($grado[0]['resultado'] >= 6 and $grado[0]['resultado'] <= 8) {
-                                echo '<p><strong>' . strtoupper($grado[0]["indicador"]) . '</strong>: ' . $grado[0]['resultado'] . '</p>';
-                                echo '<p><strong>Definición:</strong></p><p>Hacen referencia a toda aquella información que devuelve el receptor al emisor sobre su propia comunicación. El sujeto posee las fortalezas necesarias para desarrollar el saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Son de gran ayuda en la organización, por lo que al usar correctamente esta herramienta  se puede generar el cambio que se espera y además comprometer más explícitamente al alumno que lo recibe.</p>';
+                                echo '<p><strong>' . ucfirst(strtolower($grado[0]["indicador"])) . '</strong>: ' . $grado[0]['resultado'] . '</p>';
+                                echo '<p><strong>Definición:</strong></p><p>Hacen referencia a toda aquella información que devuelve el receptor al emisor sobre su propia comunicación. El sujeto posee las fortalezas necesarias para desarrollar el saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Son de gran ayuda en la organización, por lo que al usar correctamente esta herramienta  se puede generar el cambio que se espera y además comprometer más explícitamente a la persona evaluada que lo recibe.</p>';
                             } else {
-                                echo '<p><strong>' . strtoupper($grado[1]["indicador"]) . '</strong>: ' . $grado[1]['resultado'] . '</p>';
+                                echo '<p><strong>' . ucfirst(strtolower($grado[1]["indicador"])) . '</strong>: ' . $grado[1]['resultado'] . '</p>';
                                 echo '<p><strong>Definición:</strong></p><p>Como receptor no tiene la capacidad para devolver información al emisor sobre su propia comunicación. El sujeto no posee las fortalezas necesarias para saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Esto no es de gran ayuda en la organización, y al no usar correctamente esta herramienta  es dificil que pueda generar el cambio que se espera y además no compromete a el alumno que lo recibe.</p>';
                             }
                         }

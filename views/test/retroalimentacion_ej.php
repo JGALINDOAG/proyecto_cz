@@ -18,8 +18,8 @@
                                 <h5>Descripcion Examen</h5>
                                 <p>Esta prueba tiene como finalidad conocer la capacidad y habilidad que el sujeto tiene para retroalimentar a las personas que así lo requieran, claro está, dependiendo del contexto social en que se encuentre.</p>
                                 <h5>Instrucciones:</h5>
-                                <p>Abajo hay 8 pares de respuestas, acorde con tu preferencia, califica asignando el número 1 a la respuesta que mejor te identifique cuando proporcionas retroalimentación a alguien.</p>
-                                <p> Nota: no se permiten dos respuestas en cada par, solo una respuesta debe de haber.</p>
+                                <p>A continuación vas a encontrar 8 pares de preguntas de acuerdo a la forma como retroalimentas a una persona o a un grupo de personas, escoge la respuesta que tu consideres se identifica más a ti.</p>
+                                <p>Nota: no se permiten dos respuestas en cada par, solo una respuesta debe de haber.</p>
                                 <center><input type="submit" class="btn btn-outline-green btn-lg btn-block" value="CONTINUAR"></center>
                             </form>
                             </div>
