@@ -6,7 +6,7 @@
 
 <body style="width: 100%;
     height: 100vh;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .9), transparent), url(assets/img/images/hero2.jpeg) bottom no-repeat;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .9), transparent), url(assets/img/images/between_5.jpeg) bottom no-repeat;
     background-size: cover;
     display: flex;
     flex-direction: column;

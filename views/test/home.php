@@ -2,7 +2,12 @@
 <html lang="es">
 <?php require_once 'views/layout/head.php'; ?>
 
-<body>
+<body style="width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .9), transparent), url(assets/img/images/between_4.jpeg) bottom no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    position: relative;">
     <!-- Invoca al Navbar -->
     <?php NavbarUsuarioController::index(); ?>
 
