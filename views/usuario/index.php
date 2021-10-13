@@ -4,7 +4,13 @@
 <!-- Invoca al Head -->
 <?php require_once 'views/layout/head.php'; ?>
 
-<body>
+<body style="width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .9), transparent), url(assets/img/images/hero2.jpeg) bottom no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    position: relative;">
     <!-- Invoca al Navbar -->
     <?php NavbarUsuarioController::index(); ?>
     <div class="row">
