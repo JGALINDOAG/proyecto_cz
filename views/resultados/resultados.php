@@ -195,7 +195,8 @@
                             $machover = $obj_reporte->res_ind($idDetalle, $list[$l]["idprueba"]); #
                             for ($i = 0; $i < sizeof($machover); $i++) {
                                 $int = $obj_reporte->machover($machover[$i]["id_indicador"], $machover[$i]["resultado"]);
-                                echo '<p><strong>' . ucfirst(strtolower($machover[$i]["indicador"])) . '</strong>: ' . $machover[$i]["resultado"] . '</p>';
+                                //echo '<p><strong>' . ucfirst(strtolower($machover[$i]["indicador"])) . '</strong>: ' . $machover[$i]["resultado"] . '</p>';
+                                echo '<p><strong>' . ucfirst(strtolower($machover[$i]["indicador"])) . '</strong></p>';
                                 echo '<p><strong>Definición:</strong></p>' . $int['definicion'];
                             }
                         }
