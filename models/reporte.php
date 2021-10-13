@@ -855,91 +855,91 @@ class Reporte extends AccesoDatos
     if($indicador==85){
       //Indicador del conflicto sexual
       if($valor>=1){
-        $definicion='<p> Indica: conflictos de tipo sexual los cuales se asocian con sujetos que tienden a mostrar inmadurez sexual así como conductas inadecuadas  relacionadas con ésta área.</p>';
+        $definicion='<p>Indica conflictos de tipo sexual los cuales se asocian con sujetos que tienden a mostrar inmadurez sexual así como conductas inadecuadas  relacionadas con ésta área.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==86){
       //Indicadores emocionales de rasgos asociados al abuso sexual.
       if($valor>=1){
-        $definicion='<p>Indica: Rasgos o conductas de personalidad que se asocian a conflictos de tipo psicosexual orientados al acoso, abuso sexual, o a la búsqueda del placer sexual sin medir las consecuencias de acuerdo a lo social o moralmente establecido.</p>';
+        $definicion='<p>Indica rasgos o conductas de personalidad que se asocian a conflictos de tipo psicosexual orientados al acoso, abuso sexual, o a la búsqueda del placer sexual sin medir las consecuencias de acuerdo a lo social o moralmente establecido.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==87){
       //Indicadores emocionales de impulsividad
       if($valor>=1){
-        $definicion='<p>Indica: tendencia a actuar espontáneamente, casi sin premeditación o planeación; a mostrar baja tolerancia a la frustración, control interno débil, inconsistencia; a ser expansivo y a buscar gratificación inmediata. La impulsividad se relaciona, por lo común, con el temperamento de los jóvenes con inmadurez.</p>';
+        $definicion='<p>Indica tendencia a actuar espontáneamente, casi sin premeditación o planeación; a mostrar baja tolerancia a la frustración, control interno débil, inconsistencia; a ser expansivo y a buscar gratificación inmediata. La impulsividad se relaciona, por lo común, con el temperamento de los jóvenes con inmadurez.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==88){
       //Indicadores emocionales suicidas
       if($valor>=1){
-        $definicion='<p>Indica: Rasgos o características de personalidad asociadas al suicidio, ya sea éste de manera consciente o inconsciente. Este tipo de resultados se asocian a sujetos que históricamente cometen actos o conductas de alto riesgo sin medir consecuencias.</p>';
+        $definicion='<p>Indica rasgos o características de personalidad asociadas al suicidio, ya sea éste de manera consciente o inconsciente. Este tipo de resultados se asocian a sujetos que históricamente cometen actos o conductas de alto riesgo sin medir consecuencias.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==89){
       //Indicadores rasgos narcisistas
       if($valor>=1){
-        $definicion='<p>Indica: Rasgos o características de personalidad asociadas  a ser impacientes o enojarse cuando no se las trata de manera especial. Tener notables problemas interpersonales y ofenderse con facilidad. Reaccionar con ira o desdén y tratan con desprecio a los demás, para dar la impresión de que son superiores. Tener dificultad para regular las emociones y la conducta.</p>';
+        $definicion='<p>Indica rasgos o características de personalidad asociadas  a ser impacientes o enojarse cuando no se las trata de manera especial. Tener notables problemas interpersonales y ofenderse con facilidad. Reaccionar con ira o desdén y tratan con desprecio a los demás, para dar la impresión de que son superiores. Tener dificultad para regular las emociones y la conducta.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==90){
       //Indicadores emocionales de inseguridad
       if($valor>=1){
-        $definicion='<p>Indica: un auto concepto bajo, falta de seguridad en sí mismo, preocupación acerca de la adecuación mental, sentimientos de impotencia y una posición insegura. El evaluado se considera como un extraño, no lo suficientemente humano, o como una persona ridícula que tiene dificultades para establecer contacto con los demás.</p>';
+        $definicion='<p>Indica un auto concepto bajo, falta de seguridad en sí mismo, preocupación acerca de la adecuación mental, sentimientos de impotencia y una posición insegura. El evaluado se considera como un extraño, no lo suficientemente humano, o como una persona ridícula que tiene dificultades para establecer contacto con los demás.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==91){
       //Indicadores emocionales de ansiedad
       if($valor>=1){
-        $definicion='<p>Indica: tensión o inquietud de la mente con respecto al cuerpo (ansiedad corporal), a las acciones, al futuro; preocupación, inestabilidad, aflicción; estado prolongado de aprensión. Ansiedad, temor anticipado de un peligro futuro, cuyo origen es desconocido o no se reconoce. Normalmente este tipo de personas cuando no logran canalizar adecuadamente la ansiedad tienden a somatizar (enfermarse) o a realizar algún tipo de conversión fisiológico como por ejemplo: los tips nerviosos, parálisis facial o corporal, entre otros.</p>';
+        $definicion='<p>Indica tensión o inquietud de la mente con respecto al cuerpo (ansiedad corporal), a las acciones, al futuro; preocupación, inestabilidad, aflicción; estado prolongado de aprensión. Ansiedad, temor anticipado de un peligro futuro, cuyo origen es desconocido o no se reconoce. Normalmente este tipo de personas cuando no logran canalizar adecuadamente la ansiedad tienden a somatizar (enfermarse) o a realizar algún tipo de conversión fisiológico como por ejemplo: los tips nerviosos, parálisis facial o corporal, entre otros.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==92){
       //Indicadores emocionales para socializar (esquizoides)
       if($valor>=1){
-        $definicion='<p>Indica: Rasgos o conductas de personalidad, en las que el sujeto no cuenta con herramientas suficientes para entablar, mantener o realizar conductas de tipo social. Este tipo de personas, pueden manifestar ansiedad o frustración interpersonal ya que no saben cómo mostrar emociones o sentimientos de tipo social hacia el "otro¨, y suelen alejarse o distanciarse.</p>';
+        $definicion='<p>Indica rasgos o conductas de personalidad, en las que el sujeto no cuenta con herramientas suficientes para entablar, mantener o realizar conductas de tipo social. Este tipo de personas, pueden manifestar ansiedad o frustración interpersonal ya que no saben cómo mostrar emociones o sentimientos de tipo social hacia el "otro¨, y suelen alejarse o distanciarse.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==93){
       //Indicadores emocionales de dependencia
       if($valor>=1){
-        $definicion='<p>Indica: Rasgos o conductas de personalidad que se asocian a la dependencia de personas por lo regular del sexo femenino (Madre, esposa, hermana, novia, etc.). Por lo regular a este tipo de sujetos evaluados, les cuesta tomar decisiones y pueden mostrar frustración y conflicto ante situaciones de conflicto si no hay "alguien que les puede apoyar, comentar, ayudar al respecto"</p>';
+        $definicion='<p>Indica rasgos o conductas de personalidad que se asocian a la dependencia de personas por lo regular del sexo femenino (Madre, esposa, hermana, novia, etc.). Por lo regular a este tipo de sujetos evaluados, les cuesta tomar decisiones y pueden mostrar frustración y conflicto ante situaciones de conflicto si no hay "alguien que les puede apoyar, comentar, ayudar al respecto"</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==94){
       //Indicadores emocionales de timidez
       if($valor>=1){
-        $definicion='<p>Indica: conducta retraída, cautelosa y reservada; falta de seguridad en sí mismo; tendencias a avergonzarse, tendencia a atemorizarse fácilmente, a apartarse de las circunstancias difíciles o peligrosas. Timidez, limitación o defecto del carácter que impide el desarrollo armónico del yo y que en las personas que la padecen se manifiesta por una inseguridad ante los demás, una torpeza o incapacidad para afrontar y resolver las relaciones sociales.</p>';
+        $definicion='<p>Indica conducta retraída, cautelosa y reservada; falta de seguridad en sí mismo; tendencias a avergonzarse, tendencia a atemorizarse fácilmente, a apartarse de las circunstancias difíciles o peligrosas. Timidez, limitación o defecto del carácter que impide el desarrollo armónico del yo y que en las personas que la padecen se manifiesta por una inseguridad ante los demás, una torpeza o incapacidad para afrontar y resolver las relaciones sociales.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==95){
       //Indicadores emocionales de depresión
       if($valor>=1){
-        $definicion='<p>Indica: Rasgos o conductas de personalidad asociadas a la tristeza, sensación de vacío, depresión, desesperanza. Cansancio y falta de energía. Baja autoestima, autocrítica o sentirse incapaz o inútil. Es importante indagar si la depresión es de tipo exógena (muerte de algún ser querido, pérdida de empleo o algún familiar, entre otros), o endógena (que la conducta o rasgo es aprendida desde el hogar).</p>';
+        $definicion='<p>Indica rasgos o conductas de personalidad asociadas a la tristeza, sensación de vacío, depresión, desesperanza. Cansancio y falta de energía. Baja autoestima, autocrítica o sentirse incapaz o inútil. Es importante indagar si la depresión es de tipo exógena (muerte de algún ser querido, pérdida de empleo o algún familiar, entre otros), o endógena (que la conducta o rasgo es aprendida desde el hogar).</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==96){
       //Indicadores emocionales de agresividad
       if($valor>=1){
-        $definicion='<p>Indica: conducta cuya finalidad es causar daño a un objeto o persona. La conducta agresiva en el sujeto puede interpretarse como manifestación de un instinto o pulsión de destrucción, como reacción que aparece ante cualquier tipo de frustración o como respuesta aprendida ante situaciones determinadas.</p>';
+        $definicion='<p>Indica conducta cuya finalidad es causar daño a un objeto o persona. La conducta agresiva en el sujeto puede interpretarse como manifestación de un instinto o pulsión de destrucción, como reacción que aparece ante cualquier tipo de frustración o como respuesta aprendida ante situaciones determinadas.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==97){
       //Indicadores emocionales de rasgos antisociales y delictivos
       if($valor>=1){
-        $definicion='<p>Indica: Rasgos o conductas de personalidad que se asocian a actos criminales, delictivos o vandálicos. Este tipo de sujetos evaluados suelen tener una disminución notable en la falta de valores y de compromisos sociales, laborales e interpersonales.</p>';
+        $definicion='<p>Indica rasgos o conductas de personalidad que se asocian a actos criminales, delictivos o vandálicos. Este tipo de sujetos evaluados suelen tener una disminución notable en la falta de valores y de compromisos sociales, laborales e interpersonales.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==98){
       //Indicadores de posible daño o deterioro Neurológico
       if($valor>=1){
-        $definicion='<p>Indica: implica un autoconcepto bajo de inmadurez o infantilismo  con deterioro psicológico o neurológico (posibles alteraciones a nivel neurológico), en donde se puede ir considerando un problema severo de la personalidad. En este tipo de "dibujos” se recomienda que un profesional de la salud, haga otro tipo de evaluaciones confirmatorias.</p>';
+        $definicion='<p>Indica un autoconcepto bajo de inmadurez o infantilismo  con deterioro psicológico o neurológico (posibles alteraciones a nivel neurológico), en donde se puede ir considerando un problema severo de la personalidad. En este tipo de "dibujos” se recomienda que un profesional de la salud, haga otro tipo de evaluaciones confirmatorias.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     if($indicador==99){
       //Indicadores textuales conflictivos
       if($valor>=1){
-        $definicion='<p>Se observan características de conflicto e inestabilidad emocional, es probable que la persona evaluada  presente conductas no acordes a lo Socialmente establecido.</p>';
+        $definicion='<p>Se observan características de conflicto e inestabilidad emocional, es probable que la persona evaluada presente conductas no acordes a lo socialmente establecido.</p>';
         }else{$definicion='<p>No presenta elevaciones en esta área</p>';}
     }
     $out['definicion'] = $definicion;
