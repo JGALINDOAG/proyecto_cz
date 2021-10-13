@@ -32,7 +32,7 @@ if(isset($_SESSION["idAdmin"]))
 					$_SESSION["idRol"] = $rowAdministradores[0]["id_rol"];
 					$_SESSION["idInstitucion"] = $rowAdministradores[0]["id_institucion"];
 					$_SESSION["isLoggedIn"] = true;
-					if($_SESSION["idRol"] == 4) header("Location: ".AccesoDatos::ruta()."?accion=resultados&pag=index");
+					if($_SESSION["idRol"] == 4 || $_SESSION["idRol"] == 2 || $_SESSION["idRol"] == 1) header("Location: ".AccesoDatos::ruta()."?accion=resultados&pag=index");
 					elseif($_SESSION["idRol"] == 3) header("Location: ".AccesoDatos::ruta()."?accion=resultados&pag=avance");
 					else header("Location: ".AccesoDatos::ruta()."?accion=homeUsuario&pag=index");
 					exit;

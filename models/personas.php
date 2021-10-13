@@ -152,7 +152,7 @@ class Personas extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $stmt = $this->dbh->prepare("INSERT INTO detalle_personas_pruebas (Id_persona, id_folio, fecha_registro, activo, perfil) VALUES (?, ?, NOW(), '0','{}');");
+            $stmt = $this->dbh->prepare("INSERT INTO detalle_personas_pruebas (Id_persona, id_folio, fecha_registro, activo, perfil) VALUES (?, ?, NOW(), '1','{}');");
             $stmt->bindValue(1, $Id_persona, PDO::PARAM_INT);
             $stmt->bindValue(2, $id_folio, PDO::PARAM_STR);
             $stmt->execute();
