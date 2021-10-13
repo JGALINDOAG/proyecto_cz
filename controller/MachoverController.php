@@ -49,6 +49,7 @@ if (isset($_POST["save"])) {
     }
     $d = new Pruebas();
     $d->delete_respuestas($idDetalle,$id_prueba);
+    header("Location: index.php?accion=Machover&idDetalle=".$idDetalle);
 }
 
 require_once("views/test/machover.php");

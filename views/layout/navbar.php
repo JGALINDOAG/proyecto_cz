@@ -1,5 +1,5 @@
 <?php $uri = basename($_SERVER["REQUEST_URI"]); ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark <?php if (isset($_SESSION['isLoggedIn'])) echo 'bg-dark'; else echo "bg-dark-nav"; ?>">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="<?php echo AccesoDatos::ruta(); ?>?accion=indexUsuario">
             <img src="<?php echo AccesoDatos::ruta(); ?>assets/img/ico.png" width="45" height="45" class="d-inline-block align-top" alt="">
@@ -48,8 +48,9 @@
                         <a class="nav-link" href="<?php echo AccesoDatos::ruta(); ?>?accion=Home">Realizar pruebas</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav my-2 my-lg-0">
-                    <p class="mb-0 text-white-50 bg-dark">CHROME | Crhome Consultores S. A. de C. V.</p>
+                <!-- <ul class="navbar-nav my-2 my-lg-0"> -->
+                <ul class="my-2 my-lg-0">
+                    <p class="mb-0 text-white-50">CHROME | Crhome Consultores</p>
                 </ul>
             <?php endif; ?>
         </div>

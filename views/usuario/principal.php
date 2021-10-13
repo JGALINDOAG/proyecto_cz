@@ -207,7 +207,7 @@
             </p>
             <br>
             <p>
-                <b><em>CHROME</em></b> es un sistema virtual inteligente, que le permite conocer de manera íntegra y a fondo las características psicológicas para el éxito  personal, calidad y talento humano, las cuales de divide en dos vertientes: 
+                <b><em>CHROME</em></b> es un sistema virtual inteligente, que le permite conocer de manera íntegra y a fondo las características psicológicas para el éxito  personal, calidad y talento humano, las cuales se divide en dos vertientes: 
                 <ol>
                     <li><em>Área educativa.</em></li>
                     <li><em>Área empresarial.</em></li>
