@@ -60,7 +60,7 @@ class Pruebas extends AccesoDatos
             $pruebas->execute();
             $rowPruebas = $pruebas->fetch(PDO::FETCH_NUM);
             //$stmt = $this->dbh->prepare("SELECT * FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
-            $stmt = $this->dbh->prepare("SELECT id_prueba AS idprueba, prueba,(SELECT COUNT(*) AS total FROM resultados WHERE id_detalle = $idDetalle AND id_prueba = idprueba) AS avance FROM pruebas WHERE id_prueba IN ($rowPruebas[0])");
+            $stmt = $this->dbh->prepare("SELECT id_prueba AS idprueba, prueba,(SELECT COUNT(*) AS total FROM resultados WHERE id_detalle = $idDetalle AND id_prueba = idprueba) AS avance FROM pruebas WHERE id_prueba IN ($rowPruebas[0]) ORDER BY FIELD(idprueba,1,2,3,4,5,6,7,8,9,10,11,14,12,13)");
             if ($stmt->execute()) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $result[] = $row;
