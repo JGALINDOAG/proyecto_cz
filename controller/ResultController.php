@@ -16,11 +16,13 @@ $rowObservacion = $objObservacion->valid_observacion_resultado($idDetalle);
 
 if (isset($_POST['validUsuario']) == 'saveObs'):
     $objObservacion = new ObservacionResultado();
+    $dataPsicol = 0;
+    if(!empty($_POST['dataPsicol'])) $dataPsicol = 1;
     if(empty($rowObservacion)):
-        $objObservacion->add_observacion_resultado($idDetalle, $_POST['textObservacion']);
+        $objObservacion->add_observacion_resultado($idDetalle, $_POST['textObservacion'], $dataPsicol);
         $number = 1;
     else:
-        $objObservacion->update_observacion_resultado($rowObservacion[0]['id_observacion'], $_POST['textObservacion']);
+        $objObservacion->update_observacion_resultado($rowObservacion[0]['id_observacion'], $_POST['textObservacion'], $dataPsicol);
         $number = 2;
     endif;
     header("Location: ".AccesoDatos::ruta()."?accion=Result&idDetalle=".$idDetalle."&m=".AccesoDatos::encriptar($number));
