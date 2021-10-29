@@ -226,11 +226,16 @@
                                 <label class="font-weight-bold">Observaciones</label>
                                 <textarea name="textObservacion" class="form-control" placeholder="Ingrese algúna observación si es necesario" rows="5" required><?php echo @$rowObservacion[0]['observacion']; ?></textarea>
                             </div>
-                            <div class="form-group text-center font-weight-bold">
-                                Psic. Christian Zepeda Alcantara
+                            <div class="form-group">
+                                <input type="checkbox" name="dataPsicol" id="dataPsicol" value="1" <?php if (!empty($rowObservacion) && $rowObservacion[0]['datosPsicol'] == 1) echo "checked"; ?>>&nbsp;<b>Permitir ver Nombre del Psicólogo y Cedula Profesional</b>
                             </div>
-                            <div class="form-group text-center font-weight-bold">
-                               <small>Cédula profesional: 3235520</small> 
+                            <div id="showDataPsicol" class="pt-4" <?php if (@$rowObservacion[0]['datosPsicol'] == 0) echo "style='display:none'"; ?>>
+                                <div class="form-group text-center font-weight-bold">
+                                    Psic. Christian Zepeda Alcantara
+                                </div>
+                                <div class="form-group text-center font-weight-bold">
+                                <small>Cédula profesional: 3235520</small> 
+                                </div>
                             </div>
                             <input type="hidden" name="validUsuario" value="saveObs">
                             <input type="submit" value="Enviar observaciones" class="btn btn-outline-green btn-lg btn-block">
@@ -244,12 +249,14 @@
                             <label class="font-weight-bold">Observaciones</label>
                             <p><?php echo @$rowObservacion[0]['observacion']; ?></p>
                         </div>
-                        <div class="form-group text-center font-weight-bold">
-                            Psic. Christian Zepeda Alcantara
-                        </div>
-                        <div class="form-group text-center font-weight-bold">
-                            <small>Cédula profesional: 3235520</small>
-                        </div>
+                        <?php if ($rowObservacion[0]['datosPsicol'] == 1): ?>
+                            <div class="form-group text-center font-weight-bold">
+                                Psic. Christian Zepeda Alcantara
+                            </div>
+                            <div class="form-group text-center font-weight-bold">
+                                <small>Cédula profesional: 3235520</small>
+                            </div>
+                        <?php endif; ?>
                     </form>
                 <?php endif; ?>
             <?php
@@ -266,8 +273,10 @@
                 if ($('#observacion').prop('checked')) $('#showObservaciones').css('display', 'block')
                 else $('#showObservaciones').css('display', 'none')
             });
-
-
+            $("#dataPsicol").change(function() {
+                if ($('#dataPsicol').prop('checked')) $('#showDataPsicol').css('display', 'block')
+                else $('#showDataPsicol').css('display', 'none')
+            });
         });
     </script>
 </body>

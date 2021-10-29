@@ -30,7 +30,9 @@
                                 if($noPGratis != 0):
                                     $text .= 'N&uacute;mero de pruebas gratis '.$noPGratis.'%0A';  
                                 endif;
-                                $text .= 'El folio generado para esta venta es '.$folio.'%0A';
+                                $text .= 'El folio generado para esta venta es '.$folio.'%0A
+                                Favor de enlazar a la siguiente direcci&oacute;n electr&oacute;nica para realizar la prueba: 
+                                https://www.chromeconsultores.com.mx/?accion=Home';
 
                         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>¡AVISO!</strong>&nbsp;Se realizó la venta a la Institución exitosamente&nbsp;|&nbsp;El folio generado para esta venta es <b>'.$folio.'</b>

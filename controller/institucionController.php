@@ -95,7 +95,7 @@ class InstitucionController
     $objInstitucion = new Institucion();
     $pruebas = "";
     foreach($_POST["cmbPrueba"] as $idPrueba): $pruebas .= $idPrueba.","; endforeach;
-    $objInstitucion->update_institucion($_POST['cmbInstitucion'], $_POST['txtNombreInst'], $_POST['txtAbreviatura'], $_POST['txtRFC'], $_POST['txtEmail'], $_POST['txtTelefono'], $pruebas);
+    $objInstitucion->update_institucion($_POST['cmbInstitucion'], $_POST['txtNombreInst'], $_POST['txtAbreviatura'], $_POST['txtRFC'], $_POST['txtEmail'], $_POST['txtTelefono'], trim($pruebas, ","));
     header("Location: ".AccesoDatos::ruta()."?accion=institucion&pag=listInstitucion&m=".AccesoDatos::encriptar(1)."");
   }
 

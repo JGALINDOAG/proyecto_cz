@@ -23,7 +23,7 @@ if (isset($_POST["serie"])) {
             $t = new Pruebas();
             ///Muestra las preguntas correspondientes a un indicador o serie
             $preguntas = $t->preguntas_por_serie($s);
-            require_once("Views/test/terman.php");
+            require_once("views/test/terman.php");
         }
     }
     //El post viene de la vista terman.php para mostrar la serie en curso
