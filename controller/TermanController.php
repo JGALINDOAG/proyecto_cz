@@ -60,13 +60,13 @@ if (isset($_POST["serie"])) {
             $contesto = $contesto . $item . $coma;
         }
     }
-    echo '<p>'.$contesto.'</p>';
+    //echo '<p>'.$contesto.'</p>';
     if (!empty($contesto)) {
         if ($serie == 1 || $serie == 3 || $serie == 6 || $serie == 7 || $serie == 8 || $serie == 9) {
             $string = new Pruebas();
             //Realiza una suma acorde al valor de las opciones que recibe la consulta, esto no afecta a las series 3, 6 y 8 debido a sus valores positivos y negativos 
             $resultado = $string->suma($contesto);
-            print_r($resultado);
+            //print_r($resultado);
             $result = $resultado[0]["total"];
             //Se almacena el resultado obtenido por indicador a la tabla "resultados"
             $no = new Pruebas();
