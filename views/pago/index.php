@@ -96,7 +96,8 @@
                     </table>
                 </div>
                 <!--  -->
-                <div id='incompleted'>
+                <?php if($_SESSION["idInstitucion"] == 1): ?>
+                <div id='incompleted' class="pt-5">
                     <div class="form-row">
                         <div class="form-group col-sm-12 col-md-6">
                             <label>Forma de pago</label>
@@ -162,6 +163,7 @@
                     <input type="hidden" name="validUsuario" value="save">
                     <input type="submit" value="Notificar" id="pagar" class="btn btn-outline-green btn-lg btn-block">
                 </div>
+                <?php endif; ?>
             </form>
         </div>
     </section>

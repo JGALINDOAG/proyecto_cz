@@ -86,13 +86,14 @@ class InstitucionAdministrador extends AccesoDatos
     {
       try {
         $this->dbh = AccesoDatos::conexion();
-        $query = "INSERT INTO institucion_administrador VALUES (?, ?, ?, ?, ?);";
+        $query = "INSERT INTO institucion_administrador VALUES (?, ?, ?, ?, ?, ?);";
         $stmt = $this->dbh->prepare($query);
         $stmt->bindValue(1, $idFolio, PDO::PARAM_STR);
         $stmt->bindValue(2, $idAdmin, PDO::PARAM_INT);
         $stmt->bindValue(3, $costo, PDO::PARAM_INT);
         $stmt->bindValue(4, $numGratis, PDO::PARAM_INT);
         $stmt->bindValue(5, $numVendidas, PDO::PARAM_INT);
+        $stmt->bindValue(6, date("Y-m-d H:i:s"), PDO::PARAM_STR);
         $stmt->execute();
         $stmt->closeCursor(); // opcional en MySQL, dependiendo del controlador de base de datos puede ser obligatorio
         $stmt = null; // obligado para cerrar la conexión

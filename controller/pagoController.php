@@ -5,7 +5,8 @@ class PagoController
   public static function index(){
     require_once "models/institucion.php";
     $objInstitucion = new Institucion();
-    $rowInstitucion = $objInstitucion->get_folio($_SESSION["idInstitucion"]);
+    // $_SESSION["idInstitucion"]
+    $rowInstitucion = $objInstitucion->get_folio();
     require_once "views/pago/index.php";
   }
 
@@ -96,21 +97,21 @@ class PagoController
 		print $dataJson;
   }
   
-  public static function pagoByUser(){
-    require_once "models/detallePersonasPruebas.php";
-    $objDPersonasPrueba = new DetallePersonasPruebas();
-    $rowPersonasPrueba = $objDPersonasPrueba->get_pagos_by_folio_user($_POST['folio']);
-    $dataJson = json_encode($rowPersonasPrueba, JSON_UNESCAPED_UNICODE);
-		print $dataJson;
-  }
+  // public static function pagoByUser(){
+  //   require_once "models/detallePersonasPruebas.php";
+  //   $objDPersonasPrueba = new DetallePersonasPruebas();
+  //   $rowPersonasPrueba = $objDPersonasPrueba->get_pagos_by_folio_user($_POST['folio']);
+  //   $dataJson = json_encode($rowPersonasPrueba, JSON_UNESCAPED_UNICODE);
+	// 	print $dataJson;
+  // }
   
-  public static function getAdminFolio(){
-    require_once "models/institucionAdministrador.php";
-    $objIAdministrador = new InstitucionAdministrador();
-    $rowIAdministrador= $objIAdministrador->get_idFolio($_POST['folio']);
-    $dataJson = json_encode($rowIAdministrador, JSON_UNESCAPED_UNICODE);
-		print $dataJson;
-  }
+  // public static function getAdminFolio(){
+  //   require_once "models/institucionAdministrador.php";
+  //   $objIAdministrador = new InstitucionAdministrador();
+  //   $rowIAdministrador= $objIAdministrador->get_idFolio($_POST['folio']);
+  //   $dataJson = json_encode($rowIAdministrador, JSON_UNESCAPED_UNICODE);
+	// 	print $dataJson;
+  // }
 
   public static function delete(){ }
 
@@ -134,10 +135,11 @@ if (isset($_GET["accion"])) {
     PagoController::getReport();
   } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "getPagos") {
     PagoController::getPagos();
-  } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "pagoByUser") {
-    PagoController::pagoByUser();
-  } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "getAdminFolio") {
-    PagoController::getAdminFolio();
-  }
+  } 
+  // else if ($_GET["accion"] == "pago" && $_GET["pag"] == "pagoByUser") {
+  //   PagoController::pagoByUser();
+  // } else if ($_GET["accion"] == "pago" && $_GET["pag"] == "getAdminFolio") {
+  //   PagoController::getAdminFolio();
+  // }
 }
 ?>

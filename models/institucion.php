@@ -119,14 +119,14 @@ class Institucion extends AccesoDatos
     }
     
     #Obtiene los folios no pagados por la institución.
-    public function get_folio($idInstitucion) 
+    public function get_folio() 
     {
       try {
           $this->dbh = AccesoDatos::conexion();
           $query = "SELECT id_folio, (ia.costo * ia.num_vendidas) as total FROM institucion i
           INNER JOIN administradores a USING (id_institucion)
           INNER JOIN institucion_administrador ia USING (id_admin)
-          WHERE i.id_institucion = ?
+          -- WHERE i.id_institucion = ?
           -- AND (ia.costo * ia.num_vendidas) > (
           -- 	SELECT SUM(JSON_EXTRACT(transaccion, '$.total')) FROM pago
           -- )

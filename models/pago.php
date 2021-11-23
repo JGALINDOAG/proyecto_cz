@@ -94,12 +94,28 @@ class Pago extends AccesoDatos
     {
         try {
             $this->dbh = AccesoDatos::conexion();
-            $query = "SELECT p.*, i.nombre AS institucion, CONCAT(a.nombre,' ',a.apellidos) nombre FROM pago p 
-            INNER JOIN institucion_administrador ia USING(id_folio)
+            $query = "SELECT 
+            ia.id_folio, i.nombre AS institucion, CONCAT(a.nombre,' ',a.apellidos) nombre, (ia.costo * ia.num_vendidas) costo_total,
+            (
+            SELECT CONCAT('{\"tipo_pago\":\"',tipo_pago,'\", \"fecha_registro\":\"',fecha_registro,'\"}') detalle FROM pago WHERE id_pago = (Select MAX(id_pago) FROM pago WHERE id_folio = ia.id_folio)
+            ) detalle,
+            (
+            SELECT 
+            CONCAT('{\"abono\":',ANY_VALUE(SUM(p2.transaccion->'$.total')),',
+            \"adeudo\":',ANY_VALUE((ia2.costo * ia2.num_vendidas) - (SUM(p2.transaccion->'$.total'))),'
+            }')
+            FROM pago p2 
+            INNER JOIN institucion_administrador ia2 USING(id_folio)
+            WHERE ia2.id_folio = ia.id_folio
+            GROUP BY p2.id_folio
+            ) pagos, ia.fecha_emision,
+            ia.costo, ia.num_vendidas,
+            (SELECT MAX(costo_pago) FROM detalle_personas_pruebas WHERE id_folio = BINARY ia.id_folio) pagoUser
+            FROM institucion_administrador ia
             INNER JOIN administradores a USING(id_admin)
             INNER JOIN institucion i USING(id_institucion)
-            WHERE p.fecha_registro BETWEEN ? AND ?
-            ORDER BY p.fecha_registro";
+            WHERE ia.fecha_emision BETWEEN ? AND ?
+            ORDER BY ia.fecha_emision DESC;";
             $stmt = $this->dbh->prepare($query);
             $stmt->bindParam(1, $fechaInicio, PDO::PARAM_STR);
             $stmt->bindParam(2, $fechaFin, PDO::PARAM_STR);

@@ -2,7 +2,7 @@ $(document).ready( function () {
     var isTableCreated = false;
 
     $(document).ajaxStart(function() {  
-        $('#vendedor').html(''); 
+        // $('#vendedor').html(''); 
         $('#costo_evaluado').html('---'); 
         $('#costo_total_evaluado').html('---');      
         $('#total').html('---');      
@@ -22,43 +22,43 @@ $(document).ready( function () {
     $('#cmbFormaPago').prop('disabled', true);
     // $('#cantidad').prop('readonly', true);
     $("#txtFechaFin").prop('disabled', true);
-    $('#cmbFolio_dos').prop('disabled', true);
+    // $('#cmbFolio_dos').prop('disabled', true);
     $('#completed').hide();
-    $('#cmbInstitucion').on('change', function() {
-        var id = $(this).val()
-        $('#costo').html('---')
-        $('#statusPago').html('Status de pago del Folio')
+    // $('#cmbInstitucion').on('change', function() {
+    //     var id = $(this).val()
+    //     $('#costo').html('---')
+    //     $('#statusPago').html('Status de pago del Folio')
 
-        var cmbInstitucion = $.ajax({
-            method: "POST",
-            url: "?accion=institucionAdministrador&pag=getFolioByInst",
-            data: { idInstitucion: id }
-        })
+    //     var cmbInstitucion = $.ajax({
+    //         method: "POST",
+    //         url: "?accion=institucionAdministrador&pag=getFolioByInst",
+    //         data: { idInstitucion: id }
+    //     })
 
-        cmbInstitucion.done(function( res ) {
-            var option = ''
-            $('#cmbFolio_dos').empty()
-            var data = JSON.parse(res);
-            option +='<option value="" selected>Selecciona un folio</option>';
-            data.forEach(element => {
-                var opc = new Object();
-                // console.log(element)
-                opc.id_folio = element.id_folio;
-                opc.total = element.total;
-                var myString = JSON.stringify(opc);
-                option +='<option value='+ myString +'>' + element.id_folio +'</option>';
-            });
-            $('#cmbFolio_dos').append(option);
-            $('#cmbFolio_dos').prop('disabled', false);
-        });
+    //     cmbInstitucion.done(function( res ) {
+    //         var option = ''
+    //         $('#cmbFolio_dos').empty()
+    //         var data = JSON.parse(res);
+    //         option +='<option value="" selected>Selecciona un folio</option>';
+    //         data.forEach(element => {
+    //             var opc = new Object();
+    //             // console.log(element)
+    //             opc.id_folio = element.id_folio;
+    //             opc.total = element.total;
+    //             var myString = JSON.stringify(opc);
+    //             option +='<option value='+ myString +'>' + element.id_folio +'</option>';
+    //         });
+    //         $('#cmbFolio_dos').append(option);
+    //         $('#cmbFolio_dos').prop('disabled', false);
+    //     });
 
-        cmbInstitucion.fail(function() {
-            alert("error")
-        })
-    });
+    //     cmbInstitucion.fail(function() {
+    //         alert("error")
+    //     })
+    // });
 
     $("#cmbFolio_uno").change(function () {
-        var opc = 1
+        // var opc = 1
         var cmbFolio = $(this).val()
         var data = JSON.parse(cmbFolio)
         var folio = data.id_folio
@@ -66,39 +66,39 @@ $(document).ready( function () {
         const total = data.total
         $('#costo').html('<b>$'+ total +'</b>')
         $('#costo_evaluado').html('---')
-        datatable_by_folio(folio, opc)
+        datatable_by_folio(folio)
     });
     
-    $("#cmbFolio_dos").change(function () {
-        var opc = 2
-        var cmbFolio = $(this).val()
-        var data = JSON.parse(cmbFolio)
-        var folio = data.id_folio
-        const total = data.total
-        $('#costo').html('<b>$'+ total +'</b>')
-        $('#costo_evaluado').html('---')
+    // $("#cmbFolio_dos").change(function () {
+    //     var opc = 2
+    //     var cmbFolio = $(this).val()
+    //     var data = JSON.parse(cmbFolio)
+    //     var folio = data.id_folio
+    //     const total = data.total
+    //     $('#costo').html('<b>$'+ total +'</b>')
+    //     $('#costo_evaluado').html('---')
 
-        $.post( "?accion=pago&pag=pagoByUser", { folio: folio })
-            .done(function( data ) {
-                var dataPagos = JSON.parse(data)
-                var costoBruto = '<b>$' + dataPagos[0].costo_individual + '</b>'
-                var total = '<b>$' + dataPagos[0].pagoUser + '</b>'
-                if(dataPagos[0].pagoUser != null) {
-                    $('#costo_evaluado').html(costoBruto); 
-                    $('#costo_total_evaluado').html(total);
-                }
-            });
+    //     $.post( "?accion=pago&pag=pagoByUser", { folio: folio })
+    //         .done(function( data ) {
+    //             var dataPagos = JSON.parse(data)
+    //             var costoBruto = '<b>$' + dataPagos[0].costo_individual + '</b>'
+    //             var total = '<b>$' + dataPagos[0].pagoUser + '</b>'
+    //             if(dataPagos[0].pagoUser != null) {
+    //                 $('#costo_evaluado').html(costoBruto); 
+    //                 $('#costo_total_evaluado').html(total);
+    //             }
+    //         });
         
-            $.post( "?accion=pago&pag=getAdminFolio", { folio: folio })
-            .done(function( data ) {
-                var json = JSON.parse(data)
-                var nombre = '<b>' + json[0].nombre + '</b>'
-                $('#vendedor').html(nombre); 
-            });
+    //         $.post( "?accion=pago&pag=getAdminFolio", { folio: folio })
+    //         .done(function( data ) {
+    //             var json = JSON.parse(data)
+    //             var nombre = '<b>' + json[0].nombre + '</b>'
+    //             $('#vendedor').html(nombre); 
+    //         });
 
-        datatable_by_folio(folio, opc)
-        isTableCreated = true;
-    });
+    //     datatable_by_folio(folio, opc)
+    //     isTableCreated = true;
+    // });
 
     $("#cmbFormaPago").change(function () {
         var data = JSON.parse($(this).val());
@@ -236,6 +236,7 @@ function datatable(fechaInicio, fechaFin) {
 
     result.done(function( res ) {
         var dataPagos = JSON.parse(res)
+        // console.log(dataPagos)
         $('#reporte_uno').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",
@@ -267,35 +268,102 @@ function datatable(fechaInicio, fechaFin) {
                     "data": 'id_folio'
                 },
                 {
+                    "data": 'fecha_emision'
+                },
+                {
                     "data": 'institucion'
                 },
                 {
                     "data": 'nombre'
                 },
+                // {
+                //     "data": 'detalle', 'render': function (data, type, row) {
+                //         var tipo_pago
+                //         var detalle = JSON.parse(row.detalle)
+                //         if(detalle != null){
+                //             tipo_pago = detalle.tipo_pago
+                //         } else {
+                //             tipo_pago = '---'
+                //         }
+                //         return tipo_pago;
+                //     }
+                // },
+                // {
+                //     "data": 'detalle', 'render': function (data, type, row) {
+                //         var fecha_registro
+                //         var detalle = JSON.parse(row.detalle)
+                //         if(row.detalle != null){    
+                //             fecha_registro = detalle.fecha_registro
+                //         } else {
+                //             fecha_registro = '---'
+                //         }
+                //         return fecha_registro;
+                //     }
+                // },
                 {
-                    "data": 'tipo_pago'
+                    "data": 'costo', 'render': function (data, type, row) {
+                        return '$' + row.costo;
+                    }
                 },
                 {
-                    "data": 'fecha_registro'
+                    "data": 'num_vendidas', 'render': function (data, type, row) {
+                        return row.num_vendidas;
+                    }
                 },
                 {
-                    "data": 'transaccion', 'render': function (data, type, row) {
-                        var transaccion = JSON.parse(row.transaccion)
-                        return transaccion.total
+                    "data": 'pagoUser', 'render': function (data, type, row) {
+                        var pagoUser
+                        if(row.pagoUser != null){
+                            pagoUser = '$' + row.pagoUser
+                        } else {
+                            pagoUser = '$0'
+                        }
+                        return pagoUser;
+                    }
+                },
+                {
+                    "data": 'costo_total', 'render': function (data, type, row) {
+                        return '$' + row.costo_total;
+                    }
+                },
+                {
+                    "data": 'pagos', 'render': function (data, type, row) {
+                        var abono
+                        if(row.pagos != null){
+                            var pagos = JSON.parse(row.pagos)
+                            abono = '$' + pagos.abono
+                        } else {
+                            abono = '$0'
+                        }
+                        return abono;
+                    }
+                },
+                {
+                    "data": 'pagos', 'render': function (data, type, row) {
+                        var adeudo
+                        if(row.pagos != null){
+                            var pagos = JSON.parse(row.pagos)
+                            adeudo = '$' + pagos.adeudo
+                        } else {
+                            adeudo = row.costo_total
+                        }
+                        return adeudo;
                     }
                 }
             ],
             columnDefs: [
-                { className: 'text-center', targets: [2,3,4] }
-            ]
+                { orderable: false, targets: [5,6,7,8,9] },
+                { className: 'text-center', targets: [2,3,4,5,6] }
+            ],
+            order: []
         });
 
         var total = 0
         dataPagos.forEach(element => {
-            var transaccion = JSON.parse(element.transaccion)
-            total = parseInt(transaccion.total) + total
+            var pagos = JSON.parse(element.pagos)
+            if(pagos != null) total = parseInt(pagos.abono) + total
         });
-        $('#total_uno').html(total)
+        $('#total_uno').html('$' + total)
     });
 
     result.fail(function() {
@@ -304,7 +372,7 @@ function datatable(fechaInicio, fechaFin) {
     
 }
 
-function datatable_by_folio(folio, opc) {
+function datatable_by_folio(folio) {
     var result = $.ajax({
         method: "POST",
         url: "?accion=pago&pag=getPagos",
@@ -366,11 +434,11 @@ function datatable_by_folio(folio, opc) {
             pago = parseInt(transaccion.total) + pago
         });
         $('#total').html(pago)
-        if(opc === 2) {
-            var folio = $('#cmbFolio_dos').val()
-        } else {
+        // if(opc === 2) {
+        //     var folio = $('#cmbFolio_dos').val()
+        // } else {
             var folio = $('#cmbFolio_uno').val()
-        }
+        // }
         var data = JSON.parse(folio)
         if(pago == data.total) {
             $('#completed').show();
