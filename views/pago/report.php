@@ -59,21 +59,27 @@
                     <thead>
                         <tr>
                             <th scope="col">Folio</th>
+                            <th scope="col">Fecha emisión</th>
                             <th scope="col">Institución</th>
                             <th scope="col">Vendedor</th>
-                            <th scope="col">Tipo de Pago</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Precio</th>
+                            <!-- <th scope="col">Tipo de Pago</th> -->
+                            <!-- <th scope="col">Fecha pago</th> -->
+                            <th scope="col">Costo prueba</th>
+                            <th scope="col">Núm de pruebas</th>
+                            <th scope="col">Costo cobrado (evaluado)</th>
+                            <th scope="col">Costo total</th>
+                            <th scope="col">Abono</th>
+                            <th scope="col">Adeudo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="5" class="text-center">No hay datos disponibles en la tabla.</td>
+                            <td colspan="9" class="text-center">No hay datos disponibles en la tabla.</td>
                         </tr>
                     </tbody>
                     <tfooter>
                         <tr>
-                            <th class="text-right" colspan="4">Total</th>
+                            <th class="text-right" colspan="9">Total</th>
                             <th id="total_uno" class="text-center">---</th>
                         </tr>
                     </tfooter>
@@ -81,7 +87,7 @@
             </div>
         </div>
         <!-- Reporte por folio -->
-        <div class="shadow p-3 mb-5 bg-white rounded pt-4">
+        <!-- <div class="shadow p-3 mb-5 bg-white rounded pt-4">
             <div class="alert alert-light" role="alert">
                 <div class="form-row">
                     <div class="col-11">REPORTE POR FOLIO</div>
@@ -147,7 +153,7 @@
                     </tfooter>
                 </table>
             </div>
-        </div>
+        </div> -->
     </section>
     <!-- Invoca al Footer -->
     <?php require_once 'views/layout/footer.php'; ?>
