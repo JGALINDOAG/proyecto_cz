@@ -264,8 +264,7 @@ class Reporte extends AccesoDatos
       </ul>';
       $perfil=3;
     }
-    if($raven>=25 and $raven<=51){
-      if($raven>=25 and $raven<=40){
+    if($raven>=25 and $raven<=40){
         if($raven==25){$ci=54;}
         if($raven==26){$ci=56;}
         if($raven==27){$ci=58;}
@@ -283,7 +282,16 @@ class Reporte extends AccesoDatos
         if($raven==39){$ci=84;}
         if($raven==40){$ci=87;}
         $categoria='INFERIOR A TEMINO MEDIO';
-      }
+
+      $definicion='<p>El Grado de Éxito de  esta persona se encuentra  disminuido, dado que sus capacidades "cerebrales" no han sido "activadas" lo suficiente como para resolver razonadamente problemas o conflictos, los cuales se van a ver reflejados en actividades académicas, sociales, familiares, laborales, emocionales etc. Por ejemplo:</p>
+      <ul>
+        <li>Es muy probable que tenga dificultades para resolver problemas en el que se incluyan las matemáticas o la física.</li>
+        <li>Es probable que el evaluado manifieste conductas de   necedad o de conflicto al no poder resolver determinadas situaciones familiares, sociales, emocionales, entre otros.</li>
+      </ul>';
+      $tratamiento='<p>El Grado de Éxito se encuentra  en riesgo, se recomienda canalización del sujeto a un especialista con el fin de favorecer y "activar"  su desempeño académico, además de otras áreas de oportunidad.</p>';
+      $perfil=2;
+    } 
+    if($raven>=41){
       if($raven>=41 and $raven<=51){
         if($raven==41){$ci=89;}
         if($raven==42){$ci=91;}
@@ -298,15 +306,6 @@ class Reporte extends AccesoDatos
         if($raven==51){$ci=110;}
         $categoria='TERMINO MEDIO';
       }
-      $definicion='<p>El Grado de Éxito de  esta persona se encuentra  disminuido, dado que sus capacidades "cerebrales" no han sido "activadas" lo suficiente como para resolver razonadamente problemas o conflictos, los cuales se van a ver reflejados en actividades académicas, sociales, familiares, laborales, emocionales etc. Por ejemplo:</p>
-      <ul>
-        <li>Es muy probable que tenga dificultades para resolver problemas en el que se incluyan las matemáticas o la física.</li>
-        <li>Es probable que el evaluado manifieste conductas de   necedad o de conflicto al no poder resolver determinadas situaciones familiares, sociales, emocionales, entre otros.</li>
-      </ul>';
-      $tratamiento='<p>El Grado de Éxito se encuentra  en riesgo, se recomienda canalización del sujeto a un especialista con el fin de favorecer y "activar"  su desempeño académico, además de otras áreas de oportunidad.</p>';
-      $perfil=2;
-    } 
-    if($raven>=52){
       if($raven>=52 and $raven<=55){
         if($raven==52){$ci=112;}
         if($raven==53){$ci=115;}
