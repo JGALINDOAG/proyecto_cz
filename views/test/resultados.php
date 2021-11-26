@@ -58,7 +58,7 @@
                             $int2 = new Reporte();
                             $int = $int2->perfil_smp02($smp02[$i]["id_indicador"],abs($smp02[$i]["resultado"]),$info[0]['sexo']);
                             //print_r($int);
-                            echo '<p><strong>'.strtoupper($smp02[$i]["indicador"]).'</strong>: '.abs($smp02[$i]["resultado"]).'</p>';
+                            echo '<p><strong>'.mb_strtoupper($smp02[$i]["indicador"]).'</strong>: '.abs($smp02[$i]["resultado"]).'</p>';
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                             echo '<p><strong>Alternativas de Tratamiento:</strong></p>'.$int['tratamiento'];
                             echo '<p><strong>Perfil en indicador: '.$int['perfil'].'</strong></p>';
@@ -78,7 +78,7 @@
                             $int2 = new Reporte();
                             $int = $int2->perfil_smp03($smp03[$i]["id_indicador"],abs($smp03[$i]["resultado"]));
                             //print_r($int);
-                            echo '<p><strong>'.strtoupper($smp03[$i]["indicador"]).'</strong>: '.abs($smp03[$i]["resultado"]).'</p>';
+                            echo '<p><strong>'.mb_strtoupper($smp03[$i]["indicador"]).'</strong>: '.abs($smp03[$i]["resultado"]).'</p>';
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                             echo '<p><strong>Alternativas de Tratamiento:</strong></p>'.$int['tratamiento'];
                             echo '<p><strong>Perfil en indicador: '.$int['perfil'].'</strong></p>';
@@ -132,7 +132,7 @@
                             $int7 = new Reporte();
                             $int = $int7->analisis($analisis[$i]["id_indicador"],$analisis[$i]["resultado"]);
                             //print_r($int);
-                            echo '<p><strong>'.strtoupper($analisis[$i]["indicador"]).'</strong>: '.$analisis[$i]["resultado"].'</p>';
+                            echo '<p><strong>'.mb_strtoupper($analisis[$i]["indicador"]).'</strong>: '.$analisis[$i]["resultado"].'</p>';
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                             echo '<hr>';
                         }
@@ -149,7 +149,7 @@
                         //print_r($cultura);
                         $int8 = new Reporte();
                         $int = $int8->gral_test_definicion($cultura[0]["id_indicador"],$cultura[0]["resultado"]);
-                        echo '<p><strong>'.strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
+                        echo '<p><strong>'.mb_strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                         echo '<hr>';  
                     }
@@ -165,7 +165,7 @@
                         //print_r($cultura);
                         $int9 = new Reporte();
                         $int = $int9->gral_test_definicion($cultura[0]["id_indicador"],$cultura[0]["resultado"]);
-                        echo '<p><strong>'.strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
+                        echo '<p><strong>'.mb_strtoupper($cultura[0]["indicador"]).'</strong>: '.$cultura[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                         echo '<hr>';  
                     }
@@ -181,7 +181,7 @@
                         //print_r($clima);
                         $int10 = new Reporte();
                         $int = $int10->gral_test_definicion($clima[0]["id_indicador"],$clima[0]["resultado"]);
-                        echo '<p><strong>'.strtoupper($clima[0]["indicador"]).'</strong>: '.$clima[0]["resultado"].'</p>';
+                        echo '<p><strong>'.mb_strtoupper($clima[0]["indicador"]).'</strong>: '.$clima[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                         echo '<hr>';  
                     }
@@ -197,7 +197,7 @@
                         //print_r($escucha);
                         $int11 = new Reporte();
                         $int = $int11->gral_test_definicion($escucha[0]["id_indicador"],$escucha[0]["resultado"]);
-                        echo '<p><strong>'.strtoupper($escucha[0]["indicador"]).'</strong>: '.$escucha[0]["resultado"].'</p>';
+                        echo '<p><strong>'.mb_strtoupper($escucha[0]["indicador"]).'</strong>: '.$escucha[0]["resultado"].'</p>';
                         echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                         echo '<hr>';  
                     }
@@ -221,7 +221,7 @@
                             $int13 = new Reporte();
                             $int = $int13->machover($machover[$i]["id_indicador"],$machover[$i]["resultado"]);
                             //print_r($int);
-                            echo '<p><strong>'.strtoupper($machover[$i]["indicador"]).'</strong>: '.$machover[$i]["resultado"].'</p>';
+                            echo '<p><strong>'.mb_strtoupper($machover[$i]["indicador"]).'</strong>: '.$machover[$i]["resultado"].'</p>';
                             echo '<p><strong>Definición:</strong></p>'.$int['definicion'];
                             echo '<hr>';
                         }
@@ -235,12 +235,12 @@
                         $r14 = new Reporte();
                         $grado = $r14->res_ind($idDetalle,$list[$l]["id_prueba"]);
                         if($grado[0]['resultado']>=6 and $grado[0]['resultado']<=8){
-                            echo '<p><strong>'.strtoupper($grado[0]["indicador"]).'</strong>: '.$grado[0]['resultado'].'</p>';
+                            echo '<p><strong>'.mb_strtoupper($grado[0]["indicador"]).'</strong>: '.$grado[0]['resultado'].'</p>';
                             echo '<p><strong>Definición:</strong></p><p>Hacen referencia a toda aquella información que devuelve el receptor al emisor sobre su propia comunicación. El sujeto posee las fortalezas necesarias para desarrollar el saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Son de gran ayuda en la organización, por lo que al usar correctamente esta herramienta  se puede generar el cambio que se espera y además comprometer más explícitamente a la persona evaluada que lo recibe.</p>';
                             echo '<hr>';
                         }else{
-                            echo '<p><strong>'.strtoupper($grado[1]["indicador"]).'</strong>: '.$grado[1]['resultado'].'</p>';
-                            echo '<p><strong>Definición:</strong></p><p>Como receptor no tiene la capacidad para devolver información al emisor sobre su propia comunicación. El sujeto no posee las fortalezas necesarias para saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Esto no es de gran ayuda en la organización, y al no usar correctamente esta herramienta  es dificil que pueda generar el cambio que se espera y además no compromete a el alumno que lo recibe.</p>';
+                            echo '<p><strong>'.mb_strtoupper($grado[1]["indicador"]).'</strong>: '.$grado[1]['resultado'].'</p>';
+                            echo '<p><strong>Definición:</strong></p><p>Como receptor no tiene la capacidad para devolver información al emisor sobre su propia comunicación. El sujeto no posee las fortalezas necesarias para saber escuchar, procesar la información recibida y externar una respuesta a su entorno. Esto no es de gran ayuda en la organización, y al no usar correctamente esta herramienta  es dificil que pueda generar el cambio que se espera y además no compromete al receptor que lo recibe.</p>';
                             echo '<hr>';
                           }
 
