@@ -1,12 +1,11 @@
-$(document).ready( function () {
+$(document).ready(function () {
     var isTableCreated = false;
 
-    $(document).ajaxStart(function() {  
-        // $('#vendedor').html(''); 
-        $('#costo_evaluado').html('---'); 
-        $('#costo_total_evaluado').html('---');      
-        $('#total').html('---');      
-        if (isTableCreated==true) {
+    $(document).ajaxStart(function () {
+        $('#costo_evaluado').html('---');
+        $('#costo_total_evaluado').html('---');
+        $('#total').html('---');
+        if (isTableCreated == true) {
             $('#reporte').DataTable().clear();
             $('#reporte').DataTable().destroy();
             $("#reporte").append('<tr class="text-center"><td colspan="3"><b>¡Sin resultados! Por favor elija un folio</b></td></tr>')
@@ -20,90 +19,35 @@ $(document).ready( function () {
     $('#referencia').hide();
     $('#rastreo').hide();
     $('#cmbFormaPago').prop('disabled', true);
-    // $('#cantidad').prop('readonly', true);
     $("#txtFechaFin").prop('disabled', true);
-    // $('#cmbFolio_dos').prop('disabled', true);
     $('#completed').hide();
-    // $('#cmbInstitucion').on('change', function() {
-    //     var id = $(this).val()
-    //     $('#costo').html('---')
-    //     $('#statusPago').html('Status de pago del Folio')
-
-    //     var cmbInstitucion = $.ajax({
-    //         method: "POST",
-    //         url: "?accion=institucionAdministrador&pag=getFolioByInst",
-    //         data: { idInstitucion: id }
-    //     })
-
-    //     cmbInstitucion.done(function( res ) {
-    //         var option = ''
-    //         $('#cmbFolio_dos').empty()
-    //         var data = JSON.parse(res);
-    //         option +='<option value="" selected>Selecciona un folio</option>';
-    //         data.forEach(element => {
-    //             var opc = new Object();
-    //             // console.log(element)
-    //             opc.id_folio = element.id_folio;
-    //             opc.total = element.total;
-    //             var myString = JSON.stringify(opc);
-    //             option +='<option value='+ myString +'>' + element.id_folio +'</option>';
-    //         });
-    //         $('#cmbFolio_dos').append(option);
-    //         $('#cmbFolio_dos').prop('disabled', false);
-    //     });
-
-    //     cmbInstitucion.fail(function() {
-    //         alert("error")
-    //     })
-    // });
 
     $("#cmbFolio_uno").change(function () {
-        // var opc = 1
         var cmbFolio = $(this).val()
         var data = JSON.parse(cmbFolio)
         var folio = data.id_folio
         $('#cmbFormaPago').prop('disabled', false);
         const total = data.total
-        $('#costo').html('<b>$'+ total +'</b>')
+        $('#costo').html('<b>$' + total + '</b>')
         $('#costo_evaluado').html('---')
         datatable_by_folio(folio)
     });
-    
-    // $("#cmbFolio_dos").change(function () {
-    //     var opc = 2
-    //     var cmbFolio = $(this).val()
-    //     var data = JSON.parse(cmbFolio)
-    //     var folio = data.id_folio
-    //     const total = data.total
-    //     $('#costo').html('<b>$'+ total +'</b>')
-    //     $('#costo_evaluado').html('---')
 
-    //     $.post( "?accion=pago&pag=pagoByUser", { folio: folio })
-    //         .done(function( data ) {
-    //             var dataPagos = JSON.parse(data)
-    //             var costoBruto = '<b>$' + dataPagos[0].costo_individual + '</b>'
-    //             var total = '<b>$' + dataPagos[0].pagoUser + '</b>'
-    //             if(dataPagos[0].pagoUser != null) {
-    //                 $('#costo_evaluado').html(costoBruto); 
-    //                 $('#costo_total_evaluado').html(total);
-    //             }
-    //         });
-        
-    //         $.post( "?accion=pago&pag=getAdminFolio", { folio: folio })
-    //         .done(function( data ) {
-    //             var json = JSON.parse(data)
-    //             var nombre = '<b>' + json[0].nombre + '</b>'
-    //             $('#vendedor').html(nombre); 
-    //         });
-
-    //     datatable_by_folio(folio, opc)
-    //     isTableCreated = true;
-    // });
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var folio = button.data('folio') // Extract info from data-* attributes
+        var abono = button.data('abono') // Extract info from data-* attributes
+        pagos(folio)
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('#folio_title').html('Folio: <b>' + folio + '</b>')
+        modal.find('#abono_total').html('Abono: <b>' + abono + '</b>')
+    })
 
     $("#cmbFormaPago").change(function () {
         var data = JSON.parse($(this).val());
-        // console.log(data)
-        if(data.key == 1) {
+        if (data.key == 1) {
             $("#hidenCarga").prop('required', false);
             $('#pay').show();
             $('#file').hide();
@@ -116,9 +60,9 @@ $(document).ready( function () {
 
             // Render the PayPal button into #paypal-button-container
             paypal.Buttons({
-                
+
                 // Set up the transaction
-                createOrder: function(data, actions) {
+                createOrder: function (data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
@@ -129,21 +73,21 @@ $(document).ready( function () {
                 },
 
                 // Finalize the transaction
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        if(details.status == "COMPLETED") {
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
+                        if (details.status == "COMPLETED") {
                             // console.log(details)
-                            $.get( "?accion=pago&pag=paypal", { cmbFolio: $('#cmbFolio').val(), cmbFormaPago: $('#cmbFormaPago').val(), txtCantidad: $('#cantidad').val()})
-                                .done(function( data ) {
-                                    location.href ="?accion=pago&pag=index&m=vLBLfhA6DNi1R2MFHO8IvFWr4Cn9665eHUF+L/sqAKNhbGdvcml0bW8xL0NydXplYWM=";
+                            $.get("?accion=pago&pag=paypal", { cmbFolio: $('#cmbFolio').val(), cmbFormaPago: $('#cmbFormaPago').val(), txtCantidad: $('#cantidad').val() })
+                                .done(function (data) {
+                                    location.href = "?accion=pago&pag=index&m=vLBLfhA6DNi1R2MFHO8IvFWr4Cn9665eHUF+L/sqAKNhbGdvcml0bW8xL0NydXplYWM=";
                                 }
-                            );
+                                );
                         }
                     });
                 }
             }).render('#paypal-button-container');
 
-        } else if(data.key == 2) {
+        } else if (data.key == 2) {
             $("#hidenCarga, #txtReferencia, #txtRastreo, #txtFolio, #txtLinea").prop('required', false);
             $('#pay').hide();
             $('#file').hide();
@@ -152,7 +96,7 @@ $(document).ready( function () {
             $('#divFolio').hide();
             $('#divLinea').hide();
             $("#pagar").show();
-        } else if(data.key == 3) {
+        } else if (data.key == 3) {
             $('#pay').hide();
             $('#file').show();
             $('#divReferencia').show();
@@ -174,44 +118,44 @@ $(document).ready( function () {
     });
 
     //Add the following code if you want the name of the file appear on select
-    $(".custom-file-input").on("change", function() {
+    $(".custom-file-input").on("change", function () {
         var fileName = this.files[0].name;
         var fileSize = this.files[0].size;
         // alert(fileSize)
-        if(fileSize > 1000000){
+        if (fileSize > 1000000) {
             alert('El archivo no debe superar el 1MB');
             this.value = '';
             this.files[0].name = '';
-        }else{
+        } else {
             // alert('Archivo cargado');
             // recuperamos la extensión del archivo
             // var ext = fileName.split('.').pop();
             // Convertimos en minúscula porque la extensión del archivo puede estar en mayúscula
             // ext = ext.toLowerCase();
             var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);  
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         }
     });
 
-    $( "#cantidad" ).keydown(function(evento) {
+    $("#cantidad").keydown(function (evento) {
         const elemento = evento.target;
         const teclaPresionada = evento.key;
         const teclaPresionadaEsUnNumero =
-        Number.isInteger(parseInt(teclaPresionada));
-        const sePresionoUnaTeclaNoAdmitida = 
-        teclaPresionada != 'ArrowDown' &&
-        teclaPresionada != 'ArrowUp' &&
-        teclaPresionada != 'ArrowLeft' &&
-        teclaPresionada != 'ArrowRight' &&
-        teclaPresionada != 'Backspace' &&
-        teclaPresionada != 'Delete' &&
-        teclaPresionada != 'Enter' &&
-        !teclaPresionadaEsUnNumero;
-        const comienzaPorCero = 
-        elemento.value.length === 0 &&
-        teclaPresionada == 0;
+            Number.isInteger(parseInt(teclaPresionada));
+        const sePresionoUnaTeclaNoAdmitida =
+            teclaPresionada != 'ArrowDown' &&
+            teclaPresionada != 'ArrowUp' &&
+            teclaPresionada != 'ArrowLeft' &&
+            teclaPresionada != 'ArrowRight' &&
+            teclaPresionada != 'Backspace' &&
+            teclaPresionada != 'Delete' &&
+            teclaPresionada != 'Enter' &&
+            !teclaPresionadaEsUnNumero;
+        const comienzaPorCero =
+            elemento.value.length === 0 &&
+            teclaPresionada == 0;
         if (sePresionoUnaTeclaNoAdmitida || comienzaPorCero) {
-        evento.preventDefault(); 
+            evento.preventDefault();
         }
     });
 
@@ -222,10 +166,10 @@ $(document).ready( function () {
     $("#txtFechaFin").change(function () {
         var fechaInicio = $('#txtFechaInicio').val()
         var fechaFin = $('#txtFechaFin').val()
-        if(fechaInicio != '' && fechaFin != '') datatable(fechaInicio, fechaFin)
+        if (fechaInicio != '' && fechaFin != '') datatable(fechaInicio, fechaFin)
     });
 
-} );
+});
 
 function datatable(fechaInicio, fechaFin) {
     var result = $.ajax({
@@ -234,7 +178,7 @@ function datatable(fechaInicio, fechaFin) {
         data: { fechaInicio: fechaInicio, fechaFin: fechaFin }
     })
 
-    result.done(function( res ) {
+    result.done(function (res) {
         var dataPagos = JSON.parse(res)
         // console.log(dataPagos)
         $('#reporte_uno').DataTable({
@@ -276,30 +220,6 @@ function datatable(fechaInicio, fechaFin) {
                 {
                     "data": 'nombre'
                 },
-                // {
-                //     "data": 'detalle', 'render': function (data, type, row) {
-                //         var tipo_pago
-                //         var detalle = JSON.parse(row.detalle)
-                //         if(detalle != null){
-                //             tipo_pago = detalle.tipo_pago
-                //         } else {
-                //             tipo_pago = '---'
-                //         }
-                //         return tipo_pago;
-                //     }
-                // },
-                // {
-                //     "data": 'detalle', 'render': function (data, type, row) {
-                //         var fecha_registro
-                //         var detalle = JSON.parse(row.detalle)
-                //         if(row.detalle != null){    
-                //             fecha_registro = detalle.fecha_registro
-                //         } else {
-                //             fecha_registro = '---'
-                //         }
-                //         return fecha_registro;
-                //     }
-                // },
                 {
                     "data": 'costo', 'render': function (data, type, row) {
                         return '$' + row.costo;
@@ -313,7 +233,7 @@ function datatable(fechaInicio, fechaFin) {
                 {
                     "data": 'pagoUser', 'render': function (data, type, row) {
                         var pagoUser
-                        if(row.pagoUser != null){
+                        if (row.pagoUser != null) {
                             pagoUser = '$' + row.pagoUser
                         } else {
                             pagoUser = '$0'
@@ -329,7 +249,7 @@ function datatable(fechaInicio, fechaFin) {
                 {
                     "data": 'pagos', 'render': function (data, type, row) {
                         var abono
-                        if(row.pagos != null){
+                        if (row.pagos != null) {
                             var pagos = JSON.parse(row.pagos)
                             abono = '$' + pagos.abono
                         } else {
@@ -341,19 +261,34 @@ function datatable(fechaInicio, fechaFin) {
                 {
                     "data": 'pagos', 'render': function (data, type, row) {
                         var adeudo
-                        if(row.pagos != null){
+                        if (row.pagos != null) {
                             var pagos = JSON.parse(row.pagos)
                             adeudo = '$' + pagos.adeudo
                         } else {
-                            adeudo = row.costo_total
+                            adeudo = '$' + row.costo_total
                         }
                         return adeudo;
+                    }
+                },
+                {
+                    "data": 'id_folio', 'render': function (data, type, row) {
+                        var abono
+                        if (row.pagos != null) {
+                            var pagos = JSON.parse(row.pagos)
+                            abono = '$' + pagos.abono
+                        } else {
+                            abono = '$0'
+                        }
+                        var link = '<a type="button" data-toggle="modal" data-target="#exampleModal" data-folio="' + data + '" data-abono="' + abono + '" >' +
+                            ' <img src="assets/img/result.svg" title="Ver más" width="35px" />' +
+                            ' </a>';
+                        return link;
                     }
                 }
             ],
             columnDefs: [
-                { orderable: false, targets: [5,6,7,8,9] },
-                { className: 'text-center', targets: [2,3,4,5,6] }
+                { orderable: false, targets: [5, 6, 7, 8, 9] },
+                { className: 'text-center', targets: [2, 3, 4, 5, 6, 9] }
             ],
             order: []
         });
@@ -361,15 +296,15 @@ function datatable(fechaInicio, fechaFin) {
         var total = 0
         dataPagos.forEach(element => {
             var pagos = JSON.parse(element.pagos)
-            if(pagos != null) total = parseInt(pagos.abono) + total
+            if (pagos != null) total = parseInt(pagos.abono) + total
         });
         $('#total_uno').html('$' + total)
     });
 
-    result.fail(function() {
+    result.fail(function () {
         alert("error")
     })
-    
+
 }
 
 function datatable_by_folio(folio) {
@@ -379,7 +314,7 @@ function datatable_by_folio(folio) {
         data: { folio: folio }
     })
 
-    result.done(function( res ) {
+    result.done(function (res) {
         var dataPagos = JSON.parse(res)
         // console.log(dataPagos)
         $('#reporte').DataTable({
@@ -423,7 +358,7 @@ function datatable_by_folio(folio) {
                 }
             ],
             columnDefs: [
-                { className: 'text-center', targets: [1,2] }
+                { className: 'text-center', targets: [1, 2] }
             ],
             order: []
         });
@@ -437,23 +372,52 @@ function datatable_by_folio(folio) {
         // if(opc === 2) {
         //     var folio = $('#cmbFolio_dos').val()
         // } else {
-            var folio = $('#cmbFolio_uno').val()
+        var folio = $('#cmbFolio_uno').val()
         // }
         var data = JSON.parse(folio)
-        if(pago == data.total) {
+        if (pago == data.total) {
             $('#completed').show();
             $('#incompleted').hide();
-        } 
+        }
         else {
             var resta = data.total - pago
-            $('#statusPago').html('El folio cuenta con adeudo de <b>$'+ resta + '</b> pesos')
+            $('#statusPago').html('El folio cuenta con adeudo de <b>$' + resta + '</b> pesos')
             $('#incompleted').show();
             $('#completed').hide();
-        } 
+        }
     });
 
-    result.fail(function() {
+    result.fail(function () {
         alert("error")
     })
-    
+
+}
+
+function pagos(folio) {
+    $.post("?accion=pago&pag=getPagos", { folio: folio })
+        .done(function (data) {
+            var pagos = JSON.parse(data)
+            console.log(pagos.length)
+            if(pagos.length > 0){
+                var tbody = ''
+                var i = 1
+                console.log(pagos)
+                pagos.forEach(element => {
+                    var transaccion = JSON.parse(element.transaccion)
+                    tbody += '<tr>' +
+                    '   <th scope = "row" >'+ i +'</th>' +
+                    '   <td>'+ element.fecha_registro +'</td>' +
+                    '   <td>'+ element.tipo_pago +'</td>' +
+                    '   <td>'+ transaccion.total +'</td>' +
+                    '   <td>'+ transaccion.referencia +'</td>' +
+                    '   <td>'+ transaccion.clv_rastreo +'</td>' +
+                    '   <td class="text-center"><a href='+ transaccion.vaucher +' target="_blank"><img src="assets/img/result.svg" title="Ver vaucher" width="35px" /></a></td>' +
+                    ' </tr > ';
+                    i++
+                });
+            } else {
+                tbody = '<tr><td colspan="7" class="text-center">No hay historial de pagos en la base.</td></tr>'
+            }
+            $('#tbody').html(tbody)
+        });
 }

@@ -30,14 +30,14 @@ class Pago extends AccesoDatos
         }
     }
 
-    public function get_id_pago($idPago)
+    public function get_pago_by_folio($folio)
     {
         try {
             $this->dbh = AccesoDatos::conexion();
             // $idPago = AccesoDatos::desencriptar(str_replace(' ', '+', $idPago));
-            $query = "SELECT * FROM pago WHERE id_pago = ?";
+            $query = "SELECT * FROM pago WHERE id_folio = BINARY ?";
             $stmt = $this->dbh->prepare($query);
-            $stmt->bindParam(1, $idPago, PDO::PARAM_INT);
+            $stmt->bindParam(1, $folio, PDO::PARAM_STR);
             if ($stmt->execute()) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $this->result[] = $row;
@@ -48,7 +48,7 @@ class Pago extends AccesoDatos
                 $this->dbh = null;
             }
         } catch (Exception $e) {
-            die("¡Error!: get_id_pago() " . $e->getMessage());
+            die("¡Error!: get_pago_by_folio() " . $e->getMessage());
         }
     }
 
@@ -97,13 +97,8 @@ class Pago extends AccesoDatos
             $query = "SELECT 
             ia.id_folio, i.nombre AS institucion, CONCAT(a.nombre,' ',a.apellidos) nombre, (ia.costo * ia.num_vendidas) costo_total,
             (
-            SELECT CONCAT('{\"tipo_pago\":\"',tipo_pago,'\", \"fecha_registro\":\"',fecha_registro,'\"}') detalle FROM pago WHERE id_pago = (Select MAX(id_pago) FROM pago WHERE id_folio = ia.id_folio)
-            ) detalle,
-            (
             SELECT 
-            CONCAT('{\"abono\":',ANY_VALUE(SUM(p2.transaccion->'$.total')),',
-            \"adeudo\":',ANY_VALUE((ia2.costo * ia2.num_vendidas) - (SUM(p2.transaccion->'$.total'))),'
-            }')
+            CONCAT('{\"abono\":',ANY_VALUE(SUM(p2.transaccion->'$.total')),', \"adeudo\":',ANY_VALUE((ia2.costo * ia2.num_vendidas) - (SUM(p2.transaccion->'$.total'))),'}')
             FROM pago p2 
             INNER JOIN institucion_administrador ia2 USING(id_folio)
             WHERE ia2.id_folio = ia.id_folio
@@ -138,7 +133,7 @@ class Pago extends AccesoDatos
         try {
             $this->dbh = AccesoDatos::conexion();
             $query = "SELECT * FROM pago p 
-            WHERE p.id_folio = ?
+            WHERE p.id_folio = BINARY ?
             ORDER BY p.fecha_registro DESC";
             $stmt = $this->dbh->prepare($query);
             $stmt->bindParam(1, $folio, PDO::PARAM_STR);
