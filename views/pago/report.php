@@ -62,14 +62,14 @@
                             <th scope="col">Fecha emisión</th>
                             <th scope="col">Institución</th>
                             <th scope="col">Vendedor</th>
-                            <!-- <th scope="col">Tipo de Pago</th> -->
-                            <!-- <th scope="col">Fecha pago</th> -->
                             <th scope="col">Costo prueba</th>
                             <th scope="col">Núm de pruebas</th>
                             <th scope="col">Costo cobrado (evaluado)</th>
                             <th scope="col">Costo total</th>
                             <th scope="col">Abono</th>
                             <th scope="col">Adeudo</th>
+                            <th scope="col">Opción</th>
+                        </tr>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,80 +80,54 @@
                     <tfooter>
                         <tr>
                             <th class="text-right" colspan="9">Total</th>
-                            <th id="total_uno" class="text-center">---</th>
+                            <th id="total_uno" class="text-rigth" colspan="2">---</th>
                         </tr>
                     </tfooter>
                 </table>
             </div>
         </div>
-        <!-- Reporte por folio -->
-        <!-- <div class="shadow p-3 mb-5 bg-white rounded pt-4">
-            <div class="alert alert-light" role="alert">
-                <div class="form-row">
-                    <div class="col-11">REPORTE POR FOLIO</div>
+        <!-- MODAL -->
+        <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalle de pagos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="h5" id="folio_title">Folio:</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="h5" id="abono_total">Abono:</label>
+                            </div>
+                            <div class="form-group">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Fecha de pago</th>
+                                            <th scope="col">Tipo de pago</th>
+                                            <th scope="col">Pago</th>
+                                            <th scope="col">Referencia</th>
+                                            <th scope="col">Clave de rastreo</th>
+                                            <th scope="col">Vaucher</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody"></tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <hr>
             </div>
-            <div class="form-row">
-                <div class="form-group col-sm-12">
-                    <label>Nombre de la Institución</label>
-                    <select name="cmbInstitucion" id="cmbInstitucion" class="selectpicker form-control" data-live-search="true" required>
-                        <option value="" selected>Selecciona una Institucion</option>
-                        <?php foreach ($rowInstitucion as $item) : ?>
-                            <option value="<?php echo $item['id_institucion']; ?>" <?php if (isset($_POST["cmbInstitucion"]) == $item['id_institucion']) echo "selected"; ?>>
-                                <?php echo $item['nombre']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-sm-12">
-                    <label>Folio</label>
-                    <select id="cmbFolio_dos" name="cmbFolio" class="form-control">
-                        <option value="" disabled selected>Selecciona el folio a pagar</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="card" style="width: 30rem;">
-                <div class="card-header">
-                    El vendedor a cargo es <span id="vendedor"></span>
-                </div>
-                <div class="card-header">
-                    <span id="statusPago">Status de pago del Folio</span>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Costo total por folio <span id="costo">---</span></li>
-                    <li class="list-group-item">
-                        Precio fijo declarado por los evaluados <span id="costo_evaluado">---</span><br />
-                        Suma total, declarado por los evaluados <span id="costo_total_evaluado">---</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="table-responsive pt-5">
-                <table class="table table-hover" id="reporte" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tipo de pago</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Pago</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="3" class="text-center">No hay datos disponibles en la tabla.</td>
-                        </tr>
-                    </tbody>
-                    <tfooter>
-                        <tr>
-                            <th class="text-right" colspan="2">Total</th>
-                            <th id="total" class="text-center">---</th>
-                        </tr>
-                    </tfooter>
-                </table>
-            </div>
-        </div> -->
+        </div>
     </section>
     <!-- Invoca al Footer -->
     <?php require_once 'views/layout/footer.php'; ?>
