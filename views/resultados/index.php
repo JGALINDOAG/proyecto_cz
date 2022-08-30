@@ -61,7 +61,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="4" class="text-center">No hay datos disponibles en la tabla.</td>
+                            <td colspan="6" class="text-center">No hay datos disponibles en la tabla.</td>
                         </tr>
                     </tbody>
                 </table>

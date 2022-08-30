@@ -21,7 +21,7 @@ class InstitucionAdministrador extends AccesoDatos
         INNER JOIN institucion i USING(id_institucion)
         $where";
         $stmt = $this->dbh->prepare($query);
-        $stmt->bindParam(1, $_SESSION['idInstitucion'], PDO::PARAM_INT);
+        if($_SESSION['idInstitucion'] != 1) $stmt->bindParam(1, $_SESSION['idInstitucion'], PDO::PARAM_INT);
         if ($stmt->execute()) {
           while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             $this->result[] = $row;

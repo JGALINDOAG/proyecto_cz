@@ -57,40 +57,50 @@ class ResultadosController
       # Rasgos de personalidad
       $r2 = new Reporte();
       $smp02 = $r2->res_ind($item["id_detalle"], 2);
-      for ($i=0; $i<sizeof($smp02); $i++) {
-        $rowDP[$key]['personalidad_1'][] = [
-            "indicador" => $smp02[$i]["indicador"],
-            "id_indicador" => $smp02[$i]["id_indicador"],
-            "resultado" => $smp02[$i]["resultado"]
-        ];
-      }
+      if(!empty($smp02)):
+        for ($i=0; $i<sizeof($smp02); $i++) {
+          $rowDP[$key]['personalidad_1'][] = [
+              "indicador" => $smp02[$i]["indicador"],
+              "id_indicador" => $smp02[$i]["id_indicador"],
+              "resultado" => $smp02[$i]["resultado"]
+          ];
+        }
+      endif;
+
       # Capacidad para adaptarse
       $r2 = new Reporte();
       $smp02 = $r2->res_ind($item["id_detalle"], 3);
-      for ($i=0; $i<sizeof($smp02); $i++) {
-        $rowDP[$key]['personalidad_2'][] = [
-            "indicador" => $smp02[$i]["indicador"],
-            "id_indicador" => $smp02[$i]["id_indicador"],
-            "resultado" => $smp02[$i]["resultado"]
-        ];
-      }
+      if(!empty($smp02)):
+        for ($i=0; $i<sizeof($smp02); $i++) {
+          $rowDP[$key]['personalidad_2'][] = [
+              "indicador" => $smp02[$i]["indicador"],
+              "id_indicador" => $smp02[$i]["id_indicador"],
+              "resultado" => $smp02[$i]["resultado"]
+          ];
+        }
+      endif;
       # TERMAN
       $objReporte = new Reporte();
       $terman = $objReporte->res_total($item["id_detalle"], 1);
-      if($terman[0]['total'] != null):
-        // $datos1 = new Reporte();
-        $data1 = $objReporte->perfil_terman($terman[0]['total']);
-        $rowDP[$key]['ci_terman'] = $data1['ci'];
+      if(!empty($terman)):
+        if($terman[0]['total'] != null):
+          // $datos1 = new Reporte();
+          $data1 = $objReporte->perfil_terman($terman[0]['total']);
+          $rowDP[$key]['ci_terman'] = $data1['ci'];
+        endif;
       endif;
       # RAVEN
       // $r4 = new Reporte();
       $raven = $objReporte->res_total($item["id_detalle"], 4);
-      if($raven[0]['total'] != null):
-        // $datos4 = new Reporte();
-        $data4 = $objReporte->perfil_raven($raven[0]['total']);
-        $rowDP[$key]['ci_raven'] = $data4['ci'];
+      if(!empty($terman)):
+        if($raven[0]['total'] != null):
+          // $datos4 = new Reporte();
+          $data4 = $objReporte->perfil_raven($raven[0]['total']);
+          $rowDP[$key]['ci_raven'] = $data4['ci'];
+        endif;
       endif;
     endforeach;
+    // print_r($rowDP);
     $dataJson = json_encode($rowDP, JSON_UNESCAPED_UNICODE);
     print $dataJson;
   }
