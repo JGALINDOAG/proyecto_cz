@@ -16,7 +16,9 @@ if ($avance[0]["Total"] == 11) {
     for ($i=0; $i<sizeof($smp02); $i++) {
         $int2 = new Reporte();
         $int = $int2->perfil_smp02($smp02[$i]["id_indicador"],abs($smp02[$i]["resultado"]),$info[0]['sexo']);
-        array_push($pila, $int['perfil']);
+        if($smp02[$i]["id_indicador"]!=19){
+            array_push($pila, $int['perfil']);
+        } 
     }
     rsort($pila);
     //print_r($pila);
