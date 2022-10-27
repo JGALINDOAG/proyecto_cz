@@ -15,7 +15,7 @@ function dataTable(){
 
     cmbFolio.done(function( res ) {
         var dataList = JSON.parse(res)
-        // console.log(dataList)
+        console.log(dataList)
         $('#listPersonas').DataTable({
             "language": {
                 "emptyTable": "No hay datos disponibles en la tabla.",

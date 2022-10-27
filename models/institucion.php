@@ -132,7 +132,7 @@ class Institucion extends AccesoDatos
           -- )
           ";
           $stmt = $this->dbh->prepare($query);
-          $stmt->bindParam(1, $idInstitucion, PDO::PARAM_STR);
+          // $stmt->bindParam(1, $idInstitucion, PDO::PARAM_STR);
           if ($stmt->execute()) {
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                   $this->result[] = $row;

@@ -16,7 +16,7 @@ class PagoController
     $jsonCmbFolio = json_decode($_POST['cmbFolio'], true);
     $json = json_decode($_POST['cmbFormaPago'], true);
     $objPago = new Pago();
-    if(isset($_FILES['file']['name'])) $dir = 'assets/files/voucher/'.$jsonCmbFolio['id_folio'].'/'.$_FILES['file']['name'];
+    if(isset($_FILES['file']['name'])) $dir = 'assets/files/voucher/'.$jsonCmbFolio['id_folio'].'/'.str_replace(' ','_',$_FILES['file']['name']);
     if($json['key'] == 2):
       $array = [
         "total" => $_POST['txtCantidad']
@@ -71,7 +71,7 @@ class PagoController
 		$dir = 'assets/files/voucher/'.$folio.'/';
 		if(!file_exists($dir)) mkdir($dir);
 		$filename = $dir.$file;
-    move_uploaded_file($temporal, $filename);
+    move_uploaded_file($temporal, str_replace(' ','_',$filename));
 	}
 
   public static function report(){

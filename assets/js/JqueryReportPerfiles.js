@@ -1,7 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var isTableCreated = false;
 
-    $(document).ajaxStart(function () {
+    $(document).ajaxStart(function() {
         if (isTableCreated == true) {
             $('#reporte').DataTable().clear();
             $('#reporte').DataTable().destroy();
@@ -10,10 +10,10 @@ $(document).ready(function () {
         }
     });
 
-    $(document).ajaxStop(function () { });
+    $(document).ajaxStop(function() {});
 
     $('#cmbFolio').prop('disabled', true);
-    $('#cmbInstitucion').on('change', function () {
+    $('#cmbInstitucion').on('change', function() {
         var id = $(this).val()
         var cmbInstitucion = $.ajax({
             method: "POST",
@@ -21,7 +21,7 @@ $(document).ready(function () {
             data: { idInstitucion: id }
         })
 
-        cmbInstitucion.done(function (res) {
+        cmbInstitucion.done(function(res) {
             var option = ''
             $('#cmbFolio').empty()
             var data = JSON.parse(res);
@@ -36,12 +36,12 @@ $(document).ready(function () {
             $('#cmbFolio').prop('disabled', false);
         });
 
-        cmbInstitucion.fail(function () {
+        cmbInstitucion.fail(function() {
             alert("error")
         })
     });
 
-    $("#cmbFolio").change(function () {
+    $("#cmbFolio").change(function() {
         var cmbFolio = $(this).val()
         var data = JSON.parse(cmbFolio)
         var folio = data.id_folio
@@ -57,13 +57,13 @@ function datatable_by_folio(folio) {
         data: { folio: folio }
     })
 
-    result.done(function (res) {
+    result.done(function(res) {
         var dataPerfiles = JSON.parse(res)
         var shetName_excel = $('select[name="cmbFolio"] option:selected').text()
         let date = new Date()
-        // console.log(dataPerfiles)
+            // console.log(dataPerfiles)
 
-        function isKeyExists(obj,key){
+        function isKeyExists(obj, key) {
             return key in obj;
         }
 
@@ -96,13 +96,13 @@ function datatable_by_folio(folio) {
             buttons: [{
                 // 'copy', 'csv', 'excel', 'pdf', 'print'
                 extend: 'excelHtml5',
-                title: shetName_excel+'_'+date.getDate()+'_'+(date.getMonth()+1)+'_'+date.getFullYear(),
+                title: shetName_excel + '_' + date.getDate() + '_' + (date.getMonth() + 1) + '_' + date.getFullYear(),
                 sheetName: shetName_excel,
                 autoFilter: true,
-                customize: function (xlsx) {
+                customize: function(xlsx) {
                     var sheet = xlsx.xl.worksheets['sheet1.xml'];
                     // Loop over the cells in column `E`
-                    $('row c[r^="E"]', sheet).each(function () {
+                    $('row c[r^="E"]', sheet).each(function() {
                         // Get the value
                         // if ($('is t', this).text() < 10) {
                         //     $(this).attr( 's', '10' );
@@ -112,51 +112,50 @@ function datatable_by_folio(folio) {
                         //     $(this).attr( 's', '15' );     
                         // }
                         if ($(this).text() == 1) {
-                            $(this).attr( 's', '15' ); 
-                        } else if ( $(this).text() == 2 ) {
-                            $(this).attr( 's', '20' );     
-                        } else if ( $(this).text() == 3 ) {
-                            $(this).attr( 's', '10' );   
+                            $(this).attr('s', '15');
+                        } else if ($(this).text() == 2) {
+                            $(this).attr('s', '20');
+                        } else if ($(this).text() == 3) {
+                            $(this).attr('s', '10');
                         }
                     });
                     // Loop over the cells in column `C`
-                    $('row c[r^="Q"]', sheet).each(function () {
+                    $('row c[r^="Q"]', sheet).each(function() {
                         // Get the value
                         if ($(this).text() == 1) {
-                            $(this).attr( 's', '15' ); 
-                        } else if ( $(this).text() == 2 ) {
-                            $(this).attr( 's', '20' );     
-                        } else if ( $(this).text() == 3 ) {
-                            $(this).attr( 's', '10' );   
+                            $(this).attr('s', '15');
+                        } else if ($(this).text() == 2) {
+                            $(this).attr('s', '20');
+                        } else if ($(this).text() == 3) {
+                            $(this).attr('s', '10');
                         }
                     });
                     // Loop over the cells in column `W`
-                    $('row c[r^="W"]', sheet).each(function () {
+                    $('row c[r^="W"]', sheet).each(function() {
                         // Get the value
                         if ($(this).text() == 1) {
-                            $(this).attr( 's', '15' ); 
-                        } else if ( $(this).text() == 2 ) {
-                            $(this).attr( 's', '20' );     
-                        } else if ( $(this).text() == 3 ) {
-                            $(this).attr( 's', '10' );   
+                            $(this).attr('s', '15');
+                        } else if ($(this).text() == 2) {
+                            $(this).attr('s', '20');
+                        } else if ($(this).text() == 3) {
+                            $(this).attr('s', '10');
                         }
                     });
                     // Loop over the cells in column `Z`
-                    $('row c[r^="Z"]', sheet).each(function () {
+                    $('row c[r^="Z"]', sheet).each(function() {
                         // Get the value
                         if ($(this).text() == 1) {
-                            $(this).attr( 's', '15' ); 
-                        } else if ( $(this).text() == 2 ) {
-                            $(this).attr( 's', '20' );     
-                        } else if ( $(this).text() == 3 ) {
-                            $(this).attr( 's', '10' );   
+                            $(this).attr('s', '15');
+                        } else if ($(this).text() == 2) {
+                            $(this).attr('s', '20');
+                        } else if ($(this).text() == 3) {
+                            $(this).attr('s', '10');
                         }
                     });
                 }
             }],
             "data": dataPerfiles,
-            "columns": [
-                {
+            "columns": [{
                     "data": 'nombre'
                 },
                 {
@@ -169,138 +168,160 @@ function datatable_by_folio(folio) {
                     "data": 'turno'
                 },
                 {
-                    "data": 'perfil', "render": function (data, type, row) {
+                    "data": 'perfil',
+                    "render": function(data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        if(isKeyExists(p1, "ci")) return p1.ci
+                        if (isKeyExists(p1, "ci")) return p1.ci
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[0]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[0]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[1]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[1]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[2]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[2]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[3]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[3]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[4]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[4]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[5]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[5]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[6]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[6]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[7]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[7]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[8]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[8]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[9]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[9]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_1', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[10]['resultado']
+                    "data": 'personalidad_1',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_1") && row.personalidad_1.length == 11) return row.personalidad_1[10]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'perfil', "render": function (data, type, row) {
+                    "data": 'perfil',
+                    "render": function(data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        if(isKeyExists(p1, "smpuno")) return p1.smpuno
+                        if (isKeyExists(p1, "smpuno")) return p1.smpuno
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[0]['resultado']
+                    "data": 'personalidad_2',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[0]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[1]['resultado']
+                    "data": 'personalidad_2',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[1]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[2]['resultado']
+                    "data": 'personalidad_2',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[2]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[3]['resultado']
+                    "data": 'personalidad_2',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[3]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'personalidad_2', "render": function (data, type, row) {
-                        if(isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[4]['resultado']
+                    "data": 'personalidad_2',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "personalidad_2") && row.personalidad_2.length == 5) return row.personalidad_2[4]['resultado']
                         else return '--'
                     }
                 },
                 {
-                    "data": 'perfil', "render": function (data, type, row) {
+                    "data": 'perfil',
+                    "render": function(data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        if(isKeyExists(p1, "smpdos")) return p1.smpdos
+                        if (isKeyExists(p1, "smpdos")) return p1.smpdos
                         else return '--'
                     }
                 },
                 {
-                    "data": 'ci_terman', "render": function (data, type, row) {
-                        if(isKeyExists(row, "ci_terman")) return row.ci_terman
+                    "data": 'ci_terman',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "ci_terman")) return row.ci_terman
                         else return '--'
                     }
                 },
                 {
-                    "data": 'ci_raven', "render": function (data, type, row) {
-                        if(isKeyExists(row, "ci_raven")) return row.ci_raven
+                    "data": 'ci_raven',
+                    "render": function(data, type, row) {
+                        if (isKeyExists(row, "ci_raven")) return row.ci_raven
                         else return '--'
                     }
                 },
                 {
-                    "data": 'perfil', "render": function (data, type, row) {
+                    "data": 'perfil',
+                    "render": function(data, type, row) {
                         var p1 = JSON.parse(row.perfil)
-                        if(isKeyExists(p1, "final")) return p1.final
+                        if (isKeyExists(p1, "final")) return p1.final
                         else return '--'
                     }
                 }
@@ -313,7 +334,7 @@ function datatable_by_folio(folio) {
         });
     });
 
-    result.fail(function () {
+    result.fail(function() {
         alert("error")
     })
 
