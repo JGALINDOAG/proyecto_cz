@@ -41,9 +41,9 @@
                     <label>Folio</label>
                     <select id="cmbFolio" name="cmbFolio" class="selectpicker form-control" data-live-search="true">
                         <option value="" disabled selected>Selecciona el folio a pagar</option>
-                        <?php foreach ($rowFolios as $item) : ?>
-                            <option value=<?php echo $item['id_folio']; ?>><?php echo $item['id_folio']; ?></option>
-                        <?php endforeach; ?>
+                        <?php //foreach ($rowFolios as $item) : ?>
+                            <option value=<?php //echo $item['id_folio']; ?>><?php //echo $item['id_folio']; ?></option>
+                        <?php //endforeach; ?>
                     </select>
                 </div>
             </div> -->
