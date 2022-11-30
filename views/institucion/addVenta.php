@@ -32,7 +32,7 @@
                                 endif;
                                 $text .= 'El folio generado para esta venta es '.$folio.'%0A
                                 Favor de enlazar a la siguiente direcci&oacute;n electr&oacute;nica para realizar la prueba: 
-                                https://www.chromeconsultores.com.mx/?accion=Home';
+                                https://www.chromeconsultores.com/?accion=Home';
 
                         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>¡AVISO!</strong>&nbsp;Se realizó la venta a la Institución exitosamente&nbsp;|&nbsp;El folio generado para esta venta es <b>'.$folio.'</b>
